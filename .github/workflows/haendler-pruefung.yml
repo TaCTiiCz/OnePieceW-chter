@@ -1,0 +1,51 @@
+name: Händlerprüfung
+
+# Prüft alle Händlerkandidaten live (Startseite, robots.txt, Impressum, Versand nach DE,
+# Shopsystem, Entdeckungswege) und speichert das Ergebnis in data/haendler_db.json.
+on:
+  workflow_dispatch:
+    inputs:
+      nur_neue:
+        description: "Nur noch nicht geprüfte Kandidaten prüfen?"
+        type: boolean
+        default: false
+  push:
+    paths:
+      - "config/haendler_kandidaten.csv"
+      - "waechter/haendlerdb.py"
+  schedule:
+    # wöchentlich montags 03:17 UTC: alle Händler neu prüfen (Datenbank aktuell halten)
+    - cron: "17 3 * * 1"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: haendlerpruefung-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  pruefen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Händler prüfen (live)
+        run: |
+          if [ "${{ inputs.nur_neue }}" = "true" ]; then
+            python -m waechter haendler-pruefen --nur-neue
+          else
+            python -m waechter haendler-pruefen
+          fi
+      - name: Ergebnis speichern
+        run: |
+          git config user.name "onepiece-waechter[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/haendler_db.json
+          if git diff --cached --quiet; then echo "Keine Änderungen"; exit 0; fi
+          git commit -m "Händlerprüfung $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3; do git pull --rebase && git push && exit 0; sleep $((i * 10)); done
+          exit 1

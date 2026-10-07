@@ -42,6 +42,8 @@ class Antwort:
     text: str = ""
     fehler: Optional[str] = None
     url: str = ""
+    url_final: str = ""
+    dauer_ms: int = 0
 
     def json(self):
         return json.loads(self.text)
@@ -119,8 +121,11 @@ class Abrufer:
     """Echter Abruf über das Internet."""
 
     def __init__(self, host_zustand: dict, schlafen: Callable[[float], None] = time.sleep,
-                 transport: Optional[Callable] = None, protokoll: Optional[Callable[[str], None]] = None):
+                 transport: Optional[Callable] = None, protokoll: Optional[Callable[[str], None]] = None,
+                 pausen: tuple = (10.0, 30.0, 90.0), robots_cache_stunden: float = 24.0):
         self.host_zustand = host_zustand  # wird im Zustand gespeichert
+        self.pausen = pausen  # Wartezeiten zwischen Wiederholungen (wachsend)
+        self.robots_cache_stunden = robots_cache_stunden
         self.schlafen = schlafen
         self.transport = transport or self._urllib_transport
         self.log = protokoll or (lambda s: None)
@@ -146,7 +151,8 @@ class Abrufer:
 
     def _pausiere(self, host: str, stunden: float, grund: str) -> None:
         bis = (_jetzt() + dt.timedelta(hours=stunden)).replace(microsecond=0).isoformat()
-        self.host_zustand[host] = {"pause_bis": bis, "grund": grund}
+        z = self.host_zustand.setdefault(host, {})
+        z.update(pause_bis=bis, grund=grund)
         self._gesperrt_lauf[host] = grund
         self.log(f"  ! {host}: {grund} – Pause bis {bis}")
 
@@ -156,10 +162,12 @@ class Abrufer:
         req = urllib.request.Request(url, headers=kopf)
         try:
             with urllib.request.urlopen(req, timeout=timeout) as r:
-                roh = r.read(5_000_000)
-                if r.headers.get("Content-Encoding") == "gzip":
+                roh = r.read(8_000_000)
+                if r.headers.get("Content-Encoding") == "gzip" or roh[:2] == b"\x1f\x8b":
                     roh = gzip.decompress(roh)
-                return r.status, dict(r.headers), roh.decode("utf-8", errors="replace")
+                kopf_antwort = dict(r.headers)
+                kopf_antwort["x-final-url"] = r.geturl()
+                return r.status, kopf_antwort, roh.decode("utf-8", errors="replace")
         except urllib.error.HTTPError as e:
             try:
                 body = e.read(200_000).decode("utf-8", errors="replace")
@@ -171,13 +179,23 @@ class Abrufer:
     def _robots_fuer(self, basis: str) -> Robots:
         host = urlparse(basis).netloc
         if host not in self._robots:
-            status, _, text = self._roh(f"{urlparse(basis).scheme}://{host}/robots.txt", host)
-            if status == 200:
-                self._robots[host] = Robots(text)
-            elif status in SPERRE:
-                raise HostGesperrt(f"robots.txt mit HTTP {status} verweigert")
+            # robots.txt wird bis zu 24 h zwischengespeichert, damit häufige Läufe den Shop nicht belasten
+            cache = self.host_zustand.get(host, {}).get("robots")
+            if cache and _jetzt() - dt.datetime.fromisoformat(cache["geholt"]) < dt.timedelta(hours=self.robots_cache_stunden):
+                self._robots[host] = Robots(cache["text"])
             else:
-                self._robots[host] = Robots("")  # keine robots.txt -> keine Einschränkungen
+                status, _, text = self._roh(f"{urlparse(basis).scheme}://{host}/robots.txt", host)
+                if status == 200:
+                    text = text[:200_000]
+                elif status in SPERRE:
+                    raise HostGesperrt(f"robots.txt mit HTTP {status} verweigert")
+                elif status in (0, 429) or status >= 500:
+                    raise HostGesperrt(f"robots.txt nicht abrufbar (HTTP {status or 'Netzwerkfehler'})")
+                else:
+                    text = ""  # keine robots.txt -> keine Einschränkungen
+                self._robots[host] = Robots(text)
+                self.host_zustand.setdefault(host, {})["robots"] = {
+                    "text": text, "geholt": _jetzt().replace(microsecond=0).isoformat()}
             cd = self._robots[host].crawl_delay
             if cd:
                 self._abstand[host] = max(self._abstand.get(host, 4.0), min(cd, 60.0))
@@ -207,13 +225,15 @@ class Abrufer:
         try:
             robots = self._robots_fuer(url)
         except HostGesperrt as e:
-            self._pausiere(host, 6, str(e))
+            stunden = 6 if "verweigert" in str(e) else 0.5
+            self._pausiere(host, stunden, str(e))
             return Antwort(False, None, fehler=str(e), url=url)
         if not robots.erlaubt(url):
             return Antwort(False, None, fehler="robots.txt erlaubt diesen Abruf nicht – wird respektiert", url=url)
 
-        pausen = [10.0, 30.0, 90.0]
+        pausen = list(self.pausen)
         drossel = 0
+        start = time.monotonic()
         for versuch in range(len(pausen) + 1):
             if self._anfragen.get(host, 0) >= self._limit.get(host, 60):
                 return Antwort(False, None, fehler="Anfrage-Obergrenze für diesen Lauf erreicht", url=url)
@@ -223,7 +243,8 @@ class Abrufer:
                 if _BOT_SCHUTZ.search(text[:5000]) and not text.lstrip().startswith(("{", "[")):
                     self._pausiere(host, 6, "Bot-Schutz/Captcha erkannt – wird nicht umgangen")
                     return Antwort(False, 200, fehler="Bot-Schutz/Captcha erkannt", url=url)
-                return Antwort(True, 200, text=text, url=url)
+                return Antwort(True, 200, text=text, url=url, url_final=kopf.get("x-final-url", url),
+                               dauer_ms=int((time.monotonic() - start) * 1000))
             if status == 404:
                 return Antwort(False, 404, fehler="Seite nicht gefunden (404)", url=url)
             if status in SPERRE or (status == 503 and _BOT_SCHUTZ.search(text[:5000])):
