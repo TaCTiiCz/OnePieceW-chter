@@ -95,12 +95,12 @@ def lade_konfig(shops_datei: Path | None = None, produkte_datei: Path | None = N
 
     aus = roh.get("ausschluss", {})
     domains = [d.lower() for d in aus.get("domains", [])]
-    namen = [n.lower() for n in aus.get("namensmuster", [])]
-    # Die Pflicht-Ausschlüsse gelten immer, auch wenn jemand sie aus der Datei löscht.
-    for d in ("tcgdistro.com", "tcgdistronline.com", "tcgzenith.com"):
+    namen = [n.lower() for n in aus.get("namensmuster", [])] + [n.lower() for n in aus.get("bis_vertrauenspruefung", [])]
+    # TCG Distro ist dauerhaft ausgeschlossen, auch wenn jemand den Eintrag aus der Datei löscht.
+    for d in ("tcgdistro.com", "tcgdistronline.com"):
         if d not in domains:
             domains.append(d)
-    for n in ("tcgdistro", "tcg distro", "tcgzenith", "tcg zenith"):
+    for n in ("tcgdistro", "tcg distro"):
         if n not in namen:
             namen.append(n)
 

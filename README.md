@@ -1,257 +1,208 @@
-# One-Piece-TCG-Wächter
+# TCG-Wächter: NARUTO CARD GAME (Priorität 1) und One Piece (Priorität 2)
 
-Überwacht **englische** One-Piece-Kartenspiel-Produkte bei europäischen Händlern mit Lieferung nach Deutschland.
-Er erkennt **Restocks**, **neue Vorbestellungen** und **Preisrückgänge**.
-**Er kauft niemals etwas.** Er liest nur öffentliche Produktseiten.
+Der Wächter soll dir die **erste seriöse Vorbestellmöglichkeit für das NARUTO CARD GAME von Bandai** früh genug melden,
+damit du selbst kaufen kannst. Daneben überwacht er weiterhin englische One-Piece-Displays.
+**Er kauft niemals automatisch.**
 
-Beobachtet werden:
-
-- Original versiegelte **Booster Displays** (24 Packs) aller OP-Sets ab OP01. **Priorität:** OP13, OP15, OP09, OP18, OP16, OP11
-- Englische **Sleeved Booster** von OP09 und OP13
-- **Premium Card Collection -29th Anniversary Edition-** (Englisch)
-- **English Version 2nd Anniversary Set**. Zur Bezeichnung „2nd Anniversary LIMITED COLLECTION“ siehe
-  [docs/produktidentitaet.md](docs/produktidentitaet.md).
-
-Den aktuellen Bericht findest du in **[reports/latest.md](reports/latest.md)**.
+- **Produkt:** NARUTO CARD GAME, BANDAI CO., LTD. (Marke BANDAI CARD GAMES), weltweit im Sommer 2027. Englisch
+  (Region „en“, gilt für Deutschland) hat Vorrang. Japanisch, traditionelles Chinesisch und Englisch-Asien werden
+  getrennt gemeldet. Belege und Abgrenzung (Mythos TCG, Kayou, altes CCG usw.) stehen in
+  [docs/naruto_produktidentitaet.md](docs/naruto_produktidentitaet.md).
+- **Händler:** Die Datenbank enthält 148 Kandidaten. **105 davon sind live geprüft und geeignet** (Stand 07.10.2026),
+  siehe [docs/haendlerpruefung.md](docs/haendlerpruefung.md).
+- **Dashboard (Betriebsnachweis):** Datei `dashboard.md` im Zweig `waechter-daten`:
+  <https://github.com/TaCTiiCz/OnePieceW-chter/blob/waechter-daten/dashboard.md>
 
 ---
 
 ## Inhalt
 
-1. [So funktioniert es](#1-so-funktioniert-es)
-2. [Einmalig: Code in den Hauptzweig übernehmen](#2-einmalig-code-in-den-hauptzweig-übernehmen)
-3. [Ersten Prüflauf starten](#3-ersten-prüflauf-starten)
-4. [Bericht lesen](#4-bericht-lesen)
-5. [Telegram einrichten (optional)](#5-telegram-einrichten-optional)
-6. [Regelmäßig ausführen: Kosten und Grenzen](#6-regelmäßig-ausführen-kosten-und-grenzen)
-7. [Händler oder Produkte ändern](#7-händler-oder-produkte-ändern)
-8. [Was der Wächter tut, um Fehlalarme zu vermeiden](#8-was-der-wächter-tut-um-fehlalarme-zu-vermeiden)
+1. [Meldungsarten](#1-meldungsarten)
+2. [So funktioniert es](#2-so-funktioniert-es)
+3. [Einrichtung im Browser](#3-einrichtung-im-browser)
+4. [Dauerbetrieb: Kosten und Grenzen](#4-dauerbetrieb-kosten-und-grenzen)
+5. [Dashboard lesen](#5-dashboard-lesen)
+6. [Händler und Produkte ändern](#6-händler-und-produkte-ändern)
+7. [Schutz vor Fehlalarmen](#7-schutz-vor-fehlalarmen)
+8. [One Piece](#8-one-piece)
 9. [Probleme lösen](#9-probleme-lösen)
+10. [Für Fortgeschrittene](#10-für-fortgeschrittene)
 
 ---
 
-## 1. So funktioniert es
+## 1. Meldungsarten
+
+| Meldung | Wann | Bestellen möglich? |
+|---|---|---|
+| 🚨 **KAUFALARM** | Die passende Variante (Englisch, versiegeltes Spielprodukt) ist **erstmals oder erneut wirklich bestellbar**. Vorher wird die Produktseite **erneut abgerufen** und Bestellbarkeit, Sprache und Preis werden geprüft. Nur bei geprüften oder vorgeprüften Händlern. | **Ja** |
+| 🔔 **KAUFALARM (andere Sprache)** | wie oben, aber Japanisch, traditionelles Chinesisch oder Englisch-Asien | Ja |
+| 🟡 **FRÜHHINWEIS** | Neue passende Produktseite, angekündigter Vorbestellstart, neue offizielle Meldung – oder bestellbar, aber nicht bestätigt (Anzahlung ohne Gesamtpreis, Sprache unklar). Die Meldung sagt ausdrücklich, dass noch **nicht** bestellt werden kann. | **Nein / unklar** |
+| ⚠️ **UNGEPRÜFTER HINWEIS** | bestellbar, aber bei einem Shop ohne Vertrauensprüfung | keine Empfehlung |
+| ⛔ **FEHLER** | Eine wichtige Seite ließ sich 3-mal nicht abrufen. Status bleibt **unbekannt**, **nicht** „ausverkauft“. | – |
+| 📋 **AUSGANGSLAGE** | Einmalig beim ersten Lauf je Shop: bereits bestellbare Angebote (nicht neu) | Ja |
+
+Jede Meldung enthält: Produkt, Shop (mit Vertrauensstufe), Sprache, Variante, Preis, Versand und Gesamt nach
+Deutschland, Release, Prüfzeit und einen direkten Link. Fehlendes steht sichtbar als **„❓ fehlt“** in der Meldung.
+Solange Bandai keine Produkte angekündigt hat, steht in jedem Kaufalarm **„SPEKULATIV“**. Es gibt **keine
+Preisgrenze**. Angebote deutlich über dem Median vergleichbarer Angebote werden mit „💰 Teuer“ markiert.
+Dasselbe unveränderte Angebot wird nicht mehrfach gemeldet.
+
+## 2. So funktioniert es
 
 ```
-GitHub Actions (Cloud, kein eigener PC nötig)
-   │  startet  python -m waechter pruefen
-   ▼
-1. Produktlisten der Händler lesen         → nur zum Finden von Kandidaten
-2. Jede passende Produktseite einzeln abrufen → Status, Preis, Varianten
-3. Sprache / Produkttyp / Set / Versiegelung / Vollständigkeit erkennen
-4. Mit dem gespeicherten Stand vergleichen → Restock? Vorbestellung? Preis gefallen?
-5. Speichern: data/ (Verlauf)  +  reports/latest.md (Bericht)
-6. Optional: Telegram-Nachricht bei freigegebenen Händlern
+Jeder Lauf (z. B. alle 5 Minuten in GitHub Actions oder alle 1–3 Minuten auf einem eigenen Server):
+  1. Bekannte Naruto-Produktseiten prüfen               (Ziel: alle 3 Min., Fokus: 1 Min.)
+  2. Offizielle Naruto-Website auf Neuigkeiten prüfen   (30 Min.)
+  3. Neuheiten-/Vorbestellkategorien, Shopsuche, Feeds  (15 Min.)
+  4. weitere Kategorien, Shopify-Gesamtkatalog          (3 Std.), Sitemaps (täglich)
+  5. One Piece                                          (stündlich, niedrigere Priorität)
+  -> nur was fällig ist; pro Shop höflich nacheinander, Shops parallel; danach Ende
+Täglich: neue Händler suchen (optional) und neue Kandidaten live prüfen. Wöchentlich: alle Händler neu prüfen.
 ```
 
-- **Keine Server, keine Datenbank:** Der Verlauf liegt als Textdateien im Repository (`data/`).
-- **Erweiterbar:** Weitere Shopify-Händler sind nur ein Eintrag in `config/shops.toml`. Andere Shop-Systeme
-  bekommen später einen eigenen Adapter in `waechter/haendler/`.
-- **Aktuelle Händler (4):** cardcosmos (DE), Prime Protector (AT), Universe TCG (ES), Otakura (IT).
-  Die dokumentierte Prüfung steht in [docs/haendlerpruefung.md](docs/haendlerpruefung.md).
-  **Kaufalarme sind nur für cardcosmos und Prime Protector freigegeben.**
-- **Ausgeschlossen:** TCG Distro / tcgdistronline.com und TCG Zenith. Das ist im Code verankert und lässt sich
-  nicht versehentlich einschalten.
+Zustand, Verlauf, gesendete Alarme und Dashboard liegen dauerhaft im Zweig **`waechter-daten`**. Die
+Händlerdatenbank liegt in `data/haendler_db.json`.
 
-## 2. Einmalig: Code in den Hauptzweig übernehmen
+## 3. Einrichtung im Browser
 
-Der Code liegt zunächst im Zweig `claude/serene-fermat-a01vy2`. GitHub zeigt den Startknopf eines Workflows erst
-an, wenn der Workflow im Hauptzweig `main` liegt.
+### 3.1 Code in den Hauptzweig übernehmen (einmalig)
 
-1. Öffne <https://github.com/TaCTiiCz/OnePieceW-chter>.
-2. Oben erscheint ein gelber Hinweis **„claude/serene-fermat-a01vy2 had recent pushes“**. Klicke auf
-   **„Compare & pull request“**.
-   *Falls der Hinweis fehlt:* Klicke auf den Reiter **„Pull requests“**, dann auf **„New pull request“**. Wähle
-   bei **„compare:“** den Zweig `claude/serene-fermat-a01vy2`.
-3. Klicke auf **„Create pull request“**.
-4. Warte, bis unten der Test-Haken grün ist (ca. 1 Minute).
-5. Klicke auf **„Merge pull request“** und danach auf **„Confirm merge“**.
+1. Öffne <https://github.com/TaCTiiCz/OnePieceW-chter/pull/new/claude/serene-fermat-a01vy2>.
+2. Klicke auf **„Create pull request“**.
+3. Warte, bis unten die Prüfungen grün sind (ca. 2 Minuten).
+4. Klicke auf **„Merge pull request“** und dann auf **„Confirm merge“**.
 
-## 3. Ersten Prüflauf starten
+### 3.2 Telegram einrichten (Pushkanal)
 
-1. Klicke im Repository oben auf den Reiter **„Actions“**.
-   *Falls GitHub fragt, ob Workflows aktiviert werden sollen:* Klicke auf
-   **„I understand my workflows, go ahead and enable them“**.
-2. Klicke links auf **„Wächter – Prüflauf“**.
-3. Rechts erscheint der Knopf **„Run workflow“**. Klicke darauf.
-4. Lass **Branch: main** und **aktion: pruefen** stehen und klicke auf den grünen Knopf **„Run workflow“**.
-5. Nach einigen Sekunden erscheint ein neuer Eintrag. Ein Lauf dauert etwa 3–10 Minuten, weil der Wächter
-   absichtlich langsam abfragt.
-6. **Starte nach dem ersten Lauf einen zweiten.** Der erste erfolgreiche Lauf speichert nur die
-   **Ausgangsbasis** und meldet absichtlich nichts. Veränderungen erkennt der Wächter erst ab dem zweiten Lauf.
+**Kosten:** keine.
 
-> Hinweis: Der Code wurde in einer Umgebung ohne Zugriff auf die Händler-Websites entwickelt. Die Logik ist mit
-> Tests und echten, gespeicherten Händlerdaten geprüft. **Ein echter Live-Lauf hat aber noch nicht
-> stattgefunden.** Der erste Lauf in GitHub Actions ist der erste echte Live-Test. Sperrt ein Händler den Zugriff
-> aus der GitHub-Cloud, steht das im Bericht unter „Abruffehler“. Der Wächter umgeht solche Sperren nicht.
+1. Öffne <https://web.telegram.org>, melde dich an und suche **@BotFather** (blauer Haken).
+2. Sende `/newbot`, gib einen Namen ein (z. B. `Mein TCG Wächter`) und dann einen Benutzernamen, der auf `bot` endet.
+3. Kopiere den **Token**, den BotFather schickt (z. B. `123456789:AA…`). **Gib ihn niemandem.**
+4. Öffne deinen neuen Bot, klicke auf **„Start“** und schreibe `hallo`.
+5. Öffne in einem neuen Tab `https://api.telegram.org/botDEIN_TOKEN/getUpdates` (Token einsetzen) und suche
+   `"chat":{"id":`. Die Zahl dahinter ist deine **Chat-ID**.
+6. In GitHub: **Settings → Secrets and variables → Actions**
+   - Reiter **Secrets** → **New repository secret**: `TELEGRAM_BOT_TOKEN` = Token → **Add secret**
+   - **New repository secret**: `TELEGRAM_CHAT_ID` = Chat-ID → **Add secret**
+   - Reiter **Variables** → **New repository variable**: `TELEGRAM_AKTIV` = `1` → **Add variable**
+7. **Test mit simuliertem Restock:** **Actions → „Wächter“ → „Run workflow“ → aktion
+   `simulation-mit-echtem-telegram` → „Run workflow“.** Du bekommst eine Meldung mit
+   **„🧪 TEST – SIMULIERTER RESTOCK – KEIN ECHTES ANGEBOT“**. Die gemessene Verzögerung steht danach im Dashboard.
 
-## 4. Bericht lesen
+### 3.3 Dauerbetrieb einschalten (läuft auch bei geschlossenem Browser)
 
-- **Schnell:** Klicke in **Actions** auf den Lauf. Der Bericht steht direkt auf der Seite unter **„Summary“**.
-- **Dauerhaft:** Reiter **„Code“**, dann `reports` und `latest.md`.
+Zuerst Abschnitt 4 lesen und eine Variante wählen. Danach:
 
-| Symbol | Bedeutung |
-|---|---|
-| 🟢 IN STOCK | laut Produktseite bestellbar und lieferbar |
-| 🟡 PREORDER | Vorbestellung möglich |
-| 🟠 WAITLIST | nicht bestellbar, Warteliste/Benachrichtigung |
-| 🔴 SOLD OUT | ausverkauft |
-| ⚪ UNCLEAR | unklar, z. B. Abruffehler oder widersprüchliche Angaben. **Löst nie einen Alarm aus.** |
-| ❓ | unbekannt, z. B. Versandkosten. **Wird nie als 0 € gezählt.** |
-| ⛔ | Händler nicht für Kaufalarme freigegeben |
-| ⚠️ | Währung nicht auf der Produktseite bestätigt |
-
-Spalten: Preis, **Versand nach DE**, **Gesamtpreis** (nur wenn beides bekannt ist), Sprache, Produkttyp,
-versiegelt (JA/NEIN/UNBEKANNT), 24 Packs (JA/NEIN/UNBEKANNT) und der direkte Link zur Produktseite.
-
-Der vollständige Verlauf mit Zeitstempel und Quellenlink liegt in `data/verlauf/`.
-
-## 5. Telegram einrichten (optional)
-
-Telegram ist **vorbereitet, aber ausgeschaltet**. Zugangsdaten gehören **nur in GitHub-Secrets**, nie in Dateien.
-
-**Kosten:** Telegram und Telegram-Bots sind kostenlos.
-
-### 5.1 Bot anlegen (im Browser über Telegram Web)
-
-1. Öffne <https://web.telegram.org> und melde dich an.
-2. Suche oben nach **@BotFather** (blauer Haken) und öffne den Chat.
-3. Schreibe `/newbot` und sende es.
-4. Gib einen Namen ein, z. B. `Mein One Piece Wächter`.
-5. Gib einen Benutzernamen ein, der auf `bot` endet, z. B. `meinopwaechter_bot`.
-6. BotFather antwortet mit einem **Token**, etwa `123456789:AA…`. **Kopiere ihn und gib ihn niemandem.**
-
-### 5.2 Chat-ID herausfinden
-
-1. Suche in Telegram Web nach deinem neuen Bot, öffne den Chat und klicke auf **„Start“**. Schreibe danach
-   irgendeine Nachricht, z. B. `hallo`.
-2. Öffne in einem neuen Browser-Tab diese Adresse und ersetze `DEIN_TOKEN` durch deinen Token:
-   `https://api.telegram.org/botDEIN_TOKEN/getUpdates`
-3. Suche im angezeigten Text nach `"chat":{"id":`. Die Zahl dahinter ist deine **Chat-ID**,
-   z. B. `987654321`.
-
-### 5.3 In GitHub hinterlegen
-
-1. Repository → Reiter **„Settings“** → links **„Secrets and variables“** → **„Actions“**.
-2. Reiter **„Secrets“** → **„New repository secret“**:
-   - Name: `TELEGRAM_BOT_TOKEN`, Secret: dein Token → **„Add secret“**
-3. Noch einmal **„New repository secret“**:
-   - Name: `TELEGRAM_CHAT_ID`, Secret: deine Chat-ID → **„Add secret“**
-4. Reiter **„Variables“** → **„New repository variable“**:
-   - Name: `TELEGRAM_AKTIV`, Value: `1` → **„Add variable“**
-
-### 5.4 Testen
-
-**Actions** → **„Wächter – Prüflauf“** → **„Run workflow“** → bei **aktion** `telegram-test` wählen →
-**„Run workflow“**. Du solltest eine Testnachricht bekommen.
-
-**Ausschalten:** Ändere die Variable `TELEGRAM_AKTIV` auf `0`.
-
-Gemeldet wird nur bei **freigegebenen Händlern** und **sicheren Treffern**: Restock, neu gelistet und lieferbar,
-neue Vorbestellung und Preisrückgang (mindestens 3 % **und** 2 €). Dieselbe Meldung kommt höchstens einmal in
-24 Stunden.
-
-## 6. Regelmäßig ausführen: Kosten und Grenzen
-
-Die regelmäßige Ausführung ist **vorbereitet, aber ausgeschaltet**. Bitte lies diesen Abschnitt, bevor du sie
-einschaltest.
-
-### Kosten (Stand der GitHub-Regeln: bitte selbst unter Settings → Billing prüfen)
-
-- Dein Repository ist **privat**. Mit dem kostenlosen GitHub-Konto sind dafür **2.000 Actions-Minuten pro Monat**
-  enthalten.
-- Jeder Lauf wird auf **volle Minuten aufgerundet**. Ein Prüflauf mit Tests dauert voraussichtlich **3–10 Minuten**.
-  Der genaue Wert zeigt sich beim ersten Live-Lauf.
-- Beispielrechnung bei etwa 6 Minuten pro Lauf:
-
-  | Intervall | Läufe/Monat | Minuten/Monat | im Freikontingent? |
-  |---|---|---|---|
-  | alle 6 Stunden | ~120 | ~720 | ✅ |
-  | **alle 4 Stunden (Vorschlag)** | ~180 | ~1.080 | ✅ |
-  | alle 2 Stunden | ~360 | ~2.160 | ❌ knapp darüber |
-  | jede Stunde | ~720 | ~4.320 | ❌ |
-
-- Ohne hinterlegte Zahlungsmethode entstehen nach GitHubs Regeln keine Kosten. Läufe werden dann bis zum
-  Monatsende blockiert. Den Verbrauch siehst du unter **Profilbild → Settings → Billing and plans**.
-- Alternative: Ein **öffentliches** Repository hat bei GitHub keine Minutenbegrenzung. Dann wären aber Code,
-  Verlauf und Bericht für alle sichtbar. Die Secrets blieben trotzdem geheim.
-
-### Grenzen der Zeitplanung
-
-- Zeiten im Zeitplan sind **UTC** (deutsche Winterzeit = UTC+1, Sommerzeit = UTC+2).
-- Der kürzeste mögliche Abstand ist 5 Minuten. Das wäre hier aber zu teuer und gegenüber den Händlern unhöflich.
-- Geplante Läufe können sich **verzögern oder bei hoher Last ausfallen**, besonders zur vollen Stunde. Deshalb ist
-  Minute 23 eingestellt. Ein Restock, der nur wenige Minuten dauert, kann verpasst werden.
-- Geplante Läufe laufen nur auf dem Hauptzweig `main`.
-
-### Einschalten (im Browser)
-
-1. Reiter **„Code“** → `.github` → `workflows` → `waechter.yml`.
-2. Klicke rechts oben auf das **Stift-Symbol** („Edit this file“).
-3. Suche diese zwei Zeilen:
-   ```yaml
-     # schedule:
-     #   - cron: "23 */4 * * *"
-   ```
-   Entferne jeweils nur `# ` am Zeilenanfang, sodass dort steht:
+1. **Code → `.github/workflows/waechter.yml` → Stift-Symbol** („Edit this file“).
+2. Entferne bei diesen zwei Zeilen jeweils nur `# ` am Anfang und trage das gewählte Intervall ein:
    ```yaml
      schedule:
-       - cron: "23 */4 * * *"
+       - cron: "*/5 * * * *"
    ```
-   Die Einrückung (Leerzeichen vorne) muss bleiben.
-4. Klicke auf **„Commit changes…“** und dann auf **„Commit changes“**.
+3. **„Commit changes…“ → „Commit changes“.**
+4. Prüfen: Unter **Actions → „Wächter“** erscheint nach einigen Minuten ein Lauf mit dem Auslöser „schedule“.
 
-**Ausschalten:** **Actions** → **„Wächter – Prüflauf“** → rechts oben **„…“** → **„Disable workflow“**.
+**Ausschalten:** **Actions → „Wächter“ → „…“ (oben rechts) → „Disable workflow“.**
 
-## 7. Händler oder Produkte ändern
+### 3.4 Tägliche Händlersuche (optional)
 
-Alle Einstellungen stehen in zwei gut kommentierten Dateien. Du kannst sie direkt im Browser über das
-Stift-Symbol bearbeiten:
+Damit täglich automatisch **neue** Händler gefunden werden, braucht der Wächter einen Zugang zu einer offiziellen
+Such-Schnittstelle. Das Auslesen normaler Suchmaschinen-Ergebnisseiten ist nicht erlaubt.
 
-- `config/shops.toml`: Händler, Versandkosten nach DE, Freigabe für Kaufalarme, Abfrage-Abstände
-- `config/products.toml`: Prioritäts-Sets, Set-Namen, Sonderprodukte, Schwellen für Preisrückgang
+1. Bei <https://brave.com/search/api/> ein Konto anlegen und einen API-Schlüssel erstellen. Preise und
+   Freikontingent stehen beim Anbieter, bitte dort prüfen.
+2. In GitHub: **Settings → Secrets and variables → Actions → New repository secret**:
+   `BRAVE_SEARCH_API_KEY` = Schlüssel.
 
-**Einen weiteren Shopify-Händler hinzufügen:** Kopiere einen bestehenden `[shops.…]`-Block und passe ihn an. Trage
-Versandkosten nur ein, wenn sie auf der Versandseite des Händlers belegt sind, sonst `status = "unbekannt"`. Lass
-`kaufalarm_freigegeben = false`, bis du die Prüfung in `docs/haendlerpruefung.md` dokumentiert hast. Nach dem
-Speichern prüft der Test-Workflow automatisch, ob die Datei gültig ist.
+Ohne Schlüssel prüft der Wächter weiterhin täglich neue Kandidaten, die du in `config/haendler_kandidaten.csv`
+einträgst, und wöchentlich alle Händler.
 
-## 8. Was der Wächter tut, um Fehlalarme zu vermeiden
+## 4. Dauerbetrieb: Kosten und Grenzen
 
-- **Suchtreffer zählen nicht:** Jede Produktseite wird einzeln geprüft.
-- **Ausgangsbasis:** Der erste erfolgreiche Lauf je Händler meldet nichts.
-- **Abruffehler** (Zeitüberschreitung, 503, Sperre) ergeben den Status UNCLEAR. Sie lösen nie einen Restock aus,
-  und der letzte sichere Status bleibt erhalten.
-- **Typische Shop-Fallen:** Vorbestellungen werden von Shopify als „verfügbar“ gemeldet. Artikel ohne
-  Bestandsführung sind immer „verfügbar“. Preis 0,00 € ist ein Platzhalter. Beschreibungen sind manchmal
-  veraltet. All diese Fälle werden erkannt.
-- **Sprachverwechslung:** Die Sprache wird nur aus Titel, Variante, URL und Tags gelesen. JP, CN, KR, Asia-English
-  usw. werden ausgeschlossen. Bei fehlender oder widersprüchlicher Angabe gibt es keinen Kaufalarm.
-- **Produkttyp:** Case, Booster Pack, Einzelkarte, Zubehör, Starter Deck und Double Pack werden **nicht** als Display
-  gezählt. Geöffnete oder unvollständige Ware wird ausgeschlossen.
-- **Unbekannte Versandkosten** werden nie als 0 € gerechnet. Der Gesamtpreis bleibt dann „unbekannt“.
-- **Händlerlimits:** ehrliche Kennung (kein Browser-Tarnname), robots.txt, mindestens 4 Sekunden Abstand pro
-  Händler und eine Obergrenze pro Lauf. Bei 429/5xx wartet der Wächter länger. Bei 403 oder Captcha hört er sofort
-  auf und pausiert den Händler für 6 Stunden.
-- Über 100 automatische Tests prüfen das bei jeder Änderung. Siehe Ordner `tests/`. Alle Testdaten sind dort
-  gekennzeichnet.
+Dein Repository ist **privat**. GitHub enthält dafür **2.000 Actions-Minuten pro Monat**, jeder Lauf wird auf volle
+Minuten aufgerundet. Ein Wächter-Lauf dauert erfahrungsgemäß 1–3 Minuten (Werte im Dashboard).
+
+| Variante | Prüfabstand | Kosten | Zuverlässigkeit |
+|---|---|---|---|
+| **A: Repository öffentlich machen** + Zeitplan `*/5` | 5 Min. (GitHub verzögert geplante Läufe oft um einige Minuten, bei hoher Last fallen einzelne aus) | **kostenlos** (öffentliche Repositorys haben unbegrenzte Standard-Minuten) | mittel |
+| **B: privat bleiben** + Zeitplan `7 * * * *` | stündlich | kostenlos im Freikontingent (~720–1.500 Min./Monat) | mittel, zu langsam für schnelle Vorbestellungen |
+| **C: eigener kleiner Server** (z. B. Cloud-VM) mit `python -m waechter dauerlauf` | **1–3 Min.** | ca. 4–6 €/Monat bei üblichen Anbietern (bitte beim Anbieter prüfen) | hoch |
+
+Hinweise:
+- **Öffentlich** heißt: Code, Händlerliste, Verlauf und Dashboard sind für alle sichtbar. Telegram-Token und Chat-ID
+  bleiben als Secrets geheim. Umstellen: **Settings → General → ganz unten „Change repository visibility“**.
+- Mit Variante A **im privaten** Repository (ohne Umstellung) wäre das Freikontingent nach etwa 4–7 Tagen
+  verbraucht. Ohne hinterlegte Zahlungsmethode werden Läufe dann bis Monatsende blockiert, mit Zahlungsmethode
+  entstehen Kosten. Den Verbrauch siehst du unter **Profilbild → Settings → Billing and plans**.
+- GitHub-Zeitpläne laufen in **UTC** und nur im Hauptzweig `main`.
+- Die Händlerprüfung (täglich/wöchentlich, je ca. 5–10 Min.) kommt hinzu.
+
+## 5. Dashboard lesen
+
+<https://github.com/TaCTiiCz/OnePieceW-chter/blob/waechter-daten/dashboard.md>. Das Dashboard erscheint auch nach
+jedem Lauf direkt unter **Actions → Lauf → Summary**.
+
+- **Betrieb in Zahlen:** Wie viele Shops **tatsächlich** überwacht werden (mindestens 1 erfolgreicher Abruf in
+  24 Stunden), wie viele Naruto-Produktseiten bekannt und geprüft sind, Fehler und Pushkanal, dazu der letzte Push
+  und der letzte Simulationstest mit gemessener Verzögerung.
+- **Naruto-Angebote:** Status, Shop, Vertrauen, Sprache, Variante, Preis, Versand, Gesamt, Release, Link.
+- **Händler:** letzter erfolgreicher Abruf je Shop, Fehler, Zeitpunkt der Ausgangsbasis.
+- **Aktive Prüfintervalle** und **Abdeckungslücken** (blockierte Shops, fehlende Versandkosten, ungeprüfte Shops).
+
+## 6. Händler und Produkte ändern
+
+- **Neuer Händler:** Zeile in `config/haendler_kandidaten.csv` ergänzen (`domain;Name;Land;Herkunft`). Nach dem
+  Speichern wird er automatisch live geprüft.
+- **Händler freigeben (KAUFALARM statt Hinweis):** siehe [docs/haendlerpruefung.md](docs/haendlerpruefung.md).
+- **Bekannter Vorbestellstart:** in `config/naruto.toml` unter `[[termine]]` eintragen. Vorbestellstarts auf
+  Shopseiten werden auch automatisch erkannt. Rund um den Termin prüft der Wächter häufiger (Fokus).
+- **Intervalle und Grenzen:** `config/betrieb.toml`.
+- **Sobald Bandai Produkte ankündigt:** in `config/naruto.toml` `produkte_offiziell_angekuendigt = true` setzen. Dann
+  entfällt der Hinweis „SPEKULATIV“.
+
+## 7. Schutz vor Fehlalarmen
+
+- **Suchtreffer zählen nie:** Jede Produktseite wird einzeln abgerufen. Vor jedem Kaufalarm wird sie **ein zweites
+  Mal** abgerufen und geprüft.
+- **Nicht bestellbar** sind: Warteliste, „Coming soon“, „Benachrichtigen“, Anzahlung ohne klaren Gesamtpreis,
+  fehlender Preis, widersprüchliche Angaben.
+- **Abruffehler** ergeben „unbekannt“, **nie „ausverkauft“**, und lösen keinen Alarm aus. Wiederholungen erfolgen mit
+  wachsendem Abstand (Intervall ×1, ×2, ×4 …).
+- **Erster Lauf je Shop = Ausgangsbasis:** Es werden keine angeblichen Restocks gemeldet.
+- **Höflichkeit:** ehrliche Kennung, robots.txt (24 Std. zwischengespeichert), Abstand pro Shop, Obergrenze pro Lauf.
+  Bei 403, Captcha oder Bot-Schutz hört der Wächter sofort auf, umgeht nichts und pausiert den Shop.
+- **TCG Distro / tcgdistronline.com** ist dauerhaft ausgeschlossen, **TCG Zenith** bis zu einer Vertrauensprüfung.
+- **Über 140 automatische Tests** und eine **End-to-End-Simulation** laufen bei jeder Änderung. Testdaten sind gekennzeichnet.
+
+## 8. One Piece
+
+Die One-Piece-Überwachung (englische Displays OP01–OP18, Priorität OP13, OP15, OP09, OP18, OP16, OP11, Sleeved
+Booster, Sonderprodukte) läuft im selben Wächter **stündlich** mit niedrigerer Priorität. Ihr Bericht liegt im Zweig
+`waechter-daten` als `laufzeit/onepiece_bericht.md`. Einstellungen: `config/shops.toml`, `config/products.toml`.
 
 ## 9. Probleme lösen
 
 | Problem | Lösung |
 |---|---|
-| Kein „Run workflow“-Knopf | Der Code ist noch nicht in `main` (Abschnitt 2). |
-| Schritt „Verlauf und Bericht speichern“ schlägt fehl (403) | **Settings → Actions → General → Workflow permissions →** „Read and write permissions“ wählen → **Save**. |
-| Händler zeigt „Zugriff verweigert“ oder „Bot-Schutz“ | Der Händler blockiert automatische Abrufe aus der GitHub-Cloud. Das wird respektiert. Händler in `config/shops.toml` entfernen oder so lassen. |
-| „Telegram eingeschaltet, aber Secret … fehlt“ | Secret-Namen genau wie in Abschnitt 5.3 schreiben. |
-| Neue Ausgangsbasis gewünscht | Datei `data/zustand.json` löschen (Datei öffnen → „…“ → „Delete file“). |
+| Kein „Run workflow“-Knopf | Code ist noch nicht in `main` (3.1). |
+| Speichern schlägt fehl (403) | **Settings → Actions → General → Workflow permissions → „Read and write permissions“ → Save**. |
+| Keine Telegram-Nachricht | Secrets/Variable genau wie in 3.2 benennen; Simulation mit echtem Telegram starten; Dashboard zeigt den Fehler. |
+| Shop „blockiert“ | Der Shop lehnt automatische Abrufe ab. Das wird respektiert. |
+| Zeitplan läuft nicht | GitHub pausiert geplante Workflows in öffentlichen Repos nach 60 Tagen ohne Aktivität: **Actions → „Wächter“ → „Enable workflow“**. |
 
-### Für Fortgeschrittene (optional, nicht nötig)
+## 10. Für Fortgeschrittene
 
 ```bash
-python -m waechter pruefen --testdaten   # Probelauf mit Testdaten, ohne Internet
-python -m unittest discover -s tests -t . # alle Tests
-python -m waechter konfig                 # Konfiguration prüfen
+python -m waechter lauf                    # ein Lauf (fällige Aufgaben)
+python -m waechter dauerlauf               # Dauerbetrieb auf eigenem Server (prüft je nach Fälligkeit, ca. alle 20–60 s)
+python -m waechter simulation              # simulierter Restock bis zur Test-Pushmeldung, misst die Verzögerung
+python -m waechter haendler-pruefen        # Händlerdatenbank live prüfen
+python -m waechter haendler-suchen         # neue Händler suchen (BRAVE_SEARCH_API_KEY nötig)
+python -m waechter pruefen --testdaten     # One-Piece-Probelauf mit Testdaten (ohne Internet)
+python -m unittest discover -s tests -t .  # alle Tests
 ```
 
-Benötigt nur Python 3.11 oder neuer, keine Zusatzpakete.
+Es wird nur Python 3.11 oder neuer gebraucht, keine Zusatzpakete. Auf einem eigenen Server läuft der Dauerbetrieb
+z. B. als systemd-Dienst mit `python -m waechter dauerlauf`. Die Telegram-Zugangsdaten kommen dort als
+Umgebungsvariablen hinzu, niemals in Dateien im Repository.

@@ -17,11 +17,15 @@
 #    solange keine belastbaren Belege vorliegen.
 # =====================================================================
 
-# Händler, die niemals überwacht werden dürfen (Anforderung 7).
+# Händler, die niemals überwacht werden dürfen.
 # Der Wächter verweigert den Start, wenn ein Shop unten gegen diese Liste verstößt.
+# TCG Distro / tcgdistronline.com ist zusätzlich FEST im Code ausgeschlossen (dauerhaft).
 [ausschluss]
-domains = ["tcgdistro.com", "tcgdistronline.com", "tcgzenith.com"]
-namensmuster = ["tcg distro", "tcgdistro", "tcg-distro", "tcg zenith", "tcgzenith", "tcg-zenith"]
+domains = ["tcgdistro.com", "tcgdistronline.com"]
+namensmuster = ["tcg distro", "tcgdistro", "tcg-distro"]
+# Gesperrt, bis eine dokumentierte Vertrauensprüfung vorliegt (docs/haendlerpruefung.md).
+# Erst nach dieser Prüfung den Eintrag hier entfernen.
+bis_vertrauenspruefung = ["tcgzenith", "tcg zenith", "tcg-zenith"]
 
 # ---------------------------------------------------------------------
 [shops.cardcosmos]

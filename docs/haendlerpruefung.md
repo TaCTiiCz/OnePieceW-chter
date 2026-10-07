@@ -1,64 +1,62 @@
-# Dokumentierte Händlerprüfung
+# Händlerdatenbank und Händlerprüfung
 
-Stand: **06.10.2026**. Geprüft wurden nur öffentlich sichtbare Angaben auf den Shop-Seiten
-(Impressum, Versandbedingungen, Sortiment, Format der Produktdaten). Abgerufen wurde über einen
-Web-Abrufdienst, weil die Entwicklungsumgebung selbst keinen Zugriff auf die Shops hatte.
+## Wie die Datenbank entsteht
 
-**Nicht bewertet** wurden: Seriosität, Zuverlässigkeit, Kundenerfahrungen und das Risiko von Case-Hunting
-(Herausnehmen wertvoller Packs vor dem Verkauf). Dafür lagen keine belastbaren Belege vor. Eine
-Originalversiegelung beweist **nicht**, dass ein Display aus einem unselektierten Case stammt.
+1. **Kandidaten** stehen in [`config/haendler_kandidaten.csv`](../config/haendler_kandidaten.csv). Jede Zeile nennt die
+   **Herkunft**: z. B. „Suche One Piece DE 2026-10-07“ (Fundstelle einer Websuche) oder „Vorwissen (unbestätigt)“.
+   Suchtreffer dienen nur zur Entdeckung, nie als Nachweis.
+2. Die **live Händlerprüfung** (Workflow „Händlerprüfung“, läuft in der GitHub-Cloud) ruft für jeden Kandidaten ab, was
+   öffentlich und laut robots.txt erlaubt ist: Startseite, robots.txt, Impressum, Versandseite und – je nach
+   Shopsystem – öffentliche Produkt-Schnittstellen (Shopify `/meta.json`, WooCommerce Store-API).
+3. Das Ergebnis mit Belegen und Zeitstempel steht in [`data/haendler_db.json`](../data/haendler_db.json).
+   Es wird **wöchentlich komplett** und **täglich für neue Kandidaten** erneuert.
 
-## Kriterien für die Freigabe von Kaufalarmen
+## Ergebnis der Live-Prüfung vom 07.10.2026 (gemessen in der GitHub-Cloud)
 
-Ein Händler wird nur freigegeben (`kaufalarm_freigegeben = true` in `config/shops.toml`), wenn
-
-1. ein Impressum mit Firmenname, Anschrift und Registernummer/USt-ID gefunden wurde,
-2. die Lieferung nach Deutschland auf der Versandseite belegt ist,
-3. die Versandkosten nach Deutschland auf der Versandseite belegt sind,
-4. der Shop nicht auf der Ausschlussliste steht (TCG Distro / tcgdistronline.com, TCG Zenith),
-5. die Produktdaten maschinenlesbar und ohne Umgehung von Schutzmaßnahmen abrufbar sind.
-
-Nicht freigegebene Händler werden trotzdem beobachtet und erscheinen im Bericht (mit ⛔), lösen aber keine
-Telegram-Kaufalarme aus.
-
-## Ergebnis
-
-| Händler | Land | Impressum | Lieferung DE | Versandkosten DE | Engl. OP-Displays im Sortiment | Freigabe |
-|---|---|---|---|---|---|---|
-| cardcosmos | DE | ✅ cardcosmos GmbH, Fahrdorf, HRB16880 AG Flensburg, USt-ID DE366668128 | ✅ | ✅ 4,99 € pro Bestellung | ✅ (OP09, OP10, OP11, OP13, OP15, OP18, OP19, EB02 gelistet; am Prüftag alle ausverkauft) | ✅ |
-| Prime Protector | AT | ✅ Wenig GmbH, Ilztal, FN 550752f LG Graz, UID ATU76568607 | ✅ | ✅ DPD 5,90 €, ab 200 € frei | ⚠️ am Prüftag keine englischen OP-Displays gefunden (nur Zubehör/Sondersets) | ✅ |
-| Universe TCG | ES | ✅ Einzelunternehmer, NIF 77123245J, Mollet del Vallès | ✅ (EU-Versand) | ❌ nicht angegeben | ✅ (OP15, OP16, OP17, EB05, EB06; auch ganze Cases) | ⛔ |
-| Otakura | IT | ❌ nicht gefunden | ✅ (EU-Versand) | ✅ 12,50 €; 500–999,98 € → 24,90 €; ab 999,99 € frei | ✅ (OP15 ENG, am Prüftag ausverkauft) | ⛔ |
-
-### Quellen
-
-- cardcosmos: [Impressum](https://cardcosmos.de/policies/legal-notice), [Versand](https://cardcosmos.de/policies/shipping-policy)
-- Prime Protector: [Impressum](https://primeprotector.at/policies/legal-notice), [Versand](https://primeprotector.at/policies/shipping-policy)
-- Universe TCG: [Legal notice](https://www.universetcg.com/policies/legal-notice), [Shipping](https://www.universetcg.com/policies/shipping-policy)
-- Otakura: [Shipping](https://otakura.com/en/policies/shipping-policy), [Legal notice (ohne Firmenangaben)](https://otakura.com/en/policies/legal-notice)
-
-### Beobachtungen bei der Prüfung (wichtig für die Zuverlässigkeit)
-
-- **cardcosmos**: Die Shop-Suche nach „one piece display english“ lieferte fast nur **japanische** Displays.
-  Suchtreffer sind deshalb kein Nachweis – der Wächter prüft jede Produktseite und die Sprache einzeln.
-  Ein englisches OP19-Display stand mit **Preis 0,00 €** im Katalog (Platzhalter). Der Wächter behandelt das als
-  „Preis unbekannt“.
-- **Universe TCG**: Das OP15-Display war als „verfügbar“ markiert, die Beschreibung sagte aber „Status: PRE-ORDER“
-  bei einem Erscheinungsdatum vom 3. April 2026. Der Wächter meldet solche Widersprüche als **UNCLEAR**.
-- **Otakura**: Shopify-Suchergebnisse zeigten Vorbestellungen ebenfalls als „available“. Vorbestellungen
-  werden über Tags (z. B. „preordine“), Titel und Verkaufspläne erkannt.
-
-## Nicht aufgenommene Kandidaten
-
-| Händler | Grund |
+| | Anzahl |
 |---|---|
-| TCG Distro / tcgdistronline.com, TCG Zenith | auf ausdrücklichen Wunsch ausgeschlossen (im Code fest verankert) |
-| Games Island (games-island.eu) | Der Shop legt für automatische Abrufe eigene Regeln fest (u. a. max. 5 Anfragen pro 5 Minuten über eine eigene Schnittstelle; Scalper nicht erwünscht; Preise sollen von Bots nicht ausgegeben werden). Ein Preiswächter würde diesen Regeln widersprechen – daher nicht aufgenommen. |
-| Pokitrio | Versandkosten konnten nicht maschinell belegt werden; vorerst nicht aufgenommen. |
-| Cardmarket | Marktplatz mit vielen Einzelverkäufern statt eines Händlers; nicht im Umfang dieser ersten Version. |
+| Kandidaten | 148 |
+| **geeignet** (erreichbar, TCG-Sortiment, Europa, liefert nicht nachweislich NICHT nach DE) | **105** |
+| davon **automatisch vorgeprüft** (Impressum mit Register/USt-ID **und** Versand nach DE belegt) | 41 |
+| blockieren automatische Abrufe (403/Bot-Schutz) – wird respektiert | 13 |
+| eigene Bot-Regeln (Games Island) – nicht automatisch überwacht | 1 |
+| nicht erreichbar | 2 |
+| ungeeignet (kein TCG-Sortiment erkennbar, liefert nicht nach DE) | 27 |
 
-## Einen Händler selbst freigeben
+Die aktuellen Zahlen stehen immer in `data/haendler_db.json` (`zusammenfassung`) und im Dashboard.
 
-1. Impressum und Versandseite des Händlers im Browser öffnen und die Angaben oben ergänzen.
-2. In `config/shops.toml` beim Händler `kaufalarm_freigegeben = true` setzen.
-3. Datum und Quelle bei `[shops.<name>.pruefung]` eintragen.
+## Vertrauensstufen (entscheiden über die Art der Meldung)
+
+| Stufe | Bedeutung | Meldung bei Bestellbarkeit |
+|---|---|---|
+| ✅ **geprüft** | dokumentiert von Hand geprüft (`config/shops.toml`, `kaufalarm_freigegeben = true`) | **KAUFALARM** |
+| ☑️ **vorgeprüft** | automatisch: Impressum mit Handelsregister/USt-ID gefunden **und** Versand nach DE belegt | **KAUFALARM** (mit Hinweis „automatisch vorgeprüft“) |
+| ❗ **ungeprüft** | Belege fehlen | nur **UNGEPRÜFTER HINWEIS**, keine Kaufempfehlung |
+
+**Nicht bewertet** werden Seriosität, Zuverlässigkeit, Kundenerfahrungen und Case-Hunting-Risiko – dafür liegen keine
+belastbaren Belege vor. Eine Originalversiegelung beweist **nicht**, dass ein Display aus einem unselektierten Case stammt.
+
+## Ausschlüsse
+
+- **TCG Distro / tcgdistronline.com:** dauerhaft ausgeschlossen (fest im Code).
+- **TCG Zenith:** gesperrt **bis zu einer dokumentierten Vertrauensprüfung** (`config/shops.toml`,
+  `[ausschluss] bis_vertrauenspruefung`). Erst nach dieser Prüfung den Eintrag dort entfernen.
+- **Games Island:** legt eigene Regeln für automatische Abrufe fest (u. a. keine Verfügbarkeitsabfragen über die
+  Hauptseite, Scalper nicht erwünscht) – wird respektiert und nicht automatisch überwacht.
+- Shops, die mit **403 oder Bot-Schutz** antworten, werden nicht umgangen, sondern als Abdeckungslücke geführt.
+
+## Manuell dokumentiert geprüfte Händler (One Piece, Stand 06.10.2026)
+
+| Händler | Land | Impressum | Versand DE | Freigabe |
+|---|---|---|---|---|
+| cardcosmos | DE | cardcosmos GmbH, Fahrdorf, HRB16880 AG Flensburg, USt-ID DE366668128 ([Quelle](https://cardcosmos.de/policies/legal-notice)) | 4,99 € ([Quelle](https://cardcosmos.de/policies/shipping-policy)) | ✅ |
+| Prime Protector | AT | Wenig GmbH, Ilztal, FN 550752f LG Graz, UID ATU76568607 ([Quelle](https://primeprotector.at/policies/legal-notice)) | DPD 5,90 €, ab 200 € frei ([Quelle](https://primeprotector.at/policies/shipping-policy)) | ✅ |
+| Universe TCG | ES | Einzelunternehmer, NIF 77123245J ([Quelle](https://www.universetcg.com/policies/legal-notice)) | nicht angegeben | ⛔ (Versandkosten fehlen) |
+| Otakura | IT | nicht gefunden | 12,50 € ([Quelle](https://otakura.com/en/policies/shipping-policy)) | ⛔ (Impressum fehlt) |
+
+## Einen Händler hinzufügen oder freigeben
+
+- **Neuer Kandidat:** Zeile in `config/haendler_kandidaten.csv` ergänzen (Domain; Name; Land; Herkunft) und speichern
+  → die Händlerprüfung startet automatisch.
+- **Freigeben (KAUFALARM statt Hinweis):** Impressum und Versandseite im Browser prüfen, dann einen Block in
+  `config/shops.toml` anlegen (Vorlage: cardcosmos) mit `kaufalarm_freigegeben = true` und den belegten Versandkosten.

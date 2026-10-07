@@ -187,7 +187,8 @@ def naruto_lauf(konfig, daten: Path, db: Path, dash: Path, onepiece: bool = True
     l.speichern()
     db_json = json.loads(db.read_text(encoding="utf-8")) if db.exists() else {}
     dash.parent.mkdir(parents=True, exist_ok=True)
-    op = "onepiece_bericht.md" if (daten / "onepiece_bericht.md").exists() else None
+    import os
+    op = os.path.relpath(daten / "onepiece_bericht.md", dash.parent) if (daten / "onepiece_bericht.md").exists() else None
     dash.write_text(dashmod.erzeuge(l.zustand, lade_haendler(konfig, db), db_json, l.ncfg, l.betrieb,
                                     dt.datetime.now(dt.timezone.utc), op), encoding="utf-8")
     faellig = [dt.datetime.fromisoformat(a["faellig"]) for a in l.zustand["aufgaben"].values()]

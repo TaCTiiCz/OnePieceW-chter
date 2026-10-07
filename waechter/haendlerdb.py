@@ -29,9 +29,21 @@ EUROPA = {"DE", "AT", "CH", "FR", "ES", "IT", "NL", "BE", "LU", "DK", "SE", "FI"
           "HR", "PT", "IE", "GR", "RO", "BG", "EE", "LV", "LT", "MT", "CY", "UK", "IS", "LI", "EU"}
 NICHT_EU = {"CH", "UK", "NO", "IS", "LI"}
 
-# Dauerhaft ausgeschlossen (Anforderung). TCG Zenith ist bis zu einer Vertrauensprüfung gesperrt.
+# Dauerhaft ausgeschlossen (Anforderung). TCG Zenith ist bis zu einer Vertrauensprüfung gesperrt –
+# die Sperrliste steht in config/shops.toml unter [ausschluss] bis_vertrauenspruefung.
 DAUERHAFT_AUSGESCHLOSSEN = ("tcgdistro", "tcgdistronline")
-GESPERRT_BIS_PRUEFUNG = ("tcgzenith", "tcg-zenith")
+
+
+def _gesperrt_bis_pruefung() -> tuple:
+    import tomllib
+    try:
+        with open(PROJEKT / "config" / "shops.toml", "rb") as f:
+            return tuple(tomllib.load(f).get("ausschluss", {}).get("bis_vertrauenspruefung", []))
+    except (OSError, ValueError):
+        return ("tcgzenith",)
+
+
+GESPERRT_BIS_PRUEFUNG = _gesperrt_bis_pruefung()
 
 PLATTFORM_MERKMALE = [
     ("shopify", r"cdn\.shopify\.com|Shopify\.theme|myshopify\.com"),

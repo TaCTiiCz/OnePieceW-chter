@@ -32,13 +32,18 @@ class Ausschluss(unittest.TestCase):
             self.assertFalse(ist_ausgeschlossen(s.basis_url, k.ausschluss_domains, k.ausschluss_namen))
 
     def test_tcg_distro_und_zenith_werden_abgelehnt(self):
+        sperre = '[ausschluss]\nbis_vertrauenspruefung = ["tcgzenith", "tcg zenith"]\n'
         for sid, name, url in [("a", "TCG Distro", "https://tcgdistro.com"),
                                ("b", "Shop", "https://www.tcgdistronline.com"),
                                ("c", "TCG Zenith", "https://example.eu"),
                                ("d", "Irgendwas", "https://shop.tcgzenith.com"),
                                ("tcg_distro", "x", "https://example.org")]:
             with self.assertRaises(KonfigFehler, msg=url):
-                lade_mit(SHOP_VORLAGE.format(sid=sid, name=name, url=url))
+                lade_mit(sperre + SHOP_VORLAGE.format(sid=sid, name=name, url=url))
+
+    def test_echte_konfig_sperrt_zenith_bis_pruefung(self):
+        k = lade_konfig()
+        self.assertTrue(ist_ausgeschlossen("TCG Zenith", k.ausschluss_domains, k.ausschluss_namen))
 
     def test_ausschluss_gilt_auch_ohne_eintrag_in_datei(self):
         # [ausschluss] fehlt komplett -> Pflicht-Ausschlüsse greifen trotzdem
