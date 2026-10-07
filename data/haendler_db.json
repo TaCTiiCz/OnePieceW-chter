@@ -1,5 +1,5 @@
 {
- "aktualisiert": "2026-10-07T14:01:58+00:00",
+ "aktualisiert": "2026-10-07T14:08:59+00:00",
  "haendler": {
   "1piecetcg": {
    "basis_url": "https://1piecetcg.fr",
@@ -27,7 +27,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:53+00:00",
-   "geprueft_am": "2026-10-07T13:59:53+00:00",
+   "geprueft_am": "2026-10-07T14:06:44+00:00",
    "gruende": [],
    "id": "1piecetcg",
    "impressum": {
@@ -87,7 +87,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:56+00:00",
-   "geprueft_am": "2026-10-07T14:00:56+00:00",
+   "geprueft_am": "2026-10-07T14:07:46+00:00",
    "gruende": [],
    "id": "2sleeve",
    "impressum": {
@@ -174,7 +174,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:58:50+00:00",
-   "geprueft_am": "2026-10-07T13:58:50+00:00",
+   "geprueft_am": "2026-10-07T14:05:43+00:00",
    "gruende": [],
    "id": "adventurecardz",
    "impressum": {
@@ -212,17 +212,18 @@
     "tcg",
     "trading card",
     "union arena",
-    "yu-gi-oh"
+    "yu-gi-oh",
+    "yugioh"
    ],
    "tdm_vorbehalt": false,
    "versand_de": "ja",
    "versand_de_quelle": "https://adventurecardz.de/meta.json (ships_to_countries)",
    "versand_hinweise": {
     "betrag_hinweis": null,
-    "nennt_deutschland": true,
-    "nennt_eu": true
+    "nennt_deutschland": false,
+    "nennt_eu": false
    },
-   "versand_url": "https://adventurecardz.de/policies/shipping-policy",
+   "versand_url": "https://adventurecardz.de/products/one-piece-card-game-premium-card-collection-one-piece-day-26-jp-auslieferung-juni-2027",
    "vertrauen": "vorgeprueft",
    "waehrung": "EUR"
   },
@@ -244,7 +245,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:35+00:00",
-   "geprueft_am": "2026-10-07T14:00:35+00:00",
+   "geprueft_am": "2026-10-07T14:07:28+00:00",
    "gruende": [],
    "id": "alphaspel",
    "impressum_url": null,
@@ -270,6 +271,94 @@
    "versand_url": null,
    "vertrauen": "ungeprueft"
   },
+  "battlebear": {
+   "basis_url": "https://battle-bear.de",
+   "domain": "battle-bear.de",
+   "entdeckung": [
+    {
+     "art": "shopify_neueste",
+     "url": "https://battle-bear.de/products.json?limit=100"
+    },
+    {
+     "art": "shopify_katalog",
+     "url": "https://battle-bear.de/products.json?limit=250"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://battle-bear.de/collections/naruto-merch"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://battle-bear.de/collections/funko-neuheiten"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://battle-bear.de/collections/neuheiten"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://battle-bear.de/collections/one-piece-card-game"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://battle-bear.de/collections/one-piece-booster-pack"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://www.battle-bear.de/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-07T14:08:32+00:00",
+   "geprueft_am": "2026-10-07T14:08:32+00:00",
+   "gruende": [],
+   "id": "battlebear",
+   "impressum": {
+    "beleg": "tereintrag:\\u003c\\/h2\\u003e\\n\\u003cp data-mce-fragment=\\\"1\\\"\\u003eEintragung im Handelsregister.\\u003cbr data-mce-fragment=\\\"1\\\"\\u003eR",
+    "rechtsform": "GmbH",
+    "register": true,
+    "ust_id": null
+   },
+   "impressum_url": "https://battle-bear.de/pages/impressum",
+   "land": "DE",
+   "name": "Battle Bear",
+   "naruto_erwaehnt": true,
+   "plattform": "shopify",
+   "quelle": "Suche Lorcana/Yu-Gi-Oh DE 2026-10-07",
+   "shop_land_meta": "DE",
+   "sitemaps": [
+    "https://www.battle-bear.de/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "digimon",
+    "display",
+    "dragon ball",
+    "gundam",
+    "lorcana",
+    "magic: the gathering",
+    "naruto",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "sammelkarten",
+    "tcg",
+    "trading card",
+    "yu-gi-oh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "https://battle-bear.de/meta.json (ships_to_countries)",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": true,
+    "nennt_eu": true
+   },
+   "versand_url": "https://battle-bear.de/policies/shipping-policy",
+   "vertrauen": "vorgeprueft",
+   "waehrung": "EUR"
+  },
   "bayzing": {
    "basis_url": "https://bayzing.com",
    "domain": "bayzing.com",
@@ -292,7 +381,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:59+00:00",
-   "geprueft_am": "2026-10-07T14:00:59+00:00",
+   "geprueft_am": "2026-10-07T14:07:51+00:00",
    "gruende": [],
    "id": "bayzing",
    "impressum": {
@@ -353,7 +442,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:26+00:00",
-   "geprueft_am": "2026-10-07T14:00:26+00:00",
+   "geprueft_am": "2026-10-07T14:07:19+00:00",
    "gruende": [],
    "id": "bazaarofmagic",
    "impressum_url": null,
@@ -370,6 +459,7 @@
    "tcg_hinweise": [
     "booster",
     "digimon",
+    "display",
     "gundam",
     "lorcana",
     "magic: the gathering",
@@ -390,6 +480,74 @@
    },
    "versand_url": "https://www.bazaarofmagic.eu/en-WW/helpdesk/customer-service/shipment-and-shipment-costs/232",
    "vertrauen": "ungeprueft"
+  },
+  "bbspiele": {
+   "basis_url": "https://www.bb-spiele.de",
+   "domain": "bb-spiele.de",
+   "entdeckung": [
+    {
+     "art": "shopsuche",
+     "url": "https://www.bb-spiele.de/search?search=naruto"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://www.bb-spiele.de/vorverkauf"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://www.bb-spiele.de/one-piece-tcg"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://www.bb-spiele.de/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-07T14:08:31+00:00",
+   "geprueft_am": "2026-10-07T14:08:31+00:00",
+   "gruende": [],
+   "id": "bbspiele",
+   "impressum": {
+    "beleg": "g: Collectibles-Hub GmbH wird vertreten durch Andreas Herrmann Umsatzsteuer-ID: DE366189782 Alternative Streitbeilegung: Die Europä",
+    "rechtsform": "GmbH",
+    "register": true,
+    "ust_id": "DE366189782"
+   },
+   "impressum_url": "https://www.bb-spiele.de/UEber-uns/Impressum/",
+   "land": "DE",
+   "name": "BB-Spiele",
+   "naruto_erwaehnt": false,
+   "plattform": "shopware",
+   "quelle": "Suche Lorcana/Yu-Gi-Oh DE 2026-10-07",
+   "sitemaps": [
+    "https://www.bb-spiele.de/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "display",
+    "lorcana",
+    "magic: the gathering",
+    "mtg",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "sammelkarten",
+    "tcg",
+    "trading card",
+    "yu-gi-oh",
+    "yugioh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "Inlandshändler (Land DE)",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": true,
+    "nennt_eu": false
+   },
+   "versand_url": "https://www.bb-spiele.de/Shop-Service/Versand-und-Zahlungsbedingungen/",
+   "vertrauen": "vorgeprueft"
   },
   "bescards": {
    "basis_url": "https://www.bescards.com",
@@ -433,7 +591,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:01:12+00:00",
-   "geprueft_am": "2026-10-07T14:01:12+00:00",
+   "geprueft_am": "2026-10-07T14:08:05+00:00",
    "gruende": [],
    "id": "bescards",
    "impressum": {
@@ -522,7 +680,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:02+00:00",
-   "geprueft_am": "2026-10-07T13:59:02+00:00",
+   "geprueft_am": "2026-10-07T14:05:56+00:00",
    "gruende": [],
    "id": "breakthecase",
    "impressum": {
@@ -554,6 +712,8 @@
     "naruto",
     "one piece",
     "pokemon",
+    "pokémon",
+    "sammelkarten",
     "tcg",
     "trading card",
     "union arena",
@@ -589,7 +749,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:26+00:00",
-   "geprueft_am": "2026-10-07T13:59:26+00:00",
+   "geprueft_am": "2026-10-07T14:06:18+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite"
    ],
@@ -655,7 +815,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:14+00:00",
-   "geprueft_am": "2026-10-07T13:59:14+00:00",
+   "geprueft_am": "2026-10-07T14:06:07+00:00",
    "gruende": [],
    "id": "brickznmore",
    "impressum": {
@@ -740,7 +900,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:20+00:00",
-   "geprueft_am": "2026-10-07T14:00:20+00:00",
+   "geprueft_am": "2026-10-07T14:07:12+00:00",
    "gruende": [],
    "id": "bsastore",
    "impressum": {
@@ -832,7 +992,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:01:14+00:00",
-   "geprueft_am": "2026-10-07T14:01:14+00:00",
+   "geprueft_am": "2026-10-07T14:08:06+00:00",
    "gruende": [],
    "id": "candycards",
    "impressum_url": null,
@@ -855,6 +1015,7 @@
     "magic: the gathering",
     "naruto",
     "one piece",
+    "pokemon",
     "pokémon",
     "tcg",
     "trading card",
@@ -893,10 +1054,8 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:45+00:00",
-   "geprueft_am": "2026-10-07T13:59:45+00:00",
-   "gruende": [
-    "kein erkennbares TCG-Sortiment auf der Startseite"
-   ],
+   "geprueft_am": "2026-10-07T14:06:38+00:00",
+   "gruende": [],
    "id": "carab",
    "impressum": {
     "beleg": "info@carab.ch Handelsregisternummer: CHE-100.3.816.760-5 Mehrwertsteuernummer: CHE-220.011.433 Social Media Kontaktiere Uns CARAB Züri",
@@ -913,9 +1072,15 @@
    "sitemaps": [
     "https://www.carab.ch/sitemap.xml"
    ],
-   "status": "ungeeignet",
-   "tcg_bezug": false,
-   "tcg_hinweise": [],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "digimon",
+    "dragon ball",
+    "mtg",
+    "pokémon",
+    "yu-gi-oh"
+   ],
    "tdm_vorbehalt": false,
    "versand_de": "unbekannt",
    "versand_de_quelle": "",
@@ -953,7 +1118,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:01:24+00:00",
-   "geprueft_am": "2026-10-07T14:01:24+00:00",
+   "geprueft_am": "2026-10-07T14:08:16+00:00",
    "gruende": [
     "liefert laut Shopdaten nicht nach Deutschland"
    ],
@@ -993,11 +1158,99 @@
    "waehrung": "NOK",
    "zoll_hinweis": "Versand aus Nicht-EU-Land: Zoll/Einfuhrumsatzsteuer möglich"
   },
+  "cardcollector": {
+   "basis_url": "https://card-collector.net",
+   "domain": "card-collector.net",
+   "entdeckung": [
+    {
+     "art": "shopify_neueste",
+     "url": "https://card-collector.net/products.json?limit=100"
+    },
+    {
+     "art": "shopify_katalog",
+     "url": "https://card-collector.net/products.json?limit=250"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://card-collector.net/collections/naruto-mythos-tcg-events"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://card-collector.net/collections/naruto-mythos-side-event"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://card-collector.net/collections/neu-eingetroffen"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://card-collector.net/collections/gundam"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://card-collector.net/collections/digimon-card-game"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://card-collector.net/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-07T14:08:24+00:00",
+   "geprueft_am": "2026-10-07T14:08:24+00:00",
+   "gruende": [],
+   "id": "cardcollector",
+   "impressum": {
+    "beleg": "e\\n\\u003cp\\u003e\\u003cstrong\\u003e\\u003cmeta charset=\\\"utf-8\\\"\\u003eUSt.-IdNr.: DE360930484\\u003cbr\\u003e\\u003cbr\\u003eE-Mail: card",
+    "rechtsform": "GbR",
+    "register": false,
+    "ust_id": "DE360930484"
+   },
+   "impressum_url": "https://card-collector.net/pages/impressum",
+   "land": "DE",
+   "name": "Card Collector",
+   "naruto_erwaehnt": true,
+   "plattform": "shopify",
+   "quelle": "Suche Lorcana/Yu-Gi-Oh DE 2026-10-07",
+   "shop_land_meta": "DE",
+   "sitemaps": [
+    "https://card-collector.net/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "digimon",
+    "display",
+    "dragon ball",
+    "gundam",
+    "lorcana",
+    "magic: the gathering",
+    "naruto",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "sammelkarten",
+    "tcg",
+    "union arena",
+    "yu-gi-oh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "https://card-collector.net/meta.json (ships_to_countries)",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": true,
+    "nennt_eu": false
+   },
+   "versand_url": "https://card-collector.net/policies/shipping-policy",
+   "vertrauen": "vorgeprueft",
+   "waehrung": "EUR"
+  },
   "cardcollectors": {
    "domain": "cardcollectors.ch",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T13:59:39+00:00",
-   "geprueft_am": "2026-10-07T13:59:39+00:00",
+   "geprueft_am": "2026-10-07T14:06:31+00:00",
    "gruende": [
     "robots.txt mit HTTP 403 verweigert"
    ],
@@ -1047,7 +1300,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:24+00:00",
-   "geprueft_am": "2026-10-07T13:59:24+00:00",
+   "geprueft_am": "2026-10-07T14:06:16+00:00",
    "gruende": [],
    "id": "cardcorner",
    "impressum": {
@@ -1073,13 +1326,16 @@
     "dragon ball",
     "gundam",
     "lorcana",
+    "mtg",
     "naruto",
     "one piece",
     "pokemon",
+    "pokémon",
     "sammelkarten",
     "tcg",
     "union arena",
-    "yu-gi-oh"
+    "yu-gi-oh",
+    "yugioh"
    ],
    "tdm_vorbehalt": false,
    "versand_de": "ja",
@@ -1126,7 +1382,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:58:50+00:00",
-   "geprueft_am": "2026-10-07T13:58:50+00:00",
+   "geprueft_am": "2026-10-07T14:05:43+00:00",
    "gruende": [],
    "id": "cardcosmos",
    "impressum": {
@@ -1150,13 +1406,15 @@
     "dragon ball",
     "lorcana",
     "magic: the gathering",
+    "mtg",
     "one piece",
     "pokemon",
     "pokémon",
     "sammelkarten",
     "tcg",
     "trading card",
-    "yu-gi-oh"
+    "yu-gi-oh",
+    "yugioh"
    ],
    "tdm_vorbehalt": false,
    "versand_de": "ja",
@@ -1199,7 +1457,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:46+00:00",
-   "geprueft_am": "2026-10-07T14:00:46+00:00",
+   "geprueft_am": "2026-10-07T14:07:38+00:00",
    "gruende": [],
    "id": "cardempire",
    "impressum_url": null,
@@ -1219,6 +1477,7 @@
     "magic: the gathering",
     "naruto",
     "one piece",
+    "pokemon",
     "pokémon",
     "tcg",
     "trading card",
@@ -1234,7 +1493,7 @@
    "domain": "cardgameshop.be",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T14:01:24+00:00",
-   "geprueft_am": "2026-10-07T14:01:24+00:00",
+   "geprueft_am": "2026-10-07T14:08:16+00:00",
    "gruende": [
     "Abruf fehlgeschlagen nach 3 Versuchen (500)"
    ],
@@ -1284,7 +1543,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:40+00:00",
-   "geprueft_am": "2026-10-07T13:59:40+00:00",
+   "geprueft_am": "2026-10-07T14:06:32+00:00",
    "gruende": [
     "liefert laut Shopdaten nicht nach Deutschland"
    ],
@@ -1315,6 +1574,7 @@
     "magic: the gathering",
     "naruto",
     "one piece",
+    "pokemon",
     "pokémon",
     "sammelkarten",
     "tcg",
@@ -1368,7 +1628,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:21+00:00",
-   "geprueft_am": "2026-10-07T14:00:21+00:00",
+   "geprueft_am": "2026-10-07T14:07:13+00:00",
    "gruende": [],
    "id": "cardverse",
    "impressum": {
@@ -1397,6 +1657,7 @@
     "magic: the gathering",
     "naruto",
     "one piece",
+    "pokemon",
     "pokémon",
     "tcg",
     "union arena",
@@ -1440,7 +1701,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:09+00:00",
-   "geprueft_am": "2026-10-07T14:00:09+00:00",
+   "geprueft_am": "2026-10-07T14:07:01+00:00",
    "gruende": [],
    "id": "cartinhabrilhante",
    "impressum": {
@@ -1468,6 +1729,7 @@
     "magic: the gathering",
     "mtg",
     "one piece",
+    "pokemon",
     "pokémon",
     "tcg",
     "yu-gi-oh"
@@ -1496,7 +1758,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:51+00:00",
-   "geprueft_am": "2026-10-07T13:59:51+00:00",
+   "geprueft_am": "2026-10-07T14:06:43+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite"
    ],
@@ -1549,7 +1811,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:59+00:00",
-   "geprueft_am": "2026-10-07T14:00:59+00:00",
+   "geprueft_am": "2026-10-07T14:07:53+00:00",
    "gruende": [],
    "id": "catchemcards",
    "impressum": {
@@ -1623,7 +1885,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:50+00:00",
-   "geprueft_am": "2026-10-07T14:00:50+00:00",
+   "geprueft_am": "2026-10-07T14:07:43+00:00",
    "gruende": [],
    "id": "chaoscards",
    "impressum_url": null,
@@ -1661,6 +1923,22 @@
    "vertrauen": "ungeprueft",
    "zoll_hinweis": "Versand aus Nicht-EU-Land: Zoll/Einfuhrumsatzsteuer möglich"
   },
+  "collectit": {
+   "domain": "collect-it.de",
+   "entdeckung": [],
+   "erstmals_geprueft": "2026-10-07T14:08:19+00:00",
+   "geprueft_am": "2026-10-07T14:08:19+00:00",
+   "gruende": [
+    "robots.txt mit HTTP 403 verweigert"
+   ],
+   "http_status": null,
+   "id": "collectit",
+   "land": "DE",
+   "name": "Collect it",
+   "quelle": "Suche Lorcana/Yu-Gi-Oh DE 2026-10-07",
+   "status": "blockiert",
+   "vertrauen": "ungeprueft"
+  },
   "comicplanet": {
    "basis_url": "https://www.comicplanet.de",
    "domain": "comicplanet.de",
@@ -1691,7 +1969,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:11+00:00",
-   "geprueft_am": "2026-10-07T13:59:11+00:00",
+   "geprueft_am": "2026-10-07T14:06:02+00:00",
    "gruende": [],
    "id": "comicplanet",
    "impressum": {
@@ -1713,7 +1991,9 @@
    "tcg_bezug": true,
    "tcg_hinweise": [
     "booster",
+    "digimon",
     "display",
+    "gundam",
     "lorcana",
     "one piece",
     "pokemon",
@@ -1768,7 +2048,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:58:50+00:00",
-   "geprueft_am": "2026-10-07T13:58:50+00:00",
+   "geprueft_am": "2026-10-07T14:05:43+00:00",
    "gruende": [],
    "id": "crispycards",
    "impressum": {
@@ -1798,11 +2078,14 @@
     "magic: the gathering",
     "naruto",
     "one piece",
+    "pokemon",
     "pokémon",
+    "sammelkarten",
     "tcg",
     "trading card",
     "union arena",
-    "yu-gi-oh"
+    "yu-gi-oh",
+    "yugioh"
    ],
    "tdm_vorbehalt": false,
    "versand_de": "ja",
@@ -1850,7 +2133,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:12+00:00",
-   "geprueft_am": "2026-10-07T13:59:12+00:00",
+   "geprueft_am": "2026-10-07T14:06:04+00:00",
    "gruende": [],
    "id": "deichcards",
    "impressum": {
@@ -1879,6 +2162,7 @@
     "lorcana",
     "magic: the gathering",
     "one piece",
+    "pokemon",
     "pokémon",
     "sammelkarten",
     "tcg",
@@ -1935,7 +2219,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:38+00:00",
-   "geprueft_am": "2026-10-07T13:59:38+00:00",
+   "geprueft_am": "2026-10-07T14:06:30+00:00",
    "gruende": [
     "liefert laut Shopdaten nicht nach Deutschland"
    ],
@@ -2009,7 +2293,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:35+00:00",
-   "geprueft_am": "2026-10-07T14:00:35+00:00",
+   "geprueft_am": "2026-10-07T14:07:27+00:00",
    "gruende": [],
    "id": "dragonslair",
    "impressum": {
@@ -2030,7 +2314,9 @@
    "tcg_hinweise": [
     "booster",
     "digimon",
+    "display",
     "lorcana",
+    "magic: the gathering",
     "one piece",
     "pokemon",
     "pokémon",
@@ -2079,7 +2365,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:14+00:00",
-   "geprueft_am": "2026-10-07T14:00:14+00:00",
+   "geprueft_am": "2026-10-07T14:07:06+00:00",
    "gruende": [],
    "id": "evlutcg",
    "impressum": {
@@ -2108,6 +2394,7 @@
     "lorcana",
     "magic: the gathering",
     "one piece",
+    "pokemon",
     "pokémon",
     "tcg",
     "trading card",
@@ -2163,7 +2450,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:02+00:00",
-   "geprueft_am": "2026-10-07T13:59:02+00:00",
+   "geprueft_am": "2026-10-07T14:05:55+00:00",
    "gruende": [],
    "id": "fantasiacards",
    "impressum": {
@@ -2216,7 +2503,7 @@
    "domain": "fantasy-in.de",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T13:59:36+00:00",
-   "geprueft_am": "2026-10-07T13:59:36+00:00",
+   "geprueft_am": "2026-10-07T14:06:29+00:00",
    "gruende": [
     "robots.txt mit HTTP 403 verweigert"
    ],
@@ -2266,7 +2553,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:55+00:00",
-   "geprueft_am": "2026-10-07T13:59:55+00:00",
+   "geprueft_am": "2026-10-07T14:06:47+00:00",
    "gruende": [],
    "id": "fantasysphere",
    "impressum": {
@@ -2297,6 +2584,7 @@
     "mtg",
     "naruto",
     "one piece",
+    "pokemon",
     "pokémon",
     "tcg",
     "trading card",
@@ -2319,7 +2607,7 @@
    "domain": "fantasywelt.de",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T13:59:21+00:00",
-   "geprueft_am": "2026-10-07T13:59:21+00:00",
+   "geprueft_am": "2026-10-07T14:06:13+00:00",
    "gruende": [
     "Zugriff verweigert (HTTP 403)"
    ],
@@ -2357,7 +2645,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:51+00:00",
-   "geprueft_am": "2026-10-07T14:00:51+00:00",
+   "geprueft_am": "2026-10-07T14:07:43+00:00",
    "gruende": [],
    "id": "firestormgames",
    "impressum_url": null,
@@ -2415,10 +2703,8 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:01:08+00:00",
-   "geprueft_am": "2026-10-07T14:01:08+00:00",
-   "gruende": [
-    "kein erkennbares TCG-Sortiment auf der Startseite"
-   ],
+   "geprueft_am": "2026-10-07T14:07:58+00:00",
+   "gruende": [],
    "id": "galaxus",
    "impressum": {
     "beleg": "",
@@ -2435,11 +2721,14 @@
    "sitemaps": [
     "https://www.galaxus.ch/sitemap.xml"
    ],
-   "status": "ungeeignet",
-   "tcg_bezug": false,
+   "status": "geeignet",
+   "tcg_bezug": true,
    "tcg_hinweise": [
     "booster",
-    "pokémon"
+    "display",
+    "pokemon",
+    "pokémon",
+    "sammelkarten"
    ],
    "tdm_vorbehalt": false,
    "versand_de": "unbekannt",
@@ -2467,7 +2756,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:28+00:00",
-   "geprueft_am": "2026-10-07T13:59:28+00:00",
+   "geprueft_am": "2026-10-07T14:06:20+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite"
    ],
@@ -2499,6 +2788,80 @@
     "nennt_eu": true
    },
    "versand_url": "https://www.galaxus.de/de/guide/28",
+   "vertrauen": "ungeprueft"
+  },
+  "gamersheaven": {
+   "basis_url": "https://gamersheaven.de",
+   "domain": "gamersheaven.de",
+   "entdeckung": [
+    {
+     "art": "shopsuche",
+     "url": "https://gamersheaven.de/search?search=naruto"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://gamersheaven.de/vorbestellen"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://gamersheaven.de/neu"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://gamersheaven.de/one-piece-tcg"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://gamersheaven.de/one-piece-vorverkauf"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://gamersheaven.de/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-07T14:08:23+00:00",
+   "geprueft_am": "2026-10-07T14:08:23+00:00",
+   "gruende": [],
+   "id": "gamersheaven",
+   "impressum": {
+    "fehler": "robots.txt erlaubt diesen Abruf nicht – wird respektiert"
+   },
+   "impressum_url": "https://gamersheaven.de/impressum",
+   "land": "DE",
+   "name": "Gamers Heaven",
+   "naruto_erwaehnt": false,
+   "plattform": "shopware",
+   "quelle": "Suche Lorcana/Yu-Gi-Oh DE 2026-10-07",
+   "sitemaps": [
+    "https://gamersheaven.de/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "digimon",
+    "display",
+    "dragon ball",
+    "lorcana",
+    "magic: the gathering",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "sammelkarten",
+    "tcg",
+    "trading card",
+    "yu-gi-oh",
+    "yugioh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "Inlandshändler (Land DE)",
+   "versand_hinweise": {
+    "betrag_hinweis": "4,90 € (automatisch gelesen, unbestätigt)",
+    "nennt_deutschland": true,
+    "nennt_eu": true
+   },
+   "versand_url": "https://gamersheaven.de/versand-und-zahlungsbedingungen",
    "vertrauen": "ungeprueft"
   },
   "gamescape": {
@@ -2535,7 +2898,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:41+00:00",
-   "geprueft_am": "2026-10-07T14:00:41+00:00",
+   "geprueft_am": "2026-10-07T14:07:37+00:00",
    "gruende": [],
    "id": "gamescape",
    "impressum_url": null,
@@ -2602,7 +2965,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:15+00:00",
-   "geprueft_am": "2026-10-07T13:59:15+00:00",
+   "geprueft_am": "2026-10-07T14:06:08+00:00",
    "gruende": [
     "Shop legt eigene Regeln für automatische Abrufe fest – nur über deren Vorgaben nutzbar"
    ],
@@ -2657,7 +3020,7 @@
    "domain": "gameware.at",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T13:59:38+00:00",
-   "geprueft_am": "2026-10-07T13:59:38+00:00",
+   "geprueft_am": "2026-10-07T14:06:31+00:00",
    "gruende": [
     "robots.txt mit HTTP 403 verweigert"
    ],
@@ -2703,7 +3066,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:58:56+00:00",
-   "geprueft_am": "2026-10-07T13:58:56+00:00",
+   "geprueft_am": "2026-10-07T14:05:49+00:00",
    "gruende": [],
    "id": "gatetothegames",
    "impressum": {
@@ -2779,7 +3142,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:23+00:00",
-   "geprueft_am": "2026-10-07T14:00:23+00:00",
+   "geprueft_am": "2026-10-07T14:07:15+00:00",
    "gruende": [],
    "id": "geekpeak",
    "impressum": {
@@ -2803,6 +3166,7 @@
    "tcg_hinweise": [
     "booster",
     "display",
+    "lorcana",
     "magic: the gathering",
     "mtg",
     "naruto",
@@ -2857,7 +3221,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:02+00:00",
-   "geprueft_am": "2026-10-07T13:59:02+00:00",
+   "geprueft_am": "2026-10-07T14:05:55+00:00",
    "gruende": [],
    "id": "geeksheaven",
    "impressum": {
@@ -2891,8 +3255,10 @@
     "pokémon",
     "sammelkarten",
     "tcg",
+    "trading card",
     "union arena",
-    "yu-gi-oh"
+    "yu-gi-oh",
+    "yugioh"
    ],
    "tdm_vorbehalt": false,
    "versand_de": "ja",
@@ -2936,7 +3302,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:08+00:00",
-   "geprueft_am": "2026-10-07T13:59:08+00:00",
+   "geprueft_am": "2026-10-07T14:06:02+00:00",
    "gruende": [],
    "id": "gemcards",
    "impressum": {
@@ -2969,6 +3335,7 @@
     "pokémon",
     "sammelkarten",
     "tcg",
+    "trading card",
     "union arena",
     "yu-gi-oh"
    ],
@@ -3014,7 +3381,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:21+00:00",
-   "geprueft_am": "2026-10-07T14:00:21+00:00",
+   "geprueft_am": "2026-10-07T14:07:12+00:00",
    "gruende": [],
    "id": "giaxstore",
    "impressum": {
@@ -3087,7 +3454,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:51+00:00",
-   "geprueft_am": "2026-10-07T14:00:51+00:00",
+   "geprueft_am": "2026-10-07T14:07:43+00:00",
    "gruende": [],
    "id": "godofcards",
    "impressum": {
@@ -3115,6 +3482,7 @@
     "one piece",
     "pokemon",
     "pokémon",
+    "tcg",
     "trading card",
     "yu-gi-oh",
     "yugioh"
@@ -3165,7 +3533,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:11+00:00",
-   "geprueft_am": "2026-10-07T13:59:11+00:00",
+   "geprueft_am": "2026-10-07T14:06:03+00:00",
    "gruende": [],
    "id": "godofgames",
    "impressum": {
@@ -3194,6 +3562,7 @@
     "magic: the gathering",
     "naruto",
     "one piece",
+    "pokemon",
     "pokémon",
     "sammelkarten",
     "tcg",
@@ -3249,7 +3618,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:10+00:00",
-   "geprueft_am": "2026-10-07T14:00:10+00:00",
+   "geprueft_am": "2026-10-07T14:07:03+00:00",
    "gruende": [],
    "id": "goldenpullscards",
    "impressum": {
@@ -3276,6 +3645,7 @@
     "dragon ball",
     "lorcana",
     "magic: the gathering",
+    "mtg",
     "naruto",
     "one piece",
     "pokemon",
@@ -3320,7 +3690,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:36+00:00",
-   "geprueft_am": "2026-10-07T13:59:36+00:00",
+   "geprueft_am": "2026-10-07T14:06:29+00:00",
    "gruende": [],
    "id": "grubico",
    "impressum": {
@@ -3384,7 +3754,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:19+00:00",
-   "geprueft_am": "2026-10-07T14:00:19+00:00",
+   "geprueft_am": "2026-10-07T14:07:12+00:00",
    "gruende": [],
    "id": "gsgameon",
    "impressum": {
@@ -3449,7 +3819,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:07+00:00",
-   "geprueft_am": "2026-10-07T14:00:07+00:00",
+   "geprueft_am": "2026-10-07T14:07:01+00:00",
    "gruende": [],
    "id": "higanbanatcg",
    "impressum": {
@@ -3471,6 +3841,7 @@
     "booster",
     "display",
     "one piece",
+    "pokémon",
     "tcg"
    ],
    "tdm_vorbehalt": false,
@@ -3479,6 +3850,85 @@
    "versand_url": "https://higanbanatcg.com/policies/shipping-policy",
    "vertrauen": "ungeprueft",
    "waehrung": "EUR"
+  },
+  "hiveworld": {
+   "basis_url": "https://www.hiveworld.de",
+   "domain": "hiveworld.de",
+   "entdeckung": [
+    {
+     "art": "shopsuche",
+     "url": "https://www.hiveworld.de/search?search=naruto"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://www.hiveworld.de/shop/playmobil/naruto/"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://www.hiveworld.de/ladenlokale-koeln/brettspiele-neuheiten/"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://www.hiveworld.de/ladenlokale-koeln/sammelkarten-neuheiten/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://www.hiveworld.de/shop/buecher-comics/one-piece-manga/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://www.hiveworld.de/shop/sammelspiele/digimon-card-game/"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://www.hiveworld.de/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-07T14:08:25+00:00",
+   "geprueft_am": "2026-10-07T14:08:25+00:00",
+   "gruende": [],
+   "id": "hiveworld",
+   "impressum": {
+    "beleg": "ld.com Web: http://www.hiveworld.de Umsatzsteueridentifikationsnummer (USt-ID): DE252505228 Ladenlokale: Spieldurst Brettspiele, Sp",
+    "rechtsform": null,
+    "register": true,
+    "ust_id": "DE252505228"
+   },
+   "impressum_url": "https://www.hiveworld.de/informationen/impressum/",
+   "land": "DE",
+   "name": "Hiveworld",
+   "naruto_erwaehnt": true,
+   "plattform": "shopware",
+   "quelle": "Suche Lorcana/Yu-Gi-Oh DE 2026-10-07",
+   "sitemaps": [
+    "https://www.hiveworld.de/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "digimon",
+    "display",
+    "lorcana",
+    "magic: the gathering",
+    "mtg",
+    "naruto",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "sammelkarten",
+    "yu-gi-oh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "Inlandshändler (Land DE)",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": true,
+    "nennt_eu": false
+   },
+   "versand_url": "https://www.hiveworld.de/informationen/versand-und-zahlungsbedingungen/",
+   "vertrauen": "vorgeprueft"
   },
   "ilnuovomondoshop": {
    "basis_url": "https://www.ilnuovomondoshop.it",
@@ -3490,7 +3940,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:12+00:00",
-   "geprueft_am": "2026-10-07T14:00:12+00:00",
+   "geprueft_am": "2026-10-07T14:07:06+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite"
    ],
@@ -3543,7 +3993,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:52+00:00",
-   "geprueft_am": "2026-10-07T13:59:52+00:00",
+   "geprueft_am": "2026-10-07T14:06:44+00:00",
    "gruende": [],
    "id": "japanresell",
    "impressum": {
@@ -3567,6 +4017,7 @@
    "tcg_hinweise": [
     "booster",
     "display",
+    "dragon ball",
     "one piece",
     "pokemon",
     "pokémon",
@@ -3619,7 +4070,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:46+00:00",
-   "geprueft_am": "2026-10-07T13:59:46+00:00",
+   "geprueft_am": "2026-10-07T14:06:38+00:00",
    "gruende": [],
    "id": "japhunter",
    "impressum": {
@@ -3645,11 +4096,15 @@
     "display",
     "dragon ball",
     "gundam",
+    "lorcana",
     "magic: the gathering",
     "naruto",
     "one piece",
+    "pokemon",
     "pokémon",
+    "sammelkarten",
     "tcg",
+    "trading card",
     "yu-gi-oh"
    ],
    "tdm_vorbehalt": false,
@@ -3699,7 +4154,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:58+00:00",
-   "geprueft_am": "2026-10-07T13:59:58+00:00",
+   "geprueft_am": "2026-10-07T14:06:51+00:00",
    "gruende": [],
    "id": "japondemande",
    "impressum": {
@@ -3721,6 +4176,8 @@
    "status": "geeignet",
    "tcg_bezug": true,
    "tcg_hinweise": [
+    "booster",
+    "display",
     "dragon ball",
     "gundam",
     "lorcana",
@@ -3756,7 +4213,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:59+00:00",
-   "geprueft_am": "2026-10-07T14:00:59+00:00",
+   "geprueft_am": "2026-10-07T14:07:50+00:00",
    "gruende": [],
    "id": "jkentertainmentuk",
    "impressum": {
@@ -3804,7 +4261,7 @@
    "domain": "jokers.de",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T13:59:28+00:00",
-   "geprueft_am": "2026-10-07T13:59:28+00:00",
+   "geprueft_am": "2026-10-07T14:06:19+00:00",
    "gruende": [
     "robots.txt nicht abrufbar (HTTP Netzwerkfehler)"
    ],
@@ -3846,7 +4303,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:01:12+00:00",
-   "geprueft_am": "2026-10-07T14:01:12+00:00",
+   "geprueft_am": "2026-10-07T14:08:04+00:00",
    "gruende": [],
    "id": "jumpichiban",
    "impressum": {
@@ -3868,6 +4325,7 @@
    "status": "geeignet",
    "tcg_bezug": true,
    "tcg_hinweise": [
+    "booster",
     "digimon",
     "dragon ball",
     "gundam",
@@ -3919,7 +4377,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:02+00:00",
-   "geprueft_am": "2026-10-07T13:59:02+00:00",
+   "geprueft_am": "2026-10-07T14:05:55+00:00",
    "gruende": [],
    "id": "keepseven",
    "impressum": {
@@ -3953,7 +4411,8 @@
     "sammelkarten",
     "tcg",
     "trading card",
-    "yu-gi-oh"
+    "yu-gi-oh",
+    "yugioh"
    ],
    "tdm_vorbehalt": false,
    "versand_de": "ja",
@@ -3971,7 +4430,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:54+00:00",
-   "geprueft_am": "2026-10-07T13:59:54+00:00",
+   "geprueft_am": "2026-10-07T14:06:47+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite"
    ],
@@ -4038,7 +4497,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:54+00:00",
-   "geprueft_am": "2026-10-07T13:59:54+00:00",
+   "geprueft_am": "2026-10-07T14:06:47+00:00",
    "gruende": [],
    "id": "lorenzone",
    "impressum": {
@@ -4068,10 +4527,12 @@
     "magic: the gathering",
     "naruto",
     "one piece",
+    "pokemon",
     "pokémon",
     "tcg",
     "trading card",
-    "yu-gi-oh"
+    "yu-gi-oh",
+    "yugioh"
    ],
    "tdm_vorbehalt": false,
    "versand_de": "ja",
@@ -4103,7 +4564,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:53+00:00",
-   "geprueft_am": "2026-10-07T14:00:53+00:00",
+   "geprueft_am": "2026-10-07T14:07:46+00:00",
    "gruende": [],
    "id": "lotticards",
    "impressum": {
@@ -4124,10 +4585,13 @@
    "status": "geeignet",
    "tcg_bezug": true,
    "tcg_hinweise": [
+    "booster",
     "display",
     "mtg",
+    "pokemon",
     "sammelkarten",
-    "tcg"
+    "tcg",
+    "trading card"
    ],
    "tdm_vorbehalt": false,
    "versand_de": "ja",
@@ -4186,7 +4650,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:03+00:00",
-   "geprueft_am": "2026-10-07T14:00:03+00:00",
+   "geprueft_am": "2026-10-07T14:06:54+00:00",
    "gruende": [
     "liefert laut Shopdaten nicht nach Deutschland"
    ],
@@ -4197,7 +4661,7 @@
    "impressum_url": "https://ludisphere.fr/policies/legal-notice",
    "land": "FR",
    "name": "Ludisphere",
-   "naruto_erwaehnt": false,
+   "naruto_erwaehnt": true,
    "plattform": "shopify",
    "quelle": "Suche One Piece FR 2026-10-07",
    "shop_land_meta": "FR",
@@ -4210,9 +4674,13 @@
    "tcg_bezug": true,
    "tcg_hinweise": [
     "booster",
+    "display",
     "dragon ball",
+    "mtg",
+    "naruto",
     "one piece",
     "pokemon",
+    "pokémon",
     "tcg",
     "yu-gi-oh"
    ],
@@ -4233,7 +4701,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:57+00:00",
-   "geprueft_am": "2026-10-07T13:59:57+00:00",
+   "geprueft_am": "2026-10-07T14:06:50+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite"
    ],
@@ -4255,6 +4723,112 @@
    "versand_de_quelle": "",
    "versand_url": null,
    "vertrauen": "ungeprueft"
+  },
+  "magicboosterbox": {
+   "basis_url": "https://magic-booster-box.de",
+   "domain": "magic-booster-box.de",
+   "entdeckung": [
+    {
+     "art": "shopsuche",
+     "url": "https://magic-booster-box.de/search/?qs=naruto"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://magic-booster-box.de/sitemap_index.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-07T14:08:37+00:00",
+   "geprueft_am": "2026-10-07T14:08:37+00:00",
+   "gruende": [],
+   "id": "magicboosterbox",
+   "impressum": {
+    "beleg": "2318 6129 E-Mail: info@magic-booster-box.eu Umsatzsteuer-Identifikationsnummer: DE327160298 Wir sind zur Teilnahme an einem Streitb",
+    "rechtsform": "Limited",
+    "register": true,
+    "ust_id": "DE327160298"
+   },
+   "impressum_url": "https://magic-booster-box.de/Impressum",
+   "land": "DE",
+   "name": "Magic Booster Box",
+   "naruto_erwaehnt": false,
+   "plattform": "unbekannt",
+   "quelle": "Suche Magic DE 2026-10-07",
+   "sitemaps": [
+    "https://magic-booster-box.de/sitemap_index.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "display",
+    "mtg",
+    "tcg"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "Inlandshändler (Land DE)",
+   "versand_hinweise": {
+    "betrag_hinweis": "4,99 € (automatisch gelesen, unbestätigt)",
+    "nennt_deutschland": true,
+    "nennt_eu": false
+   },
+   "versand_url": "https://magic-booster-box.de/Versandinformationen",
+   "vertrauen": "vorgeprueft"
+  },
+  "magicfeel": {
+   "basis_url": "https://www.magic-feel.de",
+   "domain": "magic-feel.de",
+   "entdeckung": [
+    {
+     "art": "shopsuche",
+     "url": "https://www.magic-feel.de/search?query=naruto"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://www.magic-feel.de/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-07T14:08:39+00:00",
+   "geprueft_am": "2026-10-07T14:08:39+00:00",
+   "gruende": [],
+   "id": "magicfeel",
+   "impressum": {
+    "beleg": "051714599891 E-Mail: service@magic-feel.de Umsatzsteuer-Identifikationsnummer: DE215889295 Verantwortliche/r i.S.d. § 18 Abs. 2 MS",
+    "rechtsform": null,
+    "register": true,
+    "ust_id": "DE215889295"
+   },
+   "impressum_url": "https://www.magic-feel.de/legal-disclosure",
+   "land": "DE",
+   "name": "Magic-Feel",
+   "naruto_erwaehnt": false,
+   "plattform": "plentymarkets",
+   "quelle": "Suche Magic DE 2026-10-07",
+   "sitemaps": [
+    "https://www.magic-feel.de/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "display",
+    "mtg",
+    "pokemon",
+    "sammelkarten",
+    "tcg",
+    "trading card",
+    "yu-gi-oh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "Inlandshändler (Land DE)",
+   "versand_hinweise": {
+    "betrag_hinweis": "4,99 € (automatisch gelesen, unbestätigt)",
+    "nennt_deutschland": true,
+    "nennt_eu": false
+   },
+   "versand_url": "https://www.magic-feel.de/zahlung-und-versand",
+   "vertrauen": "vorgeprueft"
   },
   "magicmadhouse": {
    "basis_url": "https://magicmadhouse.co.uk",
@@ -4294,7 +4868,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:49+00:00",
-   "geprueft_am": "2026-10-07T14:00:49+00:00",
+   "geprueft_am": "2026-10-07T14:07:42+00:00",
    "gruende": [],
    "id": "magicmadhouse",
    "impressum_url": null,
@@ -4361,7 +4935,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:58:56+00:00",
-   "geprueft_am": "2026-10-07T13:58:56+00:00",
+   "geprueft_am": "2026-10-07T14:05:49+00:00",
    "gruende": [],
    "id": "manofgames",
    "impressum": {
@@ -4382,6 +4956,7 @@
    "status": "geeignet",
    "tcg_bezug": true,
    "tcg_hinweise": [
+    "display",
     "gundam",
     "lorcana",
     "naruto",
@@ -4433,7 +5008,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:01:22+00:00",
-   "geprueft_am": "2026-10-07T14:01:22+00:00",
+   "geprueft_am": "2026-10-07T14:08:13+00:00",
    "gruende": [
     "liefert laut Shopdaten nicht nach Deutschland"
    ],
@@ -4458,6 +5033,7 @@
     "gundam",
     "lorcana",
     "magic: the gathering",
+    "mtg",
     "one piece",
     "pokemon",
     "pokémon",
@@ -4480,7 +5056,7 @@
    "domain": "mediamarkt.de",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T13:59:32+00:00",
-   "geprueft_am": "2026-10-07T13:59:32+00:00",
+   "geprueft_am": "2026-10-07T14:06:25+00:00",
    "gruende": [
     "Zugriff verweigert (HTTP 403)"
    ],
@@ -4506,7 +5082,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:46+00:00",
-   "geprueft_am": "2026-10-07T14:00:46+00:00",
+   "geprueft_am": "2026-10-07T14:07:38+00:00",
    "gruende": [],
    "id": "mewtwo",
    "impressum_url": null,
@@ -4568,7 +5144,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:59+00:00",
-   "geprueft_am": "2026-10-07T14:00:59+00:00",
+   "geprueft_am": "2026-10-07T14:07:52+00:00",
    "gruende": [
     "liefert laut Shopdaten nicht nach Deutschland"
    ],
@@ -4645,7 +5221,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:25+00:00",
-   "geprueft_am": "2026-10-07T13:59:25+00:00",
+   "geprueft_am": "2026-10-07T14:06:18+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite"
    ],
@@ -4699,7 +5275,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:34+00:00",
-   "geprueft_am": "2026-10-07T13:59:34+00:00",
+   "geprueft_am": "2026-10-07T14:06:26+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite"
    ],
@@ -4724,6 +5300,80 @@
    "versand_url": null,
    "vertrauen": "ungeprueft"
   },
+  "mulligantcg": {
+   "basis_url": "https://mulligantcg.com",
+   "domain": "mulligantcg.com",
+   "entdeckung": [
+    {
+     "art": "shopify_neueste",
+     "url": "https://mulligantcg.com/products.json?limit=100"
+    },
+    {
+     "art": "shopify_katalog",
+     "url": "https://mulligantcg.com/products.json?limit=250"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://mulligantcg.com/collections/dm"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://mulligantcg.com/collections/gd"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://mulligantcg.com/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-07T14:08:35+00:00",
+   "geprueft_am": "2026-10-07T14:08:35+00:00",
+   "gruende": [],
+   "id": "mulligantcg",
+   "impressum": {
+    "beleg": "Stevic\\u003cbr \\/\\u003e\\n\\u003cbr \\/\\u003e\\nUmsatzsteuer-Identifikationsnummer: DE455732298\\u003cbr \\/\\u003e\\n\\u003cbr \\/\\u003e\\nVe",
+    "rechtsform": null,
+    "register": true,
+    "ust_id": "DE455732298"
+   },
+   "impressum_url": "https://mulligantcg.com/policies/legal-notice",
+   "land": "DE",
+   "name": "Mulligan TCG",
+   "naruto_erwaehnt": false,
+   "plattform": "shopify",
+   "quelle": "Suche Riftbound/SWU DE 2026-10-07",
+   "shop_land_meta": "DE",
+   "sitemaps": [
+    "https://mulligantcg.com/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "digimon",
+    "display",
+    "dragon ball",
+    "gundam",
+    "lorcana",
+    "magic: the gathering",
+    "mtg",
+    "one piece",
+    "pokémon",
+    "tcg",
+    "trading card",
+    "yu-gi-oh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "https://mulligantcg.com/meta.json (ships_to_countries)",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": true,
+    "nennt_eu": false
+   },
+   "versand_url": "https://mulligantcg.com/policies/shipping-policy",
+   "vertrauen": "vorgeprueft",
+   "waehrung": "EUR"
+  },
   "mythicvault": {
    "basis_url": "https://mythicvault.com",
    "domain": "mythicvault.com",
@@ -4746,7 +5396,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:41+00:00",
-   "geprueft_am": "2026-10-07T14:00:41+00:00",
+   "geprueft_am": "2026-10-07T14:07:36+00:00",
    "gruende": [],
    "id": "mythicvault",
    "impressum_url": null,
@@ -4764,6 +5414,7 @@
     "dragon ball",
     "gundam",
     "one piece",
+    "pokemon",
     "pokémon",
     "tcg",
     "trading card",
@@ -4801,7 +5452,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:39+00:00",
-   "geprueft_am": "2026-10-07T13:59:39+00:00",
+   "geprueft_am": "2026-10-07T14:06:31+00:00",
    "gruende": [],
    "id": "n8owlcards",
    "impressum": {
@@ -4875,7 +5526,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:17+00:00",
-   "geprueft_am": "2026-10-07T14:00:17+00:00",
+   "geprueft_am": "2026-10-07T14:07:11+00:00",
    "gruende": [],
    "id": "near07",
    "impressum_url": null,
@@ -4894,15 +5545,88 @@
     "dragon ball",
     "one piece",
     "pokemon",
-    "pokémon",
     "tcg",
-    "yu-gi-oh"
+    "yu-gi-oh",
+    "yugioh"
    ],
    "tdm_vorbehalt": false,
    "versand_de": "unbekannt",
    "versand_de_quelle": "",
    "versand_url": null,
    "vertrauen": "ungeprueft"
+  },
+  "nerdbank": {
+   "basis_url": "https://nerdbank.de",
+   "domain": "nerdbank.de",
+   "entdeckung": [
+    {
+     "art": "shopify_neueste",
+     "url": "https://nerdbank.de/products.json?limit=100"
+    },
+    {
+     "art": "shopify_katalog",
+     "url": "https://nerdbank.de/products.json?limit=250"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://nerdbank.de/collections/one-piece-displays"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://nerdbank.de/collections/one-piece-starter-decks"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://nerdbank.de/sitemap.xml"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://nerdbank.de/apps/seo-sitemaps/spielewelt-amberg/pages-sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-07T14:08:30+00:00",
+   "geprueft_am": "2026-10-07T14:08:30+00:00",
+   "gruende": [],
+   "id": "nerdbank",
+   "impressum": {
+    "fehler": "robots.txt erlaubt diesen Abruf nicht – wird respektiert"
+   },
+   "impressum_url": "https://nerdbank.de/policies/legal-notice",
+   "land": "DE",
+   "name": "Nerdbank",
+   "naruto_erwaehnt": false,
+   "plattform": "shopify",
+   "quelle": "Suche Lorcana/Yu-Gi-Oh DE 2026-10-07",
+   "shop_land_meta": "DE",
+   "sitemaps": [
+    "https://nerdbank.de/sitemap.xml",
+    "https://nerdbank.de/apps/seo-sitemaps/spielewelt-amberg/pages-sitemap.xml",
+    "https://nerdbank.de/apps/seo-sitemaps/spielewelt-amberg/articles-sitemap.xml",
+    "https://nerdbank.de/apps/seo-sitemaps/spielewelt-amberg/images-sitemap.xml",
+    "https://nerdbank.de/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "display",
+    "lorcana",
+    "magic: the gathering",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "sammelkarten",
+    "tcg",
+    "trading card",
+    "yu-gi-oh",
+    "yugioh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "https://nerdbank.de/meta.json (ships_to_countries)",
+   "versand_url": "https://nerdbank.de/policies/shipping-policy",
+   "vertrauen": "ungeprueft",
+   "waehrung": "EUR"
   },
   "northerncardgaming": {
    "basis_url": "https://www.northerncardgaming.com",
@@ -4934,7 +5658,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:01:21+00:00",
-   "geprueft_am": "2026-10-07T14:01:21+00:00",
+   "geprueft_am": "2026-10-07T14:08:12+00:00",
    "gruende": [],
    "id": "northerncardgaming",
    "impressum": {
@@ -4958,8 +5682,11 @@
     "dragon ball",
     "gundam",
     "lorcana",
+    "mtg",
     "one piece",
     "pokemon",
+    "pokémon",
+    "tcg",
     "trading card",
     "yu-gi-oh",
     "yugioh"
@@ -4999,7 +5726,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:01+00:00",
-   "geprueft_am": "2026-10-07T14:00:01+00:00",
+   "geprueft_am": "2026-10-07T14:06:54+00:00",
    "gruende": [],
    "id": "onepiececard",
    "impressum": {
@@ -5069,7 +5796,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:31+00:00",
-   "geprueft_am": "2026-10-07T14:00:31+00:00",
+   "geprueft_am": "2026-10-07T14:07:23+00:00",
    "gruende": [],
    "id": "oppacards",
    "impressum_url": null,
@@ -5145,7 +5872,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:58:50+00:00",
-   "geprueft_am": "2026-10-07T13:58:50+00:00",
+   "geprueft_am": "2026-10-07T14:05:43+00:00",
    "gruende": [],
    "id": "otakura",
    "impressum": {
@@ -5195,7 +5922,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:11+00:00",
-   "geprueft_am": "2026-10-07T14:00:11+00:00",
+   "geprueft_am": "2026-10-07T14:07:03+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite"
    ],
@@ -5236,7 +5963,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:26+00:00",
-   "geprueft_am": "2026-10-07T13:59:26+00:00",
+   "geprueft_am": "2026-10-07T14:06:18+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite"
    ],
@@ -5300,7 +6027,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:05+00:00",
-   "geprueft_am": "2026-10-07T14:00:05+00:00",
+   "geprueft_am": "2026-10-07T14:06:59+00:00",
    "gruende": [],
    "id": "philibertnet",
    "impressum": {
@@ -5325,7 +6052,9 @@
     "display",
     "lorcana",
     "one piece",
+    "pokemon",
     "pokémon",
+    "tcg",
     "yu-gi-oh"
    ],
    "tdm_vorbehalt": false,
@@ -5372,7 +6101,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:05+00:00",
-   "geprueft_am": "2026-10-07T14:00:05+00:00",
+   "geprueft_am": "2026-10-07T14:06:59+00:00",
    "gruende": [],
    "id": "pixelheart",
    "impressum": {
@@ -5426,7 +6155,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:01:22+00:00",
-   "geprueft_am": "2026-10-07T14:01:22+00:00",
+   "geprueft_am": "2026-10-07T14:08:14+00:00",
    "gruende": [],
    "id": "playingcardshop",
    "impressum_url": null,
@@ -5444,6 +6173,7 @@
     "display",
     "lorcana",
     "one piece",
+    "pokemon",
     "pokémon",
     "trading card"
    ],
@@ -5488,7 +6218,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:38+00:00",
-   "geprueft_am": "2026-10-07T13:59:38+00:00",
+   "geprueft_am": "2026-10-07T14:06:31+00:00",
    "gruende": [],
    "id": "playpeak",
    "impressum": {
@@ -5497,7 +6227,7 @@
    "impressum_url": "https://playpeak.eu/policies/legal-notice",
    "land": "AT",
    "name": "Playpeak",
-   "naruto_erwaehnt": false,
+   "naruto_erwaehnt": true,
    "plattform": "shopify",
    "quelle": "Suche TCG DE 2026-10-07",
    "sitemaps": [
@@ -5510,9 +6240,11 @@
    "tcg_hinweise": [
     "booster",
     "display",
+    "dragon ball",
     "lorcana",
     "magic: the gathering",
     "mtg",
+    "naruto",
     "one piece",
     "pokemon",
     "pokémon",
@@ -5556,7 +6288,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:01:03+00:00",
-   "geprueft_am": "2026-10-07T14:01:03+00:00",
+   "geprueft_am": "2026-10-07T14:07:56+00:00",
    "gruende": [],
    "id": "pokegeodude",
    "impressum": {
@@ -5582,13 +6314,16 @@
     "display",
     "dragon ball",
     "lorcana",
+    "magic: the gathering",
+    "mtg",
     "naruto",
     "one piece",
     "pokemon",
     "pokémon",
     "sammelkarten",
     "tcg",
-    "union arena"
+    "union arena",
+    "yugioh"
    ],
    "tdm_vorbehalt": false,
    "versand_de": "ja",
@@ -5627,7 +6362,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:46+00:00",
-   "geprueft_am": "2026-10-07T14:00:46+00:00",
+   "geprueft_am": "2026-10-07T14:07:39+00:00",
    "gruende": [],
    "id": "pokepower",
    "impressum": {
@@ -5706,7 +6441,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:58:50+00:00",
-   "geprueft_am": "2026-10-07T13:58:50+00:00",
+   "geprueft_am": "2026-10-07T14:05:43+00:00",
    "gruende": [],
    "id": "pokitrio",
    "impressum": {
@@ -5759,7 +6494,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:39+00:00",
-   "geprueft_am": "2026-10-07T14:00:39+00:00",
+   "geprueft_am": "2026-10-07T14:07:32+00:00",
    "gruende": [],
    "id": "poromagia",
    "impressum_url": null,
@@ -5820,7 +6555,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:58:50+00:00",
-   "geprueft_am": "2026-10-07T13:58:50+00:00",
+   "geprueft_am": "2026-10-07T14:05:43+00:00",
    "gruende": [],
    "id": "primeprotector",
    "impressum": {
@@ -5857,7 +6592,8 @@
     "sammelkarten",
     "tcg",
     "trading card",
-    "yu-gi-oh"
+    "yu-gi-oh",
+    "yugioh"
    ],
    "tdm_vorbehalt": false,
    "versand_de": "ja",
@@ -5909,7 +6645,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:32+00:00",
-   "geprueft_am": "2026-10-07T14:00:32+00:00",
+   "geprueft_am": "2026-10-07T14:07:25+00:00",
    "gruende": [],
    "id": "renexx",
    "impressum_url": null,
@@ -5983,7 +6719,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:33+00:00",
-   "geprueft_am": "2026-10-07T14:00:33+00:00",
+   "geprueft_am": "2026-10-07T14:07:26+00:00",
    "gruende": [],
    "id": "rogerz",
    "impressum": {
@@ -6010,8 +6746,10 @@
     "lorcana",
     "magic: the gathering",
     "one piece",
+    "pokemon",
     "pokémon",
     "tcg",
+    "trading card",
     "yu-gi-oh"
    ],
    "tdm_vorbehalt": false,
@@ -6030,7 +6768,7 @@
    "domain": "rollntrade.com",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T14:00:47+00:00",
-   "geprueft_am": "2026-10-07T14:00:47+00:00",
+   "geprueft_am": "2026-10-07T14:07:40+00:00",
    "gruende": [
     "robots.txt mit HTTP 403 verweigert"
    ],
@@ -6068,13 +6806,13 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:58+00:00",
-   "geprueft_am": "2026-10-07T13:59:58+00:00",
+   "geprueft_am": "2026-10-07T14:06:50+00:00",
    "gruende": [],
    "id": "royaltcg",
    "impressum_url": null,
    "land": "FR",
    "name": "Royal TCG",
-   "naruto_erwaehnt": false,
+   "naruto_erwaehnt": true,
    "plattform": "wix",
    "quelle": "Suche One Piece FR 2026-10-07",
    "sitemaps": [
@@ -6083,9 +6821,13 @@
    "status": "geeignet",
    "tcg_bezug": true,
    "tcg_hinweise": [
+    "display",
     "dragon ball",
     "gundam",
     "lorcana",
+    "naruto",
+    "one piece",
+    "pokemon",
     "tcg"
    ],
    "tdm_vorbehalt": false,
@@ -6094,11 +6836,47 @@
    "versand_url": null,
    "vertrauen": "ungeprueft"
   },
+  "sammelsturm": {
+   "basis_url": "https://www.sammelsturm.shop",
+   "domain": "sammelsturm.shop",
+   "entdeckung": [
+    {
+     "art": "sitemap",
+     "url": "https://www.sammelsturm.shop/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-07T14:08:38+00:00",
+   "geprueft_am": "2026-10-07T14:08:38+00:00",
+   "gruende": [
+    "kein erkennbares TCG-Sortiment auf der Startseite"
+   ],
+   "id": "sammelsturm",
+   "impressum_url": null,
+   "land": "DE",
+   "name": "Sammelsturm",
+   "naruto_erwaehnt": false,
+   "plattform": "unbekannt",
+   "quelle": "Suche Magic DE 2026-10-07",
+   "sitemaps": [
+    "https://www.sammelsturm.shop/sitemap.xml"
+   ],
+   "status": "ungeeignet",
+   "tcg_bezug": false,
+   "tcg_hinweise": [
+    "display",
+    "tcg"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "Inlandshändler (Land DE)",
+   "versand_url": null,
+   "vertrauen": "ungeprueft"
+  },
   "sapphirecards": {
    "domain": "sapphire-cards.de",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T13:58:50+00:00",
-   "geprueft_am": "2026-10-07T13:58:50+00:00",
+   "geprueft_am": "2026-10-07T14:05:43+00:00",
    "gruende": [
     "robots.txt mit HTTP 403 verweigert"
    ],
@@ -6107,6 +6885,22 @@
    "land": "DE",
    "name": "Sapphire-Cards",
    "quelle": "Suche One Piece DE 2026-10-07",
+   "status": "blockiert",
+   "vertrauen": "ungeprueft"
+  },
+  "saturn": {
+   "domain": "saturn.de",
+   "entdeckung": [],
+   "erstmals_geprueft": "2026-10-07T14:08:44+00:00",
+   "geprueft_am": "2026-10-07T14:08:44+00:00",
+   "gruende": [
+    "Zugriff verweigert (HTTP 403)"
+   ],
+   "http_status": 403,
+   "id": "saturn",
+   "land": "DE",
+   "name": "Saturn",
+   "quelle": "Suche Magic DE 2026-10-07",
    "status": "blockiert",
    "vertrauen": "ungeprueft"
   },
@@ -6144,7 +6938,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:01:24+00:00",
-   "geprueft_am": "2026-10-07T14:01:24+00:00",
+   "geprueft_am": "2026-10-07T14:08:18+00:00",
    "gruende": [
     "liefert laut Shopdaten nicht nach Deutschland"
    ],
@@ -6177,7 +6971,8 @@
     "tcg",
     "trading card",
     "union arena",
-    "yu-gi-oh"
+    "yu-gi-oh",
+    "yugioh"
    ],
    "tdm_vorbehalt": false,
    "versand_de": "nein",
@@ -6196,7 +6991,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:35+00:00",
-   "geprueft_am": "2026-10-07T13:59:35+00:00",
+   "geprueft_am": "2026-10-07T14:06:27+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite"
    ],
@@ -6249,7 +7044,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:39+00:00",
-   "geprueft_am": "2026-10-07T14:00:39+00:00",
+   "geprueft_am": "2026-10-07T14:07:31+00:00",
    "gruende": [],
    "id": "spelexperten",
    "impressum_url": null,
@@ -6268,6 +7063,7 @@
     "gundam",
     "lorcana",
     "one piece",
+    "pokemon",
     "pokémon",
     "tcg",
     "trading card",
@@ -6302,7 +7098,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:30+00:00",
-   "geprueft_am": "2026-10-07T14:00:30+00:00",
+   "geprueft_am": "2026-10-07T14:07:23+00:00",
    "gruende": [],
    "id": "spellenwinkel",
    "impressum_url": null,
@@ -6353,7 +7149,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:24+00:00",
-   "geprueft_am": "2026-10-07T13:59:24+00:00",
+   "geprueft_am": "2026-10-07T14:06:17+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite"
    ],
@@ -6387,6 +7183,74 @@
    "versand_url": "https://www.spiele-offensive.de/Versandkosten",
    "vertrauen": "ungeprueft"
   },
+  "spielraum": {
+   "basis_url": "https://www.spielraum.co.at",
+   "domain": "spielraum.co.at",
+   "entdeckung": [
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://www.spielraum.co.at/de/all-games/presales"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://www.spielraum.co.at/de/one-piece"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://www.spielraum.co.at/de/page/competitions/onepiece-termine"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://www.spielraum.co.at/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-07T14:08:22+00:00",
+   "geprueft_am": "2026-10-07T14:08:22+00:00",
+   "gruende": [],
+   "id": "spielraum",
+   "impressum": {
+    "beleg": "kes Berufsverband: Wirtschaftskammer Wien Steuer-Nummer: 03/3808239 UID-Nummer: ATU63932579 EORI-Nummer: ATEOS1000031742 EUID: ATBR",
+    "rechtsform": "GmbH",
+    "register": true,
+    "ust_id": "ATU63932579"
+   },
+   "impressum_url": "https://www.spielraum.co.at/de/page/imp",
+   "land": "AT",
+   "name": "SpielRaum",
+   "naruto_erwaehnt": false,
+   "plattform": "unbekannt",
+   "quelle": "Suche Lorcana/Yu-Gi-Oh DE 2026-10-07",
+   "sitemaps": [
+    "https://www.spielraum.co.at/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "display",
+    "lorcana",
+    "magic: the gathering",
+    "mtg",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "sammelkarten",
+    "tcg",
+    "trading card",
+    "yu-gi-oh",
+    "yugioh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "vermutlich",
+   "versand_de_quelle": "https://www.spielraum.co.at/de/page/payment-shipment nennt Deutschland",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": true,
+    "nennt_eu": true
+   },
+   "versand_url": "https://www.spielraum.co.at/de/page/payment-shipment",
+   "vertrauen": "ungeprueft"
+  },
   "stickerpoint": {
    "basis_url": "https://www.stickerpoint.de",
    "domain": "stickerpoint.de",
@@ -6413,7 +7277,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:01:09+00:00",
-   "geprueft_am": "2026-10-07T14:01:09+00:00",
+   "geprueft_am": "2026-10-07T14:08:01+00:00",
    "gruende": [],
    "id": "stickerpoint",
    "impressum": {
@@ -6442,6 +7306,7 @@
     "magic: the gathering",
     "naruto",
     "one piece",
+    "pokemon",
     "pokémon",
     "sammelkarten",
     "trading card",
@@ -6468,7 +7333,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:22+00:00",
-   "geprueft_am": "2026-10-07T13:59:22+00:00",
+   "geprueft_am": "2026-10-07T14:06:14+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite"
    ],
@@ -6525,7 +7390,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:20+00:00",
-   "geprueft_am": "2026-10-07T13:59:20+00:00",
+   "geprueft_am": "2026-10-07T14:06:13+00:00",
    "gruende": [],
    "id": "tcgcorner",
    "impressum": {
@@ -6549,9 +7414,12 @@
     "gundam",
     "one piece",
     "pokemon",
+    "pokémon",
     "tcg",
+    "trading card",
     "union arena",
-    "yu-gi-oh"
+    "yu-gi-oh",
+    "yugioh"
    ],
    "tdm_vorbehalt": false,
    "versand_de": "ja",
@@ -6579,7 +7447,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:02+00:00",
-   "geprueft_am": "2026-10-07T13:59:02+00:00",
+   "geprueft_am": "2026-10-07T14:05:56+00:00",
    "gruende": [],
    "id": "tcgfee",
    "impressum": {
@@ -6601,6 +7469,7 @@
    "tcg_bezug": true,
    "tcg_hinweise": [
     "booster",
+    "display",
     "magic: the gathering",
     "pokémon",
     "tcg",
@@ -6655,7 +7524,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:01:15+00:00",
-   "geprueft_am": "2026-10-07T14:01:15+00:00",
+   "geprueft_am": "2026-10-07T14:08:06+00:00",
    "gruende": [],
    "id": "tcghaven",
    "impressum": {
@@ -6681,11 +7550,13 @@
     "display",
     "dragon ball",
     "lorcana",
+    "mtg",
     "naruto",
     "one piece",
     "pokemon",
     "pokémon",
     "tcg",
+    "trading card",
     "yu-gi-oh"
    ],
    "tdm_vorbehalt": false,
@@ -6738,7 +7609,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:01:11+00:00",
-   "geprueft_am": "2026-10-07T14:01:11+00:00",
+   "geprueft_am": "2026-10-07T14:08:03+00:00",
    "gruende": [],
    "id": "tcgshopmoers",
    "impressum": {
@@ -6819,7 +7690,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:34+00:00",
-   "geprueft_am": "2026-10-07T14:00:34+00:00",
+   "geprueft_am": "2026-10-07T14:07:26+00:00",
    "gruende": [
     "liefert laut Shopdaten nicht nach Deutschland"
    ],
@@ -6844,10 +7715,12 @@
    "tcg_bezug": true,
    "tcg_hinweise": [
     "booster",
+    "display",
     "gundam",
     "lorcana",
     "magic: the gathering",
     "one piece",
+    "pokemon",
     "pokémon",
     "tcg",
     "trading card",
@@ -6911,7 +7784,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:39+00:00",
-   "geprueft_am": "2026-10-07T13:59:39+00:00",
+   "geprueft_am": "2026-10-07T14:06:31+00:00",
    "gruende": [],
    "id": "tcgtreasure",
    "impressum": {
@@ -6937,6 +7810,7 @@
     "lorcana",
     "naruto",
     "one piece",
+    "pokemon",
     "pokémon",
     "sammelkarten",
     "tcg",
@@ -6996,7 +7870,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:23+00:00",
-   "geprueft_am": "2026-10-07T13:59:23+00:00",
+   "geprueft_am": "2026-10-07T14:06:14+00:00",
    "gruende": [],
    "id": "tcgviert",
    "impressum": {
@@ -7025,6 +7899,7 @@
     "gundam",
     "lorcana",
     "magic: the gathering",
+    "mtg",
     "naruto",
     "one piece",
     "pokemon",
@@ -7072,7 +7947,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:11+00:00",
-   "geprueft_am": "2026-10-07T13:59:11+00:00",
+   "geprueft_am": "2026-10-07T14:06:04+00:00",
    "gruende": [],
    "id": "teamsamuringer",
    "impressum": {
@@ -7101,7 +7976,9 @@
     "one piece",
     "pokemon",
     "tcg",
-    "yu-gi-oh"
+    "trading card",
+    "yu-gi-oh",
+    "yugioh"
    ],
    "tdm_vorbehalt": false,
    "versand_de": "ja",
@@ -7119,7 +7996,7 @@
    "domain": "tf-robots.nl",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T14:00:33+00:00",
-   "geprueft_am": "2026-10-07T14:00:33+00:00",
+   "geprueft_am": "2026-10-07T14:07:25+00:00",
    "gruende": [
     "robots.txt mit HTTP 403 verweigert"
    ],
@@ -7135,7 +8012,7 @@
    "domain": "thalia.de",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T13:59:35+00:00",
-   "geprueft_am": "2026-10-07T13:59:35+00:00",
+   "geprueft_am": "2026-10-07T14:06:27+00:00",
    "gruende": [
     "robots.txt mit HTTP 403 verweigert"
    ],
@@ -7185,7 +8062,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:44+00:00",
-   "geprueft_am": "2026-10-07T13:59:44+00:00",
+   "geprueft_am": "2026-10-07T14:06:37+00:00",
    "gruende": [],
    "id": "themanashop",
    "impressum": {
@@ -7235,6 +8112,103 @@
    "vertrauen": "ungeprueft",
    "zoll_hinweis": "Versand aus Nicht-EU-Land: Zoll/Einfuhrumsatzsteuer möglich"
   },
+  "theuncommonshop": {
+   "basis_url": "https://theuncommonshop.ch",
+   "domain": "theuncommonshop.ch",
+   "entdeckung": [
+    {
+     "art": "woo_api",
+     "url": "https://theuncommonshop.ch/wp-json/wc/store/v1/products?search=naruto&per_page=50"
+    },
+    {
+     "art": "woo_neueste",
+     "url": "https://theuncommonshop.ch/wp-json/wc/store/v1/products?orderby=date&order=desc&per_page=50"
+    },
+    {
+     "art": "shopsuche",
+     "url": "https://theuncommonshop.ch/?post_type=product&s=naruto"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://theuncommonshop.ch/produktkategorie/weitere-sammelkarten/naruto-mythos-tcg/"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://theuncommonshop.ch/produktkategorie/mangas/naruto/"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://theuncommonshop.ch/produktkategorie/pokemon/vorbestellbar/"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://theuncommonshop.ch/produktkategorie/yu-gi-oh/vorbestellbar-yu-gi-oh/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://theuncommonshop.ch/produktkategorie/one-piece/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://theuncommonshop.ch/produktkategorie/one-piece/one-piece-einzelkarten/"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://theuncommonshop.ch/sitemap_index.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-07T14:08:19+00:00",
+   "geprueft_am": "2026-10-07T14:08:19+00:00",
+   "gruende": [],
+   "id": "theuncommonshop",
+   "impressum": {
+    "beleg": "ofstrasse 16 8590 Romanshorn Schweiz Tel: +41 (0)71 571 08 05 [email protected] CHE-346.239.843 MWST Bankverbindung: Raiffeisenbank Gos",
+    "rechtsform": "AB",
+    "register": false,
+    "ust_id": "CHE-346.239.843"
+   },
+   "impressum_url": "https://theuncommonshop.ch/impressum/",
+   "land": "CH",
+   "name": "The Uncommon Shop",
+   "naruto_erwaehnt": true,
+   "plattform": "woocommerce",
+   "quelle": "Suche Lorcana/Yu-Gi-Oh DE 2026-10-07",
+   "sitemaps": [
+    "https://theuncommonshop.ch/sitemap_index.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "digimon",
+    "display",
+    "dragon ball",
+    "gundam",
+    "lorcana",
+    "magic: the gathering",
+    "mtg",
+    "naruto",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "sammelkarten",
+    "tcg",
+    "union arena",
+    "yu-gi-oh",
+    "yugioh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "vermutlich",
+   "versand_de_quelle": "https://theuncommonshop.ch/versandinformationen/ nennt EU/international",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": false,
+    "nennt_eu": true
+   },
+   "versand_url": "https://theuncommonshop.ch/versandinformationen/",
+   "vertrauen": "ungeprueft",
+   "zoll_hinweis": "Versand aus Nicht-EU-Land: Zoll/Einfuhrumsatzsteuer möglich"
+  },
   "threeforonetrading": {
    "basis_url": "https://www.threeforonetrading.com",
    "domain": "threeforonetrading.com",
@@ -7253,7 +8227,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:33+00:00",
-   "geprueft_am": "2026-10-07T14:00:33+00:00",
+   "geprueft_am": "2026-10-07T14:07:25+00:00",
    "gruende": [],
    "id": "threeforonetrading",
    "impressum": {
@@ -7279,6 +8253,7 @@
     "magic: the gathering",
     "mtg",
     "one piece",
+    "pokemon",
     "pokémon",
     "tcg"
    ],
@@ -7322,7 +8297,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:47+00:00",
-   "geprueft_am": "2026-10-07T14:00:47+00:00",
+   "geprueft_am": "2026-10-07T14:07:41+00:00",
    "gruende": [],
    "id": "totalcards",
    "impressum": {
@@ -7372,7 +8347,7 @@
    "domain": "trader-online.de",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T13:59:35+00:00",
-   "geprueft_am": "2026-10-07T13:59:35+00:00",
+   "geprueft_am": "2026-10-07T14:06:28+00:00",
    "gruende": [
     "Zugriff verweigert (HTTP 403)"
    ],
@@ -7414,7 +8389,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:01:08+00:00",
-   "geprueft_am": "2026-10-07T14:01:08+00:00",
+   "geprueft_am": "2026-10-07T14:08:00+00:00",
    "gruende": [],
    "id": "tradingtoys",
    "impressum": {
@@ -7484,7 +8459,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:44+00:00",
-   "geprueft_am": "2026-10-07T14:00:44+00:00",
+   "geprueft_am": "2026-10-07T14:07:37+00:00",
    "gruende": [],
    "id": "triplacegames",
    "impressum_url": null,
@@ -7521,7 +8496,7 @@
    "domain": "turolgames.com",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T14:00:10+00:00",
-   "geprueft_am": "2026-10-07T14:00:10+00:00",
+   "geprueft_am": "2026-10-07T14:07:03+00:00",
    "gruende": [
     "unerwarteter HTTP-Status 202"
    ],
@@ -7532,6 +8507,89 @@
    "quelle": "Suche One Piece 2026-10-06",
    "status": "nicht_erreichbar",
    "vertrauen": "ungeprueft"
+  },
+  "twomoons": {
+   "basis_url": "https://www.twomoons.ch",
+   "domain": "twomoons.ch",
+   "entdeckung": [
+    {
+     "art": "shopsuche",
+     "url": "https://www.twomoons.ch/search?cat=&search=naruto"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://www.twomoons.ch/naruto-mythos/"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://www.twomoons.ch/magic-the-gathering/preorder/"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://www.twomoons.ch/star-wars/preorder/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://www.twomoons.ch/events/one-piece-events/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://www.twomoons.ch/one-piece/"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://www.twomoons.ch/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-07T14:08:25+00:00",
+   "geprueft_am": "2026-10-07T14:08:25+00:00",
+   "gruende": [],
+   "id": "twomoons",
+   "impressum": {
+    "beleg": "rsonen Edouard Wanner Name des Unternehmens : TwoMoons AG Registrationsnummer : CHE-237.769.225 Umsatzsteuer-Identifikationsnummer : CH",
+    "rechtsform": "AG",
+    "register": true,
+    "ust_id": "CHE-237.769.225"
+   },
+   "impressum_url": "https://www.twomoons.ch/TwoMoons-AG/Impressum/",
+   "land": "CH",
+   "name": "TwoMoons",
+   "naruto_erwaehnt": true,
+   "plattform": "shopware",
+   "quelle": "Suche Lorcana/Yu-Gi-Oh DE 2026-10-07",
+   "sitemaps": [
+    "https://www.twomoons.ch/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "digimon",
+    "display",
+    "dragon ball",
+    "lorcana",
+    "magic: the gathering",
+    "mtg",
+    "naruto",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "sammelkarten",
+    "tcg",
+    "trading card",
+    "yu-gi-oh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "unbekannt",
+   "versand_de_quelle": "",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": false,
+    "nennt_eu": false
+   },
+   "versand_url": "https://www.twomoons.ch/TwoMoons-AG/Versand-Zahlung/",
+   "vertrauen": "ungeprueft",
+   "zoll_hinweis": "Versand aus Nicht-EU-Land: Zoll/Einfuhrumsatzsteuer möglich"
   },
   "ultrajeux": {
    "basis_url": "https://www.ultrajeux.com",
@@ -7567,7 +8625,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:55+00:00",
-   "geprueft_am": "2026-10-07T13:59:55+00:00",
+   "geprueft_am": "2026-10-07T14:06:49+00:00",
    "gruende": [],
    "id": "ultrajeux",
    "impressum": {
@@ -7589,10 +8647,12 @@
    "tcg_bezug": true,
    "tcg_hinweise": [
     "booster",
+    "digimon",
     "display",
     "lorcana",
     "naruto",
     "one piece",
+    "pokemon",
     "tcg",
     "yu-gi-oh"
    ],
@@ -7640,7 +8700,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:58:50+00:00",
-   "geprueft_am": "2026-10-07T13:58:50+00:00",
+   "geprueft_am": "2026-10-07T14:05:43+00:00",
    "gruende": [],
    "id": "universetcg",
    "impressum": {
@@ -7666,10 +8726,13 @@
     "digimon",
     "display",
     "dragon ball",
+    "gundam",
     "lorcana",
     "magic: the gathering",
+    "mtg",
     "naruto",
     "one piece",
+    "pokemon",
     "pokémon",
     "tcg",
     "trading card",
@@ -7701,8 +8764,10 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:23+00:00",
-   "geprueft_am": "2026-10-07T14:00:23+00:00",
-   "gruende": [],
+   "geprueft_am": "2026-10-07T14:07:17+00:00",
+   "gruende": [
+    "kein erkennbares TCG-Sortiment auf der Startseite"
+   ],
    "id": "uplay",
    "impressum_url": null,
    "land": "IT",
@@ -7713,22 +8778,20 @@
    "sitemaps": [
     "https://www.uplay.it/sitemap.xml"
    ],
-   "status": "geeignet",
-   "tcg_bezug": true,
+   "status": "ungeeignet",
+   "tcg_bezug": false,
    "tcg_hinweise": [
-    "booster",
-    "dragon ball",
-    "pokémon"
+    "booster"
    ],
    "tdm_vorbehalt": false,
    "versand_de": "vermutlich",
-   "versand_de_quelle": "https://www.uplay.it/it/gioco-da-tavolo-bundle--gloom---4-espansioni--spedizioni-infauste--ospiti-indesiderati--dimore-affrante--morti-inquieti-.html nennt Deutschland",
+   "versand_de_quelle": "https://www.uplay.it/it/pagamenti_e_spedizioni.html nennt Deutschland",
    "versand_hinweise": {
-    "betrag_hinweis": null,
+    "betrag_hinweis": "5,99 € (automatisch gelesen, unbestätigt)",
     "nennt_deutschland": true,
-    "nennt_eu": false
+    "nennt_eu": true
    },
-   "versand_url": "https://www.uplay.it/it/gioco-da-tavolo-bundle--gloom---4-espansioni--spedizioni-infauste--ospiti-indesiderati--dimore-affrante--morti-inquieti-.html",
+   "versand_url": "https://www.uplay.it/it/pagamenti_e_spedizioni.html",
    "vertrauen": "ungeprueft"
   },
   "vault29tcg": {
@@ -7757,7 +8820,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:06+00:00",
-   "geprueft_am": "2026-10-07T14:00:06+00:00",
+   "geprueft_am": "2026-10-07T14:06:59+00:00",
    "gruende": [],
    "id": "vault29tcg",
    "impressum": {
@@ -7812,7 +8875,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:15+00:00",
-   "geprueft_am": "2026-10-07T14:00:15+00:00",
+   "geprueft_am": "2026-10-07T14:07:07+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite"
    ],
@@ -7861,7 +8924,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:40+00:00",
-   "geprueft_am": "2026-10-07T13:59:40+00:00",
+   "geprueft_am": "2026-10-07T14:06:37+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite"
    ],
@@ -7878,6 +8941,7 @@
    "status": "ungeeignet",
    "tcg_bezug": false,
    "tcg_hinweise": [
+    "display",
     "trading card"
    ],
    "tdm_vorbehalt": false,
@@ -7902,7 +8966,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:14+00:00",
-   "geprueft_am": "2026-10-07T13:59:14+00:00",
+   "geprueft_am": "2026-10-07T14:06:07+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite"
    ],
@@ -7967,7 +9031,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:58:50+00:00",
-   "geprueft_am": "2026-10-07T13:58:50+00:00",
+   "geprueft_am": "2026-10-07T14:05:43+00:00",
    "gruende": [],
    "id": "yonkotcg",
    "impressum": {
@@ -8054,7 +9118,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:50+00:00",
-   "geprueft_am": "2026-10-07T13:59:50+00:00",
+   "geprueft_am": "2026-10-07T14:06:42+00:00",
    "gruende": [
     "liefert laut Shopdaten nicht nach Deutschland"
    ],
@@ -8087,7 +9151,9 @@
     "one piece",
     "pokemon",
     "sammelkarten",
-    "yu-gi-oh"
+    "trading card",
+    "yu-gi-oh",
+    "yugioh"
    ],
    "tdm_vorbehalt": false,
    "versand_de": "nein",
@@ -8143,7 +9209,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:47+00:00",
-   "geprueft_am": "2026-10-07T14:00:47+00:00",
+   "geprueft_am": "2026-10-07T14:07:41+00:00",
    "gruende": [],
    "id": "zatu",
    "impressum": {
@@ -8169,6 +9235,7 @@
     "dragon ball",
     "lorcana",
     "magic: the gathering",
+    "mtg",
     "one piece",
     "pokemon",
     "pokémon",
@@ -8231,7 +9298,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T14:00:19+00:00",
-   "geprueft_am": "2026-10-07T14:00:19+00:00",
+   "geprueft_am": "2026-10-07T14:07:11+00:00",
    "gruende": [],
    "id": "zillerstore",
    "impressum": {
@@ -8307,7 +9374,7 @@
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:02+00:00",
-   "geprueft_am": "2026-10-07T13:59:02+00:00",
+   "geprueft_am": "2026-10-07T14:05:55+00:00",
    "gruende": [],
    "id": "zurisshop",
    "impressum": {
@@ -8328,9 +9395,13 @@
    "status": "geeignet",
    "tcg_bezug": true,
    "tcg_hinweise": [
+    "booster",
     "display",
+    "dragon ball",
+    "lorcana",
     "one piece",
     "pokemon",
+    "pokémon",
     "sammelkarten",
     "tcg",
     "yu-gi-oh"
@@ -8340,17 +9411,81 @@
    "versand_de_quelle": "Inlandshändler (Land DE)",
    "versand_url": null,
    "vertrauen": "vorgeprueft"
+  },
+  "zwergenschmiede": {
+   "basis_url": "https://www.zwergenschmiede.ch",
+   "domain": "zwergenschmiede.ch",
+   "entdeckung": [
+    {
+     "art": "shopsuche",
+     "url": "https://www.zwergenschmiede.ch/search/?q=naruto"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://www.zwergenschmiede.ch/neu/vorbestellungen/"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://www.zwergenschmiede.ch/neu/"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://www.zwergenschmiede.ch/neu/neuheiten/"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://www.zwergenschmiede.ch/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-07T14:08:36+00:00",
+   "geprueft_am": "2026-10-07T14:08:36+00:00",
+   "gruende": [],
+   "id": "zwergenschmiede",
+   "impressum": {
+    "beleg": "hmiede GmbH Laupenstrasse 4 3008 Bern +41 (0)31 381 38 39 [email protected] UID CHE-442.894.564 MwSt-Nummer CHE-442.894.564 MWST Geschä",
+    "rechtsform": "GmbH",
+    "register": true,
+    "ust_id": "CHE-442.894.564"
+   },
+   "impressum_url": "https://www.zwergenschmiede.ch/service/about/",
+   "land": "CH",
+   "name": "Zwergenschmiede",
+   "naruto_erwaehnt": false,
+   "plattform": "lightspeed",
+   "quelle": "Suche Magic DE 2026-10-07",
+   "sitemaps": [
+    "https://www.zwergenschmiede.ch/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "display",
+    "magic: the gathering",
+    "mtg"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "unbekannt",
+   "versand_de_quelle": "",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": false,
+    "nennt_eu": false
+   },
+   "versand_url": "https://www.zwergenschmiede.ch/service/shipping-returns/",
+   "vertrauen": "ungeprueft",
+   "zoll_hinweis": "Versand aus Nicht-EU-Land: Zoll/Einfuhrumsatzsteuer möglich"
   }
  },
  "version": 1,
  "zusammenfassung": {
-  "geeignet": 91,
-  "kandidaten": 132,
+  "geeignet": 105,
+  "kandidaten": 148,
   "land": {
-   "AT": 6,
+   "AT": 7,
    "BE": 2,
-   "CH": 11,
-   "DE": 49,
+   "CH": 14,
+   "DE": 61,
    "DK": 1,
    "ES": 7,
    "EU": 4,
@@ -8366,39 +9501,40 @@
    "SE": 4,
    "UK": 6
   },
-  "mit_entdeckungsweg": 91,
-  "naruto_erwaehnt": 42,
+  "mit_entdeckungsweg": 105,
+  "naruto_erwaehnt": 50,
   "plattform": {
-   "?": 13,
+   "?": 15,
    "gambio": 1,
    "jtl": 4,
-   "lightspeed": 3,
+   "lightspeed": 4,
    "magento": 1,
    "odoo": 3,
+   "plentymarkets": 1,
    "prestashop": 1,
-   "shopify": 57,
-   "shopware": 4,
-   "unbekannt": 34,
+   "shopify": 61,
+   "shopware": 8,
+   "unbekannt": 37,
    "wix": 2,
-   "woocommerce": 9
+   "woocommerce": 10
   },
   "status": {
-   "blockiert": 11,
+   "blockiert": 13,
    "eingeschraenkt": 1,
-   "geeignet": 91,
+   "geeignet": 105,
    "nicht_erreichbar": 2,
    "ungeeignet": 27
   },
   "versand_de": {
-   "?": 13,
-   "ja": 69,
+   "?": 15,
+   "ja": 79,
    "nein": 9,
-   "unbekannt": 31,
-   "vermutlich": 10
+   "unbekannt": 33,
+   "vermutlich": 12
   },
   "vertrauen": {
-   "ungeprueft": 98,
-   "vorgeprueft": 34
+   "ungeprueft": 107,
+   "vorgeprueft": 41
   }
  }
 }
