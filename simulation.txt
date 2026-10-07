@@ -1,0 +1,36 @@
+Test-Shop: jetzt VORBESTELLBAR (T0)
+Ausgangsbasis: 1 Angebot(e) erfasst (ausverkauft), 0 Meldungen (erwartet: 0)
+Lauf danach (unverändert ausverkauft): 0 Meldungen
+Lauf 3 (Abruffehler 503): Status UNCLEAR, Meldungen 0
+Restock erkannt und gemeldet nach 4.12 s (Prüfintervall 5.0 s)
+Lauf danach (unverändert bestellbar): 0 weitere Kaufalarme
+{
+ "ok": true,
+ "fehler_test": {
+  "meldungen": [],
+  "status": "UNCLEAR",
+  "letzter_sicherer_status": "SOLD OUT"
+ },
+ "wechsel_bis_push_s": 4.12,
+ "erkennung_bis_push_ms": 203,
+ "push_dauer_ms": 0,
+ "zweitpruefung": "bestellbar",
+ "doppelt_gesendet": 0,
+ "kanal": "Telegram (Test-Server der Simulation): aktiv – Simulation",
+ "zeit": "2026-10-07T14:15:26+00:00"
+}
+--- Test-Pushmeldung ---
+🧪 <b>TEST – SIMULIERTER RESTOCK – KEIN ECHTES ANGEBOT</b>
+<b>🚨 KAUFALARM – jetzt vorbestellbar</b>
+Vorbestellbar: NARUTO CARD GAME Booster Display (24 Packs) - Englisch - Bandai bei SIMULATIONS-SHOP (Test)
+
+<b>Produkt:</b> NARUTO CARD GAME Booster Display (24 Packs) - Englisch - Bandai
+<b>Shop:</b> SIMULATIONS-SHOP (Test) – ☑️ automatisch vorgeprüft (Impressum/Versand DE)
+<b>Sprache:</b> EN | <b>Variante:</b> DISPLAY
+<b>Status:</b> PREORDER – Zweitprüfung: bestellbar
+<b>Preis:</b> 149,99 € | <b>Versand DE:</b> ❓ fehlt (Versand nach DE unbekannt) | <b>Gesamt:</b> ❓ fehlt
+<b>Release:</b> ❓ unbekannt (offiziell: Sommer 2027)
+<b>Prüfzeit:</b> 07.10.2026 16:15:21
+⚠️ <b>SPEKULATIV:</b> Bandai hat noch keine Naruto-Produkte, Preise oder Termine offiziell angekündigt.
+👉 <a href="http://127.0.0.1:45087/produkte/naruto-card-game-booster-display-en">Bestelllink</a>
+<i>Keine automatische Bestellung.</i>
