@@ -324,6 +324,19 @@ class Alarme(unittest.TestCase):
         s.bestellbar()
         self.assertEqual([x["typ"] for x in s.lauf()[0]], [KAUFALARM])
 
+    def test_platzhalter_nach_abruffehler_wird_aufgeloest(self):
+        s = Szenario()
+        s.lauf()
+        ang = s.lauf()[1].zustand["naruto"]["angebote"]
+        alt_id = next(iter(ang))
+        # künstlicher Platzhalter wie nach einem Fehler beim ersten Abruf (andere ID, gleiche URL)
+        z = json.loads((s.tmp / "daten" / "zustand.json").read_text())
+        z["naruto"]["angebote"]["shop|" + s.prod + "|-alt"] = {**z["naruto"]["angebote"][alt_id], "letzte": None}
+        (s.tmp / "daten" / "zustand.json").write_text(json.dumps(z))
+        _, l = s.lauf()
+        self.assertNotIn("shop|" + s.prod + "|-alt", l.zustand["naruto"]["angebote"])
+        self.assertIn(alt_id, l.zustand["naruto"]["angebote"])
+
     def test_wartezeit_waechst_bei_fehlern(self):
         b = lade_betrieb()
         jetzt = dt.datetime(2026, 10, 7, tzinfo=dt.timezone.utc)

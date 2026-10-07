@@ -602,6 +602,10 @@ class Lauf:
             for b in beobs:
                 self.verarbeite(b, h, erkannt_t=t0)
             ok = all(b.abruf_ok for b in beobs)
+            if ok and a.get("angebot") and all(b.angebot_id != a["angebot"] for b in beobs):
+                # Platzhalter aus einem früheren Abruffehler: die Seite hat jetzt eigene Varianten-Einträge
+                with self.lock:
+                    self.zustand["naruto"]["angebote"].pop(a["angebot"], None)
             with self.lock:
                 erledigt(a, ok, jetzt, self.betrieb, None if ok else beobs[0].fehler)
             return
