@@ -175,6 +175,8 @@ def synchronisiere(zustand: dict, haendler: list[Haendler], ncfg: dict, betrieb:
     for q in ncfg.get("offizielle_quellen", []):
         soll[f"offiziell|{q['id']}"] = {"art": "offiziell", "shop": "offiziell", "url": q["url"], "quelle": q}
     for aid, a in zustand["naruto"]["angebote"].items():
+        if a.get("letzte") and a["letzte"].get("passend") is False:
+            continue  # ausgeschlossene Seiten (z. B. Mythos TCG) nicht weiter abrufen
         soll[f"produkt|{aid}"] = {"art": "produkt", "shop": a["shop"], "url": a["url"], "angebot": aid}
     if onepiece:
         soll["onepiece"] = {"art": "onepiece", "shop": "onepiece", "url": ""}
@@ -208,6 +210,18 @@ def erledigt(a: dict, ok: bool, jetzt: dt.datetime, betrieb: dict, fehler: Optio
         a["zuletzt_ok"] = _iso(jetzt)
         a["letzter_fehler"] = None
         a["faellig"] = _iso(jetzt + dt.timedelta(seconds=a["intervall"]))
+    elif fehler and fehler.startswith("Anfrage-Obergrenze"):
+        # kein Fehler des Shops: im nächsten Lauf weitermachen
+        a["faellig"] = _iso(jetzt)
+    elif fehler and "robots.txt erlaubt" in fehler and a.get("art") != "produkt":
+        # dauerhaftes Verbot: respektieren und nur wöchentlich nachsehen, ob es aufgehoben wurde
+        a["letzter_fehler"] = fehler
+        a["robots_verboten"] = True
+        a["faellig"] = _iso(jetzt + dt.timedelta(days=7))
+    elif fehler and "(404)" in fehler and a.get("art") != "produkt":
+        a["fehlerserie"] = a.get("fehlerserie", 0) + 1
+        a["letzter_fehler"] = fehler
+        a["faellig"] = _iso(jetzt + dt.timedelta(days=1))
     else:
         a["fehlerserie"] = a.get("fehlerserie", 0) + 1
         a["letzter_fehler"] = fehler
@@ -742,7 +756,7 @@ class Lauf:
         ids = {h.id for h in shops}
         bestellbar = [a["letzte"] for a in self.zustand["naruto"]["angebote"].values()
                       if a["shop"] in ids and a.get("letzte") and a["letzte"].get("passend")
-                      and a["letzte"].get("status") in m.KAUFBAR]
+                      and a["letzte"].get("sicherheit") == m.SICHER and a["letzte"].get("status") in m.KAUFBAR]
         if not bestellbar:
             return
         zeilen = [f"{b['titel']} – {b['shop_name']} ({b['status']}, {push.euro(b.get('preis_cent'))}) {b['url']}"

@@ -26,11 +26,15 @@ vertrieb_europa = "Asmodee soll den Vertrieb übernehmen – laut Finanzmedien, 
 [erkennung]
 # Mindestens eine dieser Phrasen MUSS im Titel/URL stehen:
 pflicht_phrasen = ["naruto card game", "naruto cardgame", "naruto-card-game", "naruto tcg", "naruto trading card game"]
-# Herstellerhinweis: ohne "bandai" bleibt ein Treffer UNSICHER, außer der Titel enthält exakt "naruto card game"
+# Herstellerhinweis: "Naruto TCG" OHNE "bandai" wird NICHT beobachtet (live 07.10.2026: fast immer NARUTO Mythos TCG).
+# Nur der offizielle Name "NARUTO CARD GAME" gilt auch ohne Herstellerangabe.
 hersteller_woerter = ["bandai"]
 # Verwechslungen – diese Produkte sind NICHT das Bandai NARUTO CARD GAME:
 ausschluss = [
-  "mythos",                 # NARUTO Mythos TCG (anderer Lizenznehmer)
+  "mythos",                 # NARUTO Mythos TCG (anderer Lizenznehmer) – wird oft OHNE "Mythos" im Titel verkauft:
+  "konoha shido", "shinobi shiren", "first set", "1st edition", "2nd edition", "first edition", "second edition",
+  "1. edition", "2. edition", "team set", "special pack", "special box",   # Mythos-Sets und -Produktarten (live 07.10.2026 gesehen)
+  "tier 1", "tier 2", "tier 3", "tier 4", "wave",                           # Kayou-Serien
   "kayou",                  # Kayou-Sammelkarten
   "moji",                   # Nicht-offizielle Booster
   "cicaboom",

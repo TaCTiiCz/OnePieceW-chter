@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import re
 import tomllib
+import unicodedata
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
@@ -34,6 +35,11 @@ class NarutoTreffer:
 _TC = re.compile(r"traditional chinese|trad\.? chinese|繁體|繁体|\btc\b|\bzh-?tw\b|chinese \(traditional\)")
 
 
+def _ohne_akzente(text: str) -> str:
+    """'Konoha Shidō' -> 'konoha shido' (Längezeichen und Akzente vereinheitlichen)."""
+    return "".join(c for c in unicodedata.normalize("NFKD", text) if not unicodedata.combining(c))
+
+
 def _wortgrenze(begriff: str, text: str) -> bool:
     return re.search(r"(?<![a-z0-9])" + re.escape(begriff) + r"(?![a-z0-9])", text) is not None
 
@@ -43,13 +49,13 @@ def pruefe(titel: str, url: str = "", tags: tuple = (), hersteller: str = "", cf
     cfg = cfg or lade_naruto()
     er = cfg["erkennung"]
     handle = url.rsplit("/", 1)[-1] if url else ""
-    text = normalisiere(f"{titel} {handle.replace('-', ' ').replace('_', ' ')} {' '.join(tags)}")
+    text = _ohne_akzente(normalisiere(f"{titel} {handle.replace('-', ' ').replace('_', ' ')} {' '.join(tags)}"))
     gruende: list[str] = []
 
     if "naruto" not in text:
         return NarutoTreffer(False, m.UNSICHER, m.UNBEKANNT, False, m.TYP_UNBEKANNT, ausschluss="kein Naruto-Produkt")
     for a in er["ausschluss"]:
-        if _wortgrenze(normalisiere(a), text):
+        if _wortgrenze(_ohne_akzente(normalisiere(a)), text):
             return NarutoTreffer(False, m.UNSICHER, m.UNBEKANNT, False, m.TYP_UNBEKANNT,
                                  ausschluss=f"Verwechslung: '{a}' (nicht das Bandai NARUTO CARD GAME)")
     pflicht = any(normalisiere(p.replace("-", " ")) in text for p in er["pflicht_phrasen"])
@@ -65,9 +71,9 @@ def pruefe(titel: str, url: str = "", tags: tuple = (), hersteller: str = "", cf
     hersteller_text = normalisiere(f"{hersteller} {titel} {' '.join(tags)}")
     if any(h in hersteller_text for h in er.get("hersteller_woerter", ["bandai"])):
         gruende.append("Hersteller Bandai genannt")
-    elif "naruto card game" not in text:
-        sicherheit = m.UNSICHER
-        gruende.append("Hersteller nicht genannt – könnte ein anderes Naruto-Kartenspiel sein")
+    elif "naruto card game" not in text and "naruto cardgame" not in text:
+        return NarutoTreffer(False, m.UNSICHER, m.UNBEKANNT, False, m.TYP_UNBEKANNT,
+                             ausschluss="'Naruto TCG' ohne Bandai/'NARUTO CARD GAME' – vermutlich NARUTO Mythos TCG")
 
     # Sprache
     sprache, hinweise = erkenne_sprache(titel, "", handle, [t for t in tags if len(t) <= 20])

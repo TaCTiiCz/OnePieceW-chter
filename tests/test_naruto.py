@@ -66,12 +66,35 @@ class Erkennung(unittest.TestCase):
         self.assertEqual((de.sprache, de.sprache_offiziell, de.sicherheit), ("DE", False, m.UNSICHER))
         self.assertEqual(self.p("NARUTO CARD GAME Booster Display").sicherheit, m.UNSICHER)
 
-    def test_naruto_tcg_ohne_bandai_ist_unsicher(self):
+    def test_naruto_tcg_ohne_bandai_wird_nicht_beobachtet(self):
         t = self.p("Naruto TCG Booster Box English")
-        self.assertTrue(t.passend)
-        self.assertEqual(t.sicherheit, m.UNSICHER)
+        self.assertFalse(t.passend)
+        self.assertIn("Mythos", t.ausschluss)
         t2 = self.p("Naruto TCG Booster Box English", hersteller="Bandai")
-        self.assertEqual(t2.sicherheit, m.SICHER)
+        self.assertEqual((t2.passend, t2.sicherheit), (True, m.SICHER))
+
+    def test_echte_mythos_und_kayou_titel_vom_live_lauf(self):
+        """ECHTE Titel, live gesehen am 07.10.2026 – alle gehören NICHT zum Bandai NARUTO CARD GAME."""
+        for titel in ["Naruto TCG: First Set 2nd Edition - Booster Box (24 Packs) - English",
+                      "Konoha Shido 2nd Edition Special Box: Itachi & Kisame (englisch)",
+                      "Naruto - Konoha Shido Display (englisch) 2nd Edition Naruto TCG kaufen",
+                      "Naruto - Shinobi Shiren Display (englisch) Naruto TCG kaufen",
+                      "Naruto TCG – Team Set 2nd Edition Special Pack (Englisch) Kakashi",
+                      "Naruto TCG Konoha Shido - First Set Booster Display Englisch",
+                      "Naruto Mythos TCG - Konoha Shidō Display First Edition [EN]",
+                      "Naruto TCG First set 2nd Edition Special Pack - Itachi",
+                      "Naruto TCG First Set - Binders",
+                      "NARUTO TCG SHINOBU W9 KD",
+                      "Naruto Kayou - Tier 4 Wave 8 Booster Display T4W8 [CN]",
+                      "Naruto Card Game Konoha Shidō Booster Display"]:
+            self.assertFalse(self.p(titel).passend, titel)
+
+    def test_echte_bandai_kandidaten_vom_live_lauf(self):
+        """ECHTE Titel, live gesehen am 07.10.2026 – passen zum Bandai NARUTO CARD GAME (Vorbestellseiten)."""
+        t = self.p("Naruto Card Game - Display 01 [ENG] (Vorbestellung - Release 2027)")
+        self.assertEqual((t.passend, t.sprache, t.variante), (True, "EN", m.DISPLAY))
+        t = self.p("Naruto Card Game by Bandai (Worldwide Launch summer 2027) English")
+        self.assertEqual((t.passend, t.sprache), (True, "EN"))
 
 
 class Seitenanalyse(unittest.TestCase):

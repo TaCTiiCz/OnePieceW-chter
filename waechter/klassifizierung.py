@@ -115,7 +115,7 @@ def erkenne_typ(text: str) -> tuple[str, str]:
         return m.PREMIUM_CARD_COLLECTION, "'Premium Card Collection'"
     if _hat(n, "anniversary set") or (_hat(n, "anniversary") and _hat(n, "limited collection", "collection set")):
         return m.ANNIVERSARY_SET, "'Anniversary Set/Collection'"
-    if _hat(n, "playmat", "play mat", "spielmatte", "deck box", "deckbox", "binder", "card sleeves", "sleeves",
+    if _hat(n, "playmat", "play mat", "spielmatte", "deck box", "deckbox", "binder", "binders", "sammelalbum", "card sleeves", "sleeves",
             "kartenhüllen", "toploader", "squaroes", "collectors case", "storage box", "figur", "figure"):
         return m.ZUBEHOER, "Zubehör-Begriff"
     if _hat(n, "case", "cases", "12 boxes", "12 displays", "12x booster box", "12 x booster box",
