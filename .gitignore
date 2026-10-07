@@ -4,3 +4,5 @@ __pycache__/
 testlauf/
 data/*.tmp
 .env
+laufzeit/
+_daten/

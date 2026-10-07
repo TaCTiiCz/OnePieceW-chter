@@ -22,3 +22,5 @@ jobs:
         run: python -m unittest discover -s tests -t . -v
       - name: Probelauf mit Testdaten (ohne Internet)
         run: python -m waechter pruefen --testdaten
+      - name: Simulation – simulierter Restock bis zur Test-Pushmeldung (End-to-End)
+        run: python -m waechter simulation

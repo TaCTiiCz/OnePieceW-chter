@@ -1,7 +1,7 @@
 name: Händlerprüfung
 
-# Prüft alle Händlerkandidaten live (Startseite, robots.txt, Impressum, Versand nach DE,
-# Shopsystem, Entdeckungswege) und speichert das Ergebnis in data/haendler_db.json.
+# Prüft Händlerkandidaten live (Startseite, robots.txt, Impressum, Versand nach DE, Shopsystem,
+# Entdeckungswege) und speichert das Ergebnis in data/haendler_db.json.
 on:
   workflow_dispatch:
     inputs:
@@ -14,8 +14,8 @@ on:
       - "config/haendler_kandidaten.csv"
       - "waechter/haendlerdb.py"
   schedule:
-    # wöchentlich montags 03:17 UTC: alle Händler neu prüfen (Datenbank aktuell halten)
-    - cron: "17 3 * * 1"
+    - cron: "17 3 * * *"   # täglich: neue Händler suchen (falls eingerichtet) und neue Kandidaten prüfen
+    - cron: "47 2 * * 1"   # montags: ALLE Händler neu prüfen
 
 permissions:
   contents: write
@@ -28,14 +28,19 @@ jobs:
   pruefen:
     runs-on: ubuntu-latest
     timeout-minutes: 40
+    env:
+      BRAVE_SEARCH_API_KEY: ${{ secrets.BRAVE_SEARCH_API_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Neue Händler suchen (nur wenn eingerichtet)
+        if: ${{ github.event.schedule == '17 3 * * *' }}
+        run: python -m waechter haendler-suchen
       - name: Händler prüfen (live)
         run: |
-          if [ "${{ inputs.nur_neue }}" = "true" ]; then
+          if [ "${{ inputs.nur_neue }}" = "true" ] || [ "${{ github.event.schedule }}" = "17 3 * * *" ]; then
             python -m waechter haendler-pruefen --nur-neue
           else
             python -m waechter haendler-pruefen
@@ -44,7 +49,7 @@ jobs:
         run: |
           git config user.name "onepiece-waechter[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/haendler_db.json
+          git add data/haendler_db.json config/haendler_kandidaten.csv
           if git diff --cached --quiet; then echo "Keine Änderungen"; exit 0; fi
           git commit -m "Händlerprüfung $(date -u +%Y-%m-%dT%H:%MZ)"
           for i in 1 2 3; do git pull --rebase && git push && exit 0; sleep $((i * 10)); done

@@ -1,0 +1,62 @@
+name: Nachweis-Lauf
+
+# Einmaliger Betriebsnachweis in der GitHub-Cloud (echtes Internet):
+# 1. Simulation: simulierter Restock bis zur Test-Pushmeldung, Verzögerung messen
+# 2. Erstlauf über ALLE geeigneten Händler (Ausgangsbasis, echte Abrufe)
+# 3. Zweiter Lauf: bekannte Produktseiten erneut prüfen
+# Ergebnis: Dashboard im Zweig "waechter-daten".
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/nachweis-ausloeser.txt"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: waechter
+  cancel-in-progress: false
+
+jobs:
+  nachweis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      TELEGRAM_AKTIV: ${{ vars.TELEGRAM_AKTIV }}
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Datenzweig vorbereiten
+        run: |
+          git config user.name "onepiece-waechter[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git fetch --depth=5 origin waechter-daten 2>/dev/null; then
+            git worktree add -B waechter-daten _daten origin/waechter-daten
+          else
+            git worktree add --detach _daten
+            cd _daten && git checkout --orphan waechter-daten && git rm -rfq . && cd ..
+          fi
+      - name: Tests
+        run: python -m unittest discover -s tests -t .
+      - name: 1. Simulation bis zur Test-Pushmeldung
+        run: python -m waechter simulation --daten _daten/laufzeit | tee _daten/simulation.txt
+      - name: 2. Erstlauf über alle geeigneten Händler (live)
+        run: python -m waechter lauf --alle --max-sekunden 900 --daten _daten/laufzeit --dashboard _daten/dashboard.md --ohne-onepiece
+      - name: 3. Zweiter Lauf (fällige Aufgaben)
+        run: python -m waechter lauf --daten _daten/laufzeit --dashboard _daten/dashboard.md --ohne-onepiece
+      - name: Dashboard in der Zusammenfassung
+        if: ${{ always() }}
+        run: if [ -f _daten/dashboard.md ]; then cat _daten/dashboard.md >> "$GITHUB_STEP_SUMMARY"; fi
+      - name: Speichern
+        if: ${{ always() }}
+        run: |
+          cd _daten
+          git add -A
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -q -m "Wächter-Daten $(date -u +%Y-%m-%d) (Nachweis-Lauf)"
+          git push -q --force origin waechter-daten
