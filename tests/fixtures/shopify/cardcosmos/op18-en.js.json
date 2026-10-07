@@ -1,0 +1,5 @@
+{"_testdaten": "NACHGEBAUT aus Echtdaten (Titel/Handle/Preis/nicht verfügbar laut Abruf 2026-10-06). Erscheinungsdatum aus offizieller Seite (20.11.2026) als Beschreibung ergänzt.",
+ "id": 1003, "title": "One Piece Card Game - OP18 The Dominance of God Booster Display - EN", "handle": "one-piece-card-game-op18-the-dominance-of-god-booster-display-englisch",
+ "description": "<p>Erscheinungstermin: 20.11.2026</p>", "vendor": "Bandai", "type": "", "tags": ["Display", "one piece", "OVP"], "price": 16990, "available": false,
+ "variants": [{"id": 2003, "title": "Default Title", "available": false, "price": 16990, "inventory_management": "shopify"}],
+ "selling_plan_groups": []}

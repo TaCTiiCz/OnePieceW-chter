@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+# Testdaten-Läufe landen hier und werden nie gespeichert
+testlauf/
+data/*.tmp
+.env

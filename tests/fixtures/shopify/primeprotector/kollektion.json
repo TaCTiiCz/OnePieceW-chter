@@ -1,0 +1,17 @@
+{
+  "_testdaten": "NACHGEBAUT aus Echtdaten: Titel/Handles/Preise aus https://primeprotector.at/search/suggest.json (abgerufen 2026-10-06). IDs nachgebaut. Zeigt: Sonder-Zubehörset ist NICHT das 2nd Anniversary Set; andere Spiele werden ignoriert.",
+  "products": [
+    {"id": 7001, "title": "One Piece Card Game Special Goods Set - Former Four Emperors (Playmat, Box & Promo)",
+     "handle": "one-piece-special-goods-set-former-four-emperors-en", "vendor": "Bandai", "product_type": "",
+     "tags": ["accessories", "Box", "one-piece", "playmat"], "body_html": "",
+     "variants": [{"id": 8001, "title": "Default Title", "available": true, "price": "68.51"}]},
+    {"id": 7002, "title": "Ultimate Guard Squaroes – One Piece Edition – Deck Boxen & Collectors Case",
+     "handle": "squaroes-one-piece", "vendor": "Ultimate Guard", "product_type": "",
+     "tags": ["accessories", "one-piece", "Squaroes", "tcg"], "body_html": "",
+     "variants": [{"id": 8002, "title": "Default Title", "available": true, "price": "19.43"}]},
+    {"id": 7003, "title": "Digimon Card Game – Timeless Bonds BT-26 Booster Display (Englisch)",
+     "handle": "digimon-card-game-timeless-bonds-bt-26-booster-display-englisch", "vendor": "Bandai", "product_type": "",
+     "tags": ["digimon", "display", "tcg"], "body_html": "",
+     "variants": [{"id": 8003, "title": "Default Title", "available": true, "price": "114.37"}]}
+  ]
+}

@@ -1,0 +1,82 @@
+# =====================================================================
+#  Ziel-Produkte des One-Piece-TCG-Wächters
+# =====================================================================
+#  Der Wächter liest die Produktlisten der Händler und ordnet jedes
+#  Angebot über Titel, Varianten und Tags einem Ziel zu. Nur Angebote,
+#  die Sprache = Englisch UND den richtigen Produkttyp eindeutig
+#  erkennen lassen, gelten als "sicherer Treffer". Unklare Angebote
+#  landen im Bericht unter "unsichere Treffer" (ohne Kaufalarm).
+# =====================================================================
+
+[allgemein]
+# Preisrückgang wird erst ab dieser Schwelle gemeldet (beides muss erfüllt sein)
+preisrueckgang_min_prozent = 3.0
+preisrueckgang_min_euro = 2.0
+# Gleiche Meldung wird innerhalb dieser Zeit nicht erneut verschickt
+wiederholsperre_stunden = 24
+
+# ---------------------------------------------------------------------
+# 1) Booster Displays (24 Packs) aller OP-Sets ab OP01, nur Englisch
+# ---------------------------------------------------------------------
+[displays]
+ab_set = 1
+# Besonders wichtige Sets (erscheinen im Bericht zuerst, Telegram markiert sie)
+prioritaet = ["OP13", "OP15", "OP09", "OP18", "OP16", "OP11"]
+
+# Englische Set-Namen, damit auch Titel ohne Set-Code erkannt werden.
+# Quelle: offizielle englische Seite en.onepiece-cardgame.com (Stand 2026-10-06)
+[displays.setnamen]
+OP01 = ["romance dawn"]
+OP02 = ["paramount war"]
+OP03 = ["pillars of strength"]
+OP04 = ["kingdoms of intrigue"]
+OP05 = ["awakening of the new era"]
+OP06 = ["wings of the captain"]
+OP07 = ["500 years in the future"]
+OP08 = ["two legends"]
+OP09 = ["emperors in the new world"]
+OP10 = ["royal blood"]
+OP11 = ["a fist of divine speed"]
+OP12 = ["legacy of the master"]
+OP13 = ["carrying on his will"]
+OP14 = ["the azure sea's seven", "the azure seas seven"]
+OP15 = ["adventure on kami's island", "adventure on kamis island"]
+OP16 = ["the time of battle"]
+OP17 = ["the world's strongest warriors", "the worlds strongest warriors"]
+OP18 = ["the dominance of god"]
+
+# ---------------------------------------------------------------------
+# 2) Englische Sleeved Booster
+# ---------------------------------------------------------------------
+[sleeved]
+sets = ["OP09", "OP13"]
+
+# ---------------------------------------------------------------------
+# 3) Sonderprodukte – Identität anhand offizieller Quellen geklärt
+#    (siehe docs/produktidentitaet.md)
+# ---------------------------------------------------------------------
+[[sonderprodukte]]
+id = "pcc-29th"
+anzeige = "Premium Card Collection -29th Anniversary Edition- (EN)"
+typ = "PREMIUM_CARD_COLLECTION"
+# Alle Begriffe einer Gruppe müssen im Titel vorkommen
+muss_enthalten = [["premium card collection", "29th"]]
+# Diese Begriffe schließen eine Verwechslung aus
+darf_nicht_enthalten = ["25th", "best selection", "live action", "6 assort", "ace & sabo", "ace&sabo"]
+identitaet = "bestaetigt"
+offizielle_quelle = "https://en.onepiece-cardgame.com/products/cardcollection29th.html"
+offizieller_inhalt = "P-159 in 2 Versionen: Normal x4 und Premium-Finish x4; UVP USD 10; Premium Bandai (US/AU/NZ)"
+
+[[sonderprodukte]]
+id = "2nd-anniversary-set-en"
+anzeige = "ONE PIECE CARD GAME English Version 2nd Anniversary Set"
+typ = "ANNIVERSARY_SET"
+muss_enthalten = [["2nd anniversary", "set"], ["2nd anniversary", "limited collection"]]
+darf_nicht_enthalten = ["complete guide", "official book", "guide book", "base shop", "tournament", "1st anniversary", "3rd anniversary", "4th anniversary", "25th"]
+# Ein offizielles Produkt namens "2nd Anniversary LIMITED COLLECTION" wurde
+# auf der offiziellen Seite NICHT gefunden. Angebote mit diesem Namen werden
+# deshalb nur als "unsicher" geführt (kein Kaufalarm).
+identitaet = "teilweise"
+unsichere_begriffe = ["limited collection"]
+offizielle_quelle = "https://en.onepiece-cardgame.com/products/other/2nd_anniversary_set.php"
+offizieller_inhalt = "Playmat x1, Leader Card x4, Character Card x4, DON!! Card x10, Storage Box x1; UVP USD 90; Lieferung Juni 2025; Premium Bandai"

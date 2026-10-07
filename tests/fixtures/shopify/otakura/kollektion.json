@@ -1,0 +1,21 @@
+{
+  "_testdaten": "Gemischt: Eintrag 5001 NACHGEBAUT aus Echtdaten (Otakura, 2026-10-06). Einträge 5002–5005 sind KÜNSTLICH und testen Verwechslungen (Japanisch, 2nd-Anniversary-Varianten). Otakura führt diese Artikel nicht unbedingt.",
+  "products": [
+    {"id": 5001, "title": "OP15 Adventure on Kami's Island EB04 – Booster Box da 24 Bustine – One Piece Card Game (ENG)",
+     "handle": "op15-adventure-on-kamis-island-eb04-booster-box-da-24-bustine-one-piece-card-game-eng", "vendor": "One Piece",
+     "product_type": "Giochi di Carte Collezionabili", "tags": ["Display Buste One Piece", "One Piece"], "body_html": "",
+     "variants": [{"id": 59258971160910, "title": "Default Title", "available": false, "price": "183.00"}]},
+    {"id": 5002, "title": "OP15 Adventure on Kami's Island – Booster Box – One Piece Card Game (JAP)",
+     "handle": "op15-booster-box-one-piece-card-game-jap", "vendor": "One Piece", "product_type": "", "tags": ["One Piece"], "body_html": "",
+     "variants": [{"id": 6002, "title": "Default Title", "available": true, "price": "95.00"}]},
+    {"id": 5003, "title": "One Piece Card Game English Version 2nd Anniversary Set",
+     "handle": "one-piece-card-game-english-version-2nd-anniversary-set", "vendor": "Bandai", "product_type": "", "tags": ["One Piece"], "body_html": "",
+     "variants": [{"id": 6003, "title": "Default Title", "available": true, "price": "249.00"}]},
+    {"id": 5004, "title": "One Piece Card Game 2nd Anniversary Complete Guide + 2 Card (JAP)",
+     "handle": "one-piece-2nd-anniversary-complete-guide-jap", "vendor": "Bandai", "product_type": "", "tags": ["One Piece"], "body_html": "",
+     "variants": [{"id": 6004, "title": "Default Title", "available": true, "price": "32.90"}]},
+    {"id": 5005, "title": "One Piece Card Game Japanese 2nd Anniversary Set",
+     "handle": "one-piece-card-game-japanese-2nd-anniversary-set", "vendor": "Bandai", "product_type": "", "tags": ["One Piece"], "body_html": "",
+     "variants": [{"id": 6005, "title": "Default Title", "available": true, "price": "299.00"}]}
+  ]
+}

@@ -1,0 +1,5 @@
+{"_testdaten": "NACHGEBAUT aus Echtdaten: Abruf 2026-10-06 zeigte Preis 0.00 und nicht verfügbar (Platzhalter für kommendes Set).",
+ "id": 1004, "title": "One Piece Card Game - OP19 Booster Display - EN", "handle": "one-piece-card-game-op19-booster-display-englisch",
+ "description": "", "vendor": "Bandai", "type": "", "tags": ["Display", "one piece", "OVP"], "price": 0, "available": false,
+ "variants": [{"id": 2004, "title": "Default Title", "available": false, "price": 0, "inventory_management": "shopify"}],
+ "selling_plan_groups": []}

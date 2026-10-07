@@ -1,0 +1,24 @@
+name: Tests
+
+on:
+  push:
+    paths-ignore:
+      - "data/**"
+      - "reports/**"
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Konfiguration prüfen
+        run: python -m waechter konfig
+      - name: Tests
+        run: python -m unittest discover -s tests -t . -v
+      - name: Probelauf mit Testdaten (ohne Internet)
+        run: python -m waechter pruefen --testdaten

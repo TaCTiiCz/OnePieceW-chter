@@ -1,0 +1,6 @@
+{"_testdaten": "NACHGEBAUT aus Echtdaten (Titel/Handle/Preis/nicht verfügbar laut Abruf 2026-10-06). Felder im Format von /products/<handle>.js nachgebaut.",
+ "id": 1001, "title": "One Piece Card Game - OP13 Carrying On His Will Booster Display - EN", "handle": "one-piece-op13-display-englisch",
+ "description": "<p>24 Booster Packs mit je 12 Karten. Neu und originalverpackt.</p>", "vendor": "Bandai", "type": "",
+ "tags": ["Display", "one piece", "OVP"], "price": 16999, "available": false,
+ "variants": [{"id": 2001, "title": "Default Title", "available": false, "price": 16999, "inventory_management": "shopify"}],
+ "selling_plan_groups": []}

@@ -1,0 +1,84 @@
+name: Wächter – Prüflauf
+
+on:
+  # Manuell starten: Reiter "Actions" -> "Wächter – Prüflauf" -> "Run workflow"
+  workflow_dispatch:
+    inputs:
+      aktion:
+        description: "Was soll passieren?"
+        type: choice
+        options:
+          - pruefen
+          - telegram-test
+        default: pruefen
+
+  # ------------------------------------------------------------------
+  # REGELMÄSSIGE AUSFÜHRUNG – derzeit AUS.
+  # Erst einschalten, nachdem du README Abschnitt "Regelmäßig ausführen"
+  # gelesen hast (Kosten!). Dann die zwei Zeilen unten auskommentieren
+  # (das "# " am Zeilenanfang entfernen). Zeiten sind in UTC.
+  # "23 */4 * * *" = alle 4 Stunden, jeweils 23 Minuten nach der vollen Stunde.
+  # ------------------------------------------------------------------
+  # schedule:
+  #   - cron: "23 */4 * * *"
+
+permissions:
+  contents: write   # damit Verlauf und Bericht ins Repository gespeichert werden können
+
+concurrency:
+  group: waechter
+  cancel-in-progress: false
+
+jobs:
+  waechter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Repository holen
+        uses: actions/checkout@v4
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Tests (Schutz vor fehlerhaften Änderungen)
+        run: python -m unittest discover -s tests -t .
+
+      - name: Prüflauf
+        if: ${{ inputs.aktion != 'telegram-test' }}
+        env:
+          TELEGRAM_AKTIV: ${{ vars.TELEGRAM_AKTIV }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python -m waechter pruefen
+
+      - name: Telegram-Testnachricht
+        if: ${{ inputs.aktion == 'telegram-test' }}
+        env:
+          TELEGRAM_AKTIV: ${{ vars.TELEGRAM_AKTIV }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python -m waechter telegram-test
+
+      - name: Bericht in der Zusammenfassung anzeigen
+        if: ${{ always() && inputs.aktion != 'telegram-test' }}
+        run: |
+          if [ -f reports/latest.md ]; then cat reports/latest.md >> "$GITHUB_STEP_SUMMARY"; fi
+
+      - name: Verlauf und Bericht speichern
+        if: ${{ inputs.aktion != 'telegram-test' }}
+        run: |
+          git config user.name "onepiece-waechter[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data reports
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen zu speichern."
+            exit 0
+          fi
+          git commit -m "Prüflauf $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3; do
+            git pull --rebase && git push && exit 0
+            sleep $((i * 10))
+          done
+          echo "Speichern fehlgeschlagen" && exit 1
