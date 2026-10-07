@@ -231,7 +231,11 @@ def pruefe_haendler(k: dict, abrufer, vorher: Optional[dict] = None, log: Callab
     abrufer.setze_host_regeln(host, 3.0, 12)
     seite = start.text
     e["plattform"] = plattform_erkennen(seite)
-    tl = text_von(seite[:600_000]).lower()
+    # Sichtbarer Text + Menü-Links + Meta-Beschreibung (viele Startseiten laden Inhalte per JavaScript)
+    meta = " ".join(re.findall(r'<meta[^>]+(?:name|property)=["\'](?:description|og:description|og:title)["\'][^>]+content=["\']([^"\']*)',
+                               seite[:200_000], re.I))
+    linktexte = " ".join(f"{u} {t}" for u, t in links(seite, basis)).replace("-", " ").replace("_", " ")
+    tl = (text_von(seite[:600_000]) + " " + meta + " " + linktexte).lower()
     hinweise = sorted({w for w in TCG_WOERTER if w in tl})
     e["tcg_hinweise"] = hinweise
     e["tcg_bezug"] = len(hinweise) >= 3
