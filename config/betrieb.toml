@@ -1,0 +1,36 @@
+# =====================================================================
+#  Betrieb: Prüfintervalle, Prioritäten und Grenzen
+# =====================================================================
+#  Intervalle in Sekunden. Sie sind das ZIEL – tatsächlich kann nicht
+#  häufiger geprüft werden, als der Wächter gestartet wird (GitHub-Zeitplan:
+#  frühestens alle 5 Minuten, oft verzögert; eigener Server: frei wählbar).
+#  robots.txt (Crawl-delay) und Händlergrenzen gehen immer vor.
+# =====================================================================
+
+[intervalle]
+naruto_produktseite = 180          # bekannte Naruto-Produktseiten: alle 3 Minuten
+naruto_produktseite_fokus = 60     # rund um einen angekündigten Vorbestellstart
+entdeckung_schnell = 900           # Neuheiten-Feeds, Shopsuche, Vorbestell-/Naruto-Kategorien: 15 Min.
+entdeckung_langsam = 10800         # Neuheiten-/Bandai-Kategorien, kompletter Shopify-Katalog: 3 Std.
+sitemap = 86400                    # Sitemaps: täglich
+offiziell = 1800                   # offizielle Naruto-Website: 30 Min.
+onepiece = 3600                    # One-Piece-Prüfung (niedrigere Priorität): stündlich
+
+[fokus]
+# Zeitfenster um einen bekannten Vorbestellstart, in dem besonders häufig geprüft wird
+minuten_vorher = 30
+stunden_nachher = 6
+
+[grenzen]
+max_laufzeit_sekunden = 170        # ein Lauf endet spätestens nach ~3 Minuten
+max_anfragen_pro_lauf = 400
+max_anfragen_pro_shop_und_lauf = 12
+parallele_shops = 8
+min_abstand_sekunden = 3           # Mindestabstand zwischen zwei Anfragen an denselben Shop
+max_backoff_minuten = 360          # längste Wartezeit nach wiederholten Fehlern
+fehler_push_ab = 3                 # nach so vielen Fehlversuchen in Folge an einer wichtigen Seite: Fehlermeldung
+
+[betrieb]
+# Nur zur Anzeige im Dashboard: wie wird der Wächter gestartet?
+ausfuehrung = "GitHub Actions (Zeitplan)"
+zeitplan_minuten = 5

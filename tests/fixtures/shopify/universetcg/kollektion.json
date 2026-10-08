@@ -1,0 +1,26 @@
+{
+  "_testdaten": "NACHGEBAUT aus Echtdaten: Titel und Handles von https://www.universetcg.com/ (Startseite, abgerufen 2026-10-06). Verfügbarkeit/Preise in dieser Liste sind KÜNSTLICH, außer beim OP15-EB04-Display (echt). Die Produktseite für OP-17 ist absichtlich NICHT hinterlegt (simulierter Abruffehler).",
+  "products": [
+    {"id": 3001, "title": "One Piece Card Game OP15-EB04 Booster Box (24 Packs) – Adventure on Kami’s Island - English",
+     "handle": "one-piece-op15-eb04-booster-box-24-packs-english", "vendor": "Universe TCG", "product_type": "Booster Box",
+     "tags": ["eb04", "One Piece", "op15"], "body_html": "", "variants": [{"id": 53503232082261, "title": "Default Title", "available": true, "price": "302.00"}]},
+    {"id": 3002, "title": "One Piece Card Game OP15-EB04 Booster Box Case (12 Boxes) – Adventure on Kami’s Island - English",
+     "handle": "one-piece-op15-eb04-booster-box-case-12-boxes-english", "vendor": "Universe TCG", "product_type": "Booster Box Case",
+     "tags": ["One Piece", "op15"], "body_html": "", "variants": [{"id": 4002, "title": "Default Title", "available": false, "price": "3168.00"}]},
+    {"id": 3003, "title": "One Piece Card Game OP-17 The World's Strongest Warriors Booster Box (24 Packs) - English",
+     "handle": "one-piece-card-game-op-17-kingdom-of-elbaf-booster-box-24-packs-english", "vendor": "Universe TCG", "product_type": "Booster Box",
+     "tags": ["One Piece", "op17"], "body_html": "", "variants": [{"id": 4003, "title": "Default Title", "available": true, "price": "199.00"}]},
+    {"id": 3004, "title": "One Piece Card Game Extra Booster EB-05 Booster Box (24 Packs) - English",
+     "handle": "one-piece-card-game-extra-booster-eb-05-booster-box-24-packs-english", "vendor": "Universe TCG", "product_type": "Booster Box",
+     "tags": ["One Piece"], "body_html": "", "variants": [{"id": 4004, "title": "Default Title", "available": true, "price": "150.00"}]},
+    {"id": 3005, "title": "One Piece Card Game OP-17 The World's Strongest Warriors Booster Pack - English",
+     "handle": "one-piece-card-game-op-17-kingdom-of-elbaf-booster-pack-english", "vendor": "Universe TCG", "product_type": "Booster Pack",
+     "tags": ["One Piece"], "body_html": "", "variants": [{"id": 4005, "title": "Default Title", "available": true, "price": "8.00"}]},
+    {"id": 3006, "title": "Electrical Luna (OP08-036) - Two Legends (Rare) [OP08-036]",
+     "handle": "electrical-luna-op08-036-two-legends-rare-036", "vendor": "Bandai", "product_type": "Single",
+     "tags": ["One Piece"], "body_html": "", "variants": [{"id": 4006, "title": "Default Title", "available": true, "price": "0.50"}]},
+    {"id": 3007, "title": "Premium Card Collection - Best Selection Vol.5 - One Piece Products",
+     "handle": "premium-card-collection-best-selection-vol-5-one-piece-products-873744", "vendor": "Bandai", "product_type": "",
+     "tags": ["One Piece"], "body_html": "", "variants": [{"id": 4007, "title": "Default Title", "available": true, "price": "40.00"}]}
+  ]
+}

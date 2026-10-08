@@ -1,0 +1,97 @@
+# =====================================================================
+#  NARUTO CARD GAME (Bandai) – höchste Priorität
+#  Produktidentität geprüft am 2026-10-07 anhand offizieller Quellen.
+#  Details: docs/naruto_produktidentitaet.md
+# =====================================================================
+
+[identitaet]
+offizieller_name = "NARUTO CARD GAME"
+hersteller = "BANDAI CO., LTD. (Marke: BANDAI CARD GAMES)"
+offizielle_website = "https://www.naruto-cardgame.com/en/"
+erscheinung = "Sommer 2027, weltweit gleichzeitig (offiziell: 'Arriving in Summer 2027', 'simultaneous global release')"
+# Website-Regionen laut offizieller Regionsauswahl https://www.naruto-cardgame.com/
+# Deutschland und Österreich sind der Region "en" zugeordnet.
+website_regionen = ["jp", "asia-tc", "asia-en", "en"]
+# Offiziell bestätigte Produkte, Preise und Vorbestelltermine: KEINE (Stand 2026-10-07)
+produkte_offiziell_angekuendigt = false
+
+[unbestaetigt]
+# Informationen aus nicht-offiziellen Quellen – NICHT als Fakt behandeln
+spracheditionen = "Japanisch, Englisch (Global), Englisch (Asien), Traditionelles Chinesisch – laut Händler-Blog jctstore.jp (15.09.2026), passt zu den offiziellen Website-Regionen, aber nicht ausdrücklich als Produktedition bestätigt"
+vertrieb_europa = "Asmodee soll den Vertrieb übernehmen – laut Finanzmedien, nicht offiziell bestätigt"
+
+# ---------------------------------------------------------------------
+# Was als "passendes Produkt" zählt
+# ---------------------------------------------------------------------
+[erkennung]
+# Mindestens eine dieser Phrasen MUSS im Titel/URL stehen:
+pflicht_phrasen = ["naruto card game", "naruto cardgame", "naruto-card-game", "naruto tcg", "naruto trading card game"]
+# Herstellerhinweis: "Naruto TCG" OHNE "bandai" wird NICHT beobachtet (live 07.10.2026: fast immer NARUTO Mythos TCG).
+# Nur der offizielle Name "NARUTO CARD GAME" gilt auch ohne Herstellerangabe.
+hersteller_woerter = ["bandai"]
+# Verwechslungen – diese Produkte sind NICHT das Bandai NARUTO CARD GAME:
+ausschluss = [
+  "mythos",                 # NARUTO Mythos TCG (anderer Lizenznehmer) – wird oft OHNE "Mythos" im Titel verkauft:
+  "konoha shido", "shinobi shiren", "first set", "1st edition", "2nd edition", "first edition", "second edition",
+  "1. edition", "2. edition", "team set", "special pack", "special box",   # Mythos-Sets und -Produktarten (live 07.10.2026 gesehen)
+  "tier 1", "tier 2", "tier 3", "tier 4", "wave",                           # Kayou-Serien
+  "kayou",                  # Kayou-Sammelkarten
+  "moji",                   # Nicht-offizielle Booster
+  "cicaboom",
+  "ccg",                    # altes Bandai Naruto CCG (2006–2010)
+  "collectible card game",
+  "carddass",
+  "hero collection",
+  "boruto",
+  "panini",
+  "ultimate ninja",
+  "clue",
+  "proxy",
+  "custom card",
+  "fan made",
+  "fanmade",
+  "replica",
+  "path to hokage", "quest for power", "curse of the sand", "approaching wind", "coils of the snake",
+  "eternal rivalry", "battle of destiny", "lightning crash", "tournament of the leaf",
+]
+# Diese Produktarten werden beobachtet (Reihenfolge = Priorität)
+varianten = ["DISPLAY", "STARTER_DECK", "BOOSTER_PACK", "CASE"]
+# Englisch zuerst; andere OFFIZIELL bestätigte Sprachen separat melden
+sprache_prioritaet = "EN"
+# Laut offizieller Website gibt es Regionen JP, Asia-TC, Asia-EN. Deutsche, französische
+# usw. Ausgaben sind NICHT bestätigt -> werden als "Sprache offiziell nicht bestätigt" gekennzeichnet.
+weitere_sprachen = ["JP", "TC", "EN-ASIA"]
+
+[alarm]
+# Keine feste Preisgrenze. Teure Angebote werden markiert:
+teuer_faktor_median = 1.5        # > 1,5 x Median vergleichbarer Angebote
+teuer_ab_euro_display = 0        # 0 = aus (noch keine offizielle UVP bekannt)
+# Kaufalarme vor der offiziellen Produktankündigung werden deutlich als SPEKULATIV markiert
+spekulative_vorbestellungen_melden = true
+wiederholsperre_stunden = 12
+
+# Bekannte Vorbestellstarts (werden zusätzlich automatisch aus Shopseiten erkannt).
+# Beispiel:
+# [[termine]]
+# beschreibung = "Vorbestellstart laut Shop X"
+# zeitpunkt = "2026-11-15T10:00:00+01:00"
+# shop = "cardcosmos"
+# quelle = "https://..."
+
+# ---------------------------------------------------------------------
+# Offizielle Quellen, die regelmäßig geprüft werden
+# ---------------------------------------------------------------------
+[[offizielle_quellen]]
+id = "naruto-news-en"
+url = "https://www.naruto-cardgame.com/en/news/article-list.php"
+art = "newsliste"
+
+[[offizielle_quellen]]
+id = "naruto-haendler-en"
+url = "https://www.naruto-cardgame.com/en/retailers/"
+art = "seite"
+
+[[offizielle_quellen]]
+id = "naruto-top-en"
+url = "https://www.naruto-cardgame.com/en/"
+art = "seite"

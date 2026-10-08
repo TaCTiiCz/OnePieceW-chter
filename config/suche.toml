@@ -1,0 +1,44 @@
+# Tägliche Suche nach neuen Händlern (optional, braucht Secret BRAVE_SEARCH_API_KEY).
+# Treffer sind NUR Kandidaten. Jeder neue Shop wird danach live geprüft (Händlerprüfung).
+
+[[anfragen]]
+q = "\"Naruto Card Game\" Bandai vorbestellen"
+land = "DE"
+
+[[anfragen]]
+q = "\"Naruto Card Game\" Bandai pre-order booster box"
+land = "ALL"
+
+[[anfragen]]
+q = "\"Naruto Card Game\" précommande Bandai"
+land = "FR"
+
+[[anfragen]]
+q = "\"Naruto Card Game\" preventa Bandai"
+land = "ES"
+
+[[anfragen]]
+q = "\"Naruto Card Game\" preordine Bandai"
+land = "IT"
+
+[[anfragen]]
+q = "One Piece Card Game Display Vorbestellung Shop"
+land = "DE"
+
+[[anfragen]]
+q = "Gundam Card Game Booster Display kaufen"
+land = "DE"
+
+[[anfragen]]
+q = "TCG Shop Österreich Booster Display"
+land = "AT"
+
+[filter]
+# Diese Domains sind keine Händler oder Marktplätze und werden ignoriert
+ignorieren = ["amazon.", "ebay.", "etsy.", "aliexpress.", "temu.", "facebook.", "instagram.", "tiktok.", "youtube.",
+  "reddit.", "x.com", "twitter.", "cardmarket.", "cardtrader.", "idealo.", "geizhals.", "trovaprezzi.", "prisjakt.",
+  "pricecharting.", "tcgplayer.", "wikipedia.", "fandom.", "bandai.", "naruto-cardgame.com", "onepiece-cardgame.com",
+  "prnewswire.", "crunchyroll.", "vinted.", "kleinanzeigen.", "whatnot.", "google.", "bing.", "pinterest."]
+# Nur europäische Länderendungen bzw. .com/.eu/.shop werden als Kandidaten übernommen
+endungen = [".de", ".at", ".ch", ".fr", ".es", ".it", ".nl", ".be", ".lu", ".dk", ".se", ".fi", ".pl", ".cz", ".sk",
+  ".hu", ".pt", ".ie", ".gr", ".si", ".hr", ".ro", ".bg", ".ee", ".lv", ".lt", ".eu", ".com", ".shop", ".store", ".net", ".co.uk"]

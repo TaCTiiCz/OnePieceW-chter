@@ -1,0 +1,152 @@
+# =====================================================================
+#  Händler-Konfiguration für den One-Piece-TCG-Wächter
+# =====================================================================
+#
+#  Jeder Händler steht in einem eigenen Block [shops.<kurzname>].
+#  Die Angaben unter "pruefung" wurden am angegebenen Datum von Hand
+#  (über die öffentlichen Shop-Seiten) dokumentiert. Details und Quellen:
+#  docs/haendlerpruefung.md
+#
+#  WICHTIG:
+#  - kaufalarm_freigegeben = true nur nach dokumentierter Prüfung.
+#    Nicht freigegebene Händler erscheinen im Bericht, lösen aber
+#    KEINE Telegram-Kaufalarme aus.
+#  - Versandkosten nach Deutschland: Nur eintragen, was auf der
+#    Händlerseite belegt ist. Unbekannt bleibt unbekannt (status = "unbekannt").
+#  - Shop-Seriosität und Case-Hunting-Risiko werden NICHT bewertet,
+#    solange keine belastbaren Belege vorliegen.
+# =====================================================================
+
+# Händler, die niemals überwacht werden dürfen.
+# Der Wächter verweigert den Start, wenn ein Shop unten gegen diese Liste verstößt.
+# TCG Distro / tcgdistronline.com ist zusätzlich FEST im Code ausgeschlossen (dauerhaft).
+[ausschluss]
+domains = ["tcgdistro.com", "tcgdistronline.com"]
+namensmuster = ["tcg distro", "tcgdistro", "tcg-distro"]
+# Gesperrt, bis eine dokumentierte Vertrauensprüfung vorliegt (docs/haendlerpruefung.md).
+# Erst nach dieser Prüfung den Eintrag hier entfernen.
+bis_vertrauenspruefung = ["tcgzenith", "tcg zenith", "tcg-zenith"]
+
+# ---------------------------------------------------------------------
+[shops.cardcosmos]
+name = "cardcosmos"
+basis_url = "https://cardcosmos.de"
+land = "DE"
+plattform = "shopify"
+waehrung = "EUR"
+# Wo der Wächter nach One-Piece-Produkten sucht (Shopify-Kollektionen)
+kollektionen = ["one-piece-karten-kaufen"]
+max_seiten = 3
+# Höflichkeit: Mindestabstand zwischen zwei Abrufen und Obergrenze pro Lauf
+min_abstand_sekunden = 4
+max_anfragen_pro_lauf = 80
+kaufalarm_freigegeben = true
+
+[shops.cardcosmos.versand_de]
+status = "bekannt"
+# Staffel: ab Bestellwert (EUR) -> Versandkosten (EUR)
+staffel = [{ ab = 0.0, kosten = 4.99 }]
+hinweis = "Laut Versandseite 4,99 € pro Bestellung innerhalb Deutschlands."
+quelle = "https://cardcosmos.de/policies/shipping-policy"
+geprueft_am = "2026-10-06"
+
+[shops.cardcosmos.pruefung]
+geprueft_am = "2026-10-06"
+impressum = "cardcosmos GmbH, Bremland 34, 24857 Fahrdorf, Deutschland; HRB16880 AG Flensburg; USt-ID DE366668128"
+impressum_quelle = "https://cardcosmos.de/policies/legal-notice"
+liefert_nach_de = true
+fuehrt_englische_op_displays = true
+seriositaet = "nicht bewertet (keine belastbaren Belege gesammelt)"
+case_herkunft = "unbekannt"
+
+# ---------------------------------------------------------------------
+[shops.primeprotector]
+name = "Prime Protector"
+basis_url = "https://primeprotector.at"
+land = "AT"
+plattform = "shopify"
+waehrung = "EUR"
+# Keine eigene One-Piece-Kollektion gefunden -> gesamter Katalog, seitenweise
+kollektionen = ["all"]
+max_seiten = 12
+min_abstand_sekunden = 4
+max_anfragen_pro_lauf = 80
+kaufalarm_freigegeben = true
+
+[shops.primeprotector.versand_de]
+status = "bekannt"
+staffel = [{ ab = 0.0, kosten = 5.90 }, { ab = 200.0, kosten = 0.0 }]
+hinweis = "Standardversand DPD 5,90 €; ab 200 € Bestellwert versandkostenfrei (DPD). Andere Versandarten teurer."
+quelle = "https://primeprotector.at/policies/shipping-policy"
+geprueft_am = "2026-10-06"
+
+[shops.primeprotector.pruefung]
+geprueft_am = "2026-10-06"
+impressum = "Wenig GmbH, Großpesendorf 3, 8211 Ilztal, Österreich; FN 550752f LG Graz; UID ATU76568607"
+impressum_quelle = "https://primeprotector.at/policies/legal-notice"
+liefert_nach_de = true
+fuehrt_englische_op_displays = "bei Prüfung keine englischen OP-Displays im Sortiment gefunden"
+seriositaet = "nicht bewertet (keine belastbaren Belege gesammelt)"
+case_herkunft = "unbekannt"
+
+# ---------------------------------------------------------------------
+[shops.universetcg]
+name = "Universe TCG"
+basis_url = "https://www.universetcg.com"
+land = "ES"
+plattform = "shopify"
+waehrung = "EUR"
+kollektionen = ["one-piece-card-game"]
+max_seiten = 4
+min_abstand_sekunden = 4
+max_anfragen_pro_lauf = 80
+# Nicht freigegeben: Versandkosten nach DE nicht belegt, Prüfung unvollständig.
+kaufalarm_freigegeben = false
+
+[shops.universetcg.versand_de]
+status = "unbekannt"
+staffel = []
+hinweis = "Versandseite nennt Laufzeiten, aber keine Versandkosten nach Deutschland."
+quelle = "https://www.universetcg.com/policies/shipping-policy"
+geprueft_am = "2026-10-06"
+
+[shops.universetcg.pruefung]
+geprueft_am = "2026-10-06"
+impressum = "Universe TCG (Einzelunternehmer), NIF 77123245J, Carrer de Gaietà Ventalló 34, local 3, 08100 Mollet del Vallès, Barcelona, Spanien"
+impressum_quelle = "https://www.universetcg.com/policies/legal-notice"
+liefert_nach_de = true
+fuehrt_englische_op_displays = true
+offene_punkte = "Versandkosten nach DE unbekannt; Produkt-Beschreibungen teils veraltet (z. B. 'PRE-ORDER' bei bereits erschienenem Set)."
+seriositaet = "nicht bewertet (keine belastbaren Belege gesammelt)"
+case_herkunft = "unbekannt (Shop verkauft auch ganze Cases)"
+
+# ---------------------------------------------------------------------
+[shops.otakura]
+name = "Otakura"
+basis_url = "https://otakura.com"
+land = "IT"
+plattform = "shopify"
+waehrung = "EUR"
+kollektionen = ["one-piece-card-game"]
+max_seiten = 4
+min_abstand_sekunden = 4
+max_anfragen_pro_lauf = 80
+# Nicht freigegeben: Impressum/Firmenangaben konnten nicht belegt werden.
+kaufalarm_freigegeben = false
+
+[shops.otakura.versand_de]
+status = "bekannt"
+staffel = [{ ab = 0.0, kosten = 12.50 }, { ab = 500.0, kosten = 24.90 }, { ab = 999.99, kosten = 0.0 }]
+hinweis = "EU-Versand FedEx 12,50 €; 500–999,98 € Bestellwert 24,90 €; ab 999,99 € kostenlos."
+quelle = "https://otakura.com/en/policies/shipping-policy"
+geprueft_am = "2026-10-06"
+
+[shops.otakura.pruefung]
+geprueft_am = "2026-10-06"
+impressum = "nicht gefunden (Seite /policies/legal-notice lieferte keine Firmenangaben)"
+impressum_quelle = "https://otakura.com/en/policies/legal-notice"
+liefert_nach_de = true
+fuehrt_englische_op_displays = true
+offene_punkte = "Firmenname, Adresse und USt-ID selbst prüfen (Fußzeile/AGB), dann ggf. freigeben."
+seriositaet = "nicht bewertet (keine belastbaren Belege gesammelt)"
+case_herkunft = "unbekannt"

@@ -1,0 +1,21 @@
+{
+  "_hinweis": "TESTDATEN. Ordnet URLs gespeicherten Dateien zu. Kein Netzwerkzugriff. Herkunft je Datei siehe Feld _testdaten in der jeweiligen Datei und README in diesem Ordner.",
+  "urls": {
+    "https://cardcosmos.de/collections/one-piece-karten-kaufen/products.json?limit=250&page=1": {"datei": "shopify/cardcosmos/kollektion.json"},
+    "https://cardcosmos.de/products/one-piece-op13-display-englisch.js": {"datei": "shopify/cardcosmos/op13-en.js.json"},
+    "https://cardcosmos.de/products/one-piece-op13-display-englisch": {"datei": "shopify/cardcosmos/op13-en.html"},
+    "https://cardcosmos.de/products/one-piece-op09-display-englisch.js": {"datei": "shopify/cardcosmos/op09-en.js.json"},
+    "https://cardcosmos.de/products/one-piece-card-game-op18-the-dominance-of-god-booster-display-englisch.js": {"datei": "shopify/cardcosmos/op18-en.js.json"},
+    "https://cardcosmos.de/products/one-piece-card-game-op19-booster-display-englisch.js": {"datei": "shopify/cardcosmos/op19-en.js.json"},
+    "https://cardcosmos.de/products/one-piece-op11-booster-box-englisch.js": {"status": 503, "fehler": "HTTP 503 (simulierter Abruffehler)"},
+
+    "https://www.universetcg.com/collections/one-piece-card-game/products.json?limit=250&page=1": {"datei": "shopify/universetcg/kollektion.json"},
+    "https://www.universetcg.com/products/one-piece-op15-eb04-booster-box-24-packs-english.js": {"datei": "shopify/universetcg/op15-box-en.js.json"},
+
+    "https://otakura.com/collections/one-piece-card-game/products.json?limit=250&page=1": {"datei": "shopify/otakura/kollektion.json"},
+    "https://otakura.com/products/op15-adventure-on-kamis-island-eb04-booster-box-da-24-bustine-one-piece-card-game-eng.js": {"datei": "shopify/otakura/op15-box-eng.js.json"},
+    "https://otakura.com/products/one-piece-card-game-english-version-2nd-anniversary-set.js": {"datei": "shopify/otakura/2nd-anniversary-set.js.json"},
+
+    "https://primeprotector.at/collections/all/products.json?limit=250&page=1": {"datei": "shopify/primeprotector/kollektion.json"}
+  }
+}

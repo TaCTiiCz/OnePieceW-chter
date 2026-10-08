@@ -1,0 +1,30 @@
+{
+  "_testdaten": "NACHGEBAUT aus Echtdaten: Titel/Handle/Preis/Verfügbarkeit aus https://cardcosmos.de/collections/one-piece-karten-kaufen/products.json und /search/suggest.json, abgerufen 2026-10-06. IDs und übrige Felder nachgebaut. Nicht aktuell.",
+  "products": [
+    {"id": 1001, "title": "One Piece Card Game - OP13 Carrying On His Will Booster Display - EN", "handle": "one-piece-op13-display-englisch",
+     "vendor": "Bandai", "product_type": "", "tags": ["Display", "one piece", "OVP"], "body_html": "",
+     "variants": [{"id": 2001, "title": "Default Title", "available": false, "price": "169.99"}]},
+    {"id": 1002, "title": "One Piece Card Game - OP09 - Emperors in the new World Booster Box - EN", "handle": "one-piece-op09-display-englisch",
+     "vendor": "Bandai", "product_type": "", "tags": ["Display", "one piece", "OVP"], "body_html": "",
+     "variants": [{"id": 2002, "title": "Default Title", "available": false, "price": "105.99"}]},
+    {"id": 1003, "title": "One Piece Card Game - OP18 The Dominance of God Booster Display - EN", "handle": "one-piece-card-game-op18-the-dominance-of-god-booster-display-englisch",
+     "vendor": "Bandai", "product_type": "", "tags": ["Display", "one piece", "OVP"], "body_html": "",
+     "variants": [{"id": 2003, "title": "Default Title", "available": false, "price": "169.90"}]},
+    {"id": 1004, "title": "One Piece Card Game - OP19 Booster Display - EN", "handle": "one-piece-card-game-op19-booster-display-englisch",
+     "vendor": "Bandai", "product_type": "", "tags": ["Display", "one piece", "OVP"], "body_html": "",
+     "variants": [{"id": 2004, "title": "Default Title", "available": false, "price": "0.00"}]},
+    {"id": 1005, "title": "One Piece Card Game - OP11 Booster Box - EN", "handle": "one-piece-op11-booster-box-englisch",
+     "vendor": "Bandai", "product_type": "", "tags": ["Display", "one piece", "OVP"], "body_html": "",
+     "variants": [{"id": 2005, "title": "Default Title", "available": false, "price": "99.99"}]},
+    {"id": 1006, "title": "One Piece Card Game - OP13 Booster Display - JPN", "handle": "one-piece-op13-display-japanisch",
+     "vendor": "Bandai", "product_type": "", "tags": ["Display", "nada-hidden", "one piece", "OVP"], "body_html": "",
+     "variants": [{"id": 2006, "title": "Default Title", "available": false, "price": "159.90"}]},
+    {"id": 1007, "title": "One Piece Card Game - OP09 The New Emperor Booster Display - JPN", "handle": "one-piece-op09-display-japanisch",
+     "vendor": "Bandai", "product_type": "", "tags": ["Display", "one piece", "OVP"], "body_html": "",
+     "variants": [{"id": 2007, "title": "Display", "available": true, "price": "199.90"},
+                  {"id": 2008, "title": "Case (12 Displays)", "available": true, "price": "2099.90"}]},
+    {"id": 1008, "title": "One Piece - Nami Ill. Alt. Art OP01-016 (The Best) – AOG 10 Gem Mint", "handle": "one-piece-nami-ill-alt-art-op01-016-the-best-aog-10-gem-mint",
+     "vendor": "", "product_type": "", "tags": ["Einzelkarten", "Graded", "One Piece"], "body_html": "",
+     "variants": [{"id": 2009, "title": "Default Title", "available": true, "price": "3000.00"}]}
+  ]
+}

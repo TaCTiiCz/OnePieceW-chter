@@ -1,0 +1,5 @@
+{"_testdaten": "NACHGEBAUT aus Echtdaten (Titel/Handle/Preis/nicht verfügbar laut Abruf 2026-10-06).",
+ "id": 1002, "title": "One Piece Card Game - OP09 - Emperors in the new World Booster Box - EN", "handle": "one-piece-op09-display-englisch",
+ "description": "", "vendor": "Bandai", "type": "", "tags": ["Display", "one piece", "OVP"], "price": 10599, "available": false,
+ "variants": [{"id": 2002, "title": "Default Title", "available": false, "price": 10599, "inventory_management": "shopify"}],
+ "selling_plan_groups": []}

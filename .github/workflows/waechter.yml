@@ -1,0 +1,99 @@
+name: Wächter
+
+# Ein Lauf prüft alle FÄLLIGEN Aufgaben (Naruto zuerst, One Piece wenn fällig) und endet dann.
+# Zustand, Verlauf und Dashboard liegen im Zweig "waechter-daten" (getrennt vom Code).
+on:
+  workflow_dispatch:
+    inputs:
+      aktion:
+        description: "Was soll passieren?"
+        type: choice
+        options:
+          - lauf
+          - simulation
+          - simulation-mit-echtem-telegram
+          - telegram-test
+        default: lauf
+
+  # ------------------------------------------------------------------
+  # REGELMÄSSIGER BETRIEB – erst nach der Kostenentscheidung einschalten
+  # (README, Abschnitt "Dauerbetrieb"). Zeiten in UTC.
+  #   Öffentliches Repository (kostenlos):   - cron: "*/5 * * * *"
+  #   Privates Repository (2.000 Min/Monat): - cron: "7 * * * *"   (stündlich)
+  # ------------------------------------------------------------------
+  # schedule:
+  #   - cron: "*/5 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: waechter
+  cancel-in-progress: false
+
+jobs:
+  waechter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      TELEGRAM_AKTIV: ${{ vars.TELEGRAM_AKTIV }}
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+    steps:
+      - name: Code holen
+        uses: actions/checkout@v4
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Datenzweig vorbereiten
+        run: |
+          git config user.name "onepiece-waechter[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git fetch --depth=5 origin waechter-daten 2>/dev/null; then
+            git worktree add -B waechter-daten _daten origin/waechter-daten
+          else
+            git worktree add --detach _daten
+            cd _daten && git checkout --orphan waechter-daten && git rm -rfq . && cd ..
+          fi
+
+      - name: Wächter-Lauf
+        if: ${{ github.event_name == 'schedule' || inputs.aktion == 'lauf' }}
+        run: python -m waechter lauf --daten _daten/laufzeit --dashboard _daten/dashboard.md
+
+      - name: Simulation (lokaler Test-Shop, Test-Telegram-Server)
+        if: ${{ inputs.aktion == 'simulation' }}
+        run: |
+          python -m waechter simulation --daten _daten/laufzeit
+          python -m waechter lauf --daten _daten/laufzeit --dashboard _daten/dashboard.md --ohne-onepiece
+
+      - name: Simulation mit echter Telegram-Testnachricht
+        if: ${{ inputs.aktion == 'simulation-mit-echtem-telegram' }}
+        run: |
+          python -m waechter simulation --telegram-echt --daten _daten/laufzeit
+          python -m waechter lauf --daten _daten/laufzeit --dashboard _daten/dashboard.md --ohne-onepiece
+
+      - name: Telegram-Testnachricht
+        if: ${{ inputs.aktion == 'telegram-test' }}
+        run: python -m waechter telegram-test
+
+      - name: Dashboard in der Zusammenfassung
+        if: ${{ always() }}
+        run: if [ -f _daten/dashboard.md ]; then cat _daten/dashboard.md >> "$GITHUB_STEP_SUMMARY"; fi
+
+      - name: Zustand dauerhaft speichern
+        if: ${{ always() && inputs.aktion != 'telegram-test' }}
+        run: |
+          cd _daten
+          git add -A
+          if git diff --cached --quiet; then echo "Keine Änderungen"; exit 0; fi
+          # pro Tag ein Commit (wird im Tagesverlauf ergänzt), damit der Zweig nicht mit tausenden Commits wächst
+          heute=$(date -u +%Y-%m-%d)
+          if git log -1 --format=%s 2>/dev/null | grep -q "Wächter-Daten $heute"; then
+            git commit -q --amend -m "Wächter-Daten $heute"
+          else
+            git commit -q -m "Wächter-Daten $heute"
+          fi
+          git push -q --force origin waechter-daten
