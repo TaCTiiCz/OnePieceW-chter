@@ -220,4 +220,4 @@ Wächter-Lauf, „schläft“ er – das ist die ehrliche Warnung, dass der Daue
 - **Einmalig einschalten:** Settings → Pages → Source: **„GitHub Actions“**. Danach Actions → „Wächter“ → „Run workflow“.
   Die Adresse steht anschließend im Lauf unter „dojo-veroeffentlichen“ (`https://<name>.github.io/<repo>/`).
 - Ohne `status.json` zeigt die Seite einen **Demo-Modus** (oben als „DEMO-MODUS“ gekennzeichnet).
-- Test: Actions → „Wächter“ → aktion `simulation` → das Dojo zeigt den simulierten Restock (mit 🧪 markiert).
+- Hinweis: Die Aktion `simulation` läuft in einer getrennten Testumgebung und löst im Dojo keinen Alarm aus. Der Alarm erscheint nur bei einem echten Restock (Kaufalarm der letzten 3 Stunden).
