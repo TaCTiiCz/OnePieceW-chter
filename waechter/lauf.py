@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import datetime as dt
+import time
+from concurrent.futures import ThreadPoolExecutor
 from typing import Callable, Optional
 
 from . import modelle as m
@@ -166,7 +168,10 @@ def pruefe_shop(shop: Shop, konfig: Konfig, abrufer, zustand: dict, zeitpunkt: s
 
 def fuehre_aus(konfig: Konfig, abrufer, speicher: Speicher, *, testdaten: bool = False,
                jetzt: Optional[dt.datetime] = None, telegram_senden: bool = True,
-               telegram_transport: Optional[Callable] = None, log: Callable[[str], None] = print) -> dict:
+               telegram_transport: Optional[Callable] = None, log: Callable[[str], None] = print,
+               zeitbudget: Optional[float] = None, parallel: int = 1) -> dict:
+    """zeitbudget (Sekunden) + parallel > 1: Shops parallel, der am längsten ungeprüfte zuerst; was das Budget sprengt,
+    kommt im nächsten Lauf dran. Ohne zeitbudget: alle Shops nacheinander in Konfigurationsreihenfolge."""
     jetzt = jetzt or dt.datetime.now(dt.timezone.utc)
     zeitpunkt = jetzt.replace(microsecond=0).isoformat()
     heute = jetzt.date()
@@ -181,13 +186,36 @@ def fuehre_aus(konfig: Konfig, abrufer, speicher: Speicher, *, testdaten: bool =
     shop_berichte: dict[str, dict] = {}
     verlauf: list[dict] = []
 
-    for shop in konfig.shops:
-        if ist_ausgeschlossen(shop.basis_url, konfig.ausschluss_domains, konfig.ausschluss_namen):
-            continue  # doppelte Sicherung, konfig.py verhindert das bereits
+    shops = [sh for sh in konfig.shops if not ist_ausgeschlossen(sh.basis_url, konfig.ausschluss_domains, konfig.ausschluss_namen)]
+    if zeitbudget:  # am längsten ungeprüfte Shops zuerst (nie geprüfte ganz vorn)
+        shops.sort(key=lambda sh: (zustand["shops"].get(sh.id) or {}).get("zuletzt_geprueft") or "")
+    t0 = time.monotonic()
+    uebersprungen: list[str] = []
+
+    def arbeite(shop: Shop):
+        if zeitbudget and time.monotonic() - t0 > zeitbudget:
+            return None
         log(f"Prüfe {shop.name} ({shop.basis_url}) …")
         abrufer.setze_host_regeln(shop.host, shop.min_abstand_sekunden, shop.max_anfragen_pro_lauf)
+        try:
+            return pruefe_shop(shop, konfig, abrufer, zustand, zeitpunkt, heute, log)
+        except Exception as ex:  # ein kaputter Shop darf den Lauf nicht stoppen
+            log(f"  ! {shop.name}: {type(ex).__name__}: {ex}")
+            return [], [], {"name": shop.name, "listen_ok": False, "fehler": [f"{type(ex).__name__}: {ex}"],
+                            "produkte_gelesen": 0, "kandidaten": 0, "seiten_geprueft": 0}
+
+    if parallel > 1:
+        with ThreadPoolExecutor(max_workers=parallel) as pool:
+            ergebnisse = list(pool.map(arbeite, shops))
+    else:
+        ergebnisse = [arbeite(sh) for sh in shops]
+
+    for shop, res in zip(shops, ergebnisse):
+        if res is None:
+            uebersprungen.append(shop.id)
+            continue
+        beob, aus, bericht = res
         sz = zustand["shops"].setdefault(shop.id, {"basis_erfasst": False})
-        beob, aus, bericht = pruefe_shop(shop, konfig, abrufer, zustand, zeitpunkt, heute, log)
         for b in beob:
             ereig, geaendert = ev.verarbeite(b, zustand, shop_basis_erfasst=sz["basis_erfasst"],
                                              shop_freigegeben=shop.kaufalarm_freigegeben,
@@ -209,6 +237,8 @@ def fuehre_aus(konfig: Konfig, abrufer, speicher: Speicher, *, testdaten: bool =
         shop_berichte[shop.id] = bericht
         alle_beob.extend(beob)
         alle_ausgeschlossen.extend(aus)
+    if uebersprungen:
+        log(f"{len(uebersprungen)} Shops wegen Zeitbudget auf den nächsten Lauf verschoben")
 
     # Telegram
     tg_aktiv, tg_info = telegram.konfiguration()
@@ -246,7 +276,7 @@ def fuehre_aus(konfig: Konfig, abrufer, speicher: Speicher, *, testdaten: bool =
         "zeit": zeitpunkt, "testdaten": testdaten, "shops": shop_berichte,
         "beobachtungen": len(alle_beob), "ereignisse": [e.als_dict() for e in alle_ereignisse],
         "ausgeschlossen": alle_ausgeschlossen[:400], "telegram": tg_info, "telegram_gesendet": gesendet,
-        "telegram_fehler": fehlgeschlagen,
+        "telegram_fehler": fehlgeschlagen, "uebersprungen": uebersprungen,
     }
     speicher.verlauf(verlauf, jetzt.strftime("%Y-%m"))
     speicher.ereignisse([e.als_dict() for e in alle_ereignisse])

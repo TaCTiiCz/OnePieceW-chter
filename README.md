@@ -177,9 +177,21 @@ jedem Lauf direkt unter **Actions → Lauf → Summary**.
 
 ## 8. One Piece
 
-Die One-Piece-Überwachung (englische Displays OP01–OP18, Priorität OP13, OP15, OP09, OP18, OP16, OP11, Sleeved
-Booster, Sonderprodukte) läuft im selben Wächter **stündlich** mit niedrigerer Priorität. Ihr Bericht liegt im Zweig
-`waechter-daten` als `laufzeit/onepiece_bericht.md`. Einstellungen: `config/shops.toml`, `config/products.toml`.
+Die One-Piece-Überwachung läuft im selben Lauf, **alle 15 Minuten** (`onepiece` in `config/betrieb.toml`). Sie meldet
+**Restock** (wieder bestellbar) und **neue Vorbestellungen** für englische Displays **OP01–OP18**, Sleeved Booster und
+die Sonderprodukte aus `config/products.toml`.
+
+- **Händler:** die 4 handverlesenen Shops aus `config/shops.toml` plus alle geprüften Shopify-Händler aus der
+  Händlerdatenbank (derzeit rund 50). Händler mit Plattform außer Shopify werden noch nicht abgedeckt.
+- **Kaufalarm per Telegram** gibt es nur für freigegebene und „vorgeprüfte“ Händler. Alle anderen werden beobachtet und
+  stehen im Bericht, lösen aber keinen Alarm aus. Versandkosten bleiben „unbekannt“, wenn sie nicht belegt sind.
+- **Zeitbudget:** Ein Lauf prüft höchstens ca. 2,5 Minuten (`onepiece_zeitbudget_sekunden`). Der am längsten ungeprüfte
+  Shop kommt zuerst dran, der Rest im nächsten Lauf. Mit dem GitHub-Zeitplan wird so jeder Shop meist alle 15–30 Minuten
+  geprüft; schneller geht es nur mit einem eigenen Server.
+- **Grenze:** Große Shops werden nur bis zu den ersten ca. 1.000 Produkten gelesen. Ein Display, das dahinter steht,
+  kann übersehen werden.
+- **Bericht:** `laufzeit/onepiece_bericht.md` im Zweig `waechter-daten`. Im Dojo erscheint der Alarm am One-Piece-Tisch
+  (der Seemann springt auf, der Rahmen blinkt).
 
 ## 9. Probleme lösen
 

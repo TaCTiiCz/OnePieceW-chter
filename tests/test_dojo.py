@@ -63,6 +63,14 @@ class DojoStatus(unittest.TestCase):
         self.assertEqual(station(d, "produkt")["status"], "restock")
         self.assertIn("vorbestellbar", d["events"][0]["text"])
 
+    def test_one_piece_alarm_betrifft_nur_den_one_piece_tisch(self):
+        z = zustand(ereignisse_kurz=[{"zeit": iso(10), "typ": "OP_VORBESTELLUNG", "text": "OP16 Display bei X"}])
+        z["aufgaben"]["onepiece"] = {"art": "onepiece", "zuletzt_ok": iso(1), "fehlerserie": 0}
+        d = dojo.erzeuge(z, JETZT)
+        self.assertEqual(d["state"], "alert")
+        self.assertEqual(station(d, "onepiece")["status"], "restock")
+        self.assertNotEqual(station(d, "produkt")["status"], "restock")
+
     def test_alter_alarm_zaehlt_nicht(self):
         z = zustand(ereignisse_kurz=[{"zeit": iso(60 * 5), "typ": "KAUFALARM", "text": "alt"}])
         self.assertEqual(dojo.erzeuge(z, JETZT)["state"], "checking")

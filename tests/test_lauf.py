@@ -74,6 +74,23 @@ class Lauf(unittest.TestCase):
     def ereignisse(self, z, typ=None):
         return [e for e in z["ereignisse"] if not e["unterdrueckt"] and (typ is None or e["typ"] == typ)]
 
+    def test_parallel_liefert_dasselbe_wie_nacheinander(self):
+        z = fuehre_aus(self.konfig, TestdatenAbrufer(self.fix), self.daten, testdaten=True, jetzt=self.zeit,
+                       log=lambda s: None, zeitbudget=600, parallel=4)
+        self.assertEqual(z["uebersprungen"], [])
+        self.assertTrue(all(s["basis_erfasst"] for s in self.daten.lade_zustand()["shops"].values()))
+        self.setze_op13(True)
+        self.zeit += dt.timedelta(hours=2)
+        z = fuehre_aus(self.konfig, TestdatenAbrufer(self.fix), self.daten, testdaten=True, jetzt=self.zeit,
+                       log=lambda s: None, zeitbudget=600, parallel=4)
+        self.assertEqual(len(self.ereignisse(z, m.RESTOCK)), 1)
+
+    def test_zeitbudget_verschiebt_shops_auf_den_naechsten_lauf(self):
+        z = fuehre_aus(self.konfig, TestdatenAbrufer(self.fix), self.daten, testdaten=True, jetzt=self.zeit,
+                       log=lambda s: None, zeitbudget=1e-9, parallel=2)
+        self.assertEqual(sorted(z["uebersprungen"]), sorted(s.id for s in self.konfig.shops))
+        self.assertEqual(self.daten.lade_zustand()["shops"], {})
+
     def test_erster_lauf_ist_nur_ausgangsbasis(self):
         self.setze_op13(True)  # sogar lieferbar -> trotzdem kein Restock beim ersten Lauf
         z = self.lauf()

@@ -160,6 +160,17 @@ def main(argv: list[str] | None = None) -> int:
     return 0
 
 
+def _onepiece_fuers_dojo(zustand: dict, zus: dict, jetzt) -> None:
+    """Kaufalarme der One-Piece-Prüfung als kurze Ereignisse ablegen (Dojo-Anzeige, Dashboard)."""
+    from . import modelle as mod
+    typen = {mod.RESTOCK: "OP_RESTOCK", mod.NEU_LIEFERBAR: "OP_RESTOCK", mod.NEUE_VORBESTELLUNG: "OP_VORBESTELLUNG"}
+    kurz = zustand.setdefault("ereignisse_kurz", [])
+    for e in zus.get("ereignisse", []):
+        if e.get("alarm") and not e.get("unterdrueckt") and e.get("typ") in typen:
+            kurz.append({"zeit": e.get("zeitpunkt") or jetzt.isoformat(), "typ": typen[e["typ"]],
+                         "text": e.get("text", ""), "testmodus": bool(zus.get("testdaten"))})
+
+
 def naruto_lauf(konfig, daten: Path, db: Path, dash: Path, onepiece: bool = True, ohne_push: bool = False,
                 log=print, alle: bool = False, max_sekunden: int = 0) -> float:
     """Ein Lauf. Gibt die Sekunden bis zur nächsten fälligen Aufgabe zurück."""
@@ -179,8 +190,13 @@ def naruto_lauf(konfig, daten: Path, db: Path, dash: Path, onepiece: bool = True
         log("One-Piece-Prüfung ist fällig …")
         sp = Speicher(daten / "onepiece")
         try:
-            fuehre_aus(konfig, Abrufer({}, protokoll=log, pausen=(5.0,)), sp, telegram_senden=not ohne_push, log=log)
-            (daten / "onepiece_bericht.md").write_text(erzeuge_bericht(konfig, sp.lade_zustand()), encoding="utf-8")
+            from .onepiece_haendler import mit_datenbank
+            op_konfig = mit_datenbank(konfig, db)
+            zus = fuehre_aus(op_konfig, Abrufer({}, protokoll=log, pausen=(5.0,)), sp, telegram_senden=not ohne_push,
+                             log=log, zeitbudget=float(l.betrieb["grenzen"].get("onepiece_zeitbudget_sekunden", 150)),
+                             parallel=int(l.betrieb["grenzen"].get("parallele_shops", 8)))
+            (daten / "onepiece_bericht.md").write_text(erzeuge_bericht(op_konfig, sp.lade_zustand()), encoding="utf-8")
+            _onepiece_fuers_dojo(l.zustand, zus, jetzt)
             erledigt(l.zustand["aufgaben"]["onepiece"], True, jetzt, l.betrieb)
         except Exception as ex:
             erledigt(l.zustand["aufgaben"]["onepiece"], False, jetzt, l.betrieb, f"{type(ex).__name__}: {ex}")

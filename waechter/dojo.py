@@ -28,6 +28,7 @@ STATIONEN = [
 _SCHNELL = {"shopify_neueste", "woo_api", "woo_neueste", "shopsuche", "kategorie_naruto", "kategorie_vorbestellung"}
 _LANGSAM = {"kategorie_neuheiten", "kategorie_bandai", "shopify_katalog"}
 ALARM_TYPEN = {"KAUFALARM", "KAUFALARM_ANDERE_SPRACHE"}
+OP_ALARM_TYPEN = {"OP_RESTOCK", "OP_VORBESTELLUNG"}  # One-Piece-Prüfung
 ERGEBNIS_ZEILEN = 12
 
 
@@ -69,11 +70,14 @@ def erzeuge(zustand: dict, jetzt: dt.datetime, *, alarm_stunden: float = 3.0, ak
     ereignisse = zustand.get("ereignisse_kurz") or []
     tag = dt.timedelta(hours=24)
 
-    alarme = []
+    alarme, op_alarme = [], []
     for e in ereignisse:
         z = _zeit(e.get("zeit"))
-        if e.get("typ") in ALARM_TYPEN and z and jetzt - z <= dt.timedelta(hours=alarm_stunden):
-            alarme.append(e)
+        if z and jetzt - z <= dt.timedelta(hours=alarm_stunden):
+            if e.get("typ") in ALARM_TYPEN:
+                alarme.append(e)
+            elif e.get("typ") in OP_ALARM_TYPEN:
+                op_alarme.append(e)
 
     gruppen: dict[str, list[dict]] = {k: [] for k, _ in STATIONEN}
     for a in aufgaben:
@@ -91,6 +95,8 @@ def erzeuge(zustand: dict, jetzt: dt.datetime, *, alarm_stunden: float = 3.0, ak
         im_lauf = bool(lauf_zeit and any(z >= lauf_zeit for z in ok_zeiten))
         if gid == "produkt" and alarme:
             status, detail = "restock", _kurz(alarme[-1].get("text", "Restock gefunden"), 90)
+        elif gid == "onepiece" and op_alarme:
+            status, detail = "restock", _kurz(op_alarme[-1].get("text", "Restock gefunden"), 90)
         elif ts and len(fehler) * 4 >= len(ts):  # mindestens ein Viertel der Aufgaben kaputt
             status, detail = "error", f"{len(fehler)} von {len(ts)} Aufgaben mit Fehlern"
         elif zuletzt and jetzt - zuletzt <= tag:
@@ -107,7 +113,7 @@ def erzeuge(zustand: dict, jetzt: dt.datetime, *, alarm_stunden: float = 3.0, ak
         e_zeit = _zeit(push.get("letzter_erfolg"))
         push_problem = bool(f_zeit and (e_zeit is None or f_zeit > e_zeit) and jetzt - f_zeit <= dt.timedelta(hours=6))
 
-    if alarme:
+    if alarme or op_alarme:
         state = "alert"
     elif not lauf_zeit or jetzt - lauf_zeit > dt.timedelta(minutes=aktuell_minuten):
         state = "stale"
