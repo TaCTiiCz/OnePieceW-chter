@@ -13,6 +13,7 @@ on:
           - simulation
           - simulation-mit-echtem-telegram
           - telegram-test
+          - alarm-test-beide
         default: lauf
 
   # ------------------------------------------------------------------
@@ -74,6 +75,10 @@ jobs:
         run: |
           python -m waechter simulation --telegram-echt --daten _daten/laufzeit
           python -m waechter lauf --daten _daten/laufzeit --dashboard _daten/dashboard.md --ohne-onepiece
+
+      - name: Alarm-Test für Naruto und One Piece (Dojo + echtes Telegram, deutlich als TEST markiert)
+        if: ${{ inputs.aktion == 'alarm-test-beide' }}
+        run: python -m waechter alarm-test --daten _daten/laufzeit --ziel _daten
 
       - name: Telegram-Testnachricht
         if: ${{ inputs.aktion == 'telegram-test' }}

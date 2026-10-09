@@ -64,6 +64,11 @@ def main(argv: list[str] | None = None) -> int:
     si.add_argument("--telegram-echt", action="store_true", help="echte Telegram-API benutzen (Nachricht ist als TEST markiert)")
     si.add_argument("--intervall", type=float, default=5.0)
     si.add_argument("--daten", default=None, help="Ergebnis im Zustand dieses Verzeichnisses vermerken (Dashboard)")
+    at = sub.add_parser("alarm-test", help="TEST-Alarm für Naruto und One Piece (Dojo + Telegram)")
+    at.add_argument("--daten", default="data")
+    at.add_argument("--ziel", default=None, help="Verzeichnis für status.json (Standard: Elternordner von --daten)")
+    at.add_argument("--welche", default="naruto,onepiece")
+    at.add_argument("--ohne-telegram", action="store_true")
     args = p.parse_args(argv)
 
     if args.befehl == "simulation":
@@ -81,6 +86,13 @@ def main(argv: list[str] | None = None) -> int:
             zd.parent.mkdir(parents=True, exist_ok=True)
             zd.write_text(json.dumps(z, ensure_ascii=False, indent=1, sort_keys=True) + "\n", encoding="utf-8")
         return 0 if e.get("ok") else 1
+
+    if args.befehl == "alarm-test":
+        from .alarmtest import ausfuehren
+        daten = Path(args.daten)
+        welche = tuple(x for x in args.welche.split(",") if x in ("naruto", "onepiece"))
+        ok = ausfuehren(daten, Path(args.ziel) if args.ziel else daten.parent, welche=welche, senden=not args.ohne_telegram)
+        return 0 if ok else 1
 
     if args.befehl == "haendler-suchen":
         from .suche import suche
