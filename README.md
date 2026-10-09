@@ -221,3 +221,6 @@ Wächter-Lauf, „schläft“ er – das ist die ehrliche Warnung, dass der Daue
   Die Adresse steht anschließend im Lauf unter „dojo-veroeffentlichen“ (`https://<name>.github.io/<repo>/`).
 - Ohne `status.json` zeigt die Seite einen **Demo-Modus** (oben als „DEMO-MODUS“ gekennzeichnet).
 - Hinweis: Die Aktion `simulation` läuft in einer getrennten Testumgebung und löst im Dojo keinen Alarm aus. Der Alarm erscheint nur bei einem echten Restock (Kaufalarm der letzten 3 Stunden).
+
+### Zwei Wächter im Dojo
+Im Dojo laufen zwei Figuren: der Ninja mit Strohhut kümmert sich um die Naruto-Stationen, der Seemann mit blauem Kopftuch nur um den One-Piece-Tisch. Der Seemann ist nur zu sehen, wenn der One-Piece-Auftrag aktiv ist. Er arbeitet nur, wenn dieser Auftrag im letzten Lauf an der Reihe war; sonst macht er Teepause.

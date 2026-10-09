@@ -101,7 +101,7 @@ function skyColors(d) {
 const WIN = [24, 134, 244, 354].map(x => ({ x, y: 20, w: 92, h: 62 }));
 const LANES = [148, 204], GAPS = [120, 225, 335, 440];
 const DESK_X = [170, 280, 390], DESK_TOP = [150, 212];
-const TEA = { x: 448, y: 204 };
+const TEA = { x: 448, y: 204 }, TEA2 = { x: 424, y: 204 };
 const deskCenter = i => ({ x: DESK_X[i % 3], row: Math.floor(i / 3) % 2 });
 const standPos = i => { const d = deskCenter(i); return { x: d.x, y: LANES[d.row] }; };
 const WALL_LAMPS = [{ x: 78, y: 12 }, { x: 188, y: 12 }, { x: 298, y: 12 }, { x: 408, y: 12 }];
@@ -234,18 +234,37 @@ poll(); setInterval(poll, 4000); setInterval(demoStep, 3500);
 const sites = () => ((data && data.sites) || []).slice(0, 6);
 
 /* ---------- Wächter ---------- */
-const g = { x: TEA.x, y: TEA.y, face: -1, phase: 0, path: [], key: '', moving: false, blink: 0, nextBlink: 2 };
+const newG = (x, y) => ({ x, y, face: -1, phase: 0, path: [], key: '', moving: false, blink: 0, nextBlink: 2 });
 const GP = { skin: '#e9b98a', skinS: '#c9966a', robe: '#3f7a86', robeS: '#2c5560', robeH: '#5aa3ad', inner: '#efe3c6', belt: '#b6392e', beltS: '#862a22',
   pants: '#27344d', pantsB: '#1b2538', sandal: '#3a2616', hair: '#2a1d18', hat: '#d4ae55', hatH: '#ecd07f', hatS: '#a9863a', hatU: '#6f521c',
   scarf: '#c0392b', scarfS: '#8f2a20', eye: '#1c1612' };
+// zweiter Agent: One-Piece-Wächter (eigene Figur: Seemann mit blauem Kopftuch, keine bekannte Figur)
+const GP2 = { skin: '#e2a878', skinS: '#bd8456', robe: '#ece4d0', robeS: '#b9ae93', robeH: '#fffaf0', inner: '#c24a3a', belt: '#2f5aa8', beltS: '#1f3d78',
+  pants: '#5a4a6a', pantsB: '#3f334d', sandal: '#2a1a10', hair: '#6a3a1a', hat: '#2f5aa8', hatH: '#4f7cd0', hatS: '#1f3d78', hatU: '#1f3d78',
+  scarf: '#2f5aa8', scarfS: '#1f3d78', eye: '#1c1612' };
+const A1 = { g: newG(TEA.x, TEA.y), P: GP, kind: 'ninja' };
+const A2 = { g: newG(TEA2.x, TEA2.y), P: GP2, kind: 'seemann' };
+const g = A1.g;
 function route(from, to) {
   const lane = y => Math.abs(y - LANES[0]) < Math.abs(y - LANES[1]) ? 0 : 1;
   if (lane(from.y) === lane(to.y)) return [{ x: to.x, y: to.y }];
   const gx = GAPS.reduce((a, b) => (Math.abs(b - from.x) + Math.abs(b - to.x) < Math.abs(a - from.x) + Math.abs(a - to.x) ? b : a));
   return [{ x: gx, y: from.y }, { x: gx, y: to.y }, { x: to.x, y: to.y }];
 }
+const opIdx = () => sites().findIndex(x => x.id === 'onepiece');
+function plan2(t) {  // One-Piece-Wächter: nur sein Pult
+  const s = sites(), i = opIdx(), st = data ? data.state : 'idle';
+  if (i < 0) return null;
+  const site = s[i], p = standPos(i);
+  if (st === 'stale') return { x: TEA2.x, y: TEA2.y, mode: 'sleep', idx: -1 };
+  if (site.status === 'restock') return { x: p.x, y: p.y, mode: 'alert', idx: i };
+  if (site.status === 'error') return { x: p.x, y: p.y, mode: 'error', idx: i };
+  if (site.im_lauf && st !== 'idle' || site.status === 'checking') return { x: p.x, y: p.y, mode: 'check', idx: i };
+  return { x: TEA2.x, y: TEA2.y, mode: 'idle', idx: -1 };
+}
 function plan(t) {
-  const s = sites(), st = data ? data.state : 'idle';
+  const op = opIdx(), st = data ? data.state : 'idle';
+  const s = sites().map((x, i) => i === op ? { ...x, id: '', status: 'skip', im_lauf: false } : x);
   const ri = s.findIndex(x => x.status === 'restock');
   const ei = s.findIndex(x => x.status === 'error');
   const ci = s.findIndex(x => x.id === (data && data.current));
@@ -254,14 +273,15 @@ function plan(t) {
   else if (st === 'error' && ei >= 0) { idx = ei; mode = 'error'; }
   else if (st === 'checking' && s.length) {
     idx = ci;
-    if (idx < 0) { const akt = s.map((x, i) => x.im_lauf ? i : -1).filter(i => i >= 0); const lst = akt.length ? akt : s.map((_, i) => i); idx = lst[Math.floor(t / 5) % lst.length]; }
+    if (idx < 0) { const akt = s.map((x, i) => x.im_lauf ? i : -1).filter(i => i >= 0); const lst = akt.length ? akt : s.map((_, i) => i).filter(i => i !== op); idx = lst[Math.floor(t / 5) % lst.length]; }
     mode = 'check';
   } else if (st === 'error') mode = 'error';
   else if (st === 'stale') mode = 'sleep';
   if (idx >= 0) { const p = standPos(idx); return { x: p.x, y: p.y, mode, idx }; }
   return { x: TEA.x, y: TEA.y, mode, idx: -1 };
 }
-function stepGuard(pl, dt) {
+function stepGuard(A, pl, dt) {
+  const g = A.g;
   const key = pl.x + ',' + pl.y;
   if (key !== g.key) { g.key = key; g.path = route(g, pl); }
   g.moving = false;
@@ -272,7 +292,8 @@ function stepGuard(pl, dt) {
   }
   if (!g.moving) { if (pl.mode === 'idle' || pl.mode === 'sleep') g.face = -1; else if (pl.idx >= 0) g.face = 1; }
 }
-function drawGuard(t, mode, lights) {
+function drawGuard(A, t, mode, lights) {
+  const g = A.g, GP = A.P, ninja = A.kind === 'ninja';
   const f = g.face, ox = Math.round(g.x), oy = Math.round(g.y), moving = g.moving;
   const sit = !moving && (mode === 'idle' || mode === 'sleep');
   const bob = moving ? -Math.round(Math.abs(Math.sin(g.phase)) * 1.5) : Math.round(Math.sin(t * 2) * 0.5);
@@ -320,10 +341,14 @@ function drawGuard(t, mode, lights) {
   P(-9, -19 + U, 4, 2, GP.belt); P(-11 + Math.round(Math.sin(t * 5) * (moving ? 2 : 0.5)), -17 + U, 3, 3, GP.beltS);
   P(-3, -27 + U, 5, 3, GP.scarf); P(-3, -25 + U, 5, 1, GP.scarfS);
   // Laterne am Gürtel
+  if (ninja) {
   const sw2 = Math.round(Math.sin(g.phase * 1 + t * 2) * (moving ? 2 : 1));
   const lx = -8 + sw2, ly = -14 + U + (sit ? 2 : 0);
   P(lx + 2, ly - 3, 1, 3, '#1a1a1a'); P(lx, ly, 5, 1, '#4a2a12'); P(lx, ly + 1, 5, 5, '#e8872a'); P(lx + 1, ly + 2, 3, 3, (Math.sin(t * 13) > 0.2) ? '#ffe49a' : '#ffd27a'); P(lx, ly + 6, 5, 1, '#4a2a12');
   lights.push({ x: f > 0 ? ox + lx + 2 : ox - lx - 2, y: oy + ly + 3, r: 46, a: 0.9, col: [255, 190, 100] });
+  } else {  // Seemann: Fernrohr am Gürtel
+    P(-10, -17 + U, 7, 2, '#8a5a2a'); P(-10, -17 + U, 2, 2, '#d8b45a'); P(-4, -17 + U, 2, 2, '#d8b45a');
+  }
   // Kopf
   const hs = [7, 8, 8, 8, 8, 7, 5];
   hs.forEach((w, i) => { const y = -34 + i + U; P(-3 + (8 - w), y, w, 1, GP.skin); P(-3 + (8 - w), y, 1, 1, GP.skinS); });
@@ -332,6 +357,7 @@ function drawGuard(t, mode, lights) {
   const eyesClosed = g.blink > 0 || mode === 'sleep';
   if (eyesClosed) P(3, -31 + U, 2, 1, GP.eye); else P(4, -32 + U, 1, 3, GP.eye);
   P(5, -29 + U, 2, 1, GP.skinS);
+  if (ninja) {
   // Hut (Kasa)
   [[4, -41], [8, -40], [12, -39], [16, -38], [20, -37], [24, -36]].forEach(([w, y], i) => {
     P(-Math.floor(w / 2) + 1, y + U + (mode === 'sleep' ? 4 : 0), w, 1, GP.hat);
@@ -340,6 +366,13 @@ function drawGuard(t, mode, lights) {
   });
   P(-10, -35 + U + (mode === 'sleep' ? 4 : 0), 22, 1, GP.hatU);
   P(1, -34 + U, 1, 7, '#7a2a20');
+  } else {  // Kopftuch mit Knoten, Haare
+    const sl = mode === 'sleep' ? 3 : 0;
+    P(-3, -35 + U + sl, 9, 1, GP.hair); P(-4, -36 + U + sl, 10, 3, GP.hat); P(-4, -36 + U + sl, 10, 1, GP.hatH); P(-4, -34 + U + sl, 10, 1, GP.hatS);
+    for (let k = 0; k < 4; k++) P(-5 - k, -35 + U + sl + Math.round(Math.sin(t * 6 + k) * (moving ? 2 : 1)), 2, 2, k % 2 ? GP.hatS : GP.hat);
+    P(5, -34 + U + sl, 2, 1, GP.hair); P(-3, -34 + U, 1, 5, GP.hair);
+    P(-2, -35 + U + sl, 1, 1, '#f1ece0'); P(1, -35 + U + sl, 1, 1, '#f1ece0');
+  }
   // vordere Hand / Arm
   const h = arm(aF, GP.robe, GP.robeH, GP.skin);
   if (brush) { seg(h.hx, h.hy, h.hx + 3, h.hy + 6, 1, '#2a1d18'); P(h.hx + 3, h.hy + 6, 1, 1, '#c0392b'); }
@@ -498,7 +531,8 @@ function frame() {
   applyOverrides();
   const hour = berlinHour(), d = daylight(hour), dark = 1 - d;
   const lights = [];
-  const pl = plan(t); stepGuard(pl, dt);
+  const pl = plan(t); stepGuard(A1, pl, dt);
+  const pl2 = plan2(t); if (pl2) stepGuard(A2, pl2, dt);
   ctx.drawImage(bgC, 0, 0);
   drawSky(t, d, hour);
   ctx.drawImage(frC, 0, 0);
@@ -513,9 +547,10 @@ function frame() {
   drawTea(t);
   // Sortiert zeichnen: Pulte / Wächter / Katze
   const s = sites(), items = [];
-  s.forEach((site, i) => { const c = deskCenter(i); items.push({ y: DESK_TOP[c.row] + 24, draw: () => drawDesk(i, site, t, pl.idx === i && pl.mode === 'check' && !g.moving, lights) }); });
-  let head = null;
-  items.push({ y: g.y + 0.5, draw: () => { head = drawGuard(t, g.moving ? 'walk' : pl.mode, lights); } });
+  s.forEach((site, i) => { const c = deskCenter(i); items.push({ y: DESK_TOP[c.row] + 24, draw: () => drawDesk(i, site, t, (pl.idx === i && pl.mode === 'check' && !g.moving) || (pl2 && pl2.idx === i && pl2.mode === 'check' && !A2.g.moving), lights) }); });
+  let head = null, head2 = null;
+  items.push({ y: g.y + 0.5, draw: () => { head = drawGuard(A1, t, g.moving ? 'walk' : pl.mode, lights); } });
+  if (pl2) items.push({ y: A2.g.y + 0.5, draw: () => { head2 = drawGuard(A2, t, A2.g.moving ? 'walk' : pl2.mode, lights); } });
   items.push({ y: cat.y, draw: () => drawCat(t, pl.mode) });
   items.sort((a, b) => a.y - b.y).forEach(it => it.draw());
   // Sprechblasen
@@ -526,6 +561,13 @@ function frame() {
     else if (pl.mode === 'check') bubbleAt(hx, hy, '.'.repeat(1 + Math.floor(t * 2.5) % 3), '#fff', '#8a6a1a');
     else if (pl.mode === 'sleep') bubbleAt(hx, hy + 4, 'z'.repeat(1 + Math.floor(t / 2) % 3), '#cfd6ee', '#2f3a66');
   }
+  if (head2 && pl2 && !A2.g.moving) {
+    const hx = head2.x, hy = head2.y - 2;
+    if (pl2.mode === 'alert') bubbleAt(hx, hy, 'RESTOCK!', '#fff', '#c0392b');
+    else if (pl2.mode === 'error') bubbleAt(hx, hy, '?!', '#fff', '#6a6a6a');
+    else if (pl2.mode === 'check') bubbleAt(hx, hy, '.'.repeat(1 + Math.floor(t * 2.5) % 3), '#fff', '#1f3d78');
+    else if (pl2.mode === 'sleep') bubbleAt(hx, hy + 4, 'z'.repeat(1 + Math.floor(t / 2) % 3), '#cfd6ee', '#2f3a66');
+  }
   // Falke
   if (pl.mode === 'alert' && !falcon && t - lastFalcon > 6) { falcon = { x: g.x, y: g.y - 60 }; lastFalcon = t; }
   if (falcon) { falcon.x += 78 * dt; falcon.y -= 16 * dt + Math.sin(t * 3) * 0.3; if (falcon.x > W + 30) falcon = null; }
@@ -535,7 +577,7 @@ function frame() {
   drawFireflies(t, dark);
   drawLightMap(dark, lights);
   // Alarm-Rahmen
-  if (pl.mode === 'alert') { const a = 0.35 + Math.sin(t * 8) * 0.2; ctx.strokeStyle = 'rgba(255,200,70,' + a.toFixed(2) + ')'; ctx.lineWidth = 4; ctx.strokeRect(2, 2, W - 4, H - 4); }
+  if (pl.mode === 'alert' || (pl2 && pl2.mode === 'alert')) { const a = 0.35 + Math.sin(t * 8) * 0.2; ctx.strokeStyle = 'rgba(255,200,70,' + a.toFixed(2) + ')'; ctx.lineWidth = 4; ctx.strokeRect(2, 2, W - 4, H - 4); }
   if (pl.mode === 'sleep') { ctx.fillStyle = 'rgba(40,50,90,.18)'; ctx.fillRect(0, 0, W, H); }
   updateBar();
   requestAnimationFrame(frame);
