@@ -206,3 +206,18 @@ python -m unittest discover -s tests -t .  # alle Tests
 Es wird nur Python 3.11 oder neuer gebraucht, keine Zusatzpakete. Auf einem eigenen Server läuft der Dauerbetrieb
 z. B. als systemd-Dienst mit `python -m waechter dauerlauf`. Die Telegram-Zugangsdaten kommen dort als
 Umgebungsvariablen hinzu, niemals in Dateien im Repository.
+
+## 5. Pixel-Dojo (Live-Ansicht im Browser)
+
+Ein kleines Pixel-Dojo zeigt, was der Wächter gerade tut: Der Ninja-Wächter geht zu dem Pult der Prüfgruppe, die im
+letzten Lauf dran war (Produkte, Offiziell, Neuheiten, Kategorien, Sitemaps, One Piece). Bei einem Kaufalarm hebt er die
+Arme, der Gong wackelt und ein Falke fliegt los. Ist ein Pult kaputt, steigt Rauch auf. Läuft seit über 30 Minuten kein
+Wächter-Lauf, „schläft“ er – das ist die ehrliche Warnung, dass der Dauerbetrieb nicht läuft.
+
+- Die Seite liegt in `dojo/index.html`, die Daten kommen aus `status.json` (erzeugt von `waechter/dojo.py` bei jedem Lauf).
+- `status.json` enthält nur Statuswerte (Stationen, Zeiten, Meldungstexte) – nie Token, Chat-ID oder Zugangsdaten.
+- Veröffentlicht wird nur `index.html` + `status.json` über GitHub Pages, nicht der gesamte Zustand.
+- **Einmalig einschalten:** Settings → Pages → Source: **„GitHub Actions“**. Danach Actions → „Wächter“ → „Run workflow“.
+  Die Adresse steht anschließend im Lauf unter „dojo-veroeffentlichen“ (`https://<name>.github.io/<repo>/`).
+- Ohne `status.json` zeigt die Seite einen **Demo-Modus** (oben als „DEMO-MODUS“ gekennzeichnet).
+- Test: Actions → „Wächter“ → aktion `simulation` → das Dojo zeigt den simulierten Restock (mit 🧪 markiert).
