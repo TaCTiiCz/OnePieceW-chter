@@ -1,0 +1,97 @@
+{
+ "updated": "2026-10-09T11:17:23+00:00",
+ "state": "alert",
+ "current": null,
+ "last_run": "2026-10-09T10:58:25+00:00",
+ "run_seconds": 310.5,
+ "sites": [
+  {
+   "id": "produkt",
+   "name": "Produkte",
+   "status": "restock",
+   "im_lauf": true,
+   "last_checked": "2026-10-09T10:58:32+00:00",
+   "detail": "🧪 TEST: Naruto Card Game Booster Display (EN) jetzt vorbestellbar"
+  },
+  {
+   "id": "offiziell",
+   "name": "Offiziell",
+   "status": "ok",
+   "im_lauf": true,
+   "last_checked": "2026-10-09T10:58:31+00:00",
+   "detail": "3 Aufgaben"
+  },
+  {
+   "id": "schnell",
+   "name": "Neuheiten",
+   "status": "ok",
+   "im_lauf": true,
+   "last_checked": "2026-10-09T11:01:12+00:00",
+   "detail": "259 Aufgaben, 5 mit Fehlern"
+  },
+  {
+   "id": "langsam",
+   "name": "Kategorien",
+   "status": "ok",
+   "im_lauf": true,
+   "last_checked": "2026-10-09T11:01:15+00:00",
+   "detail": "267 Aufgaben, 2 mit Fehlern"
+  },
+  {
+   "id": "sitemap",
+   "name": "Sitemaps",
+   "status": "ok",
+   "im_lauf": true,
+   "last_checked": "2026-10-09T11:01:10+00:00",
+   "detail": "106 Aufgaben, 18 mit Fehlern"
+  },
+  {
+   "id": "onepiece",
+   "name": "One Piece",
+   "status": "restock",
+   "im_lauf": false,
+   "last_checked": null,
+   "detail": "🧪 TEST: One Piece OP16 Display (EN) wieder lieferbar"
+  }
+ ],
+ "events": [
+  {
+   "time": "2026-10-09T11:17:23+00:00",
+   "text": "🧪 OP_RESTOCK: 🧪 TEST: One Piece OP16 Display (EN) wieder lieferbar"
+  },
+  {
+   "time": "2026-10-09T11:17:23+00:00",
+   "text": "🧪 KAUFALARM: 🧪 TEST: Naruto Card Game Booster Display (EN) jetzt vorbestellbar"
+  },
+  {
+   "time": "2026-10-09T09:11:15+00:00",
+   "text": "FRUEHHINWEIS: Offizielle Seite geändert: https://www.naruto-cardgame.com/en/"
+  },
+  {
+   "time": "2026-10-09T09:11:10+00:00",
+   "text": "FRUEHHINWEIS: Offizielle Naruto-Meldung: Tabletop.me Event Information EVENTS Oct. 09, 2026"
+  },
+  {
+   "time": "2026-10-08T09:49:12+00:00",
+   "text": "FRUEHHINWEIS: Neue passende Produktseite (über Sitemap gefunden – Seite evtl. schon länger online): Naruto Card Game - Disp…"
+  },
+  {
+   "time": "2026-10-07T14:25:28+00:00",
+   "text": "FRUEHHINWEIS: Neue passende Produktseite (über Sitemap gefunden – Seite evtl. schon länger online): Naruto Card Game - Disp…"
+  },
+  {
+   "time": "2026-10-07T14:24:30+00:00",
+   "text": "FRUEHHINWEIS: Neue passende Produktseite: Naruto Card Game - Display 01 [ENG] PreOrder - Release: 2027 bei Brickznmore – no…"
+  },
+  {
+   "time": "2026-10-07T14:20:41+00:00",
+   "text": "AUSGANGSLAGE: Ausgangslage: bereits bestellbare Naruto-Angebote (nicht neu): Naruto TCG: First Set 2nd Edition - Booster Bo…"
+  }
+ ],
+ "stats": {
+  "haendler": 103,
+  "aufgaben": 644,
+  "aufgaben_mit_fehlern": 25,
+  "push_problem": false
+ }
+}
