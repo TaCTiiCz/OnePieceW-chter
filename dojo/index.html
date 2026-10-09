@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wächter-Dojo</title>
+<style>
+  :root{--bg:#1b1410;--fg:#f3e6cf;--acc:#e8873a;--line:#3a2c20}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,Consolas,monospace;display:flex;justify-content:center;padding:12px}
+  #wrap{width:100%;max-width:1080px}
+  h1{font-size:16px;margin:4px 0 10px;letter-spacing:3px;color:var(--acc)}
+  canvas{width:100%;display:block;image-rendering:pixelated;border:3px solid #5a4028;background:#000}
+  #bar{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:13px;margin:10px 0}
+  #mode{color:#e6c04a}
+  #state b{color:var(--acc)}
+  #log{list-style:none;padding:0;margin:0;font-size:12px;line-height:1.7}
+  #log li{border-bottom:1px solid var(--line);padding:2px 0}
+  #log time{color:#9b8a70;margin-right:8px}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:#b9a77f;margin:6px 0 12px}
+  .legend i{display:inline-block;width:10px;height:10px;margin-right:5px;vertical-align:-1px}
+</style>
+</head>
+<body>
+<div id="wrap">
+  <h1>WÄCHTER-DOJO</h1>
+  <canvas id="c"></canvas>
+  <div id="bar">
+    <div id="state">Status: <b>…</b></div>
+    <div id="mode"></div>
+    <div id="upd"></div>
+  </div>
+  <div class="legend">
+    <span><i style="background:#5fae5f"></i>ok</span>
+    <span><i style="background:#e6c04a"></i>wird geprüft</span>
+    <span><i style="background:#ff4a3a"></i>Restock / Vorbestellung</span>
+    <span><i style="background:#777"></i>Fehler</span>
+  </div>
+  <div id="stats" style="font-size:12px;color:#b9a77f;margin:2px 0 10px"></div>
+  <ul id="sites" style="list-style:none;padding:0;margin:0 0 14px;font-size:12px;line-height:1.7"></ul>
+  <ul id="log"></ul>
+</div>
+
+<script>
+const W = 360, H = 210;
+const cv = document.getElementById('c'), ctx = cv.getContext('2d');
+cv.width = W; cv.height = H; ctx.imageSmoothingEnabled = false;
+
+const STATE_URL = 'status.json';
+const TEA = { x: 340, y: 176 };
+let data = null, demo = true;
+
+/* ---------- Daten: echte status.json oder Demo ---------- */
+let di = -1, hold = 0;
+function demoInit() {
+  const names = ['Produkte','Offiziell','Neuheiten','Kategorien','Sitemaps','One Piece'];
+  data = {
+    updated: new Date().toISOString(), state: 'idle', current: null,
+    sites: names.map((n, i) => ({ id: 's' + i, name: n, status: 'ok', last_checked: null, detail: '' })),
+    events: []
+  };
+  di = -1; hold = 0;
+}
+function pushEvent(t) {
+  data.events.unshift({ time: new Date().toISOString(), text: t });
+  data.events = data.events.slice(0, 20);
+}
+function demoStep() {
+  if (!data) return;
+  const s = data.sites;
+  if (hold > 0) { hold--; return; }
+  s.forEach(x => { if (x.status === 'restock' || x.status === 'error' || x.status === 'checking') x.status = 'ok'; });
+  if (di === s.length - 1) { data.state = 'idle'; data.current = null; di = -1; hold = 2; pushEvent('Runde beendet – Tee-Pause'); return; }
+  di++;
+  const x = s[di], r = Math.random();
+  data.current = x.id; x.last_checked = new Date().toISOString();
+  if (r < 0.12) { x.status = 'restock'; data.state = 'alert'; hold = 3; pushEvent('RESTOCK gefunden: ' + x.name + ' → Telegram'); }
+  else if (r < 0.2) { x.status = 'error'; data.state = 'error'; hold = 2; pushEvent('Fehler bei ' + x.name); }
+  else { x.status = 'checking'; data.state = 'checking'; pushEvent('prüfe ' + x.name); }
+  data.updated = new Date().toISOString();
+}
+async function poll() {
+  try {
+    const r = await fetch(STATE_URL + '?t=' + Date.now(), { cache: 'no-store' });
+    if (!r.ok) throw new Error('http');
+    data = await r.json(); demo = false;
+  } catch (e) {
+    if (!demo || !data) { demo = true; demoInit(); }
+  }
+}
+poll(); setInterval(poll, 4000);
+setInterval(() => { if (demo) demoStep(); }, 3500);
+
+/* ---------- Layout ---------- */
+const sites = () => (data && data.sites) || [];
+function deskPos(i, n) {
+  const rows = Math.ceil(n / 4), rowH = rows <= 2 ? 62 : 46, y0 = rows <= 2 ? 86 : 80;
+  return { x: 34 + (i % 4) * 80, y: y0 + Math.floor(i / 4) * rowH };
+}
+const rect = (x, y, w, h, c) => { ctx.fillStyle = c; ctx.fillRect(Math.round(x), Math.round(y), w, h); };
+
+/* ---------- Hintergrund ---------- */
+function drawBackground(t, alert) {
+  rect(0, 0, W, 64, '#3b2a1d');
+  for (let k = 0; k < 7; k++) {
+    const x = 4 + k * 51;
+    rect(x, 8, 46, 50, '#e9dcc0');
+    for (let g = 1; g < 3; g++) rect(x + g * 15, 8, 1, 50, '#8a6a45');
+    for (let g = 1; g < 4; g++) rect(x, 8 + g * 12, 46, 1, '#8a6a45');
+    rect(x, 8, 46, 2, '#5a4028'); rect(x, 56, 46, 2, '#5a4028');
+  }
+  rect(0, 62, W, 3, '#5a4028');
+  rect(0, 65, W, H - 65, '#b9a56a');
+  for (let x = 0; x < W; x += 60) rect(x, 65, 1, H - 65, '#8e7c46');
+  for (let y = 65; y < H; y += 72) rect(0, y, W, 1, '#8e7c46');
+  rect(W / 2 - 46, 14, 92, 16, '#a3281f');
+  rect(W / 2 - 46, 14, 92, 2, '#d4503f');
+  ctx.fillStyle = '#f3e6cf'; ctx.font = '9px monospace'; ctx.textAlign = 'center';
+  ctx.fillText('WÄCHTER-DOJO', W / 2, 26);
+  const sh = alert ? Math.round(Math.sin(t * 40) * 1.5) : 0;
+  rect(8, 18, 3, 40, '#5a4028'); rect(34, 18, 3, 40, '#5a4028'); rect(8, 18, 29, 3, '#5a4028');
+  const gx = 22 + sh;
+  rect(gx - 7, 28, 14, 14, '#d9a82e'); rect(gx - 5, 26, 10, 18, '#d9a82e'); rect(gx - 3, 31, 6, 6, '#f2d36b');
+  rect(TEA.x - 16, TEA.y - 2, 32, 14, '#7a3b2a'); rect(TEA.x - 16, TEA.y - 2, 32, 2, '#a85a3f');
+}
+
+/* ---------- Pulte ---------- */
+const COL = { ok: '#5fae5f', checking: '#e6c04a', restock: '#ff4a3a', error: '#777777', unknown: '#b9a77f' };
+function drawDesks(t) {
+  const s = sites(), n = s.length;
+  s.forEach((site, i) => {
+    const p = deskPos(i, n);
+    rect(p.x + 3, p.y + 18, 4, 5, '#3b2a1a'); rect(p.x + 37, p.y + 18, 4, 5, '#3b2a1a');
+    rect(p.x, p.y, 44, 14, '#8a5a2b'); rect(p.x, p.y, 44, 2, '#b07a40'); rect(p.x, p.y + 14, 44, 4, '#5a3a1a');
+    let c = COL[site.status] || COL.unknown;
+    if (site.status === 'checking' && Math.floor(t * 3) % 2) c = '#b99a2e';
+    if (site.status === 'restock' && Math.floor(t * 6) % 2) c = '#ffd23a';
+    rect(p.x + 6, p.y + 3, 32, 8, '#e9dcc0');
+    rect(p.x + 9, p.y + 4, 26, 6, c);
+    ctx.fillStyle = '#2a1d12'; ctx.font = '7px monospace'; ctx.textAlign = 'center';
+    ctx.fillText((site.name || site.id || '').slice(0, 11), p.x + 22, p.y + 31);
+    if (site.status === 'restock') {
+      for (let k = 0; k < 4; k++) {
+        const a = t * 3 + k * 1.6;
+        rect(p.x + 22 + Math.cos(a) * 22, p.y - 2 + Math.sin(a) * 6, 2, 2, '#ffe27a');
+      }
+    }
+    if (site.status === 'error') {
+      for (let k = 0; k < 3; k++) {
+        const ph = (t * 0.8 + k * 0.33) % 1;
+        const r = 3 + ph * 4;
+        rect(p.x + 22 + Math.sin(t + k) * 4 - r / 2, p.y - 4 - ph * 22, r, r, 'rgba(110,110,110,' + (0.8 - ph * 0.7) + ')');
+      }
+    }
+  });
+}
+
+/* ---------- Wächter-Ninja (eigene Figur) ---------- */
+const PAL = { H: '#c9a24a', h: '#9b7a2c', S: '#e8b98a', E: '#222222', R: '#4c6a7a', r: '#33495a', B: '#c0392b', F: '#3b2a1a' };
+const ROWS = [
+  '...HHHH...',
+  '..HHHHHH..',
+  '.hhhhhhhh.',
+  '...SSSS...',
+  '...ESSE...',
+  '...SSSS...',
+  '..RRRRRR..',
+  '.SRRRRRRS.',
+  '.SRBBBBRS.',
+  '..RRRRRR..',
+  '..RRrrRR..',
+  '..RR..RR..',
+  '..FF..FF..'
+];
+const ROWS_B = ROWS.slice(0, 11).concat(['..RR...RR.', '..FF...FF.']);
+function drawGuard(x, y, flip, frame, arms, squat) {
+  const rows = (frame ? ROWS_B : ROWS).slice();
+  if (arms) { rows[7] = '..RRRRRR..'; rows[8] = '..RRBBBBRR'.slice(0, 10); }
+  const px = 2, w = 10 * px;
+  ctx.save();
+  ctx.translate(Math.round(x), Math.round(y - 13 * px + (squat ? 6 : 0)));
+  if (flip) { ctx.scale(-1, 1); }
+  const ox = -w / 2;
+  const nrows = squat ? 11 : 13;
+  for (let r = 0; r < nrows; r++) for (let c = 0; c < 10; c++) {
+    const ch = rows[r][c]; if (ch !== '.') { ctx.fillStyle = PAL[ch]; ctx.fillRect(ox + c * px, r * px, px, px); }
+  }
+  if (arms) {
+    ctx.fillStyle = PAL.S;
+    [[1, 4], [1, 5], [8, 4], [8, 5]].forEach(([c, r]) => ctx.fillRect(ox + c * px, r * px, px, px));
+  }
+  ctx.restore();
+}
+
+/* ---------- Planung & Bewegung ---------- */
+function plan(t) {
+  const s = sites(), st = data ? data.state : 'idle';
+  const ri = s.findIndex(x => x.status === 'restock');
+  const ei = s.findIndex(x => x.status === 'error');
+  const ci = s.findIndex(x => x.id === (data && data.current));
+  const at = i => { const p = deskPos(i, s.length); return { x: p.x + 22, y: p.y + 6 }; };
+  if (ri >= 0) return { ...at(ri), mode: 'alert' };
+  if (st === 'error' && ei >= 0) return { ...at(ei), mode: 'error' };
+  if (st === 'checking' && s.length) {
+    let idx = ci;
+    if (idx < 0) {  // Patrouille: Pulte, die im letzten Lauf geprüft wurden (sonst alle)
+      const akt = s.map((x, i) => x.im_lauf ? i : -1).filter(i => i >= 0);
+      const lst = akt.length ? akt : s.map((_, i) => i);
+      idx = lst[Math.floor(t / 4) % lst.length];
+    }
+    return { ...at(idx), mode: 'check' };
+  }
+  if (st === 'error') return { x: TEA.x, y: TEA.y + 8, mode: 'error' };
+  if (st === 'stale') return { x: TEA.x, y: TEA.y + 8, mode: 'sleep' };
+  return { x: TEA.x, y: TEA.y + 8, mode: 'idle' };
+}
+const g = { x: TEA.x, y: TEA.y + 8, flip: false, frame: 0, ft: 0, moving: false };
+let falcon = null, lastFalcon = -99;
+
+function drawFalcon(t) {
+  if (!falcon) return;
+  const f = Math.floor(t * 8) % 2, x = falcon.x, y = falcon.y;
+  rect(x, y, 9, 3, '#7a5a3a'); rect(x + 8, y - 1, 3, 3, '#7a5a3a'); rect(x + 11, y, 2, 1, '#d9a82e');
+  rect(x + 2, y + (f ? -4 : 3), 5, 2, '#5a4028');
+  ctx.fillStyle = '#f3e6cf'; ctx.font = '7px monospace'; ctx.textAlign = 'right';
+  ctx.fillText('→ Telegram', Math.min(x - 2, W - 4), y + 14);
+}
+
+function bubble(x, y, txt, col) {
+  ctx.fillStyle = col; ctx.font = 'bold 12px monospace'; ctx.textAlign = 'center';
+  ctx.fillText(txt, Math.round(x), Math.round(y));
+}
+
+let last = performance.now() / 1000;
+function frame() {
+  const t = performance.now() / 1000, dt = Math.min(0.1, t - last); last = t;
+  const pl = plan(t);
+  drawBackground(t, pl.mode === 'alert');
+  drawDesks(t);
+
+  const dx = pl.x - g.x, dy = pl.y - g.y, dist = Math.hypot(dx, dy);
+  g.moving = dist > 1.5;
+  if (g.moving) {
+    const sp = 70 * dt, k = Math.min(1, sp / dist);
+    g.x += dx * k; g.y += dy * k;
+    if (Math.abs(dx) > 1) g.flip = dx < 0;
+    g.ft += dt; if (g.ft > 0.14) { g.ft = 0; g.frame ^= 1; }
+  } else g.frame = 0;
+
+  const bob = (!g.moving && pl.mode === 'check') ? Math.round(Math.sin(t * 10)) : 0;
+  const arms = !g.moving && pl.mode === 'alert';
+  const squat = !g.moving && (pl.mode === 'idle' || pl.mode === 'sleep');
+  drawGuard(g.x, g.y + bob, g.flip, g.frame, arms, squat);
+
+  if (!g.moving) {
+    if (pl.mode === 'alert') bubble(g.x, g.y - 34, '!', '#ff4a3a');
+    if (pl.mode === 'error') bubble(g.x, g.y - 34, '?', '#cfcfcf');
+    if (pl.mode === 'check') bubble(g.x, g.y - 34, '…', '#e6c04a');
+    if (pl.mode === 'sleep') bubble(g.x, g.y - 30, 'zzz'.slice(0, 1 + (Math.floor(t / 2) % 3)), '#9b8a70');
+    if (pl.mode === 'idle') {
+      for (let k = 0; k < 2; k++) {
+        const ph = (t * 0.7 + k * 0.5) % 1;
+        rect(g.x + 14 + Math.sin(t * 2 + k) * 2, g.y - 14 - ph * 12, 2, 2, 'rgba(240,240,240,' + (0.7 - ph * 0.6) + ')');
+      }
+      bubble(g.x, g.y - 30, 'zzz'.slice(0, 1 + (Math.floor(t) % 3)), '#9b8a70');
+    }
+  }
+
+  if (pl.mode === 'alert' && !falcon && t - lastFalcon > 5) { falcon = { x: g.x, y: g.y - 40 }; lastFalcon = t; }
+  if (falcon) { falcon.x += 90 * dt; falcon.y -= 30 * dt; if (falcon.x > W + 20) falcon = null; }
+  drawFalcon(t);
+
+  updateBar(pl);
+  requestAnimationFrame(frame);
+}
+
+/* ---------- Statuszeile & Log ---------- */
+const LABEL = { idle: 'ruht (Tee-Pause)', checking: 'prüft Seiten', alert: 'RESTOCK GEFUNDEN', error: 'Problem (z. B. Telegram)', stale: 'schläft – kein aktueller Lauf' };
+const fmt = iso => { try { return new Date(iso).toLocaleTimeString('de-DE'); } catch (e) { return '–'; } };
+const ago = iso => { try { const m = Math.round((Date.now() - new Date(iso)) / 60000); return m < 1 ? 'gerade eben' : m < 120 ? 'vor ' + m + ' min' : 'vor ' + Math.round(m / 60) + ' h'; } catch (e) { return '–'; } };
+const SLABEL = { ok: 'ok', checking: 'wird geprüft', restock: 'RESTOCK', error: 'Fehler', unknown: 'unbekannt' };
+let lastSites = '';
+function updateBar() {
+  if (!data) return;
+  document.querySelector('#state b').textContent = LABEL[data.state] || data.state || '?';
+  document.getElementById('mode').textContent = demo ? 'DEMO-MODUS (keine status.json gefunden)' : 'live';
+  document.getElementById('upd').textContent = data.last_run ? 'Letzter Lauf: ' + ago(data.last_run) : 'Stand: ' + fmt(data.updated);
+  const st = data.stats;
+  document.getElementById('stats').textContent = st
+    ? 'Händler: ' + (st.haendler ?? '–') + ' · Prüfaufgaben: ' + st.aufgaben + ' (mit Fehlern: ' + st.aufgaben_mit_fehlern + ')' + (st.push_problem ? ' · ⚠ Push-Problem' : '')
+    : '';
+  const sig = JSON.stringify([data.sites, data.events]);
+  if (sig !== lastSites) {
+    lastSites = sig;
+    const ul = document.getElementById('sites'); ul.textContent = '';
+    sites().forEach(x => {
+      const li = document.createElement('li'); li.style.borderBottom = '1px solid #3a2c20';
+      li.textContent = x.name + ' – ' + (SLABEL[x.status] || x.status) + (x.detail ? ' · ' + x.detail : '') + (x.last_checked ? ' · zuletzt ' + ago(x.last_checked) : '');
+      ul.appendChild(li);
+    });
+    const lg = document.getElementById('log'); lg.textContent = '';
+    (data.events || []).slice(0, 8).forEach(e => {
+      const li = document.createElement('li'), tm = document.createElement('time');
+      tm.textContent = fmt(e.time); li.appendChild(tm); li.appendChild(document.createTextNode(e.text));
+      lg.appendChild(li);
+    });
+  }
+}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

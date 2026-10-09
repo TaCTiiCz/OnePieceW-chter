@@ -83,6 +83,20 @@ jobs:
         if: ${{ always() }}
         run: if [ -f _daten/dashboard.md ]; then cat _daten/dashboard.md >> "$GITHUB_STEP_SUMMARY"; fi
 
+      - name: Dojo-Seite vorbereiten (nur Statusdatei und Seite, nie der gesamte Zustand)
+        if: ${{ always() && inputs.aktion != 'telegram-test' }}
+        run: |
+          mkdir -p _seite
+          for f in index.html status.json .nojekyll; do
+            if [ -f "_daten/$f" ]; then cp "_daten/$f" "_seite/$f"; fi
+          done
+
+      - name: Dojo-Seite hochladen
+        if: ${{ always() && inputs.aktion != 'telegram-test' && hashFiles('_seite/status.json') != '' }}
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _seite
+
       - name: Zustand dauerhaft speichern
         if: ${{ always() && inputs.aktion != 'telegram-test' }}
         run: |
@@ -97,3 +111,24 @@ jobs:
             git commit -q -m "Wächter-Daten $heute"
           fi
           git push -q --force origin waechter-daten
+
+  dojo-veroeffentlichen:
+    # Veröffentlicht das Pixel-Dojo (GitHub Pages). Einmalig nötig: Settings -> Pages -> Source: "GitHub Actions".
+    needs: waechter
+    if: ${{ always() && needs.waechter.result != 'skipped' && inputs.aktion != 'telegram-test' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: pages
+      cancel-in-progress: true
+    steps:
+      - name: Dojo veröffentlichen
+        id: deployment
+        continue-on-error: true
+        uses: actions/deploy-pages@v4

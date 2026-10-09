@@ -191,7 +191,12 @@ def naruto_lauf(konfig, daten: Path, db: Path, dash: Path, onepiece: bool = True
     op = os.path.relpath(daten / "onepiece_bericht.md", dash.parent) if (daten / "onepiece_bericht.md").exists() else None
     dash.write_text(dashmod.erzeuge(l.zustand, lade_haendler(konfig, db), db_json, l.ncfg, l.betrieb,
                                     dt.datetime.now(dt.timezone.utc), op), encoding="utf-8")
-    faellig = [dt.datetime.fromisoformat(a["faellig"]) for a in l.zustand["aufgaben"].values()]
+    try:  # Pixel-Dojo: status.json + Seite neben das Dashboard legen (darf den Lauf nie stören)
+        from . import dojo
+        dojo.schreibe(l.zustand, dash.parent)
+    except Exception as ex:  # pragma: no cover
+        log(f"Hinweis: Dojo-Status konnte nicht geschrieben werden: {type(ex).__name__}: {ex}")
+    faellig =[dt.datetime.fromisoformat(a["faellig"]) for a in l.zustand["aufgaben"].values()]
     return max(0.0, (min(faellig) - dt.datetime.now(dt.timezone.utc)).total_seconds()) if faellig else 60.0
 
 
