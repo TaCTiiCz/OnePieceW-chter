@@ -228,6 +228,7 @@ function applyOverrides() {
   if (!data) return;
   if (Q.has('state')) { data.state = Q.get('state'); }
   if (Q.get('state') === 'alert' && data.sites[0]) data.sites[0].status = 'restock';
+  if (Q.get('op') === 'alert') { const o = data.sites.find(x => x.id === 'onepiece'); if (o) o.status = 'restock'; data.state = 'alert'; }
   if (Q.get('state') === 'error' && data.sites[3]) data.sites[3].status = 'error';
 }
 poll(); setInterval(poll, 4000); setInterval(demoStep, 3500);
@@ -436,8 +437,21 @@ function drawDesk(i, site, t, working, lights) {
 
 /* ---------- Katze, Falke, Teekorner ---------- */
 const cat = { x: 448, y: 244 };
-function drawCat(t, mode) {
-  const x = cat.x, y = cat.y, awake = mode === 'alert' || mode === 'error', curled = mode === 'idle' || mode === 'sleep';
+const SKULL = ['.#####.', '#######', '##.#.##', '#######', '.#.#.#.'];
+function drawPirateFlag(t, x, y) {  // Piratenfahne (Totenkopf mit gekreuzten Knochen), von der Katze geschwenkt
+  const px = x + 5, top = y - 40, w = 20, h = 15, sway = Math.sin(t * 6) * 2;
+  R(px, top - 2, 1, 36, '#7a5a3a'); R(px - 1, top - 3, 3, 2, '#d8b45a');       // Mast mit Spitze
+  const wave = i => Math.round(Math.sin(t * 9 - i * 0.55) * (i / w) * 2.2 + sway * (i / w));
+  for (let i = 0; i < w; i++) {                                                  // schwarzes Tuch, spaltenweise gewellt
+    const o = wave(i); R(px + 1 + i, top + o, 1, h, i % 5 === 4 ? '#1c1c24' : '#101016');
+  }
+  const bone = (i, j) => R(px + 1 + i, top + 3 + j + wave(i), 1, 1, '#cfc9b8');
+  for (let k = 0; k < 9; k++) { bone(5 + k, 3 + k); bone(13 - k, 3 + k); }       // gekreuzte Knochen
+  SKULL.forEach((row, j) => { for (let c = 0; c < 7; c++) if (row[c] === '#') R(px + 1 + 6 + c, top + 1 + j + wave(6 + c), 1, 1, '#f4f0e2'); });
+  R(px + 1 + 5, top + 2 + wave(5), 1, 1, '#101016');
+}
+function drawCat(t, mode, flag) {
+  const x = cat.x, y = cat.y, awake = flag || mode === 'alert' || mode === 'error', curled = !flag && (mode === 'idle' || mode === 'sleep');
   R(x - 9, y + 1, 20, 2, 'rgba(0,0,0,.25)');
   const body = '#3a3a46', bodyL = '#55556a', white = '#e8e4da';
   if (curled) {
@@ -450,6 +464,7 @@ function drawCat(t, mode) {
     R(x - 1, y - 13, 1, awake ? 2 : 1, '#ffe37a'); R(x + 2, y - 13, 1, awake ? 2 : 1, '#ffe37a'); R(x - 4, y, 3, 1, body); R(x + 1, y, 3, 1, body);
     const tw = Math.round(Math.sin(t * (awake ? 8 : 2.5)) * 3);
     for (let k = 0; k < 8; k++) R(x + 4 + k, y - 1 - Math.round(Math.sin(k * 0.5 + t * 3) * 1.5) - (k > 5 ? 1 : 0) + (tw > 0 ? 0 : 0), 2, 2, body);
+    if (flag) { R(x + 3, y - 12, 3, 5, body); R(x + 4, y - 14, 3, 2, bodyL); drawPirateFlag(t, x, y); }
   }
 }
 let falcon = null, lastFalcon = -99;
@@ -543,7 +558,7 @@ function frame() {
   lights.push({ x: 23, y: 164, r: 50, a: 0.9, col: [255, 207, 122] });
   drawBamboo(t);
   drawPond(t);
-  drawGong(t, pl.mode === 'alert', lights);
+  drawGong(t, pl.mode === 'alert' || (pl2 && pl2.mode === 'alert'), lights);
   drawTea(t);
   // Sortiert zeichnen: Pulte / Wächter / Katze
   const s = sites(), items = [];
@@ -551,7 +566,7 @@ function frame() {
   let head = null, head2 = null;
   items.push({ y: g.y + 0.5, draw: () => { head = drawGuard(A1, t, g.moving ? 'walk' : pl.mode, lights); } });
   if (pl2) items.push({ y: A2.g.y + 0.5, draw: () => { head2 = drawGuard(A2, t, A2.g.moving ? 'walk' : pl2.mode, lights); } });
-  items.push({ y: cat.y, draw: () => drawCat(t, pl.mode) });
+  items.push({ y: cat.y, draw: () => drawCat(t, pl.mode, !!(pl2 && pl2.mode === 'alert')) });
   items.sort((a, b) => a.y - b.y).forEach(it => it.draw());
   // Sprechblasen
   if (head && !g.moving) {
@@ -568,6 +583,7 @@ function frame() {
     else if (pl2.mode === 'check') bubbleAt(hx, hy, '.'.repeat(1 + Math.floor(t * 2.5) % 3), '#fff', '#1f3d78');
     else if (pl2.mode === 'sleep') bubbleAt(hx, hy + 4, 'z'.repeat(1 + Math.floor(t / 2) % 3), '#cfd6ee', '#2f3a66');
   }
+  if (pl2 && pl2.mode === 'alert') bubbleAt(cat.x + 4, cat.y - 62 + Math.round(Math.sin(t * 8) * 1), 'ARRR!', '#fff', '#101016');
   // Falke
   if (pl.mode === 'alert' && !falcon && t - lastFalcon > 6) { falcon = { x: g.x, y: g.y - 60 }; lastFalcon = t; }
   if (falcon) { falcon.x += 78 * dt; falcon.y -= 16 * dt + Math.sin(t * 3) * 0.3; if (falcon.x > W + 30) falcon = null; }
