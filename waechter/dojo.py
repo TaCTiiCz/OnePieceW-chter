@@ -73,7 +73,8 @@ def erzeuge(zustand: dict, jetzt: dt.datetime, *, alarm_stunden: float = 3.0, ak
     alarme, op_alarme = [], []
     for e in ereignisse:
         z = _zeit(e.get("zeit"))
-        if z and jetzt - z <= dt.timedelta(hours=alarm_stunden):
+        fenster = dt.timedelta(minutes=15) if e.get("testmodus") else dt.timedelta(hours=alarm_stunden)
+        if z and jetzt - z <= fenster:
             if e.get("typ") in ALARM_TYPEN:
                 alarme.append(e)
             elif e.get("typ") in OP_ALARM_TYPEN:

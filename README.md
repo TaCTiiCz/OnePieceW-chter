@@ -234,5 +234,10 @@ Wächter-Lauf, „schläft“ er – das ist die ehrliche Warnung, dass der Daue
 - Ohne `status.json` zeigt die Seite einen **Demo-Modus** (oben als „DEMO-MODUS“ gekennzeichnet).
 - Hinweis: Die Aktion `simulation` läuft in einer getrennten Testumgebung und löst im Dojo keinen Alarm aus. Der Alarm erscheint nur bei einem echten Restock (Kaufalarm der letzten 3 Stunden).
 
+### Alarm testen (Naruto und One Piece)
+Actions → „Wächter“ → „Run workflow“ → Aktion **`alarm-test-beide`**. Der Test schickt je eine Telegram-Nachricht „🧪 TEST“
+für Naruto und für One Piece (nur wenn Telegram eingerichtet ist) und zeigt beide Alarme etwa 15 Minuten lang im Dojo
+(Ninja und Seemann springen auf, die Katze schwenkt die Piratenfahne). Es werden keine Shops abgerufen und nichts bestellt.
+
 ### Zwei Wächter im Dojo
 Im Dojo laufen zwei Figuren: der Ninja mit Strohhut kümmert sich um die Naruto-Stationen, der Seemann mit blauem Kopftuch nur um den One-Piece-Tisch. Der Seemann ist nur zu sehen, wenn der One-Piece-Auftrag aktiv ist. Er arbeitet nur, wenn dieser Auftrag im letzten Lauf an der Reihe war; sonst macht er Teepause.
