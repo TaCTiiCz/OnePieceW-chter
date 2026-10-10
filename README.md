@@ -240,4 +240,4 @@ für Naruto und für One Piece (nur wenn Telegram eingerichtet ist) und zeigt be
 (Ninja und Seemann springen auf, die Katze schwenkt die Piratenfahne). Es werden keine Shops abgerufen und nichts bestellt.
 
 ### Zwei Wächter im Dojo
-Im Dojo laufen zwei Figuren: der Ninja mit Strohhut kümmert sich um die Naruto-Stationen, der Seemann mit blauem Kopftuch nur um den One-Piece-Tisch. Der Seemann ist nur zu sehen, wenn der One-Piece-Auftrag aktiv ist. Er arbeitet nur, wenn dieser Auftrag im letzten Lauf an der Reihe war; sonst macht er Teepause.
+Im Dojo laufen zwei Figuren: der Ninja mit Strohhut kümmert sich um die Naruto-Stationen, der Seemann mit blauem Kopftuch um One Piece. Es gibt vier Tische: oben (Schild „NARUTO“) „Produkte“ und „Entdeckung“, unten (Schild „ONE PIECE“) „Restock“ und „Vorbestellung“. Jede Figur hat rechts ihren eigenen Teeplatz (Ninja orange, oben; Seemann blau, unten) und geht dorthin, wenn gerade nichts zu tun ist. Der Seemann ist nur zu sehen, wenn der One-Piece-Auftrag aktiv ist. Bei einem One-Piece-Restock leuchtet der Tisch „Restock“, bei einer Vorbestellung der Tisch „Vorbestellung“.

@@ -41,20 +41,23 @@ class DojoStatus(unittest.TestCase):
         d = dojo.erzeuge(zustand(), JETZT)
         self.assertEqual(d["state"], "checking")
         self.assertEqual(station(d, "produkt")["status"], "ok")
+        self.assertEqual(station(d, "produkt")["agent"], "naruto")
         self.assertTrue(station(d, "produkt")["im_lauf"])
-        self.assertFalse(station(d, "langsam")["im_lauf"])
 
     def test_station_mit_fehlern(self):
         d = dojo.erzeuge(zustand(), JETZT)
-        self.assertEqual(station(d, "langsam")["status"], "error")
+        self.assertEqual(station(d, "entdeckung")["status"], "error")
 
     def test_station_ohne_erfolg_ist_unbekannt(self):
-        d = dojo.erzeuge(zustand(), JETZT)
-        self.assertEqual(station(d, "offiziell")["status"], "unknown")
+        z = zustand()
+        z["aufgaben"]["onepiece"] = {"art": "onepiece", "zuletzt_ok": None, "fehlerserie": 0}
+        d = dojo.erzeuge(z, JETZT)
+        self.assertEqual(station(d, "op_restock")["status"], "unknown")
+        self.assertEqual(station(d, "op_vorbestellung")["agent"], "onepiece")
 
-    def test_one_piece_ohne_aufgabe_hat_kein_pult(self):
+    def test_one_piece_ohne_aufgabe_hat_keine_tische(self):
         ids = [s["id"] for s in dojo.erzeuge(zustand(), JETZT)["sites"]]
-        self.assertNotIn("onepiece", ids)
+        self.assertEqual(ids, ["produkt", "entdeckung"])
 
     def test_kaufalarm_loest_alarm_aus(self):
         z = zustand(ereignisse_kurz=[{"zeit": iso(20), "typ": "KAUFALARM", "text": "Produkt X jetzt vorbestellbar"}])
@@ -68,7 +71,8 @@ class DojoStatus(unittest.TestCase):
         z["aufgaben"]["onepiece"] = {"art": "onepiece", "zuletzt_ok": iso(1), "fehlerserie": 0}
         d = dojo.erzeuge(z, JETZT)
         self.assertEqual(d["state"], "alert")
-        self.assertEqual(station(d, "onepiece")["status"], "restock")
+        self.assertEqual(station(d, "op_vorbestellung")["status"], "restock")
+        self.assertNotEqual(station(d, "op_restock")["status"], "restock")
         self.assertNotEqual(station(d, "produkt")["status"], "restock")
 
     def test_alter_alarm_zaehlt_nicht(self):
