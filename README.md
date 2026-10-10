@@ -248,5 +248,7 @@ Im Dojo laufen zwei Figuren: der Ninja mit Strohhut kümmert sich um die Naruto-
 - **Wetter vor den Fenstern:** klar, Regen oder Gewitter mit Wolken und Blitzen. Beim Regen gibt es Ringe auf dem Teich. Das Wetter wird aus der Uhrzeit abgeleitet (alle 3 Stunden neu gewürfelt) und ist **nicht** das echte Wetter. Mit `?weather=clear`, `?weather=rain` oder `?weather=storm` hinter der Adresse erzwingst du eines.
 - **Sakura-Blätter** treiben durch den Raum (im Gewitter schneller), **Glühwürmchen** gibt es nachts am Teich und beim Bambus (bei Regen kaum).
 
-### Grafik-Shader
-Das Dojo wird weiterhin in 480×270 Pixeln gezeichnet, aber über einen WebGL-Shader in 960×540 ausgegeben: scharfes Hochskalieren der Pixel, sanftes Leuchten um helle Stellen (Lampen, Alarm), leichte Tiefenunschärfe am oberen und unteren Rand, Vignette, Farbstimmung (nachts kühler, tagsüber wärmer), feine Zeilen und Filmkorn. Mit `?fx=0` hinter der Adresse wird der Shader abgeschaltet (altes scharfes Pixelbild); das passiert automatisch, wenn der Browser kein WebGL kann.
+### Grafik (960×540)
+Das Dojo wird jetzt im Halb-Pixel-Raster in **960×540** gezeichnet (die Koordinaten bleiben 480×270, Schritte von 0,5 sind möglich). Dadurch sind Schrift, Lichtverläufe, Regen und Bewegungen feiner. Neu im Detail: Holzmaserung und Kanten an den Tischen und der Wand, feine Tatami-Fasern, Glasreflexe und Rahmenkanten an den Fenstern, weiche Schatten unter Tischen und Figuren sowie ein dünner dunkler Umriss um Ninja, Seemann und Katze. Die Figuren selbst sind weiterhin aus 1-Pixel-Blöcken gebaut.
+
+Darüber liegt ein WebGL-Shader: sanftes Leuchten um helle Stellen (Lampen, Alarm), leichte Tiefenunschärfe am oberen und unteren Rand, Vignette, Farbstimmung (nachts kühler, tagsüber wärmer), feine Zeilen und Filmkorn. Mit `?fx=0` hinter der Adresse wird der Shader abgeschaltet; das passiert automatisch, wenn der Browser kein WebGL kann.
