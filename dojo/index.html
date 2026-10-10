@@ -25,7 +25,8 @@
   @keyframes pulse{50%{box-shadow:0 0 0 4px rgba(255,90,68,.25)}}
   #stage{width:fit-content;max-width:100%;margin:0 auto;position:relative;border:4px solid #4a3322;border-radius:6px;box-shadow:0 0 0 2px #120d09,0 10px 40px rgba(0,0,0,.6);
          background:#000;line-height:0;overflow:hidden}
-  canvas{display:block;image-rendering:pixelated;image-rendering:crisp-edges;margin:0 auto}
+  canvas{display:block;margin:0 auto}
+  #c.raw{image-rendering:pixelated;image-rendering:crisp-edges}
   #meta{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--dim);margin:10px 2px}
   #mode.live{color:var(--ok)} #mode.demo{color:var(--chk)}
   #cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;margin:6px 0 14px;padding:0;list-style:none}
@@ -54,7 +55,8 @@
 <script>
 'use strict';
 const W = 480, H = 270;
-const cv = document.getElementById('c'), ctx = cv.getContext('2d');
+let view = document.getElementById('c');          // sichtbare Leinwand (WebGL-Shader, 960x540)
+const cv = document.createElement('canvas'), ctx = cv.getContext('2d');   // Szene in 480x270 Pixeln (nicht sichtbar)
 cv.width = W; cv.height = H;
 const mk = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
 const bgC = mk(W, H), bg = bgC.getContext('2d');          // statische Szene (Wand, Boden, Teich)
@@ -63,6 +65,74 @@ const lightC = mk(W, H), lg = lightC.getContext('2d');    // Lichtmaske für die
 const Q = new URLSearchParams(location.search);
 const STATE_URL = 'status.json';
 const FONT = '"Press Start 2P", ui-monospace, monospace';
+
+
+/* ---------- Shader: Szene (480x270) -> Bildschirm (960x540) ----------
+   Schärfer Pixel-Look beim Hochskalieren, sanftes Leuchten (Bloom), Tiefenunschärfe oben/unten (Tilt-Shift),
+   Vignette, Farbstimmung (warm in den Lichtern, kühl in den Schatten), feine Zeilen und Filmkorn.
+   ?fx=0 schaltet den Shader aus. */
+const FX = { on: false, gl: null, prog: null, tex: null, u: {}, dark: 0, wet: 0, flash: 0 };
+function initFx() {
+  view.width = 960; view.height = 540;
+  if (Q.get('fx') === '0') return fxFallback();
+  let gl = null; try { gl = view.getContext('webgl', { antialias: false, alpha: false, premultipliedAlpha: false }); } catch (e) {}
+  if (!gl) return fxFallback();
+  const vs = 'attribute vec2 p;varying vec2 v;void main(){v=p*0.5+0.5;gl_Position=vec4(p,0.,1.);}';
+  const fs = `precision highp float;varying vec2 v;uniform sampler2D T;uniform vec2 R;uniform float time,dark,wet,flash;
+  vec3 smp(vec2 uv){return texture2D(T,uv).rgb;}
+  vec2 sharp(vec2 uv){vec2 p=uv*R;vec2 i=floor(p);vec2 f=p-i;f=clamp((f-0.5)*2.0+0.5,0.,1.);return (i+f)/R;}
+  void main(){
+    vec2 uv=vec2(v.x,1.-v.y);
+    float ed=abs(uv.y-0.5)*2.0;                       // 0 Mitte … 1 Rand
+    float blur=smoothstep(0.92,1.0,ed)*1.2/R.y;       // Tilt-Shift
+    vec3 c=smp(sharp(uv));
+    if(blur>0.0){vec3 a=c;a+=smp(sharp(uv+vec2(0.,blur)));a+=smp(sharp(uv-vec2(0.,blur)));a+=smp(sharp(uv+vec2(blur*1.4,0.)));a+=smp(sharp(uv-vec2(blur*1.4,0.)));c=mix(c,a/5.0,smoothstep(0.92,1.0,ed));}
+    // Bloom: helle Bereiche streuen
+    vec3 b=vec3(0.);float tw=0.;
+    for(int i=-2;i<=2;i++)for(int j=-2;j<=2;j++){vec2 o=vec2(float(i),float(j))*2.4/R;vec3 s=smp(uv+o);float l=max(max(s.r,s.g),s.b);float w=smoothstep(0.88,1.0,l)*(1.0-0.12*length(vec2(float(i),float(j))));b+=s*w;tw+=1.0;}
+    c+=min(b/tw*(0.4+0.5*dark),vec3(0.16));
+    // Farbstimmung
+    float lum=dot(c,vec3(.299,.587,.114));
+    c=mix(vec3(lum),c,1.08-0.25*wet);
+    c*=mix(vec3(0.94,0.97,1.04),vec3(1.05,1.0,0.93),smoothstep(0.2,0.8,lum));
+    c=mix(c,c*vec3(0.78,0.86,1.1),0.35*dark);
+    c+=flash*0.04;
+    // Vignette
+    vec2 q=uv-0.5;c*=1.0-dot(q,q)*(0.8+0.5*dark);
+    // feine Zeilen + Korn
+    float sc=0.5+0.5*sin(uv.y*R.y*6.2831853);c*=1.0-0.03*sc;
+    float g=fract(sin(dot(uv*R+time,vec2(12.9898,78.233)))*43758.5453);c+=(g-0.5)*0.03;
+    gl_FragColor=vec4(clamp(c,0.,1.),1.);
+  }`;
+  const sh = (t, src) => { const o = gl.createShader(t); gl.shaderSource(o, src); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; };
+  try {
+    const pr = gl.createProgram(); gl.attachShader(pr, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(pr);
+    if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) throw new Error('link');
+    gl.useProgram(pr);
+    const bf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, bf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(pr, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    const tx = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tx);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+    ['T', 'R', 'time', 'dark', 'wet', 'flash'].forEach(n => FX.u[n] = gl.getUniformLocation(pr, n));
+    gl.uniform1i(FX.u.T, 0); gl.uniform2f(FX.u.R, W, H); gl.viewport(0, 0, 960, 540);
+    FX.gl = gl; FX.on = true;
+  } catch (e) { console.warn('Shader aus:', e); fxFallback(); }
+}
+function fxFallback() {   // ohne WebGL: altes scharfes Pixelbild
+  FX.on = false;
+  if (FX.gl) { const n = document.createElement('canvas'); n.id = 'c'; view.replaceWith(n); view = n; }
+  FX.gl = null; view.classList.add('raw'); view.width = W; view.height = H;
+}
+function fxPresent(t) {
+  if (!FX.on) { const c2 = view.getContext('2d'); c2.imageSmoothingEnabled = false; c2.drawImage(cv, 0, 0); return; }
+  const gl = FX.gl;
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, cv);
+  gl.uniform1f(FX.u.time, t % 100); gl.uniform1f(FX.u.dark, FX.dark); gl.uniform1f(FX.u.wet, FX.wet); gl.uniform1f(FX.u.flash, FX.flash);
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+}
+initFx();
 
 /* ---------- kleine Helfer ---------- */
 let C = ctx;
@@ -612,10 +682,10 @@ function drawScrolls(t) {   // Die letzten fünf Funde als Schriftrollen (neuest
     scrollRects.push({ x: bx - 2, y: by, w: 10, h: 30, text: (e.text || '') + (e.time ? '  (' + fmt(e.time) + ')' : '') });
   });
 }
-cv.addEventListener('mousemove', ev => {
-  const b = cv.getBoundingClientRect(), mx = (ev.clientX - b.left) * W / b.width, my = (ev.clientY - b.top) * H / b.height;
+view.addEventListener('mousemove', ev => {
+  const b = view.getBoundingClientRect(), mx = (ev.clientX - b.left) * W / b.width, my = (ev.clientY - b.top) * H / b.height;
   const hit = scrollRects.find(r => mx >= r.x && mx <= r.x + r.w && my >= r.y && my <= r.y + r.h);
-  cv.title = hit ? hit.text : '';
+  view.title = hit ? hit.text : '';
 });
 
 /* ---------- Licht ---------- */
@@ -705,6 +775,8 @@ function frame() {
   // Alarm-Rahmen
   if (pl.mode === 'alert' || (pl2 && pl2.mode === 'alert')) { const a = 0.35 + Math.sin(t * 8) * 0.2; ctx.strokeStyle = 'rgba(255,200,70,' + a.toFixed(2) + ')'; ctx.lineWidth = 4; ctx.strokeRect(2, 2, W - 4, H - 4); }
   if (pl.mode === 'sleep') { ctx.fillStyle = 'rgba(40,50,90,.18)'; ctx.fillRect(0, 0, W, H); }
+  FX.dark = dark; FX.wet = clamp(wxCur, 0, 1); FX.flash = flash;
+  fxPresent(t);
   updateBar();
   requestAnimationFrame(frame);
 }
@@ -713,8 +785,8 @@ function frame() {
 function fit() {
   const avail = document.getElementById('stage').parentElement.clientWidth - 8;
   const k = avail >= W ? Math.max(1, Math.floor(avail / W * 2) / 2) : avail / W;  // 1x, 1.5x, 2x, …
-  cv.style.width = Math.round(W * Math.min(k, avail / W)) + 'px';
-  cv.style.height = Math.round(H * Math.min(k, avail / W)) + 'px';
+  view.style.width = Math.round(W * Math.min(k, avail / W)) + 'px';
+  view.style.height = Math.round(H * Math.min(k, avail / W)) + 'px';
 }
 addEventListener('resize', fit);
 
