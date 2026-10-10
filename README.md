@@ -241,3 +241,9 @@ für Naruto und für One Piece (nur wenn Telegram eingerichtet ist) und zeigt be
 
 ### Zwei Wächter im Dojo
 Im Dojo laufen zwei Figuren: der Ninja mit Strohhut kümmert sich um die Naruto-Stationen, der Seemann mit blauem Kopftuch um One Piece. Es gibt vier Tische: oben (Schild „NARUTO“) „Produkte“ und „Entdeckung“, unten (Schild „ONE PIECE“) „Restock“ und „Vorbestellung“. Jede Figur hat rechts ihren eigenen Teeplatz (Ninja orange, oben; Seemann blau, unten) und geht dorthin, wenn gerade nichts zu tun ist. Der Seemann ist nur zu sehen, wenn der One-Piece-Auftrag aktiv ist. Bei einem One-Piece-Restock leuchtet der Tisch „Restock“, bei einer Vorbestellung der Tisch „Vorbestellung“.
+
+### Uhr, Schriftrollen und Wetter im Dojo
+- **Wanduhr** (links neben dem ersten Fenster): zeigt die echte Berliner Zeit. Der Rand zeigt, wie frisch der letzte Wächter-Lauf ist: grün unter 12 Minuten, gelb unter 30, danach rot. Darunter steht das Alter (z. B. „3m“).
+- **Schriftrollen-Wand:** die letzten fünf Alarme als Schriftrollen zwischen den Fenstern, neueste ganz links. Orange Band = Naruto, blaues Band = One Piece. Alarme der letzten 15 Minuten leuchten. Mit der Maus über einer Rolle erscheint der Text.
+- **Wetter vor den Fenstern:** klar, Regen oder Gewitter mit Wolken und Blitzen. Beim Regen gibt es Ringe auf dem Teich. Das Wetter wird aus der Uhrzeit abgeleitet (alle 3 Stunden neu gewürfelt) und ist **nicht** das echte Wetter. Mit `?weather=clear`, `?weather=rain` oder `?weather=storm` hinter der Adresse erzwingst du eines.
+- **Sakura-Blätter** treiben durch den Raum (im Gewitter schneller), **Glühwürmchen** gibt es nachts am Teich und beim Bambus (bei Regen kaum).
