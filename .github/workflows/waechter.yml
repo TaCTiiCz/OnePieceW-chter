@@ -17,13 +17,14 @@ on:
         default: lauf
 
   # ------------------------------------------------------------------
-  # REGELMÄSSIGER BETRIEB – erst nach der Kostenentscheidung einschalten
+  # REGELMÄSSIGER BETRIEB – AKTIV
   # (README, Abschnitt "Dauerbetrieb"). Zeiten in UTC.
   #   Öffentliches Repository (kostenlos):   - cron: "*/5 * * * *"
   #   Privates Repository (2.000 Min/Monat): - cron: "7 * * * *"   (stündlich)
   # ------------------------------------------------------------------
-  # schedule:
-  #   - cron: "*/5 * * * *"
+  # Eingeschaltet am 2026-10-10 (öffentliches Repository, kostenlos).
+  schedule:
+    - cron: "*/5 * * * *"
 
 permissions:
   contents: write
