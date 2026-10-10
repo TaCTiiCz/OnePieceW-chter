@@ -1,60 +1,56 @@
 {
- "updated": "2026-10-09T11:17:23+00:00",
- "state": "alert",
+ "updated": "2026-10-10T19:59:35+00:00",
+ "state": "checking",
  "current": null,
- "last_run": "2026-10-09T10:58:25+00:00",
- "run_seconds": 310.5,
+ "last_run": "2026-10-10T19:59:26+00:00",
+ "run_seconds": 9.5,
  "sites": [
   {
    "id": "produkt",
    "name": "Produkte",
-   "status": "restock",
-   "im_lauf": true,
-   "last_checked": "2026-10-09T10:58:32+00:00",
-   "detail": "🧪 TEST: Naruto Card Game Booster Display (EN) jetzt vorbestellbar"
-  },
-  {
-   "id": "offiziell",
-   "name": "Offiziell",
+   "agent": "naruto",
    "status": "ok",
    "im_lauf": true,
-   "last_checked": "2026-10-09T10:58:31+00:00",
-   "detail": "3 Aufgaben"
+   "last_checked": "2026-10-10T19:59:33+00:00",
+   "detail": "10 Aufgaben"
   },
   {
-   "id": "schnell",
-   "name": "Neuheiten",
+   "id": "entdeckung",
+   "name": "Entdeckung",
+   "agent": "naruto",
    "status": "ok",
-   "im_lauf": true,
-   "last_checked": "2026-10-09T11:01:12+00:00",
-   "detail": "259 Aufgaben, 5 mit Fehlern"
-  },
-  {
-   "id": "langsam",
-   "name": "Kategorien",
-   "status": "ok",
-   "im_lauf": true,
-   "last_checked": "2026-10-09T11:01:15+00:00",
-   "detail": "267 Aufgaben, 2 mit Fehlern"
-  },
-  {
-   "id": "sitemap",
-   "name": "Sitemaps",
-   "status": "ok",
-   "im_lauf": true,
-   "last_checked": "2026-10-09T11:01:10+00:00",
-   "detail": "106 Aufgaben, 18 mit Fehlern"
-  },
-  {
-   "id": "onepiece",
-   "name": "One Piece",
-   "status": "restock",
    "im_lauf": false,
-   "last_checked": null,
-   "detail": "🧪 TEST: One Piece OP16 Display (EN) wieder lieferbar"
+   "last_checked": "2026-10-10T19:50:11+00:00",
+   "detail": "635 Aufgaben, 30 mit Fehlern"
+  },
+  {
+   "id": "op_restock",
+   "name": "Restock",
+   "agent": "onepiece",
+   "status": "ok",
+   "im_lauf": false,
+   "last_checked": "2026-10-10T19:50:14+00:00",
+   "detail": "1 Aufgaben"
+  },
+  {
+   "id": "op_vorbestellung",
+   "name": "Vorbestellung",
+   "agent": "onepiece",
+   "status": "ok",
+   "im_lauf": false,
+   "last_checked": "2026-10-10T19:50:14+00:00",
+   "detail": "1 Aufgaben"
   }
  ],
  "events": [
+  {
+   "time": "2026-10-10T15:58:00+00:00",
+   "text": "🧪 OP_RESTOCK: 🧪 TEST: One Piece OP16 Display (EN) wieder lieferbar"
+  },
+  {
+   "time": "2026-10-10T15:58:00+00:00",
+   "text": "🧪 KAUFALARM: 🧪 TEST: Naruto Card Game Booster Display (EN) jetzt vorbestellbar"
+  },
   {
    "time": "2026-10-09T11:17:23+00:00",
    "text": "🧪 OP_RESTOCK: 🧪 TEST: One Piece OP16 Display (EN) wieder lieferbar"
@@ -90,8 +86,8 @@
  ],
  "stats": {
   "haendler": 103,
-  "aufgaben": 644,
-  "aufgaben_mit_fehlern": 25,
+  "aufgaben": 646,
+  "aufgaben_mit_fehlern": 30,
   "push_problem": false
  }
 }
