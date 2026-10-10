@@ -16,19 +16,19 @@ from .konfig import PROJEKT
 
 DOJO_HTML = PROJEKT / "dojo" / "index.html"
 
-# Reihenfolge = Reihenfolge der Pulte im Dojo
+# Reihenfolge = Reihenfolge der Tische im Dojo: je Wächter zwei Tische
+#   Naruto-Ninja:  Produkte (bekannte Produktseiten) und Entdeckung (neue Seiten, Neuheiten, offizielle Seite, Sitemaps)
+#   One-Piece-Seemann: Restock (wieder lieferbar) und Vorbestellung (neu vorbestellbar)
 STATIONEN = [
-    ("produkt", "Produkte"),
-    ("offiziell", "Offiziell"),
-    ("schnell", "Neuheiten"),
-    ("langsam", "Kategorien"),
-    ("sitemap", "Sitemaps"),
-    ("onepiece", "One Piece"),
+    ("produkt", "Produkte", "naruto"),
+    ("entdeckung", "Entdeckung", "naruto"),
+    ("op_restock", "Restock", "onepiece"),
+    ("op_vorbestellung", "Vorbestellung", "onepiece"),
 ]
-_SCHNELL = {"shopify_neueste", "woo_api", "woo_neueste", "shopsuche", "kategorie_naruto", "kategorie_vorbestellung"}
-_LANGSAM = {"kategorie_neuheiten", "kategorie_bandai", "shopify_katalog"}
+AUFGABENGRUPPE = {"produkt": "produkt", "entdeckung": "entdeckung", "op_restock": "onepiece", "op_vorbestellung": "onepiece"}
 ALARM_TYPEN = {"KAUFALARM", "KAUFALARM_ANDERE_SPRACHE"}
 OP_ALARM_TYPEN = {"OP_RESTOCK", "OP_VORBESTELLUNG"}  # One-Piece-Prüfung
+OP_STATION = {"OP_RESTOCK": "op_restock", "OP_VORBESTELLUNG": "op_vorbestellung"}
 ERGEBNIS_ZEILEN = 12
 
 
@@ -47,13 +47,10 @@ def _iso(t: dt.datetime) -> str:
 
 
 def gruppe(art: str) -> str:
-    if art in ("produkt", "offiziell", "sitemap", "onepiece"):
+    """Aufgabenart -> Gruppe (produkt / onepiece / entdeckung)."""
+    if art in ("produkt", "onepiece"):
         return art
-    if art in _SCHNELL:
-        return "schnell"
-    if art in _LANGSAM:
-        return "langsam"
-    return "schnell"
+    return "entdeckung"
 
 
 def _kurz(text: str, n: int = 110) -> str:
@@ -80,15 +77,15 @@ def erzeuge(zustand: dict, jetzt: dt.datetime, *, alarm_stunden: float = 3.0, ak
             elif e.get("typ") in OP_ALARM_TYPEN:
                 op_alarme.append(e)
 
-    gruppen: dict[str, list[dict]] = {k: [] for k, _ in STATIONEN}
+    gruppen: dict[str, list[dict]] = {g: [] for g in AUFGABENGRUPPE.values()}
     for a in aufgaben:
         gruppen.setdefault(gruppe(a.get("art", "")), []).append(a)
 
     stationen = []
-    for gid, name in STATIONEN:
-        ts = gruppen.get(gid, [])
-        if gid == "onepiece" and not ts:
-            continue  # One Piece ist optional – ohne Aufgabe kein Pult
+    for gid, name, agent in STATIONEN:
+        ts = gruppen.get(AUFGABENGRUPPE[gid], [])
+        if agent == "onepiece" and not ts:
+            continue  # One Piece ist optional – ohne Aufgabe keine Tische
         ok_zeiten = [_zeit(t.get("zuletzt_ok")) for t in ts if t.get("zuletzt_ok")]
         ok_zeiten = [z for z in ok_zeiten if z]
         zuletzt = max(ok_zeiten) if ok_zeiten else None
@@ -96,15 +93,16 @@ def erzeuge(zustand: dict, jetzt: dt.datetime, *, alarm_stunden: float = 3.0, ak
         im_lauf = bool(lauf_zeit and any(z >= lauf_zeit for z in ok_zeiten))
         if gid == "produkt" and alarme:
             status, detail = "restock", _kurz(alarme[-1].get("text", "Restock gefunden"), 90)
-        elif gid == "onepiece" and op_alarme:
-            status, detail = "restock", _kurz(op_alarme[-1].get("text", "Restock gefunden"), 90)
+        elif any(OP_STATION[e["typ"]] == gid for e in op_alarme):
+            letzte = [e for e in op_alarme if OP_STATION[e["typ"]] == gid][-1]
+            status, detail = "restock", _kurz(letzte.get("text", "Fund bei One Piece"), 90)
         elif ts and len(fehler) * 4 >= len(ts):  # mindestens ein Viertel der Aufgaben kaputt
             status, detail = "error", f"{len(fehler)} von {len(ts)} Aufgaben mit Fehlern"
         elif zuletzt and jetzt - zuletzt <= tag:
             status, detail = "ok", f"{len(ts)} Aufgaben" + (f", {len(fehler)} mit Fehlern" if fehler else "")
         else:
             status, detail = "unknown", f"{len(ts)} Aufgaben, noch kein Erfolg in 24 h"
-        stationen.append({"id": gid, "name": name, "status": status, "im_lauf": im_lauf,
+        stationen.append({"id": gid, "name": name, "agent": agent, "status": status, "im_lauf": im_lauf,
                           "last_checked": _iso(zuletzt) if zuletzt else None, "detail": detail})
 
     push = zustand.get("push") or {}

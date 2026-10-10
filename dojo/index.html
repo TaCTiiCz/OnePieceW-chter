@@ -99,10 +99,16 @@ function skyColors(d) {
 
 /* ---------- Layout ---------- */
 const WIN = [24, 134, 244, 354].map(x => ({ x, y: 20, w: 92, h: 62 }));
-const LANES = [148, 204], GAPS = [120, 225, 335, 440];
-const DESK_X = [170, 280, 390], DESK_TOP = [150, 212];
-const TEA = { x: 448, y: 204 }, TEA2 = { x: 424, y: 204 };
-const deskCenter = i => ({ x: DESK_X[i % 3], row: Math.floor(i / 3) % 2 });
+const LANES = [148, 258], GAPS = [120, 225, 335, 440];
+const DESK_X = [200, 330], DESK_TOP = [150, 212];
+const TEA = { x: 441, y: 148 }, TEA2 = { x: 441, y: 204 };   // Teeplätze: Ninja (oben), Seemann (unten)
+const agentOf = x => x.agent || (String(x.id || '').startsWith('op_') ? 'onepiece' : 'naruto');
+// Tisch-Platz je Station: Naruto-Stationen oben (Reihe 0), One-Piece-Stationen unten (Reihe 1), je zwei Tische
+function deskCenter(i) {
+  const s = ((data && data.sites) || []), a = s[i] ? agentOf(s[i]) : 'naruto';
+  const k = s.slice(0, i).filter(x => agentOf(x) === a).length;
+  return { x: DESK_X[k % 2], row: a === 'onepiece' ? 1 : 0 };
+}
 const standPos = i => { const d = deskCenter(i); return { x: d.x, y: LANES[d.row] }; };
 const WALL_LAMPS = [{ x: 78, y: 12 }, { x: 188, y: 12 }, { x: 298, y: 12 }, { x: 408, y: 12 }];
 
@@ -195,10 +201,10 @@ function drawSky(t, d, hour) {
 
 /* ---------- Daten (echt oder Demo) ---------- */
 let data = null, demo = true, di = -1, hold = 0;
-const DEMO_NAMES = ['Produkte', 'Offiziell', 'Neuheiten', 'Kategorien', 'Sitemaps', 'One Piece'];
+const DEMO_SITES = [['produkt', 'Produkte', 'naruto'], ['entdeckung', 'Entdeckung', 'naruto'], ['op_restock', 'Restock', 'onepiece'], ['op_vorbestellung', 'Vorbestellung', 'onepiece']];
 function demoInit() {
   data = { updated: new Date().toISOString(), state: 'idle', current: null, last_run: new Date().toISOString(),
-    sites: DEMO_NAMES.map((n, i) => ({ id: 's' + i, name: n, status: 'ok', last_checked: null, detail: '' })), events: [],
+    sites: DEMO_SITES.map(([id, n, ag]) => ({ id, name: n, agent: ag, status: 'ok', last_checked: null, detail: '' })), events: [],
     stats: { haendler: 12, aufgaben: 48, aufgaben_mit_fehlern: 1, push_problem: false } };
   di = -1; hold = 0;
 }
@@ -228,11 +234,12 @@ function applyOverrides() {
   if (!data) return;
   if (Q.has('state')) { data.state = Q.get('state'); }
   if (Q.get('state') === 'alert' && data.sites[0]) data.sites[0].status = 'restock';
-  if (Q.get('op') === 'alert') { const o = data.sites.find(x => x.id === 'onepiece'); if (o) o.status = 'restock'; data.state = 'alert'; }
-  if (Q.get('state') === 'error' && data.sites[3]) data.sites[3].status = 'error';
+  if (Q.get('op') === 'alert') { const o = data.sites.find(x => x.id === 'op_restock'); if (o) o.status = 'restock'; data.state = 'alert'; }
+  if (Q.get('op') === 'pre') { const o = data.sites.find(x => x.id === 'op_vorbestellung'); if (o) o.status = 'restock'; data.state = 'alert'; }
+  if (Q.get('state') === 'error' && data.sites[1]) data.sites[1].status = 'error';
 }
 poll(); setInterval(poll, 4000); setInterval(demoStep, 3500);
-const sites = () => ((data && data.sites) || []).slice(0, 6);
+const sites = () => ((data && data.sites) || []).slice(0, 8);
 
 /* ---------- Wächter ---------- */
 const newG = (x, y) => ({ x, y, face: -1, phase: 0, path: [], key: '', moving: false, blink: 0, nextBlink: 2 });
@@ -252,34 +259,36 @@ function route(from, to) {
   const gx = GAPS.reduce((a, b) => (Math.abs(b - from.x) + Math.abs(b - to.x) < Math.abs(a - from.x) + Math.abs(a - to.x) ? b : a));
   return [{ x: gx, y: from.y }, { x: gx, y: to.y }, { x: to.x, y: to.y }];
 }
-const opIdx = () => sites().findIndex(x => x.id === 'onepiece');
-function plan2(t) {  // One-Piece-Wächter: nur sein Pult
-  const s = sites(), i = opIdx(), st = data ? data.state : 'idle';
-  if (i < 0) return null;
-  const site = s[i], p = standPos(i);
-  if (st === 'stale') return { x: TEA2.x, y: TEA2.y, mode: 'sleep', idx: -1 };
-  if (site.status === 'restock') return { x: p.x, y: p.y, mode: 'alert', idx: i };
-  if (site.status === 'error') return { x: p.x, y: p.y, mode: 'error', idx: i };
-  if (site.im_lauf && st !== 'idle' || site.status === 'checking') return { x: p.x, y: p.y, mode: 'check', idx: i };
-  return { x: TEA2.x, y: TEA2.y, mode: 'idle', idx: -1 };
+const mineOf = ag => sites().map((x, i) => agentOf(x) === ag ? i : -1).filter(i => i >= 0);
+function rotate(t, lst) { return lst[Math.floor(t / 5) % lst.length]; }
+function plan2(t) {  // One-Piece-Seemann: nur seine zwei Tische (Restock, Vorbestellung)
+  const s = sites(), mine = mineOf('onepiece'), st = data ? data.state : 'idle';
+  if (!mine.length) return null;
+  const tea = { x: TEA2.x, y: TEA2.y };
+  if (st === 'stale') return { ...tea, mode: 'sleep', idx: -1 };
+  const go = (i, mode) => { const p = standPos(i); return { x: p.x, y: p.y, mode, idx: i }; };
+  const ri = mine.find(i => s[i].status === 'restock'); if (ri !== undefined) return go(ri, 'alert');
+  const ei = mine.find(i => s[i].status === 'error'); if (ei !== undefined) return go(ei, 'error');
+  const aktiv = mine.filter(i => (s[i].im_lauf && st !== 'idle') || s[i].status === 'checking');
+  if (aktiv.length) return go(rotate(t, aktiv), 'check');
+  return { ...tea, mode: 'idle', idx: -1 };
 }
-function plan(t) {
-  const op = opIdx(), st = data ? data.state : 'idle';
-  const s = sites().map((x, i) => i === op ? { ...x, id: '', status: 'skip', im_lauf: false } : x);
-  const ri = s.findIndex(x => x.status === 'restock');
-  const ei = s.findIndex(x => x.status === 'error');
-  const ci = s.findIndex(x => x.id === (data && data.current));
-  let idx = -1, mode = 'idle';
-  if (ri >= 0) { idx = ri; mode = 'alert'; }
-  else if (st === 'error' && ei >= 0) { idx = ei; mode = 'error'; }
-  else if (st === 'checking' && s.length) {
-    idx = ci;
-    if (idx < 0) { const akt = s.map((x, i) => x.im_lauf ? i : -1).filter(i => i >= 0); const lst = akt.length ? akt : s.map((_, i) => i).filter(i => i !== op); idx = lst[Math.floor(t / 5) % lst.length]; }
-    mode = 'check';
-  } else if (st === 'error') mode = 'error';
-  else if (st === 'stale') mode = 'sleep';
-  if (idx >= 0) { const p = standPos(idx); return { x: p.x, y: p.y, mode, idx }; }
-  return { x: TEA.x, y: TEA.y, mode, idx: -1 };
+function plan(t) {  // Naruto-Ninja: nur seine zwei Tische (Produkte, Entdeckung)
+  const s = sites(), mine = mineOf('naruto'), st = data ? data.state : 'idle';
+  const go = (i, mode) => { const p = standPos(i); return { x: p.x, y: p.y, mode, idx: i }; };
+  const tea = mode => ({ x: TEA.x, y: TEA.y, mode, idx: -1 });
+  const ri = mine.find(i => s[i].status === 'restock'); if (ri !== undefined) return go(ri, 'alert');
+  const ei = mine.find(i => s[i].status === 'error');
+  if (st === 'error' && ei !== undefined) return go(ei, 'error');
+  if (st === 'checking' && mine.length) {
+    const ci = mine.find(i => s[i].id === (data && data.current));
+    if (ci !== undefined) return go(ci, 'check');
+    const akt = mine.filter(i => s[i].im_lauf);
+    return go(rotate(t, akt.length ? akt : mine), 'check');
+  }
+  if (st === 'error') return tea('error');
+  if (st === 'stale') return tea('sleep');
+  return tea('idle');
 }
 function stepGuard(A, pl, dt) {
   const g = A.g;
@@ -389,17 +398,19 @@ function bubbleAt(x, y, txt, col, bgc) {
 
 /* ---------- Pulte ---------- */
 const SCOL = { ok: '#6fd16f', checking: '#ffd24a', restock: '#ff5a44', error: '#8b8b8b', unknown: '#c9b98a' };
-function drawIcon(id, x, y) {
+function drawIcon(id0, x, y) {
+  const id = { entdeckung: 'sitemap', op_restock: 'onepiece', op_vorbestellung: 'kalender' }[id0] || id0;
   const o = '#2a1d14';
   R(x - 1, y - 1, 16, 13, '#6f4a28'); R(x, y, 14, 11, '#3b2a1c');
   if (id === 'produkt') { R(x + 2, y + 2, 10, 7, '#c8944c'); R(x + 6, y + 2, 2, 7, '#efe3c6'); R(x + 2, y + 5, 10, 1, '#a8782e'); }
   else if (id === 'offiziell') { R(x + 2, y + 2, 10, 2, '#d8402e'); R(x + 3, y + 5, 8, 1, '#d8402e'); R(x + 3, y + 4, 1, 6, '#d8402e'); R(x + 10, y + 4, 1, 6, '#d8402e'); R(x + 1, y + 1, 12, 1, '#d8402e'); }
   else if (id === 'schnell') { R(x + 2, y + 2, 10, 7, '#efe3c6'); R(x + 3, y + 3, 4, 2, '#555'); for (let k = 0; k < 3; k++) R(x + 3, y + 6 + k * 1, 8, 1, '#999'); R(x + 8, y + 3, 3, 2, '#c0392b'); }
   else if (id === 'langsam') { R(x + 2, y + 2, 10, 1, '#c8944c'); R(x + 2, y + 6, 10, 1, '#c8944c'); R(x + 3, y + 3, 2, 3, '#5aa3ad'); R(x + 6, y + 3, 2, 3, '#d4ae55'); R(x + 9, y + 3, 2, 3, '#c0392b'); R(x + 3, y + 7, 3, 2, '#6fd16f'); R(x + 8, y + 7, 3, 2, '#b07acb'); }
+  else if (id === 'kalender') { R(x + 2, y + 2, 10, 8, '#efe3c6'); R(x + 2, y + 2, 10, 2, '#c0392b'); R(x + 4, y + 5, 2, 2, '#555'); R(x + 8, y + 5, 2, 2, '#555'); R(x + 4, y + 8, 2, 1, '#555'); R(x + 8, y + 8, 2, 1, '#2f5aa8'); }
   else if (id === 'sitemap') { R(x + 2, y + 2, 10, 7, '#e3d3a8'); R(x + 3, y + 7, 3, 1, '#a8782e'); R(x + 5, y + 5, 3, 1, '#a8782e'); R(x + 8, y + 4, 2, 1, '#a8782e'); R(x + 9, y + 3, 2, 2, '#c0392b'); }
   else { R(x + 6, y + 2, 2, 7, '#cfd6e0'); R(x + 4, y + 4, 6, 1, '#cfd6e0'); R(x + 3, y + 7, 2, 2, '#cfd6e0'); R(x + 9, y + 7, 2, 2, '#cfd6e0'); R(x + 4, y + 8, 6, 1, '#cfd6e0'); R(x + 6, y + 1, 2, 1, '#cfd6e0'); }
 }
-const ICON = ['produkt', 'offiziell', 'schnell', 'langsam', 'sitemap', 'onepiece'];
+let deskLabels = [];
 function drawDesk(i, site, t, working, lights) {
   const c = deskCenter(i), cx = c.x, top = DESK_TOP[c.row], x0 = cx - 34;
   const col = SCOL[site.status] || SCOL.unknown;
@@ -417,12 +428,12 @@ function drawDesk(i, site, t, working, lights) {
   const flick = 0.85 + Math.sin(t * 9 + i) * 0.1;
   R(x0 + 60, top - 7, 6, 7, '#3b2818'); R(x0 + 61, top - 6, 4, 5, mix(col, '#ffffff', 0.25)); R(x0 + 60, top - 8, 6, 1, '#5a3f27');
   lights.push({ x: x0 + 63, y: top - 4, r: 34, a: 0.55 * flick, col: hex(col) });
-  drawIcon(ICON[i] || 'produkt', x0 + 4, top - 14);
+  drawIcon(site.id || 'produkt', x0 + 4, top - 14);
   // Beschriftung
-  ctx.font = '8px ' + FONT; ctx.textAlign = 'center';
-  const name = (site.name || site.id || '').slice(0, 12);
-  ctx.fillStyle = '#1a110b'; [[1, 0], [-1, 0], [0, 1], [0, -1]].forEach(([dx, dy]) => ctx.fillText(name, cx + dx, top + 33 + dy));
-  ctx.fillStyle = '#f3e6cf'; ctx.fillText(name, cx, top + 33);
+  const name = (site.name || site.id || '').slice(0, 14);
+  deskLabels.push(() => { ctx.font = '8px ' + FONT; ctx.textAlign = 'center';
+    ctx.fillStyle = '#1a110b'; [[1, 0], [-1, 0], [0, 1], [0, -1]].forEach(([dx, dy]) => ctx.fillText(name, cx + dx, top + 33 + dy));
+    ctx.fillStyle = '#f3e6cf'; ctx.fillText(name, cx, top + 33); });
   // Effekte
   if (site.status === 'restock') {
     const gl = ctx.createLinearGradient(0, top - 70, 0, top);
@@ -479,11 +490,17 @@ function drawFalcon(t) {
   for (let k = 1; k < 5; k++) R(x - 10 - k * 5, y + 2 + Math.sin(t * 8 + k) * 2, 2, 1, 'rgba(255,230,160,' + (0.6 - k * 0.12).toFixed(2) + ')');
   ctx.font = '8px ' + FONT; ctx.textAlign = 'right'; ctx.fillStyle = '#000'; ctx.fillText('→ Telegram', Math.min(x - 12, W - 6) + 1, y + 21); ctx.fillStyle = '#ffe9b0'; ctx.fillText('→ Telegram', Math.min(x - 12, W - 6), y + 20);
 }
-function drawTea(t) {
-  R(436, 206, 30, 3, 'rgba(0,0,0,.25)'); R(437, 198, 28, 9, '#a3281f'); R(437, 198, 28, 2, '#d4503f'); R(439, 205, 24, 2, '#7a1f17');
-  R(468, 214, 14, 3, '#3b2818'); R(466, 208, 18, 6, '#5a3f27'); R(466, 208, 18, 1, '#7c5128');
-  R(470, 202, 8, 6, '#2a2a30'); R(469, 201, 10, 1, '#4a4a55'); R(478, 203, 3, 1, '#2a2a30'); R(474, 199, 2, 2, '#4a4a55');
-  for (let k = 0; k < 2; k++) { const ph = (t * 0.6 + k * 0.5) % 1; R(473 + Math.round(Math.sin(t * 2 + k) * 2), 197 - ph * 14, 1, 1, 'rgba(255,255,255,' + (0.6 - ph * 0.5).toFixed(2) + ')'); }
+function drawTea(t, dy, col) {  // Teeplatz: Kissen + Tischchen mit Teekanne; dy = Reihenverschiebung, col = Kissenfarbe
+  const o = -10, c1 = col || ['#a3281f', '#d4503f', '#7a1f17'];
+  R(436 + o, 206 + dy, 30, 3, 'rgba(0,0,0,.25)'); R(437 + o, 198 + dy, 28, 9, c1[0]); R(437 + o, 198 + dy, 28, 2, c1[1]); R(439 + o, 205 + dy, 24, 2, c1[2]);
+  R(468 + o, 214 + dy, 14, 3, '#3b2818'); R(466 + o, 208 + dy, 18, 6, '#5a3f27'); R(466 + o, 208 + dy, 18, 1, '#7c5128');
+  R(470 + o, 202 + dy, 8, 6, '#2a2a30'); R(469 + o, 201 + dy, 10, 1, '#4a4a55'); R(478 + o, 203 + dy, 3, 1, '#2a2a30'); R(474 + o, 199 + dy, 2, 2, '#4a4a55');
+  for (let k = 0; k < 2; k++) { const ph = (t * 0.6 + k * 0.5) % 1; R(473 + o + Math.round(Math.sin(t * 2 + k) * 2), 197 + dy - ph * 14, 1, 1, 'rgba(255,255,255,' + (0.6 - ph * 0.5).toFixed(2) + ')'); }
+}
+function drawRowSign(cx, top, text, c1, c2) {  // Schild zwischen den Tischen: Wer ist hier zuständig?
+  R(cx - 1, top + 6, 3, 18, '#3b2818'); R(cx - 29, top - 8, 58, 15, c2); R(cx - 28, top - 7, 56, 13, c1);
+  R(cx - 28, top - 7, 56, 1, 'rgba(255,255,255,.25)');
+  ctx.font = '6px ' + FONT; ctx.textAlign = 'center'; ctx.fillStyle = '#fff6dc'; ctx.fillText(text, cx, top + 3);
 }
 
 /* ---------- Pflanzen, Teich, Partikel ---------- */
@@ -559,7 +576,11 @@ function frame() {
   drawBamboo(t);
   drawPond(t);
   drawGong(t, pl.mode === 'alert' || (pl2 && pl2.mode === 'alert'), lights);
-  drawTea(t);
+  drawTea(t, -56, ['#c8641f', '#e8893a', '#8f4513']);   // Ninja (oben, orange)
+  drawTea(t, 0, ['#1f3d78', '#3f64a8', '#14285a']);       // Seemann (unten, blau)
+  { const ms = mineOf('naruto'), mo = mineOf('onepiece');
+    if (ms.length) drawRowSign(265, DESK_TOP[0] + 4, 'NARUTO', '#d8742a', '#7a3d12');
+    if (mo.length) drawRowSign(265, DESK_TOP[1] + 4, 'ONE PIECE', '#2a4f94', '#14285a'); }
   // Sortiert zeichnen: Pulte / Wächter / Katze
   const s = sites(), items = [];
   s.forEach((site, i) => { const c = deskCenter(i); items.push({ y: DESK_TOP[c.row] + 24, draw: () => drawDesk(i, site, t, (pl.idx === i && pl.mode === 'check' && !g.moving) || (pl2 && pl2.idx === i && pl2.mode === 'check' && !A2.g.moving), lights) }); });
@@ -567,7 +588,9 @@ function frame() {
   items.push({ y: g.y + 0.5, draw: () => { head = drawGuard(A1, t, g.moving ? 'walk' : pl.mode, lights); } });
   if (pl2) items.push({ y: A2.g.y + 0.5, draw: () => { head2 = drawGuard(A2, t, A2.g.moving ? 'walk' : pl2.mode, lights); } });
   items.push({ y: cat.y, draw: () => drawCat(t, pl.mode, !!(pl2 && pl2.mode === 'alert')) });
+  deskLabels = [];
   items.sort((a, b) => a.y - b.y).forEach(it => it.draw());
+  deskLabels.forEach(f => f());
   // Sprechblasen
   if (head && !g.moving) {
     const hx = head.x, hy = head.y - 2;
@@ -628,7 +651,7 @@ function updateBar() {
   const ul = document.getElementById('cards'); ul.textContent = '';
   sites().forEach(x => {
     const li = document.createElement('li'); li.style.borderLeftColor = SCOL[x.status] || SCOL.unknown;
-    const b = document.createElement('b'); b.textContent = x.name + ' – ' + (SLABEL[x.status] || x.status);
+    const b = document.createElement('b'); b.textContent = (agentOf(x) === 'onepiece' ? 'One Piece · ' : 'Naruto · ') + x.name + ' – ' + (SLABEL[x.status] || x.status);
     const sp = document.createElement('span'); sp.textContent = (x.detail || '') + (x.last_checked ? ' · zuletzt ' + ago(x.last_checked) : '');
     li.appendChild(b); li.appendChild(sp); ul.appendChild(li);
   });

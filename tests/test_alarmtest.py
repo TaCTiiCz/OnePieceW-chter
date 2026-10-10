@@ -31,13 +31,13 @@ class AlarmTest(unittest.TestCase):
         self.assertEqual(st["state"], "alert")
         stat = {s["id"]: s["status"] for s in st["sites"]}
         self.assertEqual(stat["produkt"], "restock")
-        self.assertEqual(stat["onepiece"], "restock")
+        self.assertEqual(stat["op_restock"], "restock")
 
     def test_nur_one_piece(self):
         _, msgs, st = self.lauf(welche=("onepiece",))
         self.assertEqual(len(msgs), 1)
         stat = {s["id"]: s["status"] for s in st["sites"]}
-        self.assertEqual(stat["onepiece"], "restock")
+        self.assertEqual(stat["op_restock"], "restock")
         self.assertNotEqual(stat.get("produkt"), "restock")
 
     def test_ohne_telegram_wird_nichts_gesendet(self):
