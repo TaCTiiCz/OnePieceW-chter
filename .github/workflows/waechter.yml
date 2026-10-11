@@ -1,6 +1,9 @@
 name: Wächter
 
-# Ein Lauf prüft alle FÄLLIGEN Aufgaben (Naruto zuerst, One Piece wenn fällig) und endet dann.
+# DAUERBETRIEB (Standard): Ein Abschnitt prüft ca. 10 Minuten lang in einer Schleife alle fälligen Aufgaben
+# (Naruto alle ~3 Min., One Piece alle ~5 Min.), speichert den Zustand, veröffentlicht das Dojo und reiht am Ende
+# selbst den nächsten Abschnitt ein. Der Zeitplan (cron) ist nur noch die Absicherung, falls die Kette einmal reißt.
+# Manuelle Aktionen (lauf, Tests) reihen sich in dieselbe Warteschlange ein und setzen danach die Kette fort.
 # Zustand, Verlauf und Dashboard liegen im Zweig "waechter-daten" (getrennt vom Code).
 on:
   workflow_dispatch:
@@ -9,25 +12,26 @@ on:
         description: "Was soll passieren?"
         type: choice
         options:
+          - dauerbetrieb
           - lauf
           - simulation
           - simulation-mit-echtem-telegram
           - telegram-test
           - alarm-test-beide
-        default: lauf
+        default: dauerbetrieb
 
   # ------------------------------------------------------------------
   # REGELMÄSSIGER BETRIEB – AKTIV
   # (README, Abschnitt "Dauerbetrieb"). Zeiten in UTC.
-  #   Öffentliches Repository (kostenlos):   - cron: "*/5 * * * *"
-  #   Privates Repository (2.000 Min/Monat): - cron: "7 * * * *"   (stündlich)
+  #   Öffentliches Repository (kostenlos): Dauerbetrieb in Abschnitten, cron nur als Absicherung (alle 30 Min.)
+  #   Privates Repository (2.000 Min/Monat): - cron: "7 * * * *" und nur 'lauf' statt 'dauerbetrieb' verwenden
   # ------------------------------------------------------------------
-  # Eingeschaltet am 2026-10-10 (öffentliches Repository, kostenlos).
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "3,33 * * * *"
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: waechter
@@ -41,6 +45,7 @@ jobs:
       TELEGRAM_AKTIV: ${{ vars.TELEGRAM_AKTIV }}
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
       TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      GH_TOKEN: ${{ github.token }}
     steps:
       - name: Code holen
         uses: actions/checkout@v4
@@ -61,8 +66,12 @@ jobs:
             cd _daten && git checkout --orphan waechter-daten && git rm -rfq . && cd ..
           fi
 
-      - name: Wächter-Lauf
-        if: ${{ github.event_name == 'schedule' || inputs.aktion == 'lauf' }}
+      - name: Wächter im Dauerbetrieb (ca. 10 Minuten Schleife)
+        if: ${{ github.event_name == 'schedule' || inputs.aktion == 'dauerbetrieb' }}
+        run: python -m waechter dauerlauf --sekunden 600 --daten _daten/laufzeit --dashboard _daten/dashboard.md
+
+      - name: Wächter-Lauf (einmalig)
+        if: ${{ inputs.aktion == 'lauf' }}
         run: python -m waechter lauf --daten _daten/laufzeit --dashboard _daten/dashboard.md
 
       - name: Simulation (lokaler Test-Shop, Test-Telegram-Server)
@@ -117,6 +126,17 @@ jobs:
             git commit -q -m "Wächter-Daten $heute"
           fi
           git push -q --force origin waechter-daten
+
+      - name: Nächsten Abschnitt einreihen (Kette fortsetzen)
+        if: ${{ always() }}
+        run: |
+          # Nur einreihen, wenn nichts wartet (sonst würde eine manuelle Aktion verdrängt) – Wiederholung bei Fehler egal
+          wartend=$(gh run list --workflow=waechter.yml --json status --jq '[.[] | select(.status=="pending" or .status=="queued" or .status=="waiting")] | length' 2>/dev/null || echo 0)
+          if [ "${wartend:-0}" = "0" ]; then
+            gh workflow run waechter.yml --ref "${{ github.ref_name }}" -f aktion=dauerbetrieb || echo "Einreihen fehlgeschlagen (Absicherung per Zeitplan)"
+          else
+            echo "Es wartet bereits ein Lauf."
+          fi
 
   dojo-veroeffentlichen:
     # Veröffentlicht das Pixel-Dojo (GitHub Pages). Einmalig nötig: Settings -> Pages -> Source: "GitHub Actions".

@@ -90,7 +90,18 @@ Händlerdatenbank liegt in `data/haendler_db.json`.
    `simulation-mit-echtem-telegram` → „Run workflow“.** Du bekommst eine Meldung mit
    **„🧪 TEST – SIMULIERTER RESTOCK – KEIN ECHTES ANGEBOT“**. Die gemessene Verzögerung steht danach im Dashboard.
 
-### 3.3 Dauerbetrieb einschalten (läuft auch bei geschlossenem Browser)
+### 3.3 Dauerbetrieb (läuft auch bei geschlossenem Browser)
+
+**Seit Oktober 2026 läuft der Wächter auf GitHub als Dauerschleife:** Ein Abschnitt prüft ca. 10 Minuten lang alle
+fälligen Aufgaben (Naruto alle ca. 3 Minuten, One Piece alle ca. 5 Minuten), speichert den Zustand, veröffentlicht das
+Dojo und reiht am Ende selbst den nächsten Abschnitt ein. Zwischen zwei Abschnitten entsteht eine Lücke von etwa einer
+Minute. Der Zeitplan (alle 30 Minuten) startet die Kette neu, falls sie einmal reißt. Das braucht ein **öffentliches**
+Repository (unbegrenzte Minuten); im privaten Repository wäre das Freikontingent in wenigen Tagen aufgebraucht.
+Das Dojo ist dabei bis zu ca. 12 Minuten alt, Telegram-Alarme kommen sofort. Manuelle Aktionen (Tests) reihen sich in
+dieselbe Warteschlange ein und setzen die Kette danach fort. **Anhalten:** Actions → „Wächter“ → „…“ → „Disable workflow“
+(laufende Abschnitte vorher abbrechen).
+
+Die folgende Anleitung beschreibt den alten Zeitplan-Betrieb (einzelne Läufe), den du im privaten Repository nutzen würdest:
 
 Zuerst Abschnitt 4 lesen und eine Variante wählen. Danach:
 

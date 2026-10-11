@@ -2,8 +2,8 @@
 #  Betrieb: Prüfintervalle, Prioritäten und Grenzen
 # =====================================================================
 #  Intervalle in Sekunden. Sie sind das ZIEL – tatsächlich kann nicht
-#  häufiger geprüft werden, als der Wächter gestartet wird (GitHub-Zeitplan:
-#  frühestens alle 5 Minuten, oft verzögert; eigener Server: frei wählbar).
+#  häufiger geprüft werden, wie die Schleife läuft (GitHub-Dauerbetrieb: Abschnitte von
+#  ca. 10 Minuten, dazwischen Lücken von ca. 1 Minute; eigener Server: frei wählbar).
 #  robots.txt (Crawl-delay) und Händlergrenzen gehen immer vor.
 # =====================================================================
 
@@ -33,5 +33,5 @@ fehler_push_ab = 3                 # nach so vielen Fehlversuchen in Folge an ei
 
 [betrieb]
 # Nur zur Anzeige im Dashboard: wie wird der Wächter gestartet?
-ausfuehrung = "GitHub Actions (Zeitplan)"
-zeitplan_minuten = 5
+ausfuehrung = "GitHub Actions (Dauerbetrieb in 10-Minuten-Abschnitten)"
+zeitplan_minuten = 0
