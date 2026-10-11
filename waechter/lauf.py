@@ -231,8 +231,8 @@ PREISGEBUNDEN = (m.RESTOCK, m.PREISRUECKGANG)   # nur hier gilt die Preisgrenze;
 def preisbewertung(zustand: dict, b: m.Beobachtung, produkte: dict, typ: str = m.RESTOCK) -> dict:
     """Preisprüfung für Display-Alarme. Rückgabe: {"sperre": Grund oder None, "zusatz": Infozeile}.
 
-    - Restock / Preisrückgang: Alarm nur, wenn Preis <= Grenze. Grenze = eigener Wert pro Set, sonst Marktpreis
-      (Median der günstigsten Preise der anderen Händler x (1 + Toleranz)), ohne genug Vergleiche ein fester Wert.
+    - Restock / Preisrückgang: Alarm nur, wenn Preis <= Grenze. Grenze = eigener Wert pro Set, sonst dein Höchstpreis
+      (max_kaufpreis_eur), sonst Marktpreis (Median der günstigsten Preise der anderen Händler), sonst ein fester Wert.
     - Neue Vorbestellung / neu gelistet: IMMER melden (nur Plausibilität: unter display_min_eur ist es kein Display);
       ist der Preis über dem Marktpreis, steht das deutlich in der Meldung."""
     pg = produkte.get("preisgrenzen", {})
@@ -254,20 +254,25 @@ def preisbewertung(zustand: dict, b: m.Beobachtung, produkte: dict, typ: str = m
     preise = list(je_shop.values())
     median = statistics.median(preise) if preise else None
     eigen = pg.get((b.set_code or "").upper())
+    max_kauf = float(pg.get("max_kaufpreis_eur", 0) or 0)
     if isinstance(eigen, (int, float)) and eigen > 0:
-        grenze, art = eigen * 100, "deine Grenze"
+        grenze, art = eigen * 100, f"deinem Limit für {b.set_code}"
+    elif max_kauf > 0:
+        grenze, art = max_kauf * 100, "deinem Höchstpreis"
     elif median is not None and len(preise) >= int(pg.get("min_vergleichspreise", 3)):
-        grenze, art = median * (1 + float(pg.get("toleranz_prozent", 0)) / 100), "Marktpreis"
+        grenze, art = median * (1 + float(pg.get("toleranz_prozent", 0)) / 100), "dem Marktpreis"
     else:
-        grenze, art = float(pg.get("display_ohne_vergleich_eur", 200)) * 100, "Standardgrenze"
-    zusatz = f"Marktvergleich: Median {euro(median)} bei {len(preise)} Händlern" if median is not None else ""
+        grenze, art = float(pg.get("display_ohne_vergleich_eur", 200)) * 100, "der Standardgrenze"
+    markt = f"Median {euro(median)} bei {len(preise)} Händlern" if median is not None else ""
     if b.preis_cent > grenze:
         if typ in PREISGEBUNDEN:
-            return {"sperre": f"Preis {euro(b.preis_cent)} über {art} {euro(grenze)}", "zusatz": zusatz}
-        zusatz = (f"💸 Preis über {art} ({euro(grenze)})" + (f" – {zusatz}" if zusatz else "")).strip()
-    elif median is not None and b.preis_cent <= median * 0.9:
-        zusatz = f"💰 Unter Marktpreis – {zusatz}"
-    return {"sperre": None, "zusatz": zusatz}
+            return {"sperre": f"Preis {euro(b.preis_cent)} über {art} ({euro(grenze)})", "zusatz": markt}
+        return {"sperre": None, "zusatz": f"💸 Über {art} ({euro(grenze)})" + (f" – Markt: {markt}" if markt else "")}
+    if median is not None and b.preis_cent <= median * 0.9:
+        return {"sperre": None, "zusatz": f"💰 Unter Marktpreis – {markt}"}
+    if median is not None and b.preis_cent > median * 1.1:
+        return {"sperre": None, "zusatz": f"Im Limit, aber über Marktpreis – {markt}"}
+    return {"sperre": None, "zusatz": f"Marktvergleich: {markt}" if markt else ""}
 
 
 def plane_shops(shops: list[Shop], zustand: dict, jetzt: dt.datetime, einst: dict) -> list[tuple[Shop, str]]:

@@ -19,19 +19,20 @@ wiederholsperre_stunden = 24
 neu_gelistet_max_tage = 14
 
 # ---------------------------------------------------------------------
-# Preisgrenzen für Kaufalarme ("guter Preis")
-# - Restock und Preisrückgang: Alarm nur, wenn Preis <= Grenze. Grenze = eigener Wert pro Set (unten), sonst der
-#   Marktpreis = Median der günstigsten Preise aller anderen Händler (+ toleranz_prozent); ohne genug Vergleichspreise
-#   gilt display_ohne_vergleich_eur. Teurere Restocks stehen nur im Bericht.
-# - Neue Vorbestellung / neu gelistet: wird IMMER gemeldet (Hinweis "💸 über Marktpreis" bzw. "💰 unter Marktpreis").
+# Preisgrenzen für Kaufalarme
+# - Restock und Preisrückgang: Alarm nur, wenn Preis <= Grenze. Grenze = eigener Wert pro Set (unten), sonst dein
+#   Höchstpreis max_kaufpreis_eur. (0 = automatisch Marktpreis: Median der günstigsten Preise der anderen Händler.)
+#   Teurere Restocks stehen nur im Bericht.
+# - Neue Vorbestellung / neu gelistet: wird IMMER gemeldet, mit Hinweis "💸 über deinem Höchstpreis" bzw.
+#   "💰 unter Marktpreis". Jede Meldung zeigt den Marktvergleich.
 # ---------------------------------------------------------------------
 [preisgrenzen]
-toleranz_prozent = 0
+max_kaufpreis_eur = 250       # Displays kaufe ich höchstens für 250 € (Stand 12.10.2026)
+toleranz_prozent = 0          # nur relevant, wenn max_kaufpreis_eur = 0
 min_vergleichspreise = 3
 display_ohne_vergleich_eur = 200
 display_min_eur = 40          # darunter ist es kein Display (Einzelbooster/Fehler) -> kein Alarm
-# Eigene Grenzen pro Set in Euro (überschreiben den Marktpreis), z. B.:
-# OP09 = 350
+# Eigene Grenzen pro Set in Euro (überschreiben den Höchstpreis), z. B.:
 # OP13 = 160
 
 # ---------------------------------------------------------------------
