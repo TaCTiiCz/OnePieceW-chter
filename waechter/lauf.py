@@ -91,6 +91,9 @@ def fehler_beobachtung(shop: Shop, angebot_id: str, vorlage: dict, url: str, feh
 
 def pruefe_shop(shop: Shop, konfig: Konfig, abrufer, zustand: dict, zeitpunkt: str, heute: dt.date,
                 log: Callable[[str], None]) -> tuple[list[m.Beobachtung], list[dict], dict]:
+    if shop.plattform != "shopify":   # WooCommerce, Shopware, JTL, … (HTML-Auswertung)
+        from .onepiece_generisch import pruefe_shop_generisch
+        return pruefe_shop_generisch(shop, konfig, abrufer, zustand, zeitpunkt, heute, log)
     setnamen = konfig.produkte.get("displays", {}).get("setnamen", {})
     bericht = {"name": shop.name, "listen_ok": False, "fehler": [], "produkte_gelesen": 0,
                "kandidaten": 0, "seiten_geprueft": 0}
