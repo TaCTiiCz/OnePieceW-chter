@@ -130,7 +130,8 @@ def erkenne_typ(text: str) -> tuple[str, str]:
     if _hat(n, "booster display", "display", "booster box", "boosterbox", "booster-box", "box da 24",
             "24 packs", "24 pack", "24 booster", "24 bustine", "24 buste", "24 sobres", "24er"):
         return m.DISPLAY, "Display/Booster Box"
-    if _hat(n, "booster pack", "single pack", "1 pack", "bustina", "booster", "pack"):
+    if _hat(n, "booster pack", "single pack", "1 pack", "bustina", "booster", "pack", "einzelbooster", "einzelpack",
+            "einzelner booster", "1x booster", "1 x booster", "sobre", "busta"):
         return m.BOOSTER_PACK, "einzelner Booster"
     return m.TYP_UNBEKANNT, "kein Produkttyp erkannt"
 
@@ -180,6 +181,10 @@ def klassifiziere(titel: str, variante: str = "", handle: str = "", tags: Iterab
     titeltext = f"{titel} {var}".strip()
     sprache, hinweise = erkenne_sprache(titel, var, handle, tags)
     typ, typgrund = erkenne_typ(titeltext)
+    if var:   # Variante "Booster"/"Einzelpack"/"Case" eines Display-Produkts ist KEIN Display
+        vtyp, vgrund = erkenne_typ(var)
+        if vtyp in (m.BOOSTER_PACK, m.CASE, m.EINZELKARTE, m.SLEEVED_BOOSTER, m.ZUBEHOER) and typ != vtyp:
+            typ, typgrund = vtyp, f"Variante '{var}': {vgrund}"
     set_code, setgrund = erkenne_set(titeltext, setnamen)
     versiegelt, vgrund = erkenne_versiegelung(titeltext, tags, beschreibung)
     vollst, vollgrund = erkenne_vollstaendigkeit(titeltext, beschreibung, typ)

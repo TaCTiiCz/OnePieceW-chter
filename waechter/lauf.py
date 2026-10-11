@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import datetime as dt
+import statistics
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
@@ -167,6 +168,8 @@ def pruefe_shop(shop: Shop, konfig: Konfig, abrufer, zustand: dict, zeitpunkt: s
         if handle not in zu_pruefen or vid not in zu_pruefen[handle]:
             zu_pruefen.setdefault(handle, {})[vid] = dict(eintrag.get("letzte") or {})
     bericht["kandidaten"] = sum(len(x) for x in zu_pruefen.values())
+    bericht["kandidaten_schluessel"] = sorted(zu_pruefen)
+    bericht["veroeffentlicht"] = {}
 
     # 3) Konkrete Produktseiten abrufen
     for handle, varianten in sorted(zu_pruefen.items()):
@@ -178,6 +181,7 @@ def pruefe_shop(shop: Shop, konfig: Konfig, abrufer, zustand: dict, zeitpunkt: s
                                                         "; ".join(fehler) or "unbekannter Fehler", zeitpunkt))
             continue
         bericht["seiten_geprueft"] += 1
+        bericht["veroeffentlicht"][handle] = js.get("published_at") or js.get("created_at")
         gesehen = set()
         for v in js.get("variants", []) or []:
             vid = str(v.get("id"))
@@ -207,6 +211,51 @@ def _alter_min(ts: Optional[str], jetzt: dt.datetime) -> Optional[float]:
         return (jetzt - dt.datetime.fromisoformat(ts)).total_seconds() / 60
     except ValueError:
         return None
+
+
+def _alter_tage(ts: Optional[str], jetzt: dt.datetime) -> Optional[float]:
+    if not ts:
+        return None
+    try:
+        t = dt.datetime.fromisoformat(str(ts).replace("Z", "+00:00"))
+        if t.tzinfo is None:
+            t = t.replace(tzinfo=dt.timezone.utc)
+        return (jetzt - t).total_seconds() / 86400
+    except ValueError:
+        return None
+
+
+def preisbewertung(zustand: dict, b: m.Beobachtung, produkte: dict) -> dict:
+    """Ist der Preis gut genug für einen Alarm? Rückgabe: {"sperre": Grund oder None, "zusatz": Infozeile}.
+    Nur für Displays; Grenze = eigener Wert pro Set, sonst Median anderer Händler x (1 + Toleranz)."""
+    pg = produkte.get("preisgrenzen", {})
+    if b.kategorie != "display" or b.preis_cent is None:
+        return {}
+    euro = lambda c: f"{c / 100:,.2f} €".replace(",", "X").replace(".", ",").replace("X", ".")
+    if b.waehrung == "EUR" and b.preis_cent < float(pg.get("display_min_eur", 40)) * 100:
+        return {"sperre": f"Preis {euro(b.preis_cent)} ist für ein Display unplausibel (Einzelbooster/Fehler?)"}
+    if b.waehrung != "EUR":
+        return {}
+    preise, shops = [], set()
+    for a in zustand.get("angebote", {}).values():
+        l = a.get("letzte") or {}
+        if (l.get("ziel_id") == b.ziel_id and l.get("shop_id") != b.shop_id and l.get("shop_id") not in shops
+                and l.get("abruf_ok") and l.get("status") in m.SICHERE_STATUS and l.get("waehrung") == "EUR"
+                and (l.get("preis_cent") or 0) >= float(pg.get("display_min_eur", 40)) * 100):
+            preise.append(l["preis_cent"])
+            shops.add(l.get("shop_id"))
+    eigen = pg.get((b.set_code or "").upper())
+    median = statistics.median(preise) if preise else None
+    if isinstance(eigen, (int, float)) and eigen > 0:
+        grenze, art = eigen * 100, "deine Grenze"
+    elif median is not None and len(preise) >= int(pg.get("min_vergleichspreise", 3)):
+        grenze, art = median * (1 + float(pg.get("toleranz_prozent", 10)) / 100), "Marktpreis"
+    else:
+        grenze, art = float(pg.get("display_ohne_vergleich_eur", 200)) * 100, "Standardgrenze"
+    zusatz = (f"Marktvergleich: Median {euro(median)} bei {len(preise)} Händlern" if median is not None else "")
+    if b.preis_cent > grenze:
+        return {"sperre": f"Preis {euro(b.preis_cent)} über {art} {euro(grenze)}", "zusatz": zusatz}
+    return {"sperre": None, "zusatz": zusatz}
 
 
 def plane_shops(shops: list[Shop], zustand: dict, jetzt: dt.datetime, einst: dict) -> list[tuple[Shop, str]]:
@@ -308,12 +357,37 @@ def fuehre_aus(konfig: Konfig, abrufer, speicher: Speicher, *, testdaten: bool =
         beob, aus, bericht = res
         sz = zustand["shops"].setdefault(shop.id, {"basis_erfasst": False})
         ereig_shop: list[m.Ereignis] = []
+        # "Neu gelistet" nur für Produkte, die WIRKLICH neu im Shop sind – nicht für alte Produkte, die der Wächter
+        # nur zum ersten Mal sieht (Katalog-Grenze, neuer Suchweg, Seitenbudget). Merkmale: Schlüssel war in keiner
+        # früheren Liste UND (falls bekannt) Veröffentlichungsdatum jung.
+        migration = "kandidaten_bekannt" not in sz
+        bekannt_vorher = set(sz.get("kandidaten_bekannt") or [])
+        veroeff = bericht.get("veroeffentlicht") or {}
+        max_tage = float(einstellungen.get("neu_gelistet_max_tage", 14))
         for b in beob:
-            ereig, geaendert = ev.verarbeite(b, zustand, shop_basis_erfasst=sz["basis_erfasst"],
+            schluessel = b.angebot_id.split(":")[1] if b.angebot_id.count(":") >= 2 else b.angebot_id
+            basis_fuer_b = sz["basis_erfasst"]
+            if b.angebot_id not in zustand["angebote"] and basis_fuer_b:
+                alter_tage = _alter_tage(veroeff.get(schluessel), jetzt)
+                jung = alter_tage is not None and alter_tage <= max_tage
+                alt_bekannt = alter_tage is not None and alter_tage > max_tage
+                basis_fuer_b = (not alt_bekannt) and (jung or (not migration and schluessel not in bekannt_vorher))
+            ereig, geaendert = ev.verarbeite(b, zustand, shop_basis_erfasst=basis_fuer_b,
                                              shop_freigegeben=shop.kaufalarm_freigegeben,
                                              einstellungen=einstellungen, jetzt=jetzt)
-            for e_ in ereig:   # Fake-Shop-Überwachung: auffallend billig -> Alarm mit Warnung
-                if e_.alarm and e_.typ in (m.RESTOCK, m.NEU_LIEFERBAR, m.NEUE_VORBESTELLUNG):
+            for e_ in ereig:
+                if not e_.alarm or e_.typ not in m.ALARM_TYPEN:
+                    continue
+                # Preisgrenze ("guter Preis"): teurere Angebote nur in den Bericht, nicht aufs Handy
+                bewertung = preisbewertung(zustand, b, konfig.produkte)
+                if bewertung.get("zusatz"):
+                    e_.text = f"{e_.text}\n{bewertung['zusatz']}"
+                if bewertung.get("sperre"):
+                    e_.alarm = False
+                    e_.alarm_grund = bewertung["sperre"]
+                    continue
+                # Fake-Shop-Überwachung: auffallend billig -> Alarm mit deutlicher Warnung
+                if e_.typ in (m.RESTOCK, m.NEU_LIEFERBAR, m.NEUE_VORBESTELLUNG):
                     warn = fakecheck.preis_verdacht(zustand, b.ziel_id, b.shop_id, b.preis_cent, b.waehrung)
                     if warn:
                         e_.text = f"{warn}\n{e_.text}"
@@ -326,6 +400,9 @@ def fuehre_aus(konfig: Konfig, abrufer, speicher: Speicher, *, testdaten: bool =
                                 "sprache": b.sprache, "typ": b.typ, "sicherheit": b.sicherheit, "quelle": b.url,
                                 "fehler": b.fehler, "testdaten": testdaten})
         alle_ereignisse.extend(ereig_shop)
+        sz["kandidaten_bekannt"] = sorted(bekannt_vorher | set(bericht.get("kandidaten_schluessel") or [])
+                                          | {aid.split(":")[1] for aid in zustand["angebote"]
+                                             if aid.startswith(shop.id + ":") and aid.count(":") >= 2})
         beob_index.update({b.angebot_id: b.als_dict() for b in beob})
         versende(ereig_shop, beob_index)       # sofort melden
         bericht["basis_vorher"] = sz["basis_erfasst"]

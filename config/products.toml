@@ -14,12 +14,33 @@ preisrueckgang_min_prozent = 3.0
 preisrueckgang_min_euro = 2.0
 # Gleiche Meldung wird innerhalb dieser Zeit nicht erneut verschickt
 wiederholsperre_stunden = 24
+# "Neu gelistet" nur, wenn das Produkt laut Shop höchstens so viele Tage veröffentlicht ist (Shopify: published_at).
+# Ältere Produkte, die der Wächter nur erstmals SIEHT (z. B. über einen neuen Suchweg), werden still übernommen.
+neu_gelistet_max_tage = 14
+
+# ---------------------------------------------------------------------
+# Preisgrenzen für Kaufalarme ("guter Preis")
+# Alarm (Restock / neu lieferbar / Vorbestellung / Preisrückgang) nur, wenn der Preis <= Grenze ist.
+# Grenze = eigener Wert pro Set (unten), sonst automatisch: Median der anderen Händler x (1 + toleranz),
+# ohne genug Vergleichspreise der feste Wert display_ohne_vergleich_eur. Teurere Angebote stehen im Bericht.
+# ---------------------------------------------------------------------
+[preisgrenzen]
+toleranz_prozent = 10
+min_vergleichspreise = 3
+display_ohne_vergleich_eur = 200
+display_min_eur = 40          # darunter ist es kein Display (Einzelbooster/Fehler) -> kein Alarm
+# Eigene Grenzen pro Set in Euro, z. B.:
+# OP09 = 350
+# OP13 = 160
 
 # ---------------------------------------------------------------------
 # 1) Booster Displays (24 Packs) aller OP-Sets ab OP01, nur Englisch
 # ---------------------------------------------------------------------
 [displays]
 ab_set = 1
+# Höchstes Set, das Bandai/Distributoren schon führen. Höhere Sets (z. B. OP20–OP24 als Platzhalter-Vorbestellung)
+# gelten als spekulativ: sie stehen im Bericht, lösen aber KEINEN Kaufalarm aus. Bei neuer Ankündigung um 1 erhöhen.
+bekannt_bis_set = 19
 # Besonders wichtige Sets (erscheinen im Bericht zuerst, Telegram markiert sie)
 prioritaet = ["OP13", "OP15", "OP09", "OP18", "OP16", "OP11"]
 
