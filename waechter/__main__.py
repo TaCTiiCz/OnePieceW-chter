@@ -19,6 +19,7 @@ import json
 import shutil
 import sys
 import time
+from typing import Optional
 from pathlib import Path
 
 from . import telegram
@@ -133,13 +134,20 @@ def main(argv: list[str] | None = None) -> int:
         daten = Path(args.daten)
         dash = Path(args.dashboard) if args.dashboard else daten / "dashboard.md"
         ende = time.monotonic() + args.sekunden if getattr(args, "sekunden", 0) else None
+        hg: Optional[dict] = {} if args.befehl == "dauerlauf" else None
         while True:
             naechste = naruto_lauf(konfig, daten, Path(args.db), dash, onepiece=not args.ohne_onepiece,
-                                   ohne_push=args.ohne_push, alle=args.alle, max_sekunden=args.max_sekunden)
+                                   ohne_push=args.ohne_push, alle=args.alle, max_sekunden=args.max_sekunden,
+                                   hintergrund=hg)
             if args.befehl == "lauf":
                 return 0
-            warte = max(20.0, min(60.0, naechste))
+            warte = max(10.0, min(30.0, naechste))
             if ende and time.monotonic() + warte > ende:
+                th = (hg or {}).get("thread")
+                if th is not None and th.is_alive():   # laufende One-Piece-Prüfung sauber abwarten (Budget begrenzt sie)
+                    th.join(timeout=240)
+                    naruto_lauf(konfig, daten, Path(args.db), dash, onepiece=not args.ohne_onepiece,
+                                ohne_push=args.ohne_push, alle=False, max_sekunden=args.max_sekunden, hintergrund=hg)
                 return 0
             time.sleep(warte)
 
@@ -183,8 +191,19 @@ def _onepiece_fuers_dojo(zustand: dict, zus: dict, jetzt) -> None:
                          "text": e.get("text", ""), "testmodus": bool(zus.get("testdaten"))})
 
 
+def _op_pruefung(konfig, daten: Path, db: Path, budget: float, parallel: int, ohne_push: bool, log):
+    """Die eigentliche One-Piece-Prüfung (eigener Speicher, darf in einem Hintergrund-Thread laufen)."""
+    sp = Speicher(daten / "onepiece")
+    from .onepiece_haendler import mit_datenbank
+    op_konfig = mit_datenbank(konfig, db)
+    zus = fuehre_aus(op_konfig, Abrufer({}, protokoll=log, pausen=(5.0,)), sp, telegram_senden=not ohne_push,
+                     log=log, zeitbudget=budget, parallel=parallel)
+    (daten / "onepiece_bericht.md").write_text(erzeuge_bericht(op_konfig, sp.lade_zustand()), encoding="utf-8")
+    return zus
+
+
 def naruto_lauf(konfig, daten: Path, db: Path, dash: Path, onepiece: bool = True, ohne_push: bool = False,
-                log=print, alle: bool = False, max_sekunden: int = 0) -> float:
+                log=print, alle: bool = False, max_sekunden: int = 0, hintergrund: Optional[dict] = None) -> float:
     """Ein Lauf. Gibt die Sekunden bis zur nächsten fälligen Aufgabe zurück."""
     from . import dashboard as dashmod
     from . import push as pushmod
@@ -198,20 +217,43 @@ def naruto_lauf(konfig, daten: Path, db: Path, dash: Path, onepiece: bool = True
         l.betrieb["grenzen"]["max_laufzeit_sekunden"] = max_sekunden
     info = l.ausfuehren(nur_faellige=not alle)
     jetzt = dt.datetime.now(dt.timezone.utc)
-    if onepiece and info.get("onepiece_faellig") and "onepiece" in l.zustand["aufgaben"]:
-        log("One-Piece-Prüfung ist fällig …")
-        sp = Speicher(daten / "onepiece")
-        try:
-            from .onepiece_haendler import mit_datenbank
-            op_konfig = mit_datenbank(konfig, db)
-            zus = fuehre_aus(op_konfig, Abrufer({}, protokoll=log, pausen=(5.0,)), sp, telegram_senden=not ohne_push,
-                             log=log, zeitbudget=float(l.betrieb["grenzen"].get("onepiece_zeitbudget_sekunden", 150)),
-                             parallel=int(l.betrieb["grenzen"].get("parallele_shops", 8)))
-            (daten / "onepiece_bericht.md").write_text(erzeuge_bericht(op_konfig, sp.lade_zustand()), encoding="utf-8")
-            _onepiece_fuers_dojo(l.zustand, zus, jetzt)
-            erledigt(l.zustand["aufgaben"]["onepiece"], True, jetzt, l.betrieb)
-        except Exception as ex:
-            erledigt(l.zustand["aufgaben"]["onepiece"], False, jetzt, l.betrieb, f"{type(ex).__name__}: {ex}")
+    if onepiece and "onepiece" in l.zustand["aufgaben"]:
+        grenzen = l.betrieb["grenzen"]
+        budget = float(grenzen.get("onepiece_zeitbudget_sekunden", 150))
+        parallel = int(grenzen.get("parallele_shops", 8))
+        task = l.zustand["aufgaben"]["onepiece"]
+
+        def uebernehmen(ergebnis):
+            zus, fehler = ergebnis
+            if fehler is None:
+                _onepiece_fuers_dojo(l.zustand, zus, jetzt)
+                erledigt(task, True, jetzt, l.betrieb)
+            else:
+                erledigt(task, False, jetzt, l.betrieb, fehler)
+
+        if hintergrund is None:   # Einzellauf: synchron
+            if info.get("onepiece_faellig"):
+                log("One-Piece-Prüfung ist fällig …")
+                try:
+                    uebernehmen((_op_pruefung(konfig, daten, db, budget, parallel, ohne_push, log), None))
+                except Exception as ex:
+                    uebernehmen((None, f"{type(ex).__name__}: {ex}"))
+        else:                     # Dauerbetrieb: One Piece läuft im Hintergrund, Naruto wird nie aufgehalten
+            th = hintergrund.get("thread")
+            if th is not None and not th.is_alive():
+                uebernehmen(hintergrund.pop("ergebnis", (None, "Hintergrundlauf ohne Ergebnis")))
+                hintergrund["thread"] = th = None
+            if th is None and info.get("onepiece_faellig"):
+                log("One-Piece-Prüfung startet im Hintergrund …")
+
+                def arbeit():
+                    try:
+                        hintergrund["ergebnis"] = (_op_pruefung(konfig, daten, db, budget, parallel, ohne_push, log), None)
+                    except Exception as ex:
+                        hintergrund["ergebnis"] = (None, f"{type(ex).__name__}: {ex}")
+                import threading
+                hintergrund["thread"] = threading.Thread(target=arbeit, daemon=True)
+                hintergrund["thread"].start()
     l.speichern()
     db_json = json.loads(db.read_text(encoding="utf-8")) if db.exists() else {}
     dash.parent.mkdir(parents=True, exist_ok=True)

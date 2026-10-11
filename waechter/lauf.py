@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import datetime as dt
+import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
 from typing import Callable, Optional
@@ -32,6 +33,20 @@ def _versand_hinweis(shop: Shop, versand: Optional[int], waehrung: Optional[str]
     return f"laut Versandseite ({shop.versand_de.geprueft_am})"
 
 
+def jetzt_utc() -> dt.datetime:
+    return dt.datetime.now(dt.timezone.utc)
+
+
+def _beobachtenswert(eintrag: dict, jetzt: dt.datetime) -> bool:
+    """Schnelle Runde: Angebote, die gerade nicht lieferbar sind, in JEDEM Lauf; lieferbare nur alle ~10 Minuten
+    (dort geht es nur um Preisrückgänge und das Erkennen von Ausverkauf)."""
+    letzte = eintrag.get("letzte") or {}
+    if letzte.get("status") != m.IN_STOCK:
+        return True
+    alter = _alter_min(eintrag.get("zuletzt_geprueft"), jetzt)
+    return alter is None or alter >= 10
+
+
 def baue_beobachtung(shop: Shop, js: dict, v: dict, k: m.Klassifizierung, t: m.Treffer, info: dict,
                      zeitpunkt: str, heute: dt.date) -> m.Beobachtung:
     preis = shopify.preis_cent_aus_js(v)
@@ -39,7 +54,7 @@ def baue_beobachtung(shop: Shop, js: dict, v: dict, k: m.Klassifizierung, t: m.T
     if waehrungen == [shop.waehrung]:
         waehrung, bestaetigt = shop.waehrung, True
     elif not waehrungen:
-        waehrung, bestaetigt = shop.waehrung, False
+        waehrung, bestaetigt = shop.waehrung, bool(shop.pruefung.get("waehrung_aus_pruefung"))
     else:
         waehrung, bestaetigt = (waehrungen[0] if len(waehrungen) == 1 else None), False
     status, gruende = bestimme_status(
@@ -49,7 +64,8 @@ def baue_beobachtung(shop: Shop, js: dict, v: dict, k: m.Klassifizierung, t: m.T
         verkaufsplaene=shopify.verkaufsplaene(js),
         schema_verfuegbarkeit=shopify.schema_verfuegbarkeit(info, v.get("id")), heute=heute)
     if not waehrungen:
-        gruende.append("Währung nicht auf der Seite bestätigt (Konfigurationswert verwendet)")
+        gruende.append("Währung laut Händlerprüfung (nicht auf der Seite sichtbar)" if bestaetigt
+                       else "Währung nicht auf der Seite bestätigt (Konfigurationswert verwendet)")
     elif not bestaetigt:
         gruende.append(f"Seite zeigt Währung {', '.join(waehrungen)} statt {shop.waehrung}")
     if info.get("seitenfehler"):
@@ -90,13 +106,13 @@ def fehler_beobachtung(shop: Shop, angebot_id: str, vorlage: dict, url: str, feh
 
 
 def pruefe_shop(shop: Shop, konfig: Konfig, abrufer, zustand: dict, zeitpunkt: str, heute: dt.date,
-                log: Callable[[str], None]) -> tuple[list[m.Beobachtung], list[dict], dict]:
+                log: Callable[[str], None], modus: str = "voll") -> tuple[list[m.Beobachtung], list[dict], dict]:
     if shop.plattform != "shopify":   # WooCommerce, Shopware, JTL, … (HTML-Auswertung)
         from .onepiece_generisch import pruefe_shop_generisch
-        return pruefe_shop_generisch(shop, konfig, abrufer, zustand, zeitpunkt, heute, log)
+        return pruefe_shop_generisch(shop, konfig, abrufer, zustand, zeitpunkt, heute, log, modus)
     setnamen = konfig.produkte.get("displays", {}).get("setnamen", {})
     bericht = {"name": shop.name, "listen_ok": False, "fehler": [], "produkte_gelesen": 0,
-               "kandidaten": 0, "seiten_geprueft": 0}
+               "kandidaten": 0, "seiten_geprueft": 0, "modus": modus}
     beobachtungen: list[m.Beobachtung] = []
     ausgeschlossen: list[dict] = []
 
@@ -105,7 +121,10 @@ def pruefe_shop(shop: Shop, konfig: Konfig, abrufer, zustand: dict, zeitpunkt: s
         bericht["fehler"].append(f"Shop übersprungen: {pause}")
         return beobachtungen, ausgeschlossen, bericht
 
-    produkte, fehler, liste_ok = shopify.liste_produkte(shop, abrufer)
+    if modus == "schnell":   # nur bekannte Angebote prüfen – kein Katalog-Scan
+        produkte, fehler, liste_ok = [], [], True
+    else:
+        produkte, fehler, liste_ok = shopify.liste_produkte(shop, abrufer)
     bericht.update(listen_ok=liste_ok, produkte_gelesen=len(produkte))
     bericht["fehler"].extend(fehler)
 
@@ -128,9 +147,20 @@ def pruefe_shop(shop: Shop, konfig: Konfig, abrufer, zustand: dict, zeitpunkt: s
                 "prioritaet": t.prioritaet, "sprache": k.sprache, "typ": k.typ, "set_code": k.set_code,
                 "versiegelt": k.versiegelt, "vollstaendig": k.vollstaendig}
 
+    # 1b) Große Shops: Katalog wird nach max_seiten abgeschnitten – One-Piece-Displays dahinter über die Shop-Suche finden
+    if modus == "voll" and liste_ok and len(produkte) >= shop.max_seiten * 250:
+        for p in shopify.suche_vorschlaege(shop, abrufer):
+            tt = p.get("title", "")
+            k = klassifiziere(tt, "", p.get("handle", ""), [], "", p.get("vendor", ""), p.get("type", ""), setnamen)
+            t, grund = ordne_zu(tt, k, konfig.produkte)
+            if t is not None and p.get("handle"):
+                zu_pruefen.setdefault(p["handle"], {})
+
     # 2) Bereits bekannte Angebote, die nicht mehr in der Liste stehen, trotzdem direkt prüfen
     for aid, eintrag in zustand["angebote"].items():
         if not aid.startswith(shop.id + ":"):
+            continue
+        if modus == "schnell" and not _beobachtenswert(eintrag, jetzt_utc()):
             continue
         _, handle, vid = aid.split(":", 2)
         if handle not in zu_pruefen or vid not in zu_pruefen[handle]:
@@ -169,6 +199,39 @@ def pruefe_shop(shop: Shop, konfig: Konfig, abrufer, zustand: dict, zeitpunkt: s
     return beobachtungen, ausgeschlossen, bericht
 
 
+def _alter_min(ts: Optional[str], jetzt: dt.datetime) -> Optional[float]:
+    if not ts:
+        return None
+    try:
+        return (jetzt - dt.datetime.fromisoformat(ts)).total_seconds() / 60
+    except ValueError:
+        return None
+
+
+def plane_shops(shops: list[Shop], zustand: dict, jetzt: dt.datetime, einst: dict) -> list[tuple[Shop, str]]:
+    """Gestaffelte Prüfung: Händler, die Kaufalarme auslösen dürfen, werden in jedem Lauf SCHNELL geprüft (nur bekannte
+    Angebote, je 1 Anfrage) und alle ~30 Min. VOLL (kompletter Katalog, findet neue Produkte). Alle übrigen Händler
+    (nur Bericht, kein Alarm) werden nur alle ~2 Std. voll geprüft. Reihenfolge: Alarmfähige zuerst, schnelle vor vollen,
+    dann am längsten ungeprüft."""
+    voll_alarm = float(einst.get("vollsuche_minuten_alarmfaehig", 30))
+    voll_sonst = float(einst.get("vollsuche_minuten_sonstige", 120))
+    plan: list[tuple[tuple, Shop, str]] = []
+    for sh in shops:
+        sz = zustand["shops"].get(sh.id) or {}
+        alter_voll = _alter_min(sz.get("letzte_vollsuche"), jetzt)
+        alter = _alter_min(sz.get("zuletzt_geprueft"), jetzt)
+        grenze = voll_alarm if sh.kaufalarm_freigegeben else voll_sonst
+        if alter_voll is None or alter_voll >= grenze:
+            modus = "voll"
+        elif sh.kaufalarm_freigegeben:
+            modus = "schnell"
+        else:
+            continue   # nicht fällig und ohne Alarmrecht: spart Anfragen
+        plan.append(((not sh.kaufalarm_freigegeben, modus == "voll", sz.get("zuletzt_geprueft") or ""), sh, modus))
+    plan.sort(key=lambda x: x[0])
+    return [(sh, mo) for _, sh, mo in plan]
+
+
 def fuehre_aus(konfig: Konfig, abrufer, speicher: Speicher, *, testdaten: bool = False,
                jetzt: Optional[dt.datetime] = None, telegram_senden: bool = True,
                telegram_transport: Optional[Callable] = None, log: Callable[[str], None] = print,
@@ -190,74 +253,100 @@ def fuehre_aus(konfig: Konfig, abrufer, speicher: Speicher, *, testdaten: bool =
     verlauf: list[dict] = []
 
     shops = [sh for sh in konfig.shops if not ist_ausgeschlossen(sh.basis_url, konfig.ausschluss_domains, konfig.ausschluss_namen)]
-    if zeitbudget:  # am längsten ungeprüfte Shops zuerst (nie geprüfte ganz vorn)
-        shops.sort(key=lambda sh: (zustand["shops"].get(sh.id) or {}).get("zuletzt_geprueft") or "")
+    modi: dict[str, str] = {sh.id: "voll" for sh in shops}
+    if zeitbudget:  # nur bei der One-Piece-Prüfung: gestaffelte Prüfung (schnelle Runde / Vollsuche)
+        plan = plane_shops(shops, zustand, jetzt, einstellungen)
+        shops = [sh for sh, _ in plan]
+        modi = {sh.id: mo for sh, mo in plan}
     t0 = time.monotonic()
     uebersprungen: list[str] = []
+    lock = threading.RLock()
 
-    def arbeite(shop: Shop):
-        if zeitbudget and time.monotonic() - t0 > zeitbudget:
-            return None
-        log(f"Prüfe {shop.name} ({shop.basis_url}) …")
-        abrufer.setze_host_regeln(shop.host, shop.min_abstand_sekunden, shop.max_anfragen_pro_lauf)
-        try:
-            return pruefe_shop(shop, konfig, abrufer, zustand, zeitpunkt, heute, log)
-        except Exception as ex:  # ein kaputter Shop darf den Lauf nicht stoppen
-            log(f"  ! {shop.name}: {type(ex).__name__}: {ex}")
-            return [], [], {"name": shop.name, "listen_ok": False, "fehler": [f"{type(ex).__name__}: {ex}"],
-                            "produkte_gelesen": 0, "kandidaten": 0, "seiten_geprueft": 0}
-
-    if parallel > 1:
-        with ThreadPoolExecutor(max_workers=parallel) as pool:
-            ergebnisse = list(pool.map(arbeite, shops))
-    else:
-        ergebnisse = [arbeite(sh) for sh in shops]
-
-    for shop, res in zip(shops, ergebnisse):
-        if res is None:
-            uebersprungen.append(shop.id)
-            continue
-        beob, aus, bericht = res
-        sz = zustand["shops"].setdefault(shop.id, {"basis_erfasst": False})
-        for b in beob:
-            ereig, geaendert = ev.verarbeite(b, zustand, shop_basis_erfasst=sz["basis_erfasst"],
-                                             shop_freigegeben=shop.kaufalarm_freigegeben,
-                                             einstellungen=einstellungen, jetzt=jetzt)
-            alle_ereignisse.extend(ereig)
-            if geaendert:
-                verlauf.append({"zeit": zeitpunkt, "angebot": b.angebot_id, "shop": shop.id, "ziel": b.ziel_id,
-                                "status": b.status, "abruf_ok": b.abruf_ok, "preis_cent": b.preis_cent,
-                                "waehrung": b.waehrung, "versand_cent": b.versand_cent, "gesamt_cent": b.gesamt_cent,
-                                "sprache": b.sprache, "typ": b.typ, "sicherheit": b.sicherheit, "quelle": b.url,
-                                "fehler": b.fehler, "testdaten": testdaten})
-        bericht["basis_vorher"] = sz["basis_erfasst"]
-        if bericht["listen_ok"] and not sz["basis_erfasst"]:
-            sz["basis_erfasst"] = True
-            sz["basis_seit"] = zeitpunkt
-            bericht["basis_jetzt_erfasst"] = True
-        sz["zuletzt_geprueft"] = zeitpunkt
-        sz["letzter_fehler"] = bericht["fehler"][-1] if bericht["fehler"] else None
-        shop_berichte[shop.id] = bericht
-        alle_beob.extend(beob)
-        alle_ausgeschlossen.extend(aus)
-    if uebersprungen:
-        log(f"{len(uebersprungen)} Shops wegen Zeitbudget auf den nächsten Lauf verschoben")
-
-    # Telegram
+    # Telegram vorab klären: Alarme werden SOFORT nach der Prüfung des jeweiligen Shops gesendet, nicht erst am Laufende
     tg_aktiv, tg_info = telegram.konfiguration()
     if testdaten:
         tg_aktiv, tg_info = False, "Testdaten-Lauf: Telegram wird nie benutzt"
     elif not telegram_senden:
         tg_aktiv, tg_info = False, "Telegram für diesen Lauf abgeschaltet"
     offene = zustand.setdefault("offene_meldungen", [])
-    beob_index = {b.angebot_id: b.als_dict() for b in alle_beob}
-    for e in alle_ereignisse:
-        if e.alarm and not e.unterdrueckt:
-            offene.append(e.als_dict())
+    beob_index: dict[str, dict] = {}
     gesendet, fehlgeschlagen = 0, []
+
+    def versende(ereig: list, index: dict) -> None:
+        nonlocal gesendet
+        for e in ereig:
+            if not (e.alarm and not e.unterdrueckt):
+                continue
+            d = e.als_dict()
+            if not tg_aktiv:
+                continue   # nicht aktiv: Meldungen nicht aufstauen, nur im Bericht zeigen
+            ok, info = telegram.sende(telegram.formatiere(d, index.get(e.angebot_id)), telegram_transport)
+            if ok:
+                gesendet += 1
+                e.gemeldet = True
+            else:
+                fehlgeschlagen.append(info)
+                offene.append(d)   # wird im nächsten Lauf erneut versucht
+
+    def arbeite(shop: Shop):
+        if zeitbudget and time.monotonic() - t0 > zeitbudget:
+            return None
+        log(f"Prüfe {shop.name} ({shop.basis_url}) [{modi.get(shop.id, 'voll')}] …")
+        abrufer.setze_host_regeln(shop.host, shop.min_abstand_sekunden, shop.max_anfragen_pro_lauf)
+        try:
+            res = pruefe_shop(shop, konfig, abrufer, zustand, zeitpunkt, heute, log, modi.get(shop.id, "voll"))
+        except Exception as ex:  # ein kaputter Shop darf den Lauf nicht stoppen
+            log(f"  ! {shop.name}: {type(ex).__name__}: {ex}")
+            res = [], [], {"name": shop.name, "listen_ok": False, "fehler": [f"{type(ex).__name__}: {ex}"],
+                           "produkte_gelesen": 0, "kandidaten": 0, "seiten_geprueft": 0}
+        with lock:
+            verarbeite_shop(shop, res)
+        return True
+
+    def verarbeite_shop(shop: Shop, res) -> None:
+        beob, aus, bericht = res
+        sz = zustand["shops"].setdefault(shop.id, {"basis_erfasst": False})
+        ereig_shop: list[m.Ereignis] = []
+        for b in beob:
+            ereig, geaendert = ev.verarbeite(b, zustand, shop_basis_erfasst=sz["basis_erfasst"],
+                                             shop_freigegeben=shop.kaufalarm_freigegeben,
+                                             einstellungen=einstellungen, jetzt=jetzt)
+            ereig_shop.extend(ereig)
+            if geaendert:
+                verlauf.append({"zeit": zeitpunkt, "angebot": b.angebot_id, "shop": shop.id, "ziel": b.ziel_id,
+                                "status": b.status, "abruf_ok": b.abruf_ok, "preis_cent": b.preis_cent,
+                                "waehrung": b.waehrung, "versand_cent": b.versand_cent, "gesamt_cent": b.gesamt_cent,
+                                "sprache": b.sprache, "typ": b.typ, "sicherheit": b.sicherheit, "quelle": b.url,
+                                "fehler": b.fehler, "testdaten": testdaten})
+        alle_ereignisse.extend(ereig_shop)
+        beob_index.update({b.angebot_id: b.als_dict() for b in beob})
+        versende(ereig_shop, beob_index)       # sofort melden
+        bericht["basis_vorher"] = sz["basis_erfasst"]
+        if bericht["listen_ok"] and not sz["basis_erfasst"]:
+            sz["basis_erfasst"] = True
+            sz["basis_seit"] = zeitpunkt
+            bericht["basis_jetzt_erfasst"] = True
+        if bericht["listen_ok"] and bericht.get("modus", "voll") == "voll":
+            sz["letzte_vollsuche"] = zeitpunkt
+        sz["zuletzt_geprueft"] = zeitpunkt
+        sz["letzter_fehler"] = bericht["fehler"][-1] if bericht["fehler"] else None
+        shop_berichte[shop.id] = bericht
+        alle_beob.extend(beob)
+        alle_ausgeschlossen.extend(aus)
+
+    if parallel > 1:
+        with ThreadPoolExecutor(max_workers=parallel) as pool:
+            ergebnisse = list(pool.map(arbeite, shops))
+    else:
+        ergebnisse = [arbeite(sh) for sh in shops]
+    uebersprungen = [sh.id for sh, r in zip(shops, ergebnisse) if r is None]
+    if uebersprungen:
+        log(f"{len(uebersprungen)} Shops wegen Zeitbudget auf den nächsten Lauf verschoben")
+
+    # Übrig gebliebene (früher fehlgeschlagene) Meldungen erneut versuchen
     if tg_aktiv:
         rest = []
-        for e in offene:
+        for e in list(offene):
             if jetzt - dt.datetime.fromisoformat(e["zeitpunkt"]) > dt.timedelta(hours=24):
                 continue  # zu alt, nicht mehr nachsenden
             ok, info = telegram.sende(telegram.formatiere(e, beob_index.get(e["angebot_id"])), telegram_transport)
@@ -267,11 +356,9 @@ def fuehre_aus(konfig: Konfig, abrufer, speicher: Speicher, *, testdaten: bool =
                     if x.fingerabdruck == e["fingerabdruck"]:
                         x.gemeldet = True
             else:
-                fehlgeschlagen.append(info)
                 rest.append(e)
         zustand["offene_meldungen"] = rest
     else:
-        # nicht aktiv: Meldungen nicht aufstauen, nur im Bericht zeigen
         zustand["offene_meldungen"] = []
 
     ev.aufraeumen(zustand, jetzt)

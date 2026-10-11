@@ -1,5 +1,13 @@
-# Tägliche Suche nach neuen Händlern (optional, braucht Secret BRAVE_SEARCH_API_KEY).
+# Suche nach neuen Händlern über die Brave-Search-API (optional, Secret BRAVE_SEARCH_API_KEY oder BRAVE_API_KEY).
 # Treffer sind NUR Kandidaten. Jeder neue Shop wird danach live geprüft (Händlerprüfung).
+#
+# Budget: höchstens `pro_woche` Suchen je Kalenderwoche (Brave: 5 $ Gratis-Guthaben/Monat = ca. 1000 Suchen),
+# höchstens `pro_lauf` je Lauf (täglicher Lauf). Die Anfragen werden reihum abgearbeitet, damit über die Wochen
+# alle Formulierungen drankommen. Anfragen = feste Liste [[anfragen]] + Kombinationen aus [[gruppen]] (Produkt x Begriff).
+
+[budget]
+pro_woche = 100
+pro_lauf = 15
 
 [[anfragen]]
 q = "\"Naruto Card Game\" Bandai vorbestellen"
@@ -32,6 +40,62 @@ land = "DE"
 [[anfragen]]
 q = "TCG Shop Österreich Booster Display"
 land = "AT"
+
+# ---- Kombinationen: jede Gruppe erzeugt Anfragen "<Produkt> <Begriff>" für das angegebene Land ----
+[[gruppen]]
+land = "DE"
+produkte = ["One Piece Card Game Display", "One Piece Booster Box", "One Piece OP15 Display", "Naruto Card Game Bandai", "Gundam Card Game Display"]
+begriffe = ["kaufen", "Vorbestellung", "Shop", "auf Lager", "Restock"]
+
+[[gruppen]]
+land = "AT"
+produkte = ["One Piece Card Game Display", "Naruto Card Game Bandai"]
+begriffe = ["kaufen", "Vorbestellung", "Shop"]
+
+[[gruppen]]
+land = "CH"
+produkte = ["One Piece Card Game Display", "Naruto Card Game Bandai"]
+begriffe = ["kaufen", "Vorbestellung", "Shop"]
+
+[[gruppen]]
+land = "FR"
+produkte = ["One Piece Card Game display", "Naruto Card Game Bandai"]
+begriffe = ["précommande", "acheter", "boutique"]
+
+[[gruppen]]
+land = "ES"
+produkte = ["One Piece Card Game display", "Naruto Card Game Bandai"]
+begriffe = ["preventa", "comprar", "tienda"]
+
+[[gruppen]]
+land = "IT"
+produkte = ["One Piece Card Game display", "Naruto Card Game Bandai"]
+begriffe = ["preordine", "acquista", "negozio"]
+
+[[gruppen]]
+land = "NL"
+produkte = ["One Piece Card Game display", "Naruto Card Game Bandai"]
+begriffe = ["voorbestellen", "kopen", "webshop"]
+
+[[gruppen]]
+land = "ALL"
+produkte = ["One Piece TCG booster box EU", "Naruto Card Game Bandai booster box", "One Piece OP15 display", "One Piece OP13 display"]
+begriffe = ["pre-order", "in stock", "buy Europe", "restock"]
+
+[[gruppen]]
+land = "BE"
+produkte = ["One Piece Card Game display", "Naruto Card Game Bandai"]
+begriffe = ["voorbestellen", "précommande"]
+
+[[gruppen]]
+land = "PL"
+produkte = ["One Piece Card Game display", "Naruto Card Game Bandai"]
+begriffe = ["przedsprzedaż", "kup", "sklep", "zamów"]
+
+[[gruppen]]
+land = "SE"
+produkte = ["One Piece Card Game display", "Naruto Card Game Bandai"]
+begriffe = ["förbeställ", "köp"]
 
 [filter]
 # Diese Domains sind keine Händler oder Marktplätze und werden ignoriert

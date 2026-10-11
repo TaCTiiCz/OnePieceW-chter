@@ -30,13 +30,14 @@ jobs:
     timeout-minutes: 40
     env:
       BRAVE_SEARCH_API_KEY: ${{ secrets.BRAVE_SEARCH_API_KEY }}
+      BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: Neue Händler suchen (nur wenn eingerichtet)
-        if: ${{ github.event.schedule == '17 3 * * *' }}
+        if: ${{ github.event.schedule == '17 3 * * *' || github.event_name == 'workflow_dispatch' }}
         run: python -m waechter haendler-suchen
       - name: Händler prüfen (live)
         run: |
@@ -50,6 +51,7 @@ jobs:
           git config user.name "onepiece-waechter[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/haendler_db.json config/haendler_kandidaten.csv
+          if [ -f data/suche_zustand.json ]; then git add data/suche_zustand.json; fi
           if git diff --cached --quiet; then echo "Keine Änderungen"; exit 0; fi
           git commit -m "Händlerprüfung $(date -u +%Y-%m-%dT%H:%MZ)"
           for i in 1 2 3; do git pull --rebase && git push && exit 0; sleep $((i * 10)); done

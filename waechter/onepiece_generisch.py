@@ -21,6 +21,7 @@ from . import seite
 from .haendlerdb import links
 from .klassifizierung import klassifiziere
 from .konfig import Shop
+from .lauf import _beobachtenswert, jetzt_utc
 from .zuordnung import ordne_zu
 
 OP_WORT = re.compile(r"one[\s\-_+]?piece|\bop[\s\-_]?\d{1,2}\b", re.I)
@@ -128,10 +129,10 @@ def _fehler(shop: Shop, url: str, vorlage: dict, fehler: str, zeitpunkt: str) ->
 
 
 def pruefe_shop_generisch(shop: Shop, konfig, abrufer, zustand: dict, zeitpunkt: str, heute: dt.date,
-                          log: Callable[[str], None]) -> tuple[list[m.Beobachtung], list[dict], dict]:
+                          log: Callable[[str], None], modus: str = "voll") -> tuple[list[m.Beobachtung], list[dict], dict]:
     setnamen = konfig.produkte.get("displays", {}).get("setnamen", {})
     bericht = {"name": shop.name, "listen_ok": False, "fehler": [], "produkte_gelesen": 0, "kandidaten": 0,
-               "seiten_geprueft": 0, "generisch": True}
+               "seiten_geprueft": 0, "generisch": True, "modus": modus}
     beobachtungen: list[m.Beobachtung] = []
     ausgeschlossen: list[dict] = []
     pause = abrufer.host_pausiert(shop.host)
@@ -141,7 +142,7 @@ def pruefe_shop_generisch(shop: Shop, konfig, abrufer, zustand: dict, zeitpunkt:
 
     # 1) Listen lesen
     zu_pruefen: dict[str, dict] = {}   # URL -> Vorlage
-    for lu in (shop.pruefung.get("listen") or []):
+    for lu in ((shop.pruefung.get("listen") or []) if modus == "voll" else []):
         a = abrufer.hole(lu)
         if not a.ok:
             bericht["fehler"].append(f"{lu}: {a.fehler}")
@@ -159,8 +160,12 @@ def pruefe_shop_generisch(shop: Shop, konfig, abrufer, zustand: dict, zeitpunkt:
 
     # 2) Bereits bekannte Angebote immer erneut prüfen (auch wenn sie aus der Liste verschwunden sind)
     bekannt: list[str] = []
+    if modus == "schnell":
+        bericht["listen_ok"] = True
     for aid, eintrag in zustand["angebote"].items():
         if aid.startswith(shop.id + ":"):
+            if modus == "schnell" and not _beobachtenswert(eintrag, jetzt_utc()):
+                continue
             u = (eintrag.get("letzte") or {}).get("url")
             if u:
                 bekannt.append(u)
