@@ -10,6 +10,7 @@ from typing import Callable, Optional
 
 from . import modelle as m
 from . import ereignisse as ev
+from . import fakecheck
 from . import telegram
 from .haendler import shopify
 from .klassifizierung import klassifiziere
@@ -311,6 +312,12 @@ def fuehre_aus(konfig: Konfig, abrufer, speicher: Speicher, *, testdaten: bool =
             ereig, geaendert = ev.verarbeite(b, zustand, shop_basis_erfasst=sz["basis_erfasst"],
                                              shop_freigegeben=shop.kaufalarm_freigegeben,
                                              einstellungen=einstellungen, jetzt=jetzt)
+            for e_ in ereig:   # Fake-Shop-Überwachung: auffallend billig -> Alarm mit Warnung
+                if e_.alarm and e_.typ in (m.RESTOCK, m.NEU_LIEFERBAR, m.NEUE_VORBESTELLUNG):
+                    warn = fakecheck.preis_verdacht(zustand, b.ziel_id, b.shop_id, b.preis_cent, b.waehrung)
+                    if warn:
+                        e_.text = f"{warn}\n{e_.text}"
+                        e_.daten["preis_verdacht"] = True
             ereig_shop.extend(ereig)
             if geaendert:
                 verlauf.append({"zeit": zeitpunkt, "angebot": b.angebot_id, "shop": shop.id, "ziel": b.ziel_id,
