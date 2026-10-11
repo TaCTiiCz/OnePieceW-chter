@@ -14,7 +14,7 @@ entdeckung_schnell = 900           # Neuheiten-Feeds, Shopsuche, Vorbestell-/Nar
 entdeckung_langsam = 10800         # Neuheiten-/Bandai-Kategorien, kompletter Shopify-Katalog: 3 Std.
 sitemap = 86400                    # Sitemaps: täglich
 offiziell = 1800                   # offizielle Naruto-Website: 30 Min.
-onepiece = 900                     # One-Piece-Prüfung (alle Displays, Restock + Vorbestellung): alle 15 Minuten
+onepiece = 300                     # One-Piece-Prüfung (alle Displays, Restock + Vorbestellung): bei jedem Lauf (Ziel 5 Min.)
 
 [fokus]
 # Zeitfenster um einen bekannten Vorbestellstart, in dem besonders häufig geprüft wird
