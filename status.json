@@ -1,18 +1,18 @@
 {
- "updated": "2026-10-10T23:54:44+00:00",
- "state": "checking",
+ "updated": "2026-10-11T23:53:47+00:00",
+ "state": "alert",
  "current": null,
- "last_run": "2026-10-10T23:47:54+00:00",
- "run_seconds": 71.4,
+ "last_run": "2026-10-11T23:53:38+00:00",
+ "run_seconds": 9.2,
  "sites": [
   {
    "id": "produkt",
    "name": "Produkte",
    "agent": "naruto",
-   "status": "ok",
+   "status": "error",
    "im_lauf": true,
-   "last_checked": "2026-10-10T23:48:00+00:00",
-   "detail": "10 Aufgaben"
+   "last_checked": "2026-10-11T23:53:41+00:00",
+   "detail": "4 von 10 Aufgaben mit Fehlern"
   },
   {
    "id": "entdeckung",
@@ -20,74 +20,82 @@
    "agent": "naruto",
    "status": "ok",
    "im_lauf": true,
-   "last_checked": "2026-10-10T23:48:11+00:00",
-   "detail": "635 Aufgaben, 30 mit Fehlern"
+   "last_checked": "2026-10-11T23:53:43+00:00",
+   "detail": "649 Aufgaben, 38 mit Fehlern"
   },
   {
    "id": "op_restock",
    "name": "Restock",
    "agent": "onepiece",
-   "status": "ok",
+   "status": "restock",
    "im_lauf": true,
-   "last_checked": "2026-10-10T23:49:05+00:00",
-   "detail": "1 Aufgaben"
+   "last_checked": "2026-10-11T23:53:47+00:00",
+   "detail": "Neu gelistet und lieferbar: OP12 Booster Display (EN, 24 Packs) bei AdventureCardz"
   },
   {
    "id": "op_vorbestellung",
    "name": "Vorbestellung",
    "agent": "onepiece",
-   "status": "ok",
+   "status": "restock",
    "im_lauf": true,
-   "last_checked": "2026-10-10T23:49:05+00:00",
-   "detail": "1 Aufgaben"
+   "last_checked": "2026-10-11T23:53:47+00:00",
+   "detail": "Neue Vorbestellung: OP24 Booster Display (EN, 24 Packs) bei Brickznmore"
   }
  ],
  "events": [
   {
-   "time": "2026-10-10T15:58:00+00:00",
-   "text": "🧪 OP_RESTOCK: 🧪 TEST: One Piece OP16 Display (EN) wieder lieferbar"
+   "time": "2026-10-11T22:15:20+00:00",
+   "text": "OP_RESTOCK: Neu gelistet und lieferbar: OP12 Booster Display (EN, 24 Packs) bei AdventureCardz"
   },
   {
-   "time": "2026-10-10T15:58:00+00:00",
-   "text": "🧪 KAUFALARM: 🧪 TEST: Naruto Card Game Booster Display (EN) jetzt vorbestellbar"
+   "time": "2026-10-11T22:15:20+00:00",
+   "text": "OP_RESTOCK: Neu gelistet und lieferbar: OP17 Booster Display (EN, 24 Packs) bei AdventureCardz"
   },
   {
-   "time": "2026-10-09T11:17:23+00:00",
-   "text": "🧪 OP_RESTOCK: 🧪 TEST: One Piece OP16 Display (EN) wieder lieferbar"
+   "time": "2026-10-11T22:15:20+00:00",
+   "text": "OP_RESTOCK: Neu gelistet und lieferbar: OP17 Booster Display (EN, 24 Packs) bei AdventureCardz"
   },
   {
-   "time": "2026-10-09T11:17:23+00:00",
-   "text": "🧪 KAUFALARM: 🧪 TEST: Naruto Card Game Booster Display (EN) jetzt vorbestellbar"
+   "time": "2026-10-11T22:15:20+00:00",
+   "text": "OP_RESTOCK: Neu gelistet und lieferbar: OP17 Booster Display (EN, 24 Packs) bei GS Game On"
   },
   {
-   "time": "2026-10-09T09:11:15+00:00",
-   "text": "FRUEHHINWEIS: Offizielle Seite geändert: https://www.naruto-cardgame.com/en/"
+   "time": "2026-10-11T22:15:20+00:00",
+   "text": "OP_RESTOCK: Neu gelistet und lieferbar: OP13 Booster Display (EN, 24 Packs) bei GS Game On"
   },
   {
-   "time": "2026-10-09T09:11:10+00:00",
-   "text": "FRUEHHINWEIS: Offizielle Naruto-Meldung: Tabletop.me Event Information EVENTS Oct. 09, 2026"
+   "time": "2026-10-11T22:15:20+00:00",
+   "text": "OP_RESTOCK: Neu gelistet und lieferbar: OP09 Booster Display (EN, 24 Packs) bei GS Game On"
   },
   {
-   "time": "2026-10-08T09:49:12+00:00",
-   "text": "FRUEHHINWEIS: Neue passende Produktseite (über Sitemap gefunden – Seite evtl. schon länger online): Naruto Card Game - Disp…"
+   "time": "2026-10-11T22:15:20+00:00",
+   "text": "OP_RESTOCK: Neu gelistet und lieferbar: OP05 Booster Display (EN, 24 Packs) bei GS Game On"
   },
   {
-   "time": "2026-10-07T14:25:28+00:00",
-   "text": "FRUEHHINWEIS: Neue passende Produktseite (über Sitemap gefunden – Seite evtl. schon länger online): Naruto Card Game - Disp…"
+   "time": "2026-10-11T22:15:20+00:00",
+   "text": "OP_RESTOCK: Neu gelistet und lieferbar: OP01 Booster Display (EN, 24 Packs) bei GS Game On"
   },
   {
-   "time": "2026-10-07T14:24:30+00:00",
-   "text": "FRUEHHINWEIS: Neue passende Produktseite: Naruto Card Game - Display 01 [ENG] PreOrder - Release: 2027 bei Brickznmore – no…"
+   "time": "2026-10-11T22:15:20+00:00",
+   "text": "OP_RESTOCK: Neu gelistet und lieferbar: OP12 Booster Display (EN, 24 Packs) bei Brickznmore"
   },
   {
-   "time": "2026-10-07T14:20:41+00:00",
-   "text": "AUSGANGSLAGE: Ausgangslage: bereits bestellbare Naruto-Angebote (nicht neu): Naruto TCG: First Set 2nd Edition - Booster Bo…"
+   "time": "2026-10-11T22:15:20+00:00",
+   "text": "OP_RESTOCK: Neu gelistet und lieferbar: OP11 Booster Display (EN, 24 Packs) bei Brickznmore"
+  },
+  {
+   "time": "2026-10-11T22:15:20+00:00",
+   "text": "OP_VORBESTELLUNG: Neue Vorbestellung: OP24 Booster Display (EN, 24 Packs) bei Brickznmore"
+  },
+  {
+   "time": "2026-10-11T22:15:20+00:00",
+   "text": "OP_VORBESTELLUNG: Neue Vorbestellung: OP23 Booster Display (EN, 24 Packs) bei Brickznmore"
   }
  ],
  "stats": {
-  "haendler": 103,
-  "aufgaben": 646,
-  "aufgaben_mit_fehlern": 30,
+  "haendler": 105,
+  "aufgaben": 660,
+  "aufgaben_mit_fehlern": 42,
   "push_problem": false
  }
 }
