@@ -118,9 +118,10 @@ dieselbe Warteschlange ein und setzen die Kette danach fort. **Anhalten:** Actio
   - „Neu gelistet" nur bei echten Neuzugängen: Das Produkt stand in keiner früheren Liste des Shops und ist (bei Shopify laut
     `published_at`) höchstens `neu_gelistet_max_tage` (14) Tage online. Alte Produkte, die der Wächter nur erstmals SIEHT
     (Katalog-Grenze, neuer Suchweg, Seitenbudget), werden still übernommen.
-  - Preisgrenzen (`[preisgrenzen]` in `config/products.toml`): Alarm nur, wenn der Preis höchstens Marktmedian + 10 % beträgt
-    (oder deine eigene Grenze pro Set, z. B. `OP09 = 350`); ohne Vergleichspreise gilt 200 €. Unter 40 € ist es kein Display.
-    Jede Meldung zeigt den Marktvergleich.
+  - Preisgrenzen (`[preisgrenzen]` in `config/products.toml`): **Restocks und Preisrückgänge** nur, wenn der Preis höchstens
+    beim Marktpreis liegt (Median der günstigsten Preise aller anderen Händler) oder unter deiner eigenen Grenze pro Set
+    (z. B. `OP09 = 350`); ohne Vergleichspreise gilt 200 €. **Vorbestellungen und Neuheiten werden immer gemeldet**, mit
+    Hinweis „💸 über Marktpreis" bzw. „💰 unter Marktpreis". Unter 40 € ist es kein Display. Jede Meldung zeigt den Marktvergleich.
   - Varianten wie „Booster" in einem Display-Produkt sind Einzelbooster, keine Displays.
   - Sets über `bekannt_bis_set` (19) gelten als spekulative Platzhalter-Vorbestellungen: Bericht ja, Alarm nein.
 - *Wachhund* (`.github/workflows/wachhund.yml`): prüft alle 30 Minuten, ob das Dojo noch aktuell ist; startet bei Stillstand die

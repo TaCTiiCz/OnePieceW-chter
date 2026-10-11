@@ -20,16 +20,17 @@ neu_gelistet_max_tage = 14
 
 # ---------------------------------------------------------------------
 # Preisgrenzen für Kaufalarme ("guter Preis")
-# Alarm (Restock / neu lieferbar / Vorbestellung / Preisrückgang) nur, wenn der Preis <= Grenze ist.
-# Grenze = eigener Wert pro Set (unten), sonst automatisch: Median der anderen Händler x (1 + toleranz),
-# ohne genug Vergleichspreise der feste Wert display_ohne_vergleich_eur. Teurere Angebote stehen im Bericht.
+# - Restock und Preisrückgang: Alarm nur, wenn Preis <= Grenze. Grenze = eigener Wert pro Set (unten), sonst der
+#   Marktpreis = Median der günstigsten Preise aller anderen Händler (+ toleranz_prozent); ohne genug Vergleichspreise
+#   gilt display_ohne_vergleich_eur. Teurere Restocks stehen nur im Bericht.
+# - Neue Vorbestellung / neu gelistet: wird IMMER gemeldet (Hinweis "💸 über Marktpreis" bzw. "💰 unter Marktpreis").
 # ---------------------------------------------------------------------
 [preisgrenzen]
-toleranz_prozent = 10
+toleranz_prozent = 0
 min_vergleichspreise = 3
 display_ohne_vergleich_eur = 200
 display_min_eur = 40          # darunter ist es kein Display (Einzelbooster/Fehler) -> kein Alarm
-# Eigene Grenzen pro Set in Euro, z. B.:
+# Eigene Grenzen pro Set in Euro (überschreiben den Marktpreis), z. B.:
 # OP09 = 350
 # OP13 = 160
 
