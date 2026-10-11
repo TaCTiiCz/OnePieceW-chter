@@ -114,6 +114,15 @@ dieselbe Warteschlange ein und setzen die Kette danach fort. **Anhalten:** Actio
   nur Vorkasse/Krypto, Reißer-Werbung, Domain-Endung, fehlende Kontaktdaten). Hohes Risiko (≥5 Punkte) oder mittleres Risiko bei „vorgeprüft"
   nimmt dem Shop das Kaufalarm-Recht; Details stehen in `data/haendler_db.json` (`fake_check`). Zusätzlich warnt jeder Restock-/Neu-Alarm deutlich,
   wenn der Preis unter 50 % des Medians anderer Händler liegt. Alle Signale sind Hinweise, keine Beweise; fehlende Daten geben keine Punkte.
+- *Saubere Meldungen (nach der Fehlalarm-Welle vom 12.10.2026):*
+  - „Neu gelistet" nur bei echten Neuzugängen: Das Produkt stand in keiner früheren Liste des Shops und ist (bei Shopify laut
+    `published_at`) höchstens `neu_gelistet_max_tage` (14) Tage online. Alte Produkte, die der Wächter nur erstmals SIEHT
+    (Katalog-Grenze, neuer Suchweg, Seitenbudget), werden still übernommen.
+  - Preisgrenzen (`[preisgrenzen]` in `config/products.toml`): Alarm nur, wenn der Preis höchstens Marktmedian + 10 % beträgt
+    (oder deine eigene Grenze pro Set, z. B. `OP09 = 350`); ohne Vergleichspreise gilt 200 €. Unter 40 € ist es kein Display.
+    Jede Meldung zeigt den Marktvergleich.
+  - Varianten wie „Booster" in einem Display-Produkt sind Einzelbooster, keine Displays.
+  - Sets über `bekannt_bis_set` (19) gelten als spekulative Platzhalter-Vorbestellungen: Bericht ja, Alarm nein.
 - *Wachhund* (`.github/workflows/wachhund.yml`): prüft alle 30 Minuten, ob das Dojo noch aktuell ist; startet bei Stillstand die
   Kette neu und warnt einmalig per Telegram.
 

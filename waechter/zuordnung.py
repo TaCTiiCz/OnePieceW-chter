@@ -78,6 +78,11 @@ def ordne_zu(titeltext: str, k: m.Klassifizierung, produkte: dict) -> tuple[Opti
         if k.typ == m.TYP_UNBEKANNT:
             t.sicherheit = m.UNSICHER
             t.gruende = ["Produkttyp unklar (kein 'Display/Booster Box' im Titel)"]
+        bis = int(produkte.get("displays", {}).get("bekannt_bis_set", 0) or 0)
+        if bis and _set_nummer(k.set_code) > bis:
+            t.sicherheit = m.UNSICHER
+            t.gruende.append(f"Set {k.set_code} ist noch nicht angekündigt (bekannt bis OP{bis:02d}) – "
+                             "spekulative Platzhalter-Vorbestellung, kein Kaufalarm")
         return _sprache_pruefen(t, k)
 
     return None, f"Produkttyp {k.typ} wird nicht beobachtet"

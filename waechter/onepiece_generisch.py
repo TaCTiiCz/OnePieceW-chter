@@ -170,8 +170,17 @@ def pruefe_shop_generisch(shop: Shop, konfig, abrufer, zustand: dict, zeitpunkt:
             if u:
                 bekannt.append(u)
                 zu_pruefen.setdefault(u, dict(eintrag.get("letzte") or {}))
-    reihenfolge = bekannt + [u for u in zu_pruefen if u not in bekannt]
+    # Reihenfolge: bis zu 4 noch nie besuchte Kandidaten, dann bekannte Angebote (am längsten ungeprüft zuerst).
+    # So kommen neue Produkte auch bei Shops mit vielen bekannten Angeboten dran.
+    def _alter(u: str) -> str:
+        for aid, e in zustand["angebote"].items():
+            if aid.startswith(shop.id + ":") and (e.get("letzte") or {}).get("url") == u:
+                return e.get("zuletzt_geprueft") or ""
+        return ""
+    neu_urls = [u for u in zu_pruefen if u not in bekannt]
+    reihenfolge = neu_urls[:4] + sorted(bekannt, key=_alter) + neu_urls[4:]
     bericht["kandidaten"] = len(reihenfolge)
+    bericht["kandidaten_schluessel"] = sorted({_slug(u) for u in zu_pruefen})
 
     # 3) Produktseiten einzeln prüfen
     for u in reihenfolge[:MAX_PRODUKTSEITEN]:
