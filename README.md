@@ -192,8 +192,13 @@ Die One-Piece-Überwachung läuft im selben Lauf, **bei jedem Lauf** (Ziel alle 
 **Restock** (wieder bestellbar) und **neue Vorbestellungen** für englische Displays **OP01–OP18**, Sleeved Booster und
 die Sonderprodukte aus `config/products.toml`.
 
-- **Händler:** die 4 handverlesenen Shops aus `config/shops.toml` plus alle geprüften Shopify-Händler aus der
-  Händlerdatenbank (derzeit rund 50). Händler mit Plattform außer Shopify werden noch nicht abgedeckt.
+- **Händler:** die 4 handverlesenen Shops aus `config/shops.toml` plus alle geprüften Händler aus der Händlerdatenbank
+  (derzeit rund 100): Shopify-Shops über ihre Produktliste, **alle anderen** (WooCommerce, Shopware, JTL, Lightspeed,
+  Magento, …) über ihre Listen- und Suchseiten. Dort liest der Wächter die One-Piece-Kategorien, Vorbestell-/Neuheiten-Seiten
+  und die Shopsuche (Suchwort „one piece display“), erkennt Displays am Titel und prüft jede Produktseite einzeln
+  (Schema.org, Kauf-Knopf, Preis). Die Alarmregeln sind dieselben wie bei Shopify. Grenzen: nur die erste Seite jeder
+  Liste, höchstens 12 Produktseiten pro Shop und Lauf, keine Shops, die ihre Produkte erst per JavaScript nachladen,
+  und keine Sitemaps. Seiten ohne eindeutigen Kauf-Knopf bleiben „unklar“ und lösen nichts aus.
 - **Kaufalarm per Telegram** gibt es nur für freigegebene und „vorgeprüfte“ Händler. Alle anderen werden beobachtet und
   stehen im Bericht, lösen aber keinen Alarm aus. Versandkosten bleiben „unbekannt“, wenn sie nicht belegt sind.
 - **Zeitbudget:** Ein Lauf prüft höchstens ca. 2,5 Minuten (`onepiece_zeitbudget_sekunden`). Der am längsten ungeprüfte

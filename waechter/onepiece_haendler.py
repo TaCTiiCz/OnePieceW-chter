@@ -13,6 +13,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from .haendlerdb import ausschlussgrund
+from .onepiece_generisch import listen_urls_aus_db
 from .konfig import Konfig, Shop, Versand, ist_ausgeschlossen
 
 ALARM_VERTRAUEN = ("vorgeprueft", "freigegeben")
@@ -31,8 +32,12 @@ def mit_datenbank(konfig: Konfig, db_datei: Path, *, max_seiten: int = 4, max_an
     ids = {s.id for s in konfig.shops}
     neu: list[Shop] = []
     for h in (db.get("haendler") or {}).values():
-        if not isinstance(h, dict) or h.get("status") != "geeignet" or h.get("plattform") != "shopify":
+        if not isinstance(h, dict) or h.get("status") != "geeignet":
             continue
+        shopify_shop = h.get("plattform") == "shopify"
+        listen = [] if shopify_shop else listen_urls_aus_db(h)
+        if not shopify_shop and not listen:
+            continue   # ohne brauchbare Listen-/Suchseite kann One Piece dort nicht gefunden werden
         basis = (h.get("basis_url") or f"https://{h.get('domain', '')}").rstrip("/")
         dom = urlparse(basis).netloc.lower().removeprefix("www.")
         name = h.get("name") or dom
@@ -43,10 +48,10 @@ def mit_datenbank(konfig: Konfig, db_datei: Path, *, max_seiten: int = 4, max_an
             continue
         vorhanden.add(dom)
         neu.append(Shop(
-            id=h["id"], name=name, basis_url=basis, land=h.get("land", "?"), plattform="shopify",
+            id=h["id"], name=name, basis_url=basis, land=h.get("land", "?"), plattform="shopify" if shopify_shop else (h.get("plattform") or "andere"),
             waehrung=h.get("waehrung") or "EUR", kollektionen=["all"], max_seiten=max_seiten,
             min_abstand_sekunden=3.0, max_anfragen_pro_lauf=max_anfragen_pro_shop,
             kaufalarm_freigegeben=h.get("vertrauen") in ALARM_VERTRAUEN,
             versand_de=Versand("unbekannt", [], "Versandkosten nach DE nicht belegt", "", ""),
-            pruefung={"quelle": "Händlerdatenbank", "vertrauen": h.get("vertrauen", "ungeprueft")}))
+            pruefung={"quelle": "Händlerdatenbank", "vertrauen": h.get("vertrauen", "ungeprueft"), "listen": listen}))
     return replace(konfig, shops=list(konfig.shops) + sorted(neu, key=lambda s: s.id))
