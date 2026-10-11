@@ -57,6 +57,22 @@ def liste_produkte(shop, abrufer) -> tuple[list[dict], list[str], bool]:
     return list(produkte.values()), fehler, ok
 
 
+def suche_vorschlaege(shop, abrufer) -> list[dict]:
+    """Shopify-Shopsuche (Vorschlags-Schnittstelle): findet Produkte auch hinter der Katalog-Grenze. Fehler sind egal."""
+    erg: dict[str, dict] = {}
+    for q in ("one+piece+display", "one+piece+booster+box"):
+        a = abrufer.hole(f"{shop.basis_url}/search/suggest.json?q={q}&resources%5Btype%5D=product&resources%5Blimit%5D=10")
+        if not a.ok:
+            continue
+        try:
+            for p in (a.json().get("resources", {}).get("results", {}).get("products", []) or []):
+                if isinstance(p, dict) and p.get("handle"):
+                    erg[p["handle"]] = p
+        except (ValueError, AttributeError):
+            continue
+    return list(erg.values())
+
+
 def hole_produkt(shop, handle: str, abrufer) -> tuple[Optional[dict], dict, list[str]]:
     """Konkrete Produktseite. Rückgabe: (Produktdaten .js, Seiteninfos, Fehler)."""
     fehler: list[str] = []

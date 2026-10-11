@@ -1,0 +1,55 @@
+name: Wachhund
+
+# Prüft alle 30 Minuten, ob der Wächter noch läuft (Dojo-Status veröffentlicht?). Steht er still, wird die Kette neu
+# gestartet und einmalig eine Telegram-Warnung geschickt.
+on:
+  schedule:
+    - cron: "11,41 * * * *"
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: wachhund
+  cancel-in-progress: false
+
+jobs:
+  wachhund:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TELEGRAM_AKTIV: ${{ vars.TELEGRAM_AKTIV }}
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      SEITE: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/status.json
+    steps:
+      - name: Alter des letzten Laufs bestimmen
+        id: alter
+        run: |
+          alter=-1
+          if json=$(curl -fsS --max-time 20 "$SEITE?t=$(date +%s)"); then
+            u=$(echo "$json" | python3 -c 'import sys,json,datetime as d; j=json.load(sys.stdin); t=d.datetime.fromisoformat(j["updated"].replace("Z","+00:00")); print(int((d.datetime.now(d.timezone.utc)-t).total_seconds()//60))' 2>/dev/null || echo -1)
+            alter=$u
+          fi
+          echo "Letzter Lauf vor $alter Minuten (-1 = unbekannt)"
+          echo "alter=$alter" >> "$GITHUB_OUTPUT"
+
+      - name: Kette neu starten, wenn nichts läuft
+        if: ${{ steps.alter.outputs.alter == '-1' || steps.alter.outputs.alter >= 45 }}
+        run: |
+          aktiv=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow=waechter.yml --json status --jq '[.[] | select(.status=="pending" or .status=="queued" or .status=="waiting" or .status=="in_progress")] | length' 2>/dev/null || echo 0)
+          if [ "${aktiv:-0}" = "0" ]; then
+            gh workflow run waechter.yml --repo "$GITHUB_REPOSITORY" --ref main -f aktion=dauerbetrieb && echo "Kette neu gestartet."
+          else
+            echo "Es läuft bereits etwas."
+          fi
+
+      - name: Einmalige Telegram-Warnung (nur im Fenster 45-74 Minuten)
+        if: ${{ env.TELEGRAM_AKTIV == 'true' && steps.alter.outputs.alter >= 45 && steps.alter.outputs.alter < 75 }}
+        run: |
+          curl -fsS --max-time 20 -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            -d chat_id="${TELEGRAM_CHAT_ID}" \
+            --data-urlencode text="⚠️ Wächter-Wachhund: Der letzte Lauf ist ${{ steps.alter.outputs.alter }} Minuten her. Die Kette wird neu gestartet." >/dev/null || echo "Telegram fehlgeschlagen"
