@@ -109,6 +109,7 @@ dieselbe Warteschlange ein und setzen die Kette danach fort. **Anhalten:** Actio
 - *Sofortige Alarme:* Telegram geht pro Händler raus, sobald dessen Prüfung fertig ist – nicht erst nach dem ganzen Durchlauf.
 - *One Piece im Hintergrund:* Im Dauerbetrieb läuft die One-Piece-Prüfung in einem eigenen Faden und bremst Naruto nicht.
 - *Währung aus der Händlerprüfung:* Preisrückgang-Alarme funktionieren auch, wenn die Produktseite die Währung nicht nennt.
+- *Händlersuche (Brave):* höchstens 100 Suchen pro Woche (max. 15 je Tageslauf), reihum durch ca. 100 Formulierungen in 11 Ländern; Verbrauch in `data/suche_zustand.json`; Abbruch bei 401/402/429. Secret `BRAVE_SEARCH_API_KEY` oder `BRAVE_API_KEY`.
 - *Wachhund* (`.github/workflows/wachhund.yml`): prüft alle 30 Minuten, ob das Dojo noch aktuell ist; startet bei Stillstand die
   Kette neu und warnt einmalig per Telegram.
 
