@@ -8,13 +8,13 @@
 # =====================================================================
 
 [intervalle]
-naruto_produktseite = 180          # bekannte Naruto-Produktseiten: alle 3 Minuten
-naruto_produktseite_fokus = 60     # rund um einen angekündigten Vorbestellstart
+naruto_produktseite = 120          # bekannte Naruto-Produktseiten: alle 2 Minuten
+naruto_produktseite_fokus = 30     # rund um einen angekündigten Vorbestellstart
 entdeckung_schnell = 900           # Neuheiten-Feeds, Shopsuche, Vorbestell-/Naruto-Kategorien: 15 Min.
 entdeckung_langsam = 10800         # Neuheiten-/Bandai-Kategorien, kompletter Shopify-Katalog: 3 Std.
 sitemap = 86400                    # Sitemaps: täglich
 offiziell = 1800                   # offizielle Naruto-Website: 30 Min.
-onepiece = 300                     # One-Piece-Prüfung (alle Displays, Restock + Vorbestellung): bei jedem Lauf (Ziel 5 Min.)
+onepiece = 180                     # One-Piece-Prüfung: Alarm-Shops schnell (nur bekannte Angebote), volle Katalogsuche gestaffelt
 
 [fokus]
 # Zeitfenster um einen bekannten Vorbestellstart, in dem besonders häufig geprüft wird

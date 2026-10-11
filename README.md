@@ -93,13 +93,24 @@ Händlerdatenbank liegt in `data/haendler_db.json`.
 ### 3.3 Dauerbetrieb (läuft auch bei geschlossenem Browser)
 
 **Seit Oktober 2026 läuft der Wächter auf GitHub als Dauerschleife:** Ein Abschnitt prüft ca. 10 Minuten lang alle
-fälligen Aufgaben (Naruto alle ca. 3 Minuten, One Piece alle ca. 5 Minuten), speichert den Zustand, veröffentlicht das
+fälligen Aufgaben (Naruto alle ca. 2 Minuten, One Piece alle ca. 3 Minuten), speichert den Zustand, veröffentlicht das
 Dojo und reiht am Ende selbst den nächsten Abschnitt ein. Zwischen zwei Abschnitten entsteht eine Lücke von etwa einer
 Minute. Der Zeitplan (alle 30 Minuten) startet die Kette neu, falls sie einmal reißt. Das braucht ein **öffentliches**
 Repository (unbegrenzte Minuten); im privaten Repository wäre das Freikontingent in wenigen Tagen aufgebraucht.
 Das Dojo ist dabei bis zu ca. 12 Minuten alt, Telegram-Alarme kommen sofort. Manuelle Aktionen (Tests) reihen sich in
 dieselbe Warteschlange ein und setzen die Kette danach fort. **Anhalten:** Actions → „Wächter“ → „…“ → „Disable workflow“
 (laufende Abschnitte vorher abbrechen).
+
+**Feintuning (Oktober 2026):**
+- *Gestaffelte Prüfung:* Händler mit Kaufalarm-Recht werden in jedem Lauf **schnell** geprüft (nur bekannte Angebote, eine
+  Anfrage je Angebot) und alle ca. 30 Minuten **voll** (kompletter Katalog, findet neue Produkte). Händler ohne
+  Alarm-Recht werden nur alle ca. 2 Stunden voll geprüft. Das spart Anfragen und macht die Alarm-Händler schneller.
+  Einstellbar in `config/products.toml` unter `[allgemein]`: `vollsuche_minuten_alarmfaehig`, `vollsuche_minuten_sonstige`.
+- *Sofortige Alarme:* Telegram geht pro Händler raus, sobald dessen Prüfung fertig ist – nicht erst nach dem ganzen Durchlauf.
+- *One Piece im Hintergrund:* Im Dauerbetrieb läuft die One-Piece-Prüfung in einem eigenen Faden und bremst Naruto nicht.
+- *Währung aus der Händlerprüfung:* Preisrückgang-Alarme funktionieren auch, wenn die Produktseite die Währung nicht nennt.
+- *Wachhund* (`.github/workflows/wachhund.yml`): prüft alle 30 Minuten, ob das Dojo noch aktuell ist; startet bei Stillstand die
+  Kette neu und warnt einmalig per Telegram.
 
 Die folgende Anleitung beschreibt den alten Zeitplan-Betrieb (einzelne Läufe), den du im privaten Repository nutzen würdest:
 

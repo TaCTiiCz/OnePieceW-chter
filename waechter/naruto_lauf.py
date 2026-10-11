@@ -557,6 +557,7 @@ class Lauf:
                if x.angebot_id == b.angebot_id]
         b2 = neu[0] if neu else NBeob(**{**asdict(b), "abruf_ok": False, "fehler": "Variante beim erneuten Abruf nicht gefunden"})
         ok, grund = bestellbar_bestaetigt(b2)
+        wort = "Jetzt lieferbar" if b2.status == m.IN_STOCK else "Vorbestellbar"
         with self.lock:
             self._verlauf(b2, asdict(b))
             self.zustand["naruto"]["angebote"][b.angebot_id]["letzte"] = asdict(b2)
@@ -578,9 +579,9 @@ class Lauf:
             elif h.vertrauen == "ungeprueft":
                 self._ereignis(UNGEPRUEFT, b2, f"Bestellbar bei UNGEPRÜFTEM Shop {h.name}: {b2.titel} – keine Kaufempfehlung", extra)
             elif b2.sprache == self.ncfg["erkennung"].get("sprache_prioritaet", "EN"):
-                self._ereignis(KAUFALARM, b2, f"Vorbestellbar: {b2.titel} bei {h.name}", extra)
+                self._ereignis(KAUFALARM, b2, f"{wort}: {b2.titel} bei {h.name}", extra)
             else:
-                self._ereignis(KAUFALARM_SPRACHE, b2, f"Vorbestellbar ({b2.sprache}): {b2.titel} bei {h.name}", extra)
+                self._ereignis(KAUFALARM_SPRACHE, b2, f"{wort} ({b2.sprache}): {b2.titel} bei {h.name}", extra)
 
     def _verlauf(self, b: NBeob, letzte: dict) -> None:
         felder = ("abruf_ok", "status", "preis_cent", "waehrung", "gesamt_cent", "sprache", "variante", "fehler")
