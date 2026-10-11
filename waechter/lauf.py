@@ -225,36 +225,48 @@ def _alter_tage(ts: Optional[str], jetzt: dt.datetime) -> Optional[float]:
         return None
 
 
-def preisbewertung(zustand: dict, b: m.Beobachtung, produkte: dict) -> dict:
-    """Ist der Preis gut genug für einen Alarm? Rückgabe: {"sperre": Grund oder None, "zusatz": Infozeile}.
-    Nur für Displays; Grenze = eigener Wert pro Set, sonst Median anderer Händler x (1 + Toleranz)."""
+PREISGEBUNDEN = (m.RESTOCK, m.PREISRUECKGANG)   # nur hier gilt die Preisgrenze; Vorbestellungen/Neuheiten immer melden
+
+
+def preisbewertung(zustand: dict, b: m.Beobachtung, produkte: dict, typ: str = m.RESTOCK) -> dict:
+    """Preisprüfung für Display-Alarme. Rückgabe: {"sperre": Grund oder None, "zusatz": Infozeile}.
+
+    - Restock / Preisrückgang: Alarm nur, wenn Preis <= Grenze. Grenze = eigener Wert pro Set, sonst Marktpreis
+      (Median der günstigsten Preise der anderen Händler x (1 + Toleranz)), ohne genug Vergleiche ein fester Wert.
+    - Neue Vorbestellung / neu gelistet: IMMER melden (nur Plausibilität: unter display_min_eur ist es kein Display);
+      ist der Preis über dem Marktpreis, steht das deutlich in der Meldung."""
     pg = produkte.get("preisgrenzen", {})
     if b.kategorie != "display" or b.preis_cent is None:
         return {}
     euro = lambda c: f"{c / 100:,.2f} €".replace(",", "X").replace(".", ",").replace("X", ".")
-    if b.waehrung == "EUR" and b.preis_cent < float(pg.get("display_min_eur", 40)) * 100:
+    min_cent = float(pg.get("display_min_eur", 40)) * 100
+    if b.waehrung == "EUR" and b.preis_cent < min_cent:
         return {"sperre": f"Preis {euro(b.preis_cent)} ist für ein Display unplausibel (Einzelbooster/Fehler?)"}
     if b.waehrung != "EUR":
         return {}
-    preise, shops = [], set()
+    je_shop: dict[str, int] = {}
     for a in zustand.get("angebote", {}).values():
         l = a.get("letzte") or {}
-        if (l.get("ziel_id") == b.ziel_id and l.get("shop_id") != b.shop_id and l.get("shop_id") not in shops
-                and l.get("abruf_ok") and l.get("status") in m.SICHERE_STATUS and l.get("waehrung") == "EUR"
-                and (l.get("preis_cent") or 0) >= float(pg.get("display_min_eur", 40)) * 100):
-            preise.append(l["preis_cent"])
-            shops.add(l.get("shop_id"))
-    eigen = pg.get((b.set_code or "").upper())
+        if (l.get("ziel_id") == b.ziel_id and l.get("shop_id") != b.shop_id and l.get("abruf_ok")
+                and l.get("status") in m.SICHERE_STATUS and l.get("waehrung") == "EUR"
+                and (l.get("preis_cent") or 0) >= min_cent):
+            je_shop[l["shop_id"]] = min(je_shop.get(l["shop_id"], 10 ** 9), l["preis_cent"])
+    preise = list(je_shop.values())
     median = statistics.median(preise) if preise else None
+    eigen = pg.get((b.set_code or "").upper())
     if isinstance(eigen, (int, float)) and eigen > 0:
         grenze, art = eigen * 100, "deine Grenze"
     elif median is not None and len(preise) >= int(pg.get("min_vergleichspreise", 3)):
-        grenze, art = median * (1 + float(pg.get("toleranz_prozent", 10)) / 100), "Marktpreis"
+        grenze, art = median * (1 + float(pg.get("toleranz_prozent", 0)) / 100), "Marktpreis"
     else:
         grenze, art = float(pg.get("display_ohne_vergleich_eur", 200)) * 100, "Standardgrenze"
-    zusatz = (f"Marktvergleich: Median {euro(median)} bei {len(preise)} Händlern" if median is not None else "")
+    zusatz = f"Marktvergleich: Median {euro(median)} bei {len(preise)} Händlern" if median is not None else ""
     if b.preis_cent > grenze:
-        return {"sperre": f"Preis {euro(b.preis_cent)} über {art} {euro(grenze)}", "zusatz": zusatz}
+        if typ in PREISGEBUNDEN:
+            return {"sperre": f"Preis {euro(b.preis_cent)} über {art} {euro(grenze)}", "zusatz": zusatz}
+        zusatz = (f"💸 Preis über {art} ({euro(grenze)})" + (f" – {zusatz}" if zusatz else "")).strip()
+    elif median is not None and b.preis_cent <= median * 0.9:
+        zusatz = f"💰 Unter Marktpreis – {zusatz}"
     return {"sperre": None, "zusatz": zusatz}
 
 
@@ -378,8 +390,8 @@ def fuehre_aus(konfig: Konfig, abrufer, speicher: Speicher, *, testdaten: bool =
             for e_ in ereig:
                 if not e_.alarm or e_.typ not in m.ALARM_TYPEN:
                     continue
-                # Preisgrenze ("guter Preis"): teurere Angebote nur in den Bericht, nicht aufs Handy
-                bewertung = preisbewertung(zustand, b, konfig.produkte)
+                # Preisgrenze ("guter Preis") für Restocks/Preisrückgänge; Vorbestellungen und Neuheiten immer melden
+                bewertung = preisbewertung(zustand, b, konfig.produkte, e_.typ)
                 if bewertung.get("zusatz"):
                     e_.text = f"{e_.text}\n{bewertung['zusatz']}"
                 if bewertung.get("sperre"):

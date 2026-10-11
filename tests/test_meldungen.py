@@ -54,13 +54,21 @@ def zustand(*preise, set_code="OP13"):
 class Preisgrenzen(unittest.TestCase):
     P = lade_konfig().produkte
 
-    def test_ueber_marktpreis_kein_alarm(self):
-        r = preisbewertung(zustand(11000, 12000, 13000), beob(43000), self.P)
+    def test_restock_ueber_marktpreis_kein_alarm(self):
+        r = preisbewertung(zustand(11000, 12000, 13000), beob(43000), self.P, m.RESTOCK)
         self.assertIn("über Marktpreis", r["sperre"])
         self.assertIn("Median", r["zusatz"])
 
-    def test_marktpreis_ok(self):
-        self.assertIsNone(preisbewertung(zustand(11000, 12000, 13000), beob(12500), self.P)["sperre"])
+    def test_restock_zum_marktpreis_ok(self):
+        self.assertIsNone(preisbewertung(zustand(11000, 12000, 13000), beob(12000), self.P, m.RESTOCK)["sperre"])
+        self.assertIn("💰", preisbewertung(zustand(11000, 12000, 13000), beob(9900), self.P, m.RESTOCK)["zusatz"])
+
+    def test_vorbestellung_und_neuheit_immer_melden_aber_kennzeichnen(self):
+        for typ in (m.NEUE_VORBESTELLUNG, m.NEU_LIEFERBAR):
+            r = preisbewertung(zustand(11000, 12000, 13000), beob(43000), self.P, typ)
+            self.assertIsNone(r["sperre"], typ)
+            self.assertIn("💸", r["zusatz"])
+        self.assertIn("unplausibel", preisbewertung(zustand(), beob(1699), self.P, m.NEUE_VORBESTELLUNG)["sperre"])
 
     def test_einzelbooster_preis_ist_kein_display(self):
         self.assertIn("unplausibel", preisbewertung(zustand(), beob(1699), self.P)["sperre"])
