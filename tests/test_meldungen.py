@@ -52,15 +52,33 @@ def zustand(*preise, set_code="OP13"):
 
 
 class Preisgrenzen(unittest.TestCase):
-    P = lade_konfig().produkte
+    # Markt-Logik ohne Höchstpreis testen; der Höchstpreis hat eigene Tests
+    P = dict(lade_konfig().produkte, preisgrenzen={**lade_konfig().produkte["preisgrenzen"], "max_kaufpreis_eur": 0})
 
-    def test_ueber_marktpreis_kein_alarm(self):
-        r = preisbewertung(zustand(11000, 12000, 13000), beob(43000), self.P)
-        self.assertIn("über Marktpreis", r["sperre"])
+    def test_hoechstpreis_250(self):
+        p = lade_konfig().produkte
+        self.assertEqual(p["preisgrenzen"]["max_kaufpreis_eur"], 250)
+        self.assertIsNone(preisbewertung(zustand(11000, 12000, 13000), beob(24900), p, m.RESTOCK)["sperre"])
+        self.assertIn("Höchstpreis", preisbewertung(zustand(30000, 32000, 35000), beob(25100), p, m.RESTOCK)["sperre"])
+        r = preisbewertung(zustand(), beob(30000), p, m.NEUE_VORBESTELLUNG)
+        self.assertIsNone(r["sperre"])
+        self.assertIn("💸", r["zusatz"])
+
+    def test_restock_ueber_marktpreis_kein_alarm(self):
+        r = preisbewertung(zustand(11000, 12000, 13000), beob(43000), self.P, m.RESTOCK)
+        self.assertIn("über dem Marktpreis", r["sperre"])
         self.assertIn("Median", r["zusatz"])
 
-    def test_marktpreis_ok(self):
-        self.assertIsNone(preisbewertung(zustand(11000, 12000, 13000), beob(12500), self.P)["sperre"])
+    def test_restock_zum_marktpreis_ok(self):
+        self.assertIsNone(preisbewertung(zustand(11000, 12000, 13000), beob(12000), self.P, m.RESTOCK)["sperre"])
+        self.assertIn("💰", preisbewertung(zustand(11000, 12000, 13000), beob(9900), self.P, m.RESTOCK)["zusatz"])
+
+    def test_vorbestellung_und_neuheit_immer_melden_aber_kennzeichnen(self):
+        for typ in (m.NEUE_VORBESTELLUNG, m.NEU_LIEFERBAR):
+            r = preisbewertung(zustand(11000, 12000, 13000), beob(43000), self.P, typ)
+            self.assertIsNone(r["sperre"], typ)
+            self.assertIn("💸", r["zusatz"])
+        self.assertIn("unplausibel", preisbewertung(zustand(), beob(1699), self.P, m.NEUE_VORBESTELLUNG)["sperre"])
 
     def test_einzelbooster_preis_ist_kein_display(self):
         self.assertIn("unplausibel", preisbewertung(zustand(), beob(1699), self.P)["sperre"])
@@ -72,7 +90,7 @@ class Preisgrenzen(unittest.TestCase):
     def test_eigene_grenze_pro_set(self):
         p = dict(self.P, preisgrenzen={**self.P["preisgrenzen"], "OP09": 350})
         self.assertIsNone(preisbewertung(zustand(50000, 52000, 58000, set_code="OP09"), beob(34000, "OP09"), p)["sperre"])
-        self.assertIn("deine Grenze", preisbewertung(zustand(set_code="OP09"), beob(36000, "OP09"), p)["sperre"])
+        self.assertIn("Limit für OP09", preisbewertung(zustand(set_code="OP09"), beob(36000, "OP09"), p)["sperre"])
 
 
 class Erkennung(unittest.TestCase):

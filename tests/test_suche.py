@@ -25,7 +25,8 @@ class Suche(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             datei = Path(d) / "k.csv"
             datei.write_text("domain;name;land;quelle\ncardcosmos.de;cardcosmos;DE;x\n", encoding="utf-8")
-            z = suche(log=lambda s: None, transport=lambda url: ergebnisse, kandidaten_datei=datei)
+            z = suche(log=lambda s: None, transport=lambda url: ergebnisse, kandidaten_datei=datei,
+                      zustand_datei=Path(d) / "z.json")   # nie das echte Wochenbudget anfassen
             inhalt = datei.read_text(encoding="utf-8")
         self.assertEqual(z["neu"], ["neuer-tcg-shop.de"])
         self.assertIn("neuer-tcg-shop.de;", inhalt)
