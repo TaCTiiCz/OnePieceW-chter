@@ -339,6 +339,13 @@ def pruefe_haendler(k: dict, abrufer, vorher: Optional[dict] = None, log: Callab
     e["vertrauen"] = "vorgeprueft" if (geeignet and vorgeprueft) else "ungeprueft"
     if not e["entdeckung"]:
         e["gruende"].append("kein automatischer Entdeckungsweg gefunden (Abdeckungslücke)")
+    try:   # Fake-Shop-Überwachung: darf die Prüfung nie scheitern lassen
+        from . import fakecheck
+        fakecheck.anwenden(e, fakecheck.bewerte_shop(domain, k["land"], seite, alle_links, imp_info, abrufer))
+        if e["fake_check"]["stufe"] != "gering":
+            log(f"  ! {domain}: Fake-Shop-Risiko {e['fake_check']['stufe']} ({e['fake_check']['punkte']} P.)")
+    except Exception as ex:  # pragma: no cover
+        e["fake_check"] = {"stufe": "unbekannt", "punkte": 0, "signale": [f"Prüfung fehlgeschlagen ({type(ex).__name__})"]}
     log(f"  {domain}: {e['status']} / {e['vertrauen']} / {e['plattform']} / Versand DE {e['versand_de']}")
     return e
 
