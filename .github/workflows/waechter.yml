@@ -119,7 +119,7 @@ jobs:
         if: ${{ always() && inputs.aktion != 'telegram-test' }}
         run: |
           mkdir -p _seite
-          for f in index.html status.json .nojekyll; do
+          for f in index.html status.json icon.png .nojekyll; do
             if [ -f "_daten/$f" ]; then cp "_daten/$f" "_seite/$f"; fi
           done
 

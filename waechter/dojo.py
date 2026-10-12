@@ -135,6 +135,7 @@ def erzeuge(zustand: dict, jetzt: dt.datetime, *, alarm_stunden: float = 3.0, ak
         "run_seconds": lauf.get("dauer_s"),
         "sites": stationen,
         "events": events,
+        "naruto": _naruto_kurz(zustand),
         "stats": {
             "haendler": lauf.get("haendler"),
             "aufgaben": len(aufgaben),
@@ -142,6 +143,22 @@ def erzeuge(zustand: dict, jetzt: dt.datetime, *, alarm_stunden: float = 3.0, ak
             "push_problem": push_problem,
         },
     }
+
+
+def _naruto_kurz(zustand: dict) -> dict:
+    """Kurzfassung für Widget/Dojo: bestellbare Naruto-Angebote (nur sicher zugeordnete) und das günstigste."""
+    from . import befehle
+    from . import modelle as m
+    try:
+        bestellbar = [l for l in befehle.naruto_angebote(zustand)
+                      if l.get("status") in m.KAUFBAR and l.get("sicherheit") == m.SICHER]
+    except Exception:   # Statusdatei darf nie daran scheitern
+        return {"bestellbar": 0, "guenstigste": None}
+    mit_preis = sorted((l for l in bestellbar if l.get("preis_cent")), key=lambda l: l["preis_cent"])
+    g = mit_preis[0] if mit_preis else None
+    return {"bestellbar": len(bestellbar),
+            "guenstigste": {"titel": _kurz(g.get("titel") or "", 60), "shop": g.get("shop_name") or g.get("shop"),
+                            "preis_cent": g.get("preis_cent"), "status": g.get("status"), "url": g.get("url")} if g else None}
 
 
 def schreibe(zustand: dict, ziel_dir: Path, jetzt: Optional[dt.datetime] = None) -> Path:
@@ -155,5 +172,8 @@ def schreibe(zustand: dict, ziel_dir: Path, jetzt: Optional[dt.datetime] = None)
     os.replace(tmp, datei)
     if DOJO_HTML.exists():
         shutil.copyfile(DOJO_HTML, ziel_dir / "index.html")
+    icon = DOJO_HTML.parent / "icon.png"
+    if icon.exists():   # App-Icon für "Zum Home-Bildschirm"
+        shutil.copyfile(icon, ziel_dir / "icon.png")
     (ziel_dir / ".nojekyll").write_text("", encoding="utf-8")
     return datei
