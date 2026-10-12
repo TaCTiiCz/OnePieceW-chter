@@ -24,7 +24,8 @@ jobs:
       TELEGRAM_AKTIV: ${{ vars.TELEGRAM_AKTIV }}
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
       TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-      SEITE: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/status.json
+      # Status direkt aus dem Datenzweig (nicht von der Dojo-Seite: die kann beim Umstellen kurz stehen bleiben)
+      SEITE: https://raw.githubusercontent.com/${{ github.repository }}/waechter-daten/status.json
     steps:
       - name: Alter des letzten Laufs bestimmen
         id: alter
