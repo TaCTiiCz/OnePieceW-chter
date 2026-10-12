@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import datetime as dt
 import json
+import os
 import shutil
 from pathlib import Path
 from typing import Optional
@@ -127,6 +128,7 @@ def erzeuge(zustand: dict, jetzt: dt.datetime, *, alarm_stunden: float = 3.0, ak
 
     return {
         "updated": _iso(jetzt),
+        "quelle": os.environ.get("WAECHTER_QUELLE", "github"),   # "server" (eigener Server) oder "github"
         "state": state,
         "current": None,
         "last_run": _iso(lauf_zeit) if lauf_zeit else None,
@@ -148,7 +150,9 @@ def schreibe(zustand: dict, ziel_dir: Path, jetzt: Optional[dt.datetime] = None)
     ziel_dir = Path(ziel_dir)
     ziel_dir.mkdir(parents=True, exist_ok=True)
     datei = ziel_dir / "status.json"
-    datei.write_text(json.dumps(erzeuge(zustand, jetzt), ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    tmp = datei.with_suffix(".json.tmp")   # atomar: der Server-Abgleich darf nie eine halbe Datei hochladen
+    tmp.write_text(json.dumps(erzeuge(zustand, jetzt), ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    os.replace(tmp, datei)
     if DOJO_HTML.exists():
         shutil.copyfile(DOJO_HTML, ziel_dir / "index.html")
     (ziel_dir / ".nojekyll").write_text("", encoding="utf-8")

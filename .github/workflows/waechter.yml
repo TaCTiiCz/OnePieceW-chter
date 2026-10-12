@@ -5,6 +5,8 @@ name: Wächter
 # selbst den nächsten Abschnitt ein. Der Zeitplan (cron) ist nur noch die Absicherung, falls die Kette einmal reißt.
 # Manuelle Aktionen (lauf, Tests) reihen sich in dieselbe Warteschlange ein und setzen danach die Kette fort.
 # Zustand, Verlauf und Dashboard liegen im Zweig "waechter-daten" (getrennt vom Code).
+# EIGENER SERVER (Repository-Variable BETRIEB=server): Der Server prüft durchgehend; GitHub pausiert und springt
+# automatisch ein, wenn der Server-Herzschlag (waechter-daten/server.json) älter als 20 Minuten ist.
 on:
   workflow_dispatch:
     inputs:
@@ -66,12 +68,27 @@ jobs:
             cd _daten && git checkout --orphan waechter-daten && git rm -rfq . && cd ..
           fi
 
+      - name: Eigener Server aktiv? (dann pausiert GitHub und springt nur bei Ausfall ein)
+        id: server
+        run: |
+          aktiv=false
+          if [ "${{ vars.BETRIEB }}" = "server" ]; then
+            alter=$(python3 -c 'import json,datetime as d; j=json.load(open("_daten/server.json")); t=d.datetime.fromisoformat(j["heartbeat"].replace("Z","+00:00")); print(int((d.datetime.now(d.timezone.utc)-t).total_seconds()//60))' 2>/dev/null || echo 99999)
+            if [ "$alter" -lt 20 ]; then
+              aktiv=true
+              echo "Eigener Server meldet sich (vor $alter Min.) – GitHub pausiert."
+            else
+              echo "::warning::Eigener Server ist seit $alter Min. still – GitHub springt ein (Ausfallsicherung)."
+            fi
+          fi
+          echo "aktiv=$aktiv" >> "$GITHUB_OUTPUT"
+
       - name: Wächter im Dauerbetrieb (ca. 10 Minuten Schleife)
-        if: ${{ github.event_name == 'schedule' || inputs.aktion == 'dauerbetrieb' }}
+        if: ${{ (github.event_name == 'schedule' || inputs.aktion == 'dauerbetrieb') && steps.server.outputs.aktiv != 'true' }}
         run: python -m waechter dauerlauf --sekunden 600 --daten _daten/laufzeit --dashboard _daten/dashboard.md
 
       - name: Wächter-Lauf (einmalig)
-        if: ${{ inputs.aktion == 'lauf' }}
+        if: ${{ inputs.aktion == 'lauf' && steps.server.outputs.aktiv != 'true' }}
         run: python -m waechter lauf --daten _daten/laufzeit --dashboard _daten/dashboard.md
 
       - name: Simulation (lokaler Test-Shop, Test-Telegram-Server)
@@ -107,15 +124,28 @@ jobs:
           done
 
       - name: Dojo-Seite hochladen
-        if: ${{ always() && inputs.aktion != 'telegram-test' && hashFiles('_seite/status.json') != '' }}
+        if: ${{ always() && vars.BETRIEB != 'server' && inputs.aktion != 'telegram-test' && hashFiles('_seite/status.json') != '' }}
         uses: actions/upload-pages-artifact@v3
         with:
           path: _seite
 
+      - name: Dojo in den Zweig dojo-seite (Server-Betrieb, GitHub springt gerade ein)
+        if: ${{ always() && vars.BETRIEB == 'server' && steps.server.outputs.aktiv != 'true' && hashFiles('_seite/status.json') != '' }}
+        run: |
+          cd _seite
+          git init -q -b dojo-seite
+          git add -A
+          git -c user.name="onepiece-waechter[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -q -m "Dojo"
+          git push -q --force "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" dojo-seite
+
       - name: Zustand dauerhaft speichern
-        if: ${{ always() && inputs.aktion != 'telegram-test' }}
+        if: ${{ always() && inputs.aktion != 'telegram-test' && steps.server.outputs.aktiv != 'true' }}
         run: |
           cd _daten
+          # Herzschlag des eigenen Servers nie überschreiben (sonst liefen Server und GitHub danach parallel)
+          if git fetch -q origin waechter-daten 2>/dev/null && git show FETCH_HEAD:server.json > /tmp/server.json 2>/dev/null; then
+            cp /tmp/server.json server.json
+          fi
           git add -A
           if git diff --cached --quiet; then echo "Keine Änderungen"; exit 0; fi
           # pro Tag ein Commit (wird im Tagesverlauf ergänzt), damit der Zweig nicht mit tausenden Commits wächst
@@ -127,9 +157,15 @@ jobs:
           fi
           git push -q --force origin waechter-daten
 
-      - name: Nächsten Abschnitt einreihen (Kette fortsetzen)
-        if: ${{ always() }}
+      - name: Nächsten Abschnitt einreihen (Kette fortsetzen – nicht, solange der eigene Server läuft)
+        if: ${{ always() && steps.server.outputs.aktiv != 'true' }}
         run: |
+          # Hat sich der eigene Server inzwischen gemeldet? Dann übernimmt er – die Kette endet hier.
+          if [ "${{ vars.BETRIEB }}" = "server" ]; then
+            alter=$(git -C _daten fetch -q origin waechter-daten 2>/dev/null && git -C _daten show FETCH_HEAD:server.json 2>/dev/null \
+              | python3 -c 'import sys,json,datetime as d; j=json.load(sys.stdin); t=d.datetime.fromisoformat(j["heartbeat"].replace("Z","+00:00")); print(int((d.datetime.now(d.timezone.utc)-t).total_seconds()//60))' 2>/dev/null || echo 99999)
+            if [ "$alter" -lt 20 ]; then echo "Eigener Server meldet sich (vor $alter Min.) – Kette endet."; exit 0; fi
+          fi
           # Nur einreihen, wenn nichts wartet (sonst würde eine manuelle Aktion verdrängt) – Wiederholung bei Fehler egal
           wartend=$(gh run list --workflow=waechter.yml --json status --jq '[.[] | select(.status=="pending" or .status=="queued" or .status=="waiting")] | length' 2>/dev/null || echo 0)
           if [ "${wartend:-0}" = "0" ]; then
@@ -141,7 +177,7 @@ jobs:
   dojo-veroeffentlichen:
     # Veröffentlicht das Pixel-Dojo (GitHub Pages). Einmalig nötig: Settings -> Pages -> Source: "GitHub Actions".
     needs: waechter
-    if: ${{ always() && needs.waechter.result != 'skipped' && inputs.aktion != 'telegram-test' }}
+    if: ${{ always() && vars.BETRIEB != 'server' && needs.waechter.result != 'skipped' && inputs.aktion != 'telegram-test' }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:

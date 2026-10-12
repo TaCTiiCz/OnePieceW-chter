@@ -24,7 +24,8 @@ jobs:
       TELEGRAM_AKTIV: ${{ vars.TELEGRAM_AKTIV }}
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
       TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-      SEITE: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/status.json
+      # Status direkt aus dem Datenzweig (nicht von der Dojo-Seite: die kann beim Umstellen kurz stehen bleiben)
+      SEITE: https://raw.githubusercontent.com/${{ github.repository }}/waechter-daten/status.json
     steps:
       - name: Alter des letzten Laufs bestimmen
         id: alter
@@ -36,6 +37,28 @@ jobs:
           fi
           echo "Letzter Lauf vor $alter Minuten (-1 = unbekannt)"
           echo "alter=$alter" >> "$GITHUB_OUTPUT"
+
+      - name: Eigener Server – Herzschlag prüfen (nur bei BETRIEB=server)
+        id: server
+        if: ${{ vars.BETRIEB == 'server' }}
+        run: |
+          url="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/waechter-daten/server.json?t=$(date +%s)"
+          alter=$(curl -fsS --max-time 20 "$url" | python3 -c 'import sys,json,datetime as d; j=json.load(sys.stdin); t=d.datetime.fromisoformat(j["heartbeat"].replace("Z","+00:00")); print(int((d.datetime.now(d.timezone.utc)-t).total_seconds()//60))' 2>/dev/null || echo -1)
+          echo "Server-Herzschlag vor $alter Minuten (-1 = unbekannt)"
+          echo "alter=$alter" >> "$GITHUB_OUTPUT"
+
+      - name: Server still – GitHub einspringen lassen und warnen
+        if: ${{ vars.BETRIEB == 'server' && steps.server.outputs.alter != '-1' && steps.server.outputs.alter >= 20 }}
+        run: |
+          a=${{ steps.server.outputs.alter }}
+          aktiv=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow=waechter.yml --json status --jq '[.[] | select(.status=="pending" or .status=="queued" or .status=="waiting" or .status=="in_progress")] | length' 2>/dev/null || echo 0)
+          if [ "${aktiv:-0}" = "0" ]; then gh workflow run waechter.yml --repo "$GITHUB_REPOSITORY" --ref main -f aktion=dauerbetrieb || true; fi
+          # Warnung einmal nach 20-49 Min., Erinnerung nach 6 und 24 Stunden
+          if [ "$TELEGRAM_AKTIV" = "true" ] && { [ "$a" -lt 50 ] || { [ "$a" -ge 360 ] && [ "$a" -lt 390 ]; } || { [ "$a" -ge 1440 ] && [ "$a" -lt 1470 ]; }; }; then
+            curl -fsS --max-time 20 -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+              -d chat_id="${TELEGRAM_CHAT_ID}" \
+              --data-urlencode text="⚠️ Wächter-Server meldet sich seit ${a} Minuten nicht. GitHub prüft solange weiter (langsamer). Bitte in der Oracle-Konsole nachsehen, ob die Instanz läuft." >/dev/null || echo "Telegram fehlgeschlagen"
+          fi
 
       - name: Kette neu starten, wenn nichts läuft
         if: ${{ steps.alter.outputs.alter == '-1' || steps.alter.outputs.alter >= 45 }}

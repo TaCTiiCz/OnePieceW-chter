@@ -1,0 +1,10 @@
+[Unit]
+Description=TCG-Wächter – Abgleich mit GitHub alle 5 Minuten
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=5min
+AccuracySec=20s
+
+[Install]
+WantedBy=timers.target
