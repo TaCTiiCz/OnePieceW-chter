@@ -100,3 +100,13 @@ class Gesamtpruefung(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ShopMerkmale(unittest.TestCase):
+    def test_shop_vs_newsseite(self):
+        from waechter.haendlerdb import SHOP_MUSTER
+        self.assertTrue(SHOP_MUSTER.search('<a href="/warenkorb">Warenkorb (0)</a>'))
+        self.assertTrue(SHOP_MUSTER.search('<a href="https://x.fr/panier">Mon panier</a>'))
+        self.assertTrue(SHOP_MUSTER.search('<button class="add-to-cart">Add to cart</button>'))
+        news = "<h1>Naruto Card Game: Bandai kündigt Vorbestellung an</h1><p>Kommentare</p><a href='/news/'>News</a>"
+        self.assertIsNone(SHOP_MUSTER.search(news))
