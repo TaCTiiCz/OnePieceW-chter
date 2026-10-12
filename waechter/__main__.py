@@ -254,6 +254,12 @@ def naruto_lauf(konfig, daten: Path, db: Path, dash: Path, onepiece: bool = True
                 import threading
                 hintergrund["thread"] = threading.Thread(target=arbeit, daemon=True)
                 hintergrund["thread"].start()
+    if not ohne_push and not getattr(l, "testmodus", False):
+        try:   # Telegram-Befehle (/status, /lieferbar, /hilfe) – darf den Lauf nie stören
+            from . import befehle
+            befehle.fuer_lauf(l.zustand, konfig, daten, db, log)
+        except Exception as ex:  # pragma: no cover
+            log(f"Hinweis: Telegram-Befehle nicht abrufbar: {type(ex).__name__}")
     l.speichern()
     db_json = json.loads(db.read_text(encoding="utf-8")) if db.exists() else {}
     dash.parent.mkdir(parents=True, exist_ok=True)
