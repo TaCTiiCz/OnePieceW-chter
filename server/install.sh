@@ -115,12 +115,12 @@ systemctl daemon-reload
 systemctl enable --now waechter-sync.timer >/dev/null
 systemctl enable waechter >/dev/null
 systemctl restart waechter --no-block
-gruen "Dienste eingerichtet. Der Wächter startet (falls gerade ein GitHub-Abschnitt läuft, wartet er bis zu 13 Minuten)."
+gruen "Dienste eingerichtet. Der Wächter startet, sobald GitHub pausiert (Variable BETRIEB=server, laufender Abschnitt endet)."
 
 schritt "7/7 Telegram-Bestätigung"
 curl -fsS --max-time 15 -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
   -d chat_id="${TELEGRAM_CHAT_ID}" \
-  --data-urlencode text="🖥️ Wächter-Server ist eingerichtet ($(hostname)). Er übernimmt, sobald du auf GitHub die Variable BETRIEB=server setzt." >/dev/null \
+  --data-urlencode text="🖥️ Wächter-Server ist eingerichtet ($(hostname)). Er startet, sobald GitHub pausiert (Variable BETRIEB=server) – das dauert bis zu 15 Minuten." >/dev/null \
   && gruen "Testnachricht an Telegram geschickt." || rot "Telegram-Nachricht fehlgeschlagen – Chat-ID prüfen."
 
 echo

@@ -27,17 +27,25 @@ github_aktiv() {
     | python3 -c 'import json,sys; print(sum(r["status"] in ("in_progress","queued","pending","waiting","requested") for r in json.load(sys.stdin)["workflow_runs"]))' \
     2>/dev/null || echo -1
 }
-for _ in $(seq 1 15); do
+frei=false
+for _ in $(seq 1 "${WAECHTER_WARTE_MAX:-18}"); do
   n=$(github_aktiv)
-  if [ "$n" = "0" ]; then break; fi
+  if [ "$n" = "0" ]; then frei=true; break; fi
   if [ "$n" = "-1" ]; then   # GitHub-API nicht erreichbar: am Alter der letzten GitHub-Meldung orientieren
-    als git -C "$DATEN" fetch -q origin waechter-daten || break
+    als git -C "$DATEN" fetch -q origin waechter-daten || { frei=true; break; }
     q=$(als git -C "$DATEN" show origin/waechter-daten:status.json 2>/dev/null | quelle)
     a=$(als git -C "$DATEN" show origin/waechter-daten:status.json 2>/dev/null | alter_min -)
-    { [ "$q" = "github" ] && [ "$a" -lt 12 ]; } || break
+    if ! { [ "$q" = "github" ] && [ "$a" -lt 12 ]; }; then frei=true; break; fi
   fi
   log "Auf GitHub läuft noch ein Abschnitt – warte, bis er fertig ist …"
-  sleep 60
+  sleep "${WAECHTER_WARTE_SEK:-60}"
+  uebernehmen && zustand_sichern >/dev/null 2>&1 || true   # neueren GitHub-Stand zuerst übernehmen, dann Herzschlag erneuern
 done
+if [ "$frei" != true ]; then
+  # GitHub prüft nach ~18 Min. immer noch: dann ist BETRIEB=server (noch) nicht gesetzt. Nicht parallel laufen –
+  # systemd versucht es nach 30 Sekunden erneut.
+  log "GitHub prüft weiter. Ist auf GitHub die Variable BETRIEB=server gesetzt? Neuer Versuch gleich."
+  exit 1
+fi
 uebernehmen
 log "Start frei."
