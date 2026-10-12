@@ -21,7 +21,8 @@ from . import modelle as m
 from . import telegram
 
 BEFEHLE = [("status", "Läuft der Wächter? Kurzüberblick"),
-           ("lieferbar", "Günstigste lieferbare / vorbestellbare Displays"),
+           ("naruto", "Naruto: alle Vorbestell-Seiten mit Links"),
+           ("lieferbar", "One Piece: günstigste lieferbare / vorbestellbare Displays"),
            ("hilfe", "Was der Bot kann")]
 _befehle_gemeldet = False      # setMyCommands einmal pro Prozess
 MAX_ALTER_ERSTER_ABRUF = 600   # beim allerersten Abruf ältere Nachrichten nicht mehr beantworten (Sekunden)
@@ -108,14 +109,42 @@ def _zeile(l: dict) -> str:
     return f'{name} – <b>{_euro(l.get("preis_cent"))}</b> – <a href="{html.escape(l.get("url") or "", quote=True)}">{shop}</a>'
 
 
-def naruto_zaehler(zustand: dict) -> dict:
-    z = {"PREORDER": 0, "IN STOCK": 0, "SOLD OUT": 0, "sonst": 0}
+STATUS_REIHENFOLGE = {"PREORDER": 0, "IN STOCK": 1, "WAITLIST": 2, "SOLD OUT": 3}
+STATUS_WORT = {"PREORDER": "vorbestellbar", "IN STOCK": "lieferbar", "WAITLIST": "Warteliste", "SOLD OUT": "ausverkauft"}
+
+
+def naruto_angebote(zustand: dict) -> list[dict]:
+    """Passende Naruto-Seiten (ohne Verwechslungen), doppelte Sprachversionen derselben Seite zusammengefasst.
+    Reihenfolge: vorbestellbar, lieferbar, Warteliste, ausverkauft; darin sichere vor unsicheren, dann nach Preis."""
+    gesehen: dict[tuple, dict] = {}
     for a in ((zustand.get("naruto") or {}).get("angebote") or {}).values():
         l = a.get("letzte") or {}
         if not l.get("passend") or l.get("ausschluss"):
             continue
-        z[l.get("status") if l.get("status") in z else "sonst"] += 1
+        k = (l.get("shop"), (l.get("titel") or "").lower(), l.get("preis_cent"), l.get("status"))
+        if k not in gesehen:
+            gesehen[k] = l
+    return sorted(gesehen.values(), key=lambda l: (STATUS_REIHENFOLGE.get(l.get("status"), 9),
+                                                    l.get("sicherheit") != m.SICHER, l.get("preis_cent") or 10 ** 9))
+
+
+def naruto_zaehler(zustand: dict) -> dict:
+    z = {"PREORDER": 0, "IN STOCK": 0, "SOLD OUT": 0, "sonst": 0}
+    for l in naruto_angebote(zustand):
+        if l.get("sicherheit") == m.SICHER:
+            z[l.get("status") if l.get("status") in z else "sonst"] += 1
     return z
+
+
+def _naruto_zeile(l: dict, mit_status: bool = False) -> str:
+    titel = (l.get("titel") or "?")
+    for weg in ("Naruto Card Game", "NARUTO CARD GAME", "Naruto TCG", " - ", " – ", " — "):
+        titel = titel.replace(weg, " ")
+    titel = html.escape(" ".join(titel.split())[:48])
+    preis = _euro(l.get("preis_cent")) if l.get("preis_cent") else "Preis ?"
+    shop = html.escape(l.get("shop_name") or l.get("shop") or "?")
+    vorsatz = f"{STATUS_WORT.get(l.get('status'), l.get('status') or '?')}: " if mit_status else ""
+    return f'{vorsatz}<a href="{html.escape(l.get("url") or "", quote=True)}">{shop}</a> – {titel} – <b>{preis}</b>'
 
 
 def status_text(zustand: dict, op_zustand: dict, alarm_shops: Optional[set], jetzt: dt.datetime,
@@ -137,15 +166,21 @@ def status_text(zustand: dict, op_zustand: dict, alarm_shops: Optional[set], jet
          f"Prüfaufgaben: {len(aufgaben)} (davon {mit_fehler} mit Fehler, meist Seite weg oder gesperrt)",
          "",
          "<b>Naruto</b> (Bandai, Release Sommer 2027)",
-         f"Vorbestellbar: {nz['PREORDER']} · lieferbar: {nz['IN STOCK']} · ausverkauft: {nz['SOLD OUT']}",
-         "",
+         f"Seiten: {nz['PREORDER']} vorbestellbar · {nz['IN STOCK']} lieferbar · {nz['SOLD OUT']} ausverkauft"]
+    sicher = [l for l in naruto_angebote(zustand) if l.get("sicherheit") == m.SICHER]
+    offen = [l for l in sicher if l.get("status") in ("PREORDER", "IN STOCK")]
+    z += [f"• {_naruto_zeile(l, mit_status=True)}" for l in offen[:6]]
+    zu = sorted({l.get("shop_name") or l.get("shop") or "?" for l in sicher if l.get("status") == "SOLD OUT"})
+    if zu:
+        z.append(f"Ausverkauft (wird weiter beobachtet): {html.escape(', '.join(zu))}")
+    z += ["",
          "<b>One Piece</b> (EN-Displays)",
          f"{op_anzahl} Angebote beobachtet · letzter Durchlauf {_vor(op_zeit, jetzt)}",
          f"Bis {_euro(grenze_cent)} bei geprüften Händlern: {len(lieferbar)} lieferbar, {len(vor)} vorbestellbar"]
     top = _je_set(lieferbar)[:5]
     if top:
         z += ["", "<b>Günstigste lieferbare Displays</b>"] + [f"{i}. {_zeile(l)}" for i, l in enumerate(top, 1)]
-    z += ["", "/lieferbar – volle Liste · /hilfe"]
+    z += ["", "/naruto – alle Naruto-Seiten · /lieferbar – One-Piece-Liste · /hilfe"]
     return "\n".join(z)
 
 
@@ -160,10 +195,30 @@ def lieferbar_text(op_zustand: dict, alarm_shops: Optional[set], jetzt: dt.datet
     return "\n".join(z)
 
 
+def naruto_text(zustand: dict) -> str:
+    alle = naruto_angebote(zustand)
+    sicher = [l for l in alle if l.get("sicherheit") == m.SICHER]
+    unsicher = [l for l in alle if l.get("sicherheit") != m.SICHER]
+    z = ["<b>Naruto Card Game (Bandai) – beobachtete Seiten</b>", "Release laut Bandai: Sommer 2027"]
+    for status, kopf in (("PREORDER", "🟡 Vorbestellbar"), ("IN STOCK", "🟢 Lieferbar"),
+                         ("WAITLIST", "🔔 Warteliste"), ("SOLD OUT", "⚪ Ausverkauft – Seite wird weiter beobachtet")):
+        teil = [l for l in sicher if l.get("status") == status]
+        if teil:
+            z += ["", f"<b>{kopf}</b>"] + [_naruto_zeile(l) for l in teil[:15]]
+    if not sicher:
+        z += ["", "Noch keine sicher erkannte Naruto-Seite."]
+    if unsicher:
+        z += ["", f"<b>❔ Unsichere Treffer</b> (ungeprüfter Händler oder Zuordnung unklar, kein Kaufalarm)"]
+        z += [_naruto_zeile(l, mit_status=True) for l in unsicher[:8]]
+    z += ["", "<i>Kaufalarm kommt automatisch, sobald eine sichere Seite bestellbar wird.</i>"]
+    return "\n".join(z)
+
+
 def hilfe_text() -> str:
     return ("<b>TCG-Wächter – Befehle</b>\n"
-            "/status – läuft der Wächter? Kurzüberblick mit den günstigsten Displays\n"
-            "/lieferbar – alle Sets: günstigstes lieferbares und vorbestellbares Display\n"
+            "/status – läuft der Wächter? Kurzüberblick mit Naruto-Vorbestellungen und den günstigsten Displays\n"
+            "/naruto – alle beobachteten Naruto-Seiten mit Links\n"
+            "/lieferbar – One Piece: je Set das günstigste lieferbare und vorbestellbare Display\n"
             "/hilfe – diese Übersicht\n\n"
             "Kaufalarme kommen weiterhin von selbst. Antwort dauert meist unter 30 Sekunden.")
 
@@ -204,6 +259,8 @@ def bearbeite(zustand: dict, op_zustand_laden: Callable[[], dict], alarm_shops_l
         try:
             if befehl in ("status", "start"):
                 inhalt = status_text(zustand, op_zustand_laden(), alarm_shops_laden(), jetzt, grenze_cent)
+            elif befehl in ("naruto", "vorbestellung", "vorbestellungen"):
+                inhalt = naruto_text(zustand)
             elif befehl in ("lieferbar", "liste"):
                 inhalt = lieferbar_text(op_zustand_laden(), alarm_shops_laden(), jetzt, grenze_cent)
             else:
