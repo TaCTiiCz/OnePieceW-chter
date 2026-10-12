@@ -127,6 +127,24 @@ dieselbe Warteschlange ein und setzen die Kette danach fort. **Anhalten:** Actio
 - *Wachhund* (`.github/workflows/wachhund.yml`): prüft alle 30 Minuten, ob das Dojo noch aktuell ist; startet bei Stillstand die
   Kette neu und warnt einmalig per Telegram.
 
+### 3.4 Eigener Server (Oracle Cloud Free Tier) – schneller, GitHub als Ausfallsicherung
+
+Auf einem eigenen Linux-Server läuft der Wächter ohne Unterbrechung (Naruto-Produktseiten jede Minute, One Piece etwa
+alle 1–3 Minuten, Takte in `config/betrieb_server.toml`). Einrichtung: `server/install.sh` (fragt Telegram-Token,
+Chat-ID und einen GitHub-Token mit „Contents: Read and write" nur für dieses Repository).
+
+- **Umschalten:** Repository-Variable `BETRIEB=server`. GitHub pausiert, solange der Server-Herzschlag
+  (`waechter-daten/server.json`, alle 5 Min.) jünger als 20 Minuten ist, und **springt automatisch ein**, wenn der Server
+  ausfällt (der Wachhund warnt dann per Telegram). Kommt der Server zurück, übernimmt er den neuesten Zustand und lässt
+  einen laufenden GitHub-Abschnitt erst auslaufen – keine doppelten Meldungen.
+- **Dojo:** Server und GitHub-Notbetrieb schreiben in den Zweig `dojo-seite`; GitHub Pages zeigt diesen Zweig an
+  (Settings → Pages → Deploy from a branch → `dojo-seite`).
+- **Updates:** Der Server holt alle 5 Minuten neuen Code von `main` und startet sich bei Programm-/Einstellungsänderungen neu.
+- **Befehle auf dem Server:** `sudo bash /opt/waechter/code/server/status.sh` (Überblick),
+  `sudo journalctl -u waechter -f` (Live-Protokoll), `sudo systemctl restart waechter`.
+- **Zurück zu GitHub:** Variable `BETRIEB` löschen, Pages-Quelle wieder auf „GitHub Actions", auf dem Server
+  `sudo systemctl disable --now waechter waechter-sync.timer`.
+
 Die folgende Anleitung beschreibt den alten Zeitplan-Betrieb (einzelne Läufe), den du im privaten Repository nutzen würdest:
 
 Zuerst Abschnitt 4 lesen und eine Variante wählen. Danach:

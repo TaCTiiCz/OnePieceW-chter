@@ -10,6 +10,7 @@ from __future__ import annotations
 import datetime as dt
 import hashlib
 import json
+import os
 import statistics
 import threading
 import time
@@ -41,7 +42,11 @@ SCHNELL = {"shopify_neueste", "woo_api", "woo_neueste", "shopsuche", "kategorie_
 LANGSAM = {"kategorie_neuheiten", "kategorie_bandai", "shopify_katalog"}
 
 
-def lade_betrieb(datei: Path = KONFIG_DIR / "betrieb.toml") -> dict:
+def lade_betrieb(datei: Optional[Path] = None) -> dict:
+    """Betriebswerte. Eigener Server: WAECHTER_BETRIEB zeigt auf config/betrieb_server.toml (kürzere Takte)."""
+    datei = Path(datei or os.environ.get("WAECHTER_BETRIEB") or KONFIG_DIR / "betrieb.toml")
+    if not datei.is_absolute() and not datei.exists():
+        datei = KONFIG_DIR.parent / datei
     with open(datei, "rb") as f:
         return tomllib.load(f)
 

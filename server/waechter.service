@@ -1,0 +1,23 @@
+[Unit]
+Description=TCG-Wächter (Naruto + One Piece) – Dauerbetrieb
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=waechter
+Group=waechter
+EnvironmentFile=/etc/waechter/waechter.env
+WorkingDirectory=/opt/waechter/code
+# Vor dem Start: neuesten Zustand übernehmen und einen laufenden GitHub-Abschnitt auslaufen lassen (max. ~13 Min.)
+ExecStartPre=/bin/bash /opt/waechter/code/server/start.sh
+ExecStart=/usr/bin/python3 -m waechter dauerlauf --daten /opt/waechter/daten/laufzeit --dashboard /opt/waechter/daten/dashboard.md
+Restart=always
+RestartSec=30
+TimeoutStartSec=20min
+TimeoutStopSec=60
+Nice=5
+MemoryMax=700M
+
+[Install]
+WantedBy=multi-user.target

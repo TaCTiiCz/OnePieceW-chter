@@ -1,0 +1,9 @@
+[Unit]
+Description=TCG-Wächter – Abgleich mit GitHub (Zustand, Dojo, Code-Updates)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /opt/waechter/code/server/sync.sh
+TimeoutStartSec=4min
