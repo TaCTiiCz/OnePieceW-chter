@@ -70,6 +70,34 @@ teuer_ab_euro_display = 0        # 0 = aus (noch keine offizielle UVP bekannt)
 spekulative_vorbestellungen_melden = true
 wiederholsperre_stunden = 12
 
+# ---------------------------------------------------------------------
+# Vorbestellungen: so schnell wie möglich zum fairen Preis bestellen
+# ---------------------------------------------------------------------
+[vorbestellung]
+# Preis bis hier: 🔥 "fairer Preis" (laut). Offizielle UVP gibt es noch nicht – One-Piece-Displays liegen meist bei 90–120 €.
+fair_bis_euro = { DISPLAY = 150, CASE = 1800, STARTER_DECK = 20, BOOSTER_PACK = 6 }
+# Deine Obergrenze: teurere Vorbestellungen (meist Platzhalterpreise) kommen nur noch LEISE (ohne Ton) und ohne Erinnerung.
+max_euro = { DISPLAY = 250, CASE = 3000, STARTER_DECK = 40, BOOSTER_PACK = 10 }
+leise_ueber_grenze = true
+# Erinnerung, solange ein Kaufalarm noch bestellbar ist und nicht mit /gekauft quittiert wurde
+erinnerung_minuten = 10
+erinnerungen_max = 2
+# Offizielle Meldung mit diesen Wörtern -> alle Shops für auto_fokus_stunden im Fokus-Modus (häufiger prüfen)
+auto_fokus_woerter = ["pre-order", "preorder", "pre order", "price", "msrp", "retailer", "launch", "release"]
+auto_fokus_stunden = 48
+
+# Bekannte Termine: in diesem Zeitraum werden die Shops (shop = "*": alle) deutlich häufiger geprüft.
+# Jump Festa 2027 (Tokio): nächste offizielle Naruto-Details laut Bandai.
+[[termine]]
+beschreibung = "Jump Festa 2027, Tag 1 – neue Naruto-Infos erwartet"
+zeitpunkt = "2026-12-19"
+shop = "*"
+
+[[termine]]
+beschreibung = "Jump Festa 2027, Tag 2"
+zeitpunkt = "2026-12-20"
+shop = "*"
+
 # Bekannte Vorbestellstarts (werden zusätzlich automatisch aus Shopseiten erkannt).
 # Beispiel:
 # [[termine]]

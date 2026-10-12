@@ -49,13 +49,15 @@ def formatiere(e: dict, beob: Optional[dict]) -> str:
     return "\n".join(z)
 
 
-def sende(text: str, transport: Optional[Callable] = None) -> tuple[bool, str]:
+def sende(text: str, transport: Optional[Callable] = None, leise: bool = False) -> tuple[bool, str]:
     token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
     chat = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
     if not token or not chat:
         return False, "Zugangsdaten fehlen"
-    daten = urllib.parse.urlencode({"chat_id": chat, "text": text, "parse_mode": "HTML",
-                                    "disable_web_page_preview": "true"}).encode()
+    felder = {"chat_id": chat, "text": text, "parse_mode": "HTML", "disable_web_page_preview": "true"}
+    if leise:
+        felder["disable_notification"] = "true"   # kommt an, aber ohne Ton
+    daten = urllib.parse.urlencode(felder).encode()
     url = f"https://api.telegram.org/bot{token}/sendMessage"
     try:
         if transport:

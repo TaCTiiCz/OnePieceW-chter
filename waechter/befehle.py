@@ -23,6 +23,7 @@ from . import telegram
 BEFEHLE = [("status", "Läuft der Wächter? Kurzüberblick"),
            ("naruto", "Naruto: alle Vorbestell-Seiten mit Links"),
            ("lieferbar", "One Piece: günstigste lieferbare / vorbestellbare Displays"),
+           ("gekauft", "Erinnerungen zu offenen Kaufalarmen stoppen"),
            ("hilfe", "Was der Bot kann")]
 _befehle_gemeldet = False      # setMyCommands einmal pro Prozess
 MAX_ALTER_ERSTER_ABRUF = 600   # beim allerersten Abruf ältere Nachrichten nicht mehr beantworten (Sekunden)
@@ -144,7 +145,20 @@ def _naruto_zeile(l: dict, mit_status: bool = False) -> str:
     preis = _euro(l.get("preis_cent")) if l.get("preis_cent") else "Preis ?"
     shop = html.escape(l.get("shop_name") or l.get("shop") or "?")
     vorsatz = f"{STATUS_WORT.get(l.get('status'), l.get('status') or '?')}: " if mit_status else ""
-    return f'{vorsatz}<a href="{html.escape(l.get("url") or "", quote=True)}">{shop}</a> – {titel} – <b>{preis}</b>'
+    kasse = ""
+    if l.get("warenkorb_url") and l.get("status") in m.KAUFBAR:
+        kasse = f' – 🛒 <a href="{html.escape(l["warenkorb_url"], quote=True)}">Kasse</a>'
+    return f'{vorsatz}<a href="{html.escape(l.get("url") or "", quote=True)}">{shop}</a> – {titel} – <b>{preis}</b>{kasse}'
+
+
+def gekauft_text(zustand: dict) -> str:
+    """Offene Kaufalarme quittieren: keine weiteren Erinnerungen."""
+    offen = zustand.get("naruto", {}).get("offene_alarme", {})
+    if not offen:
+        return "Keine offenen Kaufalarme – es laufen keine Erinnerungen."
+    namen = [f"• {html.escape((o.get('titel') or '?')[:60])} ({html.escape(o.get('shop') or '?')})" for o in offen.values()]
+    offen.clear()
+    return "✅ Erinnerungen gestoppt für:\n" + "\n".join(namen[:10]) + "\n\nNeue Kaufalarme kommen weiterhin."
 
 
 def status_text(zustand: dict, op_zustand: dict, alarm_shops: Optional[set], jetzt: dt.datetime,
@@ -219,6 +233,7 @@ def hilfe_text() -> str:
             "/status – läuft der Wächter? Kurzüberblick mit Naruto-Vorbestellungen und den günstigsten Displays\n"
             "/naruto – alle beobachteten Naruto-Seiten mit Links\n"
             "/lieferbar – One Piece: je Set das günstigste lieferbare und vorbestellbare Display\n"
+            "/gekauft – Erinnerungen zu offenen Kaufalarmen stoppen\n"
             "/hilfe – diese Übersicht\n\n"
             "Kaufalarme kommen weiterhin von selbst. Antwort dauert meist unter 30 Sekunden.")
 
@@ -261,6 +276,8 @@ def bearbeite(zustand: dict, op_zustand_laden: Callable[[], dict], alarm_shops_l
                 inhalt = status_text(zustand, op_zustand_laden(), alarm_shops_laden(), jetzt, grenze_cent)
             elif befehl in ("naruto", "vorbestellung", "vorbestellungen"):
                 inhalt = naruto_text(zustand)
+            elif befehl in ("gekauft", "stopp", "stop", "erledigt"):
+                inhalt = gekauft_text(zustand)
             elif befehl in ("lieferbar", "liste"):
                 inhalt = lieferbar_text(op_zustand_laden(), alarm_shops_laden(), jetzt, grenze_cent)
             else:

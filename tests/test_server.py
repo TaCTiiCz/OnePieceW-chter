@@ -15,7 +15,7 @@ from waechter.naruto_lauf import lade_betrieb
 class Server(unittest.TestCase):
     def test_standard_ist_github_takt(self):
         with mock.patch.dict(os.environ, {"WAECHTER_BETRIEB": ""}):
-            self.assertEqual(lade_betrieb()["intervalle"]["naruto_produktseite"], 120)
+            self.assertEqual(lade_betrieb()["intervalle"]["naruto_produktseite"], 60)
 
     def test_server_takt_ueber_umgebung(self):
         with mock.patch.dict(os.environ, {"WAECHTER_BETRIEB": "config/betrieb_server.toml"}):

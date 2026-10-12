@@ -8,6 +8,7 @@
 [budget]
 pro_woche = 100
 pro_lauf = 15
+naruto_anteil = 0.5   # Hälfte jedes Laufs für Naruto-Anfragen (neue Vorbestell-Shops finden)
 
 [[anfragen]]
 q = "\"Naruto Card Game\" Bandai vorbestellen"
@@ -28,6 +29,18 @@ land = "ES"
 [[anfragen]]
 q = "\"Naruto Card Game\" preordine Bandai"
 land = "IT"
+
+[[anfragen]]
+q = "\"Naruto Card Game\" booster display pre-order"
+land = "DE"
+
+[[anfragen]]
+q = "\"Naruto Card Game\" Bandai Display vorbestellbar"
+land = "AT"
+
+[[anfragen]]
+q = "\"Naruto Card Game\" booster box preorder EU shop"
+land = "ALL"
 
 [[anfragen]]
 q = "One Piece Card Game Display Vorbestellung Shop"

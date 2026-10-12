@@ -29,7 +29,9 @@ KOPF = {
     "UNGEPRUEFTER_HINWEIS": "⚠️ UNGEPRÜFTER HINWEIS – keine Kaufempfehlung",
     "FEHLER": "⛔ FEHLER – Abruf fehlgeschlagen (nicht ausverkauft!)",
     "AUSGANGSLAGE": "📋 AUSGANGSLAGE",
+    "ERINNERUNG": "⏰ ERINNERUNG – immer noch bestellbar",
 }
+KAUFTYPEN = ("KAUFALARM", "KAUFALARM_ANDERE_SPRACHE", "ERINNERUNG")
 VERTRAUEN = {"freigegeben": "✅ geprüft (dokumentiert)", "vorgeprueft": "☑️ automatisch vorgeprüft (Impressum/Versand DE)",
              "ungeprueft": "❗ UNGEPRÜFT"}
 
@@ -56,8 +58,12 @@ def formatiere(e: dict, ncfg: Optional[dict] = None, nachgesendet: bool = False,
     z: list[str] = []
     if test or e.get("testmodus"):
         z.append("🧪 <b>TEST – SIMULIERTER RESTOCK – KEIN ECHTES ANGEBOT</b>")
-    z.append(f"<b>{KOPF.get(e['typ'], e['typ'])}</b>" + (" (nachgesendet)" if nachgesendet else ""))
+    feuer = "🔥 " if e.get("preisstufe") == "fair" and e["typ"] in KAUFTYPEN else ""
+    z.append(f"{feuer}<b>{KOPF.get(e['typ'], e['typ'])}</b>" + (" (nachgesendet)" if nachgesendet else ""))
     z.append(html.escape(e.get("text", "")))
+    if e.get("warenkorb_url") and e["typ"] in KAUFTYPEN:
+        z.append(f'🛒 <b><a href="{html.escape(e["warenkorb_url"], quote=True)}">DIREKT ZUR KASSE</a></b> '
+                 "(legt 1 Stück in den Warenkorb)")
     if e.get("titel"):
         z.append("")
         z.append(f"<b>Produkt:</b> {html.escape(e['titel'])}")
@@ -71,6 +77,12 @@ def formatiere(e: dict, ncfg: Optional[dict] = None, nachgesendet: bool = False,
             f"❓ fehlt ({html.escape(e.get('versand_hinweis') or 'unbekannt')})"
         z.append(f"<b>Preis:</b> {euro(e.get('preis_cent'), e.get('waehrung'))} | <b>Versand DE:</b> {versand} | "
                  f"<b>Gesamt:</b> {euro(e.get('gesamt_cent'), e.get('waehrung'))}")
+        if e.get("preisstufe") == "fair":
+            z.append(f"🔥 <b>{html.escape(e.get('preisstufe_text') or 'fairer Preis')}</b>")
+        elif e.get("preisstufe") == "ueber":
+            z.append(f"💸 <b>{html.escape(e.get('preisstufe_text') or 'über deiner Grenze')}</b> (leise zugestellt)")
+        if e.get("storno"):
+            z.append(f"⚠️ <b>Stornierung evtl. ausgeschlossen:</b> „{html.escape(e['storno'][:160])}“ – vor dem Kauf prüfen")
         if e.get("teuer"):
             z.append(f"💰 <b>Teuer:</b> {html.escape(e['teuer'])}")
         z.append(f"<b>Release:</b> {html.escape(e.get('release') or '❓ unbekannt (offiziell: Sommer 2027)')}")
@@ -81,7 +93,10 @@ def formatiere(e: dict, ncfg: Optional[dict] = None, nachgesendet: bool = False,
             z.append("⚠️ <b>SPEKULATIV:</b> Bandai hat noch keine Naruto-Produkte, Preise oder Termine offiziell angekündigt.")
     if e.get("url"):
         z.append(f'👉 <a href="{html.escape(e["url"], quote=True)}">{"Bestelllink" if e["typ"].startswith("KAUFALARM") else "Zur Seite"}</a>')
-    z.append("<i>Keine automatische Bestellung.</i>")
+    if e["typ"] in KAUFTYPEN and e.get("preisstufe") != "ueber":
+        z.append("<i>Keine automatische Bestellung. Gekauft? Sende /gekauft, dann kommen keine Erinnerungen mehr.</i>")
+    else:
+        z.append("<i>Keine automatische Bestellung.</i>")
     return "\n".join(z)
 
 
@@ -98,13 +113,13 @@ class Kanal:
     def aus_umgebung(cls) -> "Kanal":
         aktiv, info = telegram.konfiguration()
         if aktiv:
-            return cls("Telegram", True, lambda text: telegram.sende(text), info)
+            return cls("Telegram", True, lambda text, leise=False: telegram.sende(text, leise=leise), info)
         return cls("Telegram", False, None, info)
 
     @classmethod
     def telegram_mit_adresse(cls, api_basis: str) -> "Kanal":
         """Für die Simulation: Telegram-API-Aufruf an einen eigenen (Test-)Server."""
-        def sender(text):
+        def sender(text, leise=False):
             import urllib.request, urllib.parse, json
             daten = urllib.parse.urlencode({"chat_id": os.environ.get("TELEGRAM_CHAT_ID", "sim"), "text": text,
                                             "parse_mode": "HTML"}).encode()
@@ -116,12 +131,14 @@ class Kanal:
     def beschreibung(self) -> str:
         return f"{self.name}: {'aktiv' if self.aktiv else 'NICHT eingerichtet'} – {self.info}"
 
-    def sende(self, text: str) -> tuple[bool, str, int]:
+    def sende(self, text: str, leise: bool = False) -> tuple[bool, str, int]:
         if not self.aktiv or self._sender is None:
             return False, "Pushkanal nicht eingerichtet", 0
         t0 = time.monotonic()
         try:
-            ok, info = self._sender(text)
+            import inspect
+            kann_leise = "leise" in inspect.signature(self._sender).parameters
+            ok, info = self._sender(text, leise=leise) if (leise and kann_leise) else self._sender(text)
         except Exception as ex:
             ok, info = False, f"Fehler ({type(ex).__name__})"
         return ok, info, int((time.monotonic() - t0) * 1000)
