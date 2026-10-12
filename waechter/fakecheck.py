@@ -28,8 +28,12 @@ RISIKO_ZAHLUNG = re.compile(r"vorkasse|nur überweisung|bank ?transfer only|west
                             r"prepayment only|moneygram", re.I)
 REISSER = re.compile(r"bis zu\s*\d{2}\s?%\s*rabatt|up to\s*\d{2}\s?%\s*off|räumungsverkauf|geschäftsaufgabe|"
                      r"closing down|liquidation|-\s?[789]\d\s?%|nur noch heute|last chance sale", re.I)
-RECHT = {"agb": r"agb|terms|bedingungen|conditions", "widerruf": r"widerruf|rückgabe|return|refund|retour",
-         "datenschutz": r"datenschutz|privacy|privacidad|confidentialit"}
+RECHT = {"agb": r"agb|terms|bedingungen|conditions|cgv|condizioni|condiciones|voorwaarden|villkor|vilk[aå]r|ehdot|"
+                r"regulamin|[aá]szf|termos|obchodn",
+         "widerruf": r"widerruf|r[uü]ckgabe|return|refund|retour|r[eé]tractation|recesso|desistimiento|devoluc|herroeping|"
+                     r"[aå]nger|fortrydelse|peruutus|odst[aą]pien|zwrot|el[aá]ll[aá]s|reklamac|odstoupen",
+         "datenschutz": r"datenschutz|privacy|privacidad|confidentialit|riservatezza|privacybeleid|integritet|persondata|"
+                        r"tietosuoja|prywatno|adatv[eé]del|privacidade|ochrana-osobn|gdpr|dsgvo|rgpd"}
 GUETESIEGEL = re.compile(r"trusted ?shops|ekomi|trustpilot|händlerbund|handlerbund|excellent\.|provenexpert|"
                          r"kundenbewertungen|verified reviews", re.I)
 KONTAKT = re.compile(r"[\w.+-]+@[\w-]+\.[a-z]{2,}|\+?\d[\d /().-]{7,}\d", re.I)
@@ -72,8 +76,10 @@ def bewerte_shop(domain: str, land: str, startseite: str, alle_links: list[tuple
     imp = impressum or {}
     deutschsprachig = land in ("DE", "AT", "CH")
     if not imp or imp.get("fehler"):
-        punkte += 3 if deutschsprachig else 1
-        signale.append("kein Impressum auffindbar")
+        # Impressumspflicht gilt im deutschsprachigen Raum; anderswo zählen nur Rechtstexte und Kontaktdaten
+        if deutschsprachig:
+            punkte += 3
+            signale.append("kein Impressum auffindbar")
     elif deutschsprachig and not (imp.get("ust_id") or imp.get("register")):
         punkte += 2
         signale.append("Impressum ohne USt-ID/Handelsregister")
