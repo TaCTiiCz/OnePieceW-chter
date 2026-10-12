@@ -48,13 +48,17 @@ frage() {  # frage VARIABLE "Text" [geheim]
   local hinweis=""; [ -n "$vorhanden" ] && hinweis=" (Enter = bisherigen Wert behalten)"
   local wert
   if [ "${3:-}" = geheim ]; then read -rsp "$2$hinweis: " wert; echo; else read -rp "$2$hinweis: " wert; fi
-  # Browser-Terminals (z. B. Oracle Cloud Shell) hängen beim Einfügen Steuerzeichen an (^[[200~ … ~).
-  # Tokens und Chat-IDs bestehen nur aus Buchstaben, Ziffern, ":", "_" und "-" – alles andere fliegt raus.
-  wert=$(printf '%s' "$wert" | sed -e 's/\x1b\[20[01]~//g' | tr -cd 'A-Za-z0-9:_-')
+  # Browser-Terminals (z. B. Oracle Cloud Shell) hängen beim Einfügen Steuerzeichen an (^[[200~ … ^[[201~),
+  # auch in sichtbarer Form. Erst die Marker entfernen, dann alles außer Buchstaben, Ziffern, ":", "_", "-".
+  wert=$(printf '%s' "$wert" | sed -e 's/\x1b//g' -e 's/\^\[//g' -e 's/\[20[01]~//g' | tr -cd 'A-Za-z0-9:_-')
   wert="${wert:-$vorhanden}"
   [ -n "$wert" ] || { rot "Ohne $1 geht es nicht."; exit 1; }
+  if [ "${3:-}" = geheim ]; then
+    echo "   erkannt: ${wert:0:6}…${wert: -4} (${#wert} Zeichen)"
+  fi
   printf -v "$1" '%s' "$wert"
 }
+printf '\033[?2004l'   # Einfüge-Steuerzeichen des Terminals abschalten (sonst landen sie in den Eingaben)
 frage TELEGRAM_BOT_TOKEN "Telegram-Bot-Token (von @BotFather, Form 123456:ABC…)" geheim
 frage TELEGRAM_CHAT_ID   "Telegram-Chat-ID (Zahl, z. B. 123456789)"
 frage GITHUB_TOKEN       "GitHub-Token (beginnt mit github_pat_)" geheim
