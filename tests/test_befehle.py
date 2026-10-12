@@ -48,8 +48,21 @@ OP = {"shops": {"a": {"zuletzt_geprueft": (JETZT - dt.timedelta(minutes=3)).isof
                    "7": angebot("a", "display-OP16", 13999, sicher=m.UNSICHER),
                    "8": angebot("a", "display-OP14", 14999, alter_min=600)}}
 NZ = {"aufgaben": {"t1": {"zuletzt_versuch": (JETZT - dt.timedelta(seconds=40)).isoformat(), "letzter_fehler": None}},
-      "naruto": {"angebote": {"n1": {"letzte": {"passend": True, "status": "PREORDER"}},
-                              "n2": {"letzte": {"passend": False, "status": "IN STOCK"}}}}}
+      "naruto": {"angebote": {
+          "n1": {"letzte": {"passend": True, "status": "PREORDER", "sicherheit": m.SICHER, "shop": "universetcg",
+                            "shop_name": "Universe TCG", "titel": "Naruto Card Game Booster Box (Pre-order) – English",
+                            "preis_cent": 35000, "url": "https://universe.example/box"}},
+          "n2": {"letzte": {"passend": False, "status": "IN STOCK"}},
+          "n3": {"letzte": {"passend": True, "status": "SOLD OUT", "sicherheit": m.SICHER, "shop": "fantasia",
+                            "shop_name": "FantasiaCards", "titel": "Naruto Card Game - Display 01 [ENG]",
+                            "url": "https://fantasia.example/en/p"}},
+          "n4": {"letzte": {"passend": True, "status": "SOLD OUT", "sicherheit": m.SICHER, "shop": "fantasia",
+                            "shop_name": "FantasiaCards", "titel": "Naruto Card Game - Display 01 [ENG]",
+                            "url": "https://fantasia.example/fr/p"}},
+          "n5": {"letzte": {"passend": True, "status": "PREORDER", "sicherheit": m.UNSICHER, "shop": "news",
+                            "shop_name": "brettspiel-news.de", "titel": "Bandais TCG-Offensive", "url": "https://news.example"}},
+          "n6": {"letzte": {"passend": True, "status": "PREORDER", "sicherheit": m.SICHER, "shop": "x",
+                            "ausschluss": "Verwechslung", "shop_name": "X", "titel": "Naruto Kayou", "url": "https://x"}}}}}
 
 
 class Befehle(unittest.TestCase):
@@ -67,7 +80,11 @@ class Befehle(unittest.TestCase):
         self.assertEqual(z["telegram_befehle"]["offset"], 11)
         t = fake.gesendet[0]
         self.assertIn("läuft", t)
-        self.assertIn("Vorbestellbar: 1", t)          # nur passende Naruto-Angebote
+        self.assertIn("1 vorbestellbar · 0 lieferbar · 1 ausverkauft", t)   # nur sichere, passende Seiten, ohne Dubletten
+        self.assertIn('href="https://universe.example/box"', t)            # Vorbestellseite mit Link
+        self.assertIn("350,00 €", t)
+        self.assertIn("Ausverkauft (wird weiter beobachtet): FantasiaCards", t)
+        self.assertNotIn("news.example", t)
         self.assertIn("2 lieferbar, 1 vorbestellbar", t)
         self.assertLess(t.index("109,99"), t.index("119,99") if "119,99" in t else len(t))
 
@@ -97,6 +114,17 @@ class Befehle(unittest.TestCase):
         self.assertNotIn("139,99", t)                  # unsicher erkannt
         self.assertNotIn("149,99", t)                  # zu lange nicht geprüft
         self.assertIn("129,99", t)                     # Vorbestellung OP15
+
+    def test_naruto_befehl_listet_alle_seiten(self):
+        n, fake, _ = self.lauf([nachricht(20, "/naruto")])
+        t = fake.gesendet[0]
+        self.assertIn("🟡 Vorbestellbar", t)
+        self.assertIn("Universe TCG", t)
+        self.assertIn("⚪ Ausverkauft", t)
+        self.assertEqual(t.count("fantasia.example"), 1)    # Sprachversionen zusammengefasst
+        self.assertIn("❔ Unsichere Treffer", t)
+        self.assertIn("news.example", t)
+        self.assertNotIn("Kayou", t)                        # Verwechslung ausgeschlossen
 
     def test_unbekannter_befehl_bekommt_hilfe(self):
         n, fake, _ = self.lauf([nachricht(3, "/xyz")])

@@ -131,10 +131,12 @@ dieselbe Warteschlange ein und setzen die Kette danach fort. **Anhalten:** Actio
 
 Der Bot antwortet auf Befehle aus deinem eigenen Chat (andere Chats werden ignoriert), meist innerhalb von 30 Sekunden:
 
-- `/status` – läuft der Wächter, wann war die letzte Prüfung, Naruto-Stand, One Piece: wie viele Displays bis zum
+- `/status` – läuft der Wächter, wann war die letzte Prüfung, Naruto-Vorbestellseiten mit Links, One Piece: wie viele Displays bis zum
   Höchstpreis lieferbar/vorbestellbar sind, plus die fünf günstigsten.
 - `/lieferbar` – für jedes Set das günstigste lieferbare und vorbestellbare EN-Display bis zum Höchstpreis
   (nur sicher erkannte Angebote bei geprüften Händlern, höchstens 6 Stunden alt).
+- `/naruto` – alle beobachteten Naruto-Seiten mit Links: vorbestellbar, lieferbar, ausverkauft (wird weiter beobachtet) und
+  unsichere Treffer getrennt.
 - `/hilfe` – Übersicht.
 
 Technik: Abfrage per `getUpdates` in jedem Schleifendurchgang (`waechter/befehle.py`), Position im Zustand
