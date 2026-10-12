@@ -20,10 +20,13 @@ uebernehmen() {
 uebernehmen
 zustand_sichern || true
 
-# Laufende/wartende GitHub-Abschnitte auslaufen lassen (höchstens ~15 Min.). Das Repository ist öffentlich,
-# die Abfrage braucht keinen Token.
+# Laufende/wartende GitHub-Abschnitte auslaufen lassen. Läuft GitHub nach ~18 Min. immer noch, ist BETRIEB=server
+# nicht gesetzt: dann startet der Server NICHT (systemd versucht es erneut) – Server und GitHub laufen nie parallel.
 github_aktiv() {
-  curl -fsS --max-time 20 "https://api.github.com/repos/${WAECHTER_REPO}/actions/workflows/waechter.yml/runs?per_page=10" \
+  local tok auth=()
+  tok=$(sed -nE 's#https://x-access-token:([^@]*)@github.com#\1#p' "$BASIS/.git-credentials" 2>/dev/null | head -1)
+  [ -n "$tok" ] && auth=(-H "Authorization: Bearer $tok")   # mit Token 5000 statt 60 Abfragen pro Stunde
+  curl -fsS --max-time 20 "${auth[@]}" "https://api.github.com/repos/${WAECHTER_REPO}/actions/workflows/waechter.yml/runs?per_page=10" \
     | python3 -c 'import json,sys; print(sum(r["status"] in ("in_progress","queued","pending","waiting","requested") for r in json.load(sys.stdin)["workflow_runs"]))' \
     2>/dev/null || echo -1
 }
