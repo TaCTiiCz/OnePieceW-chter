@@ -68,8 +68,18 @@ def plane_anfragen(cfg: dict, zustand: dict, heute: dt.date) -> tuple[list[dict]
     liste = alle_anfragen(cfg)
     if not liste:
         return [], zustand
-    start = int(zustand.get("cursor", 0)) % len(liste)
-    return [liste[(start + i) % len(liste)] for i in range(min(erlaubt, len(liste)))], zustand
+    # Naruto zuerst: ein fester Anteil jedes Laufs geht an Naruto-Anfragen (eigener Umlauf)
+    naruto = [a for a in liste if "naruto" in a["q"].lower()]
+    rest = [a for a in liste if "naruto" not in a["q"].lower()]
+    n_naruto = min(len(naruto), round(erlaubt * float(b.get("naruto_anteil", 0.5)))) if rest else min(erlaubt, len(naruto))
+    n_rest = min(len(rest), erlaubt - n_naruto)
+    if n_rest < erlaubt - n_naruto:   # zu wenige andere Anfragen: Rest an Naruto
+        n_naruto = min(len(naruto), erlaubt - n_rest)
+    sn = int(zustand.get("cursor_naruto", 0)) % max(1, len(naruto))
+    sr = int(zustand.get("cursor", 0)) % max(1, len(rest))
+    gewaehlt = [{**naruto[(sn + i) % len(naruto)], "_gruppe": "naruto"} for i in range(n_naruto)]
+    gewaehlt += [{**rest[(sr + i) % len(rest)], "_gruppe": "rest"} for i in range(n_rest)]
+    return gewaehlt, zustand
 
 
 def suche(log: Callable[[str], None] = print, transport: Optional[Callable] = None,
@@ -90,7 +100,10 @@ def suche(log: Callable[[str], None] = print, transport: Optional[Callable] = No
     if not anfragen:
         log(f"Händlersuche: Wochenbudget ({cfg.get('budget', {}).get('pro_woche', 100)}) aufgebraucht – bis nächste Woche Pause.")
         return {"aktiv": True, "neu": [], "suchen": 0}
-    gesamt = len(alle_anfragen(cfg))
+    alle = alle_anfragen(cfg)
+    gesamt_naruto = sum("naruto" in a["q"].lower() for a in alle)
+    gesamt = len(alle) - gesamt_naruto
+    je_gruppe = {"naruto": 0, "rest": 0}
     bekannt = {k["domain"].removeprefix("www.") for k in lade_kandidaten(kandidaten_datei)}
     neu: list[tuple[str, str]] = []
     heute = dt.date.today().isoformat()
@@ -114,8 +127,10 @@ def suche(log: Callable[[str], None] = print, transport: Optional[Callable] = No
                 log("  Abbruch: Brave lehnt weitere Anfragen ab.")
                 break
             gesendet += 1
+            je_gruppe[a.get("_gruppe", "rest")] += 1
             continue
         gesendet += 1
+        je_gruppe[a.get("_gruppe", "rest")] += 1
         urls = [x.get("url", "") for x in (daten.get("web", {}) or {}).get("results", [])]
         for d in domains_aus_ergebnissen(urls, cfg):
             if d not in bekannt and d not in {n for n, _ in neu}:
@@ -125,7 +140,8 @@ def suche(log: Callable[[str], None] = print, transport: Optional[Callable] = No
             for d, q in neu:
                 f.write(f"{d};{d};{land_aus_tld(d) or '?'};Brave-Suche {heute}: {q.replace(';', ',')}\n")
     zustand["verbraucht"] = int(zustand.get("verbraucht", 0)) + gesendet
-    zustand["cursor"] = (int(zustand.get("cursor", 0)) + gesendet) % max(1, gesamt)
+    zustand["cursor"] = (int(zustand.get("cursor", 0)) + je_gruppe["rest"]) % max(1, gesamt)
+    zustand["cursor_naruto"] = (int(zustand.get("cursor_naruto", 0)) + je_gruppe["naruto"]) % max(1, gesamt_naruto)
     zustand_datei.parent.mkdir(parents=True, exist_ok=True)
     zustand_datei.write_text(json.dumps(zustand, indent=1), encoding="utf-8")
     log(f"Händlersuche: {gesendet} Suchen ({zustand['verbraucht']} diese Woche), {len(neu)} neue Kandidaten")

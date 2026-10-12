@@ -8,7 +8,9 @@
 [intervalle]
 naruto_produktseite = 60           # bekannte Naruto-Produktseiten: jede Minute
 naruto_produktseite_fokus = 20     # rund um einen angekündigten Vorbestellstart
-entdeckung_schnell = 600           # Neuheiten-Feeds, Shopsuche, Vorbestell-/Naruto-Kategorien: 10 Min.
+entdeckung_naruto = 180            # Naruto-Kategorien und Shopsuche "naruto": alle 3 Min.
+entdeckung_schnell = 600           # Neuheiten-Feeds, Vorbestell-Kategorien: 10 Min.
+entdeckung_fokus = 120             # im Fokus-Modus
 entdeckung_langsam = 10800         # Neuheiten-/Bandai-Kategorien, kompletter Shopify-Katalog: 3 Std.
 sitemap = 86400                    # Sitemaps: täglich
 offiziell = 900                    # offizielle Naruto-Website: 15 Min.

@@ -45,6 +45,38 @@ VORBESTELLUNG = re.compile(r"vorbestell|pre-?order|precommande|précommande|prev
                            r"voorbestel|förbeställ|forudbestil|przedsprzeda", re.I)
 STARTTERMIN = re.compile(r"(vorbestell\w*|pre-?orders?|precommandes?|preventa|preordin\w*)[^!?\n]{0,40}?"
                          r"\b(ab|from|starts?|open(s|ing)?|à partir|desde|dal|beginnt|startet)\b[^!?\n]{0,60}", re.I)
+# Vorbestellungen, die sich nicht (kostenlos) stornieren lassen – Warnung im Alarm
+STORNO = re.compile(r"no cancel|cannot be cancel|can ?not be cancel|non-?cancel|not be cancel|no refunds?\b|non-?refundable|"
+                    r"nicht storn|keine storn|storno (ist )?(nicht|ausgeschlossen)|stornierung (ist )?(nicht|ausgeschlossen)|"
+                    r"kein rücktritt|pas d'annulation|non annulable|ne peut (pas )?être annul|non rimborsabil|"
+                    r"non annullabil|sin cancelaci|no se (puede|admiten?) (cancelar|cancelaciones)|no reembolsable|"
+                    r"niet annuleer", re.I)
+_WOO_ID = re.compile(r'name=["\']add-to-cart["\'][^>]*?value=["\'](\d+)["\']|value=["\'](\d+)["\'][^>]*?name=["\']add-to-cart["\']'
+                     r'|data-product_id=["\'](\d+)["\']', re.I)
+
+
+def storno_hinweis(text: str) -> Optional[str]:
+    """Kurzer Textauszug, falls die Seite eine Stornierung/Erstattung ausschließt."""
+    t = STORNO.search(text or "")
+    if not t:
+        return None
+    a, e = max(0, t.start() - 40), min(len(text), t.end() + 60)
+    return re.sub(r"\s+", " ", text[a:e]).strip()
+
+
+def warenkorb_link(seite: str, url: str) -> Optional[str]:
+    """WooCommerce: Link, der das Produkt direkt in den Warenkorb legt und die Kasse öffnet."""
+    if "woocommerce" not in (seite or "").lower():
+        return None
+    t = _WOO_ID.search(seite)
+    if not t:
+        return None
+    pid = next(g for g in t.groups() if g)
+    from urllib.parse import urlparse
+    u = urlparse(url)
+    return f"{u.scheme}://{u.netloc}/checkout/?add-to-cart={pid}"
+
+
 VERFUEGBARKEIT = {
     "instock": m.IN_STOCK, "instoreonly": m.IN_STOCK, "onlineonly": m.IN_STOCK, "limitedavailability": m.IN_STOCK,
     "preorder": m.PREORDER, "presale": m.PREORDER,
@@ -68,6 +100,7 @@ class SeitenInfo:
     release: Optional[str] = None
     schema_status: Optional[str] = None
     text_auszug: str = ""
+    storno: Optional[str] = None
 
 
 def _preis_cent(wert) -> Optional[int]:
@@ -193,6 +226,7 @@ def analysiere(seite: str, heute: Optional[dt.date] = None) -> SeitenInfo:
     info.coming_soon = bool(COMING_SOON.search(hauptteil))
     info.warteliste = bool(WARTELISTE.search(hauptteil))
     info.anzahlung = bool(ANZAHLUNG.search(hauptteil))
+    info.storno = storno_hinweis(hauptteil)
     vorbestell_text = bool(VORBESTELLUNG.search(hauptteil))
 
     # Vorbestellstart / Erscheinungsdatum aus dem Text
