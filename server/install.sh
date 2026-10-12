@@ -48,6 +48,9 @@ frage() {  # frage VARIABLE "Text" [geheim]
   local hinweis=""; [ -n "$vorhanden" ] && hinweis=" (Enter = bisherigen Wert behalten)"
   local wert
   if [ "${3:-}" = geheim ]; then read -rsp "$2$hinweis: " wert; echo; else read -rp "$2$hinweis: " wert; fi
+  # Browser-Terminals (z. B. Oracle Cloud Shell) hängen beim Einfügen Steuerzeichen an (^[[200~ … ~).
+  # Tokens und Chat-IDs bestehen nur aus Buchstaben, Ziffern, ":", "_" und "-" – alles andere fliegt raus.
+  wert=$(printf '%s' "$wert" | sed -e 's/\x1b\[20[01]~//g' | tr -cd 'A-Za-z0-9:_-')
   wert="${wert:-$vorhanden}"
   [ -n "$wert" ] || { rot "Ohne $1 geht es nicht."; exit 1; }
   printf -v "$1" '%s' "$wert"
