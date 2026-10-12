@@ -1,0 +1,102 @@
+{
+ "updated": "2026-10-12T10:51:02+00:00",
+ "quelle": "server",
+ "state": "checking",
+ "current": null,
+ "last_run": "2026-10-12T10:51:00+00:00",
+ "run_seconds": 0.5,
+ "sites": [
+  {
+   "id": "produkt",
+   "name": "Produkte",
+   "agent": "naruto",
+   "status": "error",
+   "im_lauf": false,
+   "last_checked": "2026-10-12T10:50:25+00:00",
+   "detail": "6 von 12 Aufgaben mit Fehlern"
+  },
+  {
+   "id": "entdeckung",
+   "name": "Entdeckung",
+   "agent": "naruto",
+   "status": "ok",
+   "im_lauf": true,
+   "last_checked": "2026-10-12T10:51:00+00:00",
+   "detail": "966 Aufgaben, 217 mit Fehlern"
+  },
+  {
+   "id": "op_restock",
+   "name": "Restock",
+   "agent": "onepiece",
+   "status": "ok",
+   "im_lauf": false,
+   "last_checked": "2026-10-12T10:50:14+00:00",
+   "detail": "1 Aufgaben"
+  },
+  {
+   "id": "op_vorbestellung",
+   "name": "Vorbestellung",
+   "agent": "onepiece",
+   "status": "ok",
+   "im_lauf": false,
+   "last_checked": "2026-10-12T10:50:14+00:00",
+   "detail": "1 Aufgaben"
+  }
+ ],
+ "events": [
+  {
+   "time": "2026-10-12T09:33:20+00:00",
+   "text": "FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Naruto Card Game - Display 01 [ENG]…"
+  },
+  {
+   "time": "2026-10-12T09:33:20+00:00",
+   "text": "FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Naruto Card Game Case — 12 Booster …"
+  },
+  {
+   "time": "2026-10-12T09:33:19+00:00",
+   "text": "FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Naruto Card Game - Display 01 [ENG]…"
+  },
+  {
+   "time": "2026-10-12T09:33:19+00:00",
+   "text": "FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Naruto Card Game - Display 01 [ENG]…"
+  },
+  {
+   "time": "2026-10-12T09:32:09+00:00",
+   "text": "FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Naruto Card Game Booster Box (Pre-o…"
+  },
+  {
+   "time": "2026-10-12T09:32:09+00:00",
+   "text": "FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Naruto Card Game - Display 01 [ENG]…"
+  },
+  {
+   "time": "2026-10-11T22:15:20+00:00",
+   "text": "OP_RESTOCK: Neu gelistet und lieferbar: OP12 Booster Display (EN, 24 Packs) bei AdventureCardz"
+  },
+  {
+   "time": "2026-10-11T22:15:20+00:00",
+   "text": "OP_RESTOCK: Neu gelistet und lieferbar: OP17 Booster Display (EN, 24 Packs) bei AdventureCardz"
+  },
+  {
+   "time": "2026-10-11T22:15:20+00:00",
+   "text": "OP_RESTOCK: Neu gelistet und lieferbar: OP17 Booster Display (EN, 24 Packs) bei AdventureCardz"
+  },
+  {
+   "time": "2026-10-11T22:15:20+00:00",
+   "text": "OP_RESTOCK: Neu gelistet und lieferbar: OP17 Booster Display (EN, 24 Packs) bei GS Game On"
+  },
+  {
+   "time": "2026-10-11T22:15:20+00:00",
+   "text": "OP_RESTOCK: Neu gelistet und lieferbar: OP13 Booster Display (EN, 24 Packs) bei GS Game On"
+  },
+  {
+   "time": "2026-10-11T22:15:20+00:00",
+   "text": "OP_RESTOCK: Neu gelistet und lieferbar: OP09 Booster Display (EN, 24 Packs) bei GS Game On"
+  }
+ ],
+ "stats": {
+  "haendler": 160,
+  "aufgaben": 979,
+  "aufgaben_mit_fehlern": 223,
+  "push_problem": false
+ }
+}
