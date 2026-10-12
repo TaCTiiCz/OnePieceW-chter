@@ -15,7 +15,7 @@ main() {
 
   # 2) Dojo-Seite (höchstens ~6 Veröffentlichungen pro Stunde, GitHub-Pages-Grenze ist 10)
   if { [ $(( 10#$(date -u +%M) % 10 )) -lt 5 ] || [ "${WAECHTER_DOJO_SOFORT:-0}" = 1 ]; } && [ -f "$DATEN/status.json" ]; then
-    for f in index.html status.json .nojekyll; do
+    for f in index.html status.json icon.png .nojekyll; do
       [ -f "$DATEN/$f" ] && cp "$DATEN/$f" "$SEITE/$f"
     done
     chown -R waechter:waechter "$SEITE"

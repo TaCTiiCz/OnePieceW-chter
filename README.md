@@ -309,6 +309,12 @@ Wächter-Lauf, „schläft“ er – das ist die ehrliche Warnung, dass der Daue
 - Ohne `status.json` zeigt die Seite einen **Demo-Modus** (oben als „DEMO-MODUS“ gekennzeichnet).
 - Hinweis: Die Aktion `simulation` läuft in einer getrennten Testumgebung und löst im Dojo keinen Alarm aus. Der Alarm erscheint nur bei einem echten Restock (Kaufalarm der letzten 3 Stunden).
 
+### Dojo auf dem iPhone
+- **Als App-Icon:** Dojo-Seite in Safari öffnen → Teilen → „Zum Home-Bildschirm“. Startet im Vollbild mit Pixel-Icon.
+- **Als Widget:** App „Scriptable“ installieren, `widget/dojo-widget.js` als neues Script „Dojo“ einfügen, dann ein
+  Scriptable-Widget (klein/mittel/groß) auf den Startbildschirm legen und das Script „Dojo“ wählen. Zeigt Status (läuft /
+  ALARM / steht?), letzten Lauf, bestellbare Naruto-Angebote und One-Piece-Alarme; Tippen öffnet das Dojo.
+
 ### Alarm testen (Naruto und One Piece)
 Actions → „Wächter“ → „Run workflow“ → Aktion **`alarm-test-beide`**. Der Test schickt je eine Telegram-Nachricht „🧪 TEST“
 für Naruto und für One Piece (nur wenn Telegram eingerichtet ist) und zeigt beide Alarme etwa 15 Minuten lang im Dojo
