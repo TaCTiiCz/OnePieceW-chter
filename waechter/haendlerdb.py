@@ -122,6 +122,14 @@ UST_LAND = {"ATU": "AT", "DE": "DE", "IT": "IT", "FR": "FR", "ES": "ES", "NL": "
             "CHE": "CH", "GB": "UK"}
 
 
+# Ein Händler hat einen Warenkorb/eine Kasse. News-Seiten, Blogs und Magazine haben das nicht.
+SHOP_MUSTER = re.compile(
+    r"warenkorb|einkaufswagen|/cart\b|/cart[/?\"']|add[ -]to[ -]cart|checkout|zur kasse|\bkasse\b|basket|panier|carrello|"
+    r"carrito|winkelwagen|kundvagn|varukorg|indkøbskurv|ostoskori|koszyk|košík|kosár|cesta de la compra|"
+    r"in den warenkorb|ajouter au panier|aggiungi al carrello|añadir al carrito|woocommerce-cart|shopify-cart|"
+    r"data-cart|minicart|mini-cart", re.I)
+
+
 def land_aus_tld(domain: str) -> Optional[str]:
     d = domain.lower()
     for tld in sorted(TLD_LAND, key=len, reverse=True):
@@ -373,7 +381,13 @@ def pruefe_haendler(k: dict, abrufer, vorher: Optional[dict] = None, log: Callab
         e["gruende"].append("liefert laut Shopdaten nicht nach Deutschland")
     if land in NICHT_EU:
         e["zoll_hinweis"] = "Versand aus Nicht-EU-Land: Zoll/Einfuhrumsatzsteuer möglich"
-    geeignet = land in EUROPA and e["tcg_bezug"] and e["versand_de"] != "nein" and not e.get("eigene_bot_regeln")
+    e["shop_merkmale"] = bool(SHOP_MUSTER.search(seite[:800_000])) or e["plattform"] in (
+        "shopify", "woocommerce", "shopware", "jtl", "magento", "prestashop", "gambio", "oxid", "ecwid", "lightspeed",
+        "plentymarkets")
+    if not e["shop_merkmale"]:
+        e["gruende"].append("keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin")
+    geeignet = (land in EUROPA and e["tcg_bezug"] and e["versand_de"] != "nein" and not e.get("eigene_bot_regeln")
+                and e["shop_merkmale"])
     e["status"] = "geeignet" if geeignet else ("eingeschraenkt" if e.get("eigene_bot_regeln") else "ungeeignet")
     vorgeprueft = (bool(imp_info.get("ust_id") or imp_info.get("register")) and e["versand_de"] == "ja")
     e["vertrauen"] = "vorgeprueft" if (geeignet and vorgeprueft) else "ungeprueft"
