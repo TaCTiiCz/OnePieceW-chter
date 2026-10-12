@@ -1,5 +1,5 @@
 {
- "aktualisiert": "2026-10-12T06:02:06+00:00",
+ "aktualisiert": "2026-10-12T06:14:38+00:00",
  "haendler": {
   "1piecetcg": {
    "basis_url": "https://1piecetcg.fr",
@@ -36,7 +36,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:57:44+00:00",
+   "geprueft_am": "2026-10-12T06:10:33+00:00",
    "gruende": [],
    "id": "1piecetcg",
    "impressum": {
@@ -107,7 +107,7 @@
     ],
     "stufe": "mittel"
    },
-   "geprueft_am": "2026-10-12T05:58:54+00:00",
+   "geprueft_am": "2026-10-12T06:11:41+00:00",
    "gruende": [],
    "id": "2sleeve",
    "impressum": {
@@ -202,7 +202,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:56:29+00:00",
+   "geprueft_am": "2026-10-12T06:09:20+00:00",
    "gruende": [],
    "id": "adventurecardz",
    "impressum": {
@@ -282,7 +282,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:33+00:00",
+   "geprueft_am": "2026-10-12T06:11:23+00:00",
    "gruende": [],
    "id": "alphaspel",
    "impressum_url": null,
@@ -358,7 +358,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:56+00:00",
+   "geprueft_am": "2026-10-12T06:12:40+00:00",
    "gruende": [
     "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin"
    ],
@@ -414,10 +414,6 @@
     },
     {
      "art": "kategorie_bandai",
-     "url": "https://www.animeclick.it/novel/28511/one-piece-stampede"
-    },
-    {
-     "art": "kategorie_bandai",
      "url": "https://www.animeclick.it/anime/66723/dragon-ball-super-beerus"
     },
     {
@@ -434,8 +430,9 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:18+00:00",
+   "geprueft_am": "2026-10-12T06:13:00+00:00",
    "gruende": [
+    "kein erkennbares TCG-Sortiment auf der Startseite",
     "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin"
    ],
    "id": "animeclick",
@@ -451,11 +448,10 @@
     "https://www.animeclick.it/sitemap.xml"
    ],
    "status": "ungeeignet",
-   "tcg_bezug": true,
+   "tcg_bezug": false,
    "tcg_hinweise": [
     "dragon ball",
-    "naruto",
-    "one piece"
+    "naruto"
    ],
    "tdm_vorbehalt": false,
    "versand_de": "unbekannt",
@@ -473,7 +469,7 @@
     },
     {
      "art": "kategorie_naruto",
-     "url": "https://www.animeup.de/anime/naruto-was-heisst-anbu/"
+     "url": "https://www.animeup.de/anime/naruto-und-neji-wie-glaube-an-veraenderung-die-neue-ninja-generation-praegt/"
     },
     {
      "art": "kategorie_naruto",
@@ -481,11 +477,11 @@
     },
     {
      "art": "kategorie_bandai",
-     "url": "https://www.animeup.de/anime/dragon-ball-welcher-son-goku-staerkste-ranking/"
+     "url": "https://www.animeup.de/anime/one-piece-sir-crocodile-geheimnis/"
     },
     {
      "art": "kategorie_bandai",
-     "url": "https://www.animeup.de/news/dragon-ball-super-beerus-startet-am-11-oktober-2026-bei-crunchyroll/"
+     "url": "https://www.animeup.de/anime/dragon-ball-welcher-son-goku-staerkste-ranking/"
     },
     {
      "art": "sitemap",
@@ -501,7 +497,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:57+00:00",
+   "geprueft_am": "2026-10-12T06:12:40+00:00",
    "gruende": [],
    "id": "animeup",
    "impressum": {
@@ -524,9 +520,13 @@
    "status": "geeignet",
    "tcg_bezug": true,
    "tcg_hinweise": [
+    "booster",
     "dragon ball",
     "naruto",
-    "one piece"
+    "one piece",
+    "sammelkarten",
+    "tcg",
+    "trading card"
    ],
    "tdm_vorbehalt": false,
    "versand_de": "ja",
@@ -578,7 +578,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:42+00:00",
+   "geprueft_am": "2026-10-12T06:12:25+00:00",
    "gruende": [],
    "id": "battlebear",
    "impressum": {
@@ -658,7 +658,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:55+00:00",
+   "geprueft_am": "2026-10-12T06:11:43+00:00",
    "gruende": [],
    "id": "bayzing",
    "impressum": {
@@ -729,7 +729,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:24+00:00",
+   "geprueft_am": "2026-10-12T06:11:16+00:00",
    "gruende": [],
    "id": "bazaarofmagic",
    "impressum_url": null,
@@ -800,7 +800,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:38+00:00",
+   "geprueft_am": "2026-10-12T06:12:23+00:00",
    "gruende": [],
    "id": "bbspiele",
    "impressum": {
@@ -898,7 +898,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:13+00:00",
+   "geprueft_am": "2026-10-12T06:11:58+00:00",
    "gruende": [],
    "id": "bescards",
    "impressum": {
@@ -951,7 +951,7 @@
    "domain": "blackfire.eu",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-11T22:59:44+00:00",
-   "geprueft_am": "2026-10-12T06:01:06+00:00",
+   "geprueft_am": "2026-10-12T06:13:43+00:00",
    "gruende": [
     "robots.txt erlaubt diesen Abruf nicht – wird respektiert"
    ],
@@ -997,7 +997,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:01+00:00",
+   "geprueft_am": "2026-10-12T06:12:46+00:00",
    "gruende": [],
    "id": "blog",
    "impressum_url": null,
@@ -1074,7 +1074,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:56:44+00:00",
+   "geprueft_am": "2026-10-12T06:09:34+00:00",
    "gruende": [],
    "id": "breakthecase",
    "impressum": {
@@ -1165,8 +1165,10 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:53+00:00",
-   "gruende": [],
+   "geprueft_am": "2026-10-12T06:12:36+00:00",
+   "gruende": [
+    "kein erkennbares TCG-Sortiment auf der Startseite"
+   ],
    "id": "brettspielnews",
    "impressum": {
     "beleg": "tzsteuer-ID Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: DE238244230 Redaktionell verantwortlich Daniel Krau",
@@ -1185,11 +1187,9 @@
    "sitemaps": [
     "https://www.brettspiel-news.de/sitemap.xml"
    ],
-   "status": "geeignet",
-   "tcg_bezug": true,
+   "status": "ungeeignet",
+   "tcg_bezug": false,
    "tcg_hinweise": [
-    "lorcana",
-    "magic: the gathering",
     "tcg"
    ],
    "tdm_vorbehalt": false,
@@ -1201,7 +1201,7 @@
     "nennt_eu": true
    },
    "versand_url": "https://www.brettspiel-news.de/index.php/de/nachrichten-uebersicht/branche/16171-dungeon-crawler-carl-unstoppable-versandkosten-bringen-unterst-tzende-in-europa-auf-die-palme",
-   "vertrauen": "vorgeprueft"
+   "vertrauen": "ungeprueft"
   },
   "brettspielversand": {
    "basis_url": "https://brettspielversand.de",
@@ -1229,7 +1229,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:57:12+00:00",
+   "geprueft_am": "2026-10-12T06:10:01+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite"
    ],
@@ -1303,7 +1303,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:57:00+00:00",
+   "geprueft_am": "2026-10-12T06:09:49+00:00",
    "gruende": [],
    "id": "brickznmore",
    "impressum": {
@@ -1396,7 +1396,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:16+00:00",
+   "geprueft_am": "2026-10-12T06:11:06+00:00",
    "gruende": [],
    "id": "bsastore",
    "impressum": {
@@ -1453,6 +1453,10 @@
      "url": "https://business.cardsandtoys.de/search/?qs=naruto"
     },
     {
+     "art": "kategorie_naruto",
+     "url": "https://business.cardsandtoys.de/Holly-Box-Naruto-Shippuden-Ichikaru-Ramen-Blind-Box"
+    },
+    {
      "art": "kategorie_vorbestellung",
      "url": "https://business.cardsandtoys.de/Pre-Order"
     },
@@ -1482,7 +1486,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:19+00:00",
+   "geprueft_am": "2026-10-12T06:13:01+00:00",
    "gruende": [],
    "id": "business",
    "impressum": {
@@ -1495,7 +1499,7 @@
    "land": "DE",
    "land_quelle": "Kandidatenliste",
    "name": "business.cardsandtoys.de",
-   "naruto_erwaehnt": false,
+   "naruto_erwaehnt": true,
    "plattform": "jtl",
    "quelle": "Brave-Suche 2026-10-11: One Piece Card Game Display Vorbestellung Shop",
    "shop_merkmale": true,
@@ -1511,6 +1515,7 @@
     "lorcana",
     "magic: the gathering",
     "mtg",
+    "naruto",
     "one piece",
     "pokemon",
     "pokémon",
@@ -1550,7 +1555,7 @@
     ],
     "stufe": "hoch"
    },
-   "geprueft_am": "2026-10-12T06:00:34+00:00",
+   "geprueft_am": "2026-10-12T06:13:15+00:00",
    "gruende": [
     "Fake-Shop-Verdacht (hoch, 6 Punkte): kein Impressum auffindbar; Rechtstexte fehlen: agb, widerruf, datenschutz; Reißer-Werbung (Totalverkauf, extreme Rabatte)"
    ],
@@ -1611,7 +1616,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:07+00:00",
+   "geprueft_am": "2026-10-12T06:12:50+00:00",
    "gruende": [],
    "id": "campustech",
    "impressum": {
@@ -1703,7 +1708,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:14+00:00",
+   "geprueft_am": "2026-10-12T06:11:58+00:00",
    "gruende": [],
    "id": "candycards",
    "impressum_url": null,
@@ -1775,7 +1780,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:57:36+00:00",
+   "geprueft_am": "2026-10-12T06:10:25+00:00",
    "gruende": [],
    "id": "carab",
    "impressum": {
@@ -1850,7 +1855,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:41+00:00",
+   "geprueft_am": "2026-10-12T06:14:12+00:00",
    "gruende": [],
    "id": "cardbinder",
    "impressum": {
@@ -1939,7 +1944,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:20+00:00",
+   "geprueft_am": "2026-10-12T06:13:03+00:00",
    "gruende": [],
    "id": "cardbuddys",
    "impressum": {
@@ -2003,7 +2008,7 @@
     },
     {
      "art": "kategorie_bandai",
-     "url": "https://www.cardcatcher.de/One-Piece-Card-Game-Premium-Card-Collection-Best-Selection-Vol6-Englisch"
+     "url": "https://www.cardcatcher.de/One-Piece-Card-Game-Ace-Newgate-ST22-Starter-Deck-Englisch"
     },
     {
      "art": "sitemap",
@@ -2017,7 +2022,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:00+00:00",
+   "geprueft_am": "2026-10-12T06:13:34+00:00",
    "gruende": [],
    "id": "cardcatcher",
    "impressum": {
@@ -2100,7 +2105,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:25+00:00",
+   "geprueft_am": "2026-10-12T06:12:10+00:00",
    "gruende": [
     "liefert laut Shopdaten nicht nach Deutschland"
    ],
@@ -2174,7 +2179,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:20+00:00",
+   "geprueft_am": "2026-10-12T06:13:56+00:00",
    "gruende": [],
    "id": "cardclub",
    "impressum": {
@@ -2261,7 +2266,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:32+00:00",
+   "geprueft_am": "2026-10-12T06:12:17+00:00",
    "gruende": [],
    "id": "cardcollector",
    "impressum": {
@@ -2317,7 +2322,7 @@
    "domain": "cardcollectors.ch",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T13:59:39+00:00",
-   "geprueft_am": "2026-10-12T05:57:29+00:00",
+   "geprueft_am": "2026-10-12T06:10:19+00:00",
    "gruende": [
     "robots.txt mit HTTP 403 verweigert"
    ],
@@ -2375,7 +2380,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:57:12+00:00",
+   "geprueft_am": "2026-10-12T06:09:57+00:00",
    "gruende": [],
    "id": "cardcorner",
    "impressum": {
@@ -2459,7 +2464,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:35+00:00",
+   "geprueft_am": "2026-10-12T06:13:15+00:00",
    "gruende": [],
    "id": "cardcorner2",
    "impressum": {
@@ -2548,7 +2553,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:56:29+00:00",
+   "geprueft_am": "2026-10-12T06:09:20+00:00",
    "gruende": [],
    "id": "cardcosmos",
    "impressum": {
@@ -2633,7 +2638,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:42+00:00",
+   "geprueft_am": "2026-10-12T06:11:32+00:00",
    "gruende": [],
    "id": "cardempire",
    "impressum_url": null,
@@ -2706,7 +2711,7 @@
     ],
     "stufe": "mittel"
    },
-   "geprueft_am": "2026-10-12T06:01:10+00:00",
+   "geprueft_am": "2026-10-12T06:13:43+00:00",
    "gruende": [],
    "id": "cardframes",
    "impressum": {
@@ -2787,7 +2792,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:50+00:00",
+   "geprueft_am": "2026-10-12T06:13:27+00:00",
    "gruende": [],
    "id": "cardgames24",
    "impressum": {
@@ -2838,7 +2843,7 @@
    "domain": "cardgameshop.be",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T14:01:24+00:00",
-   "geprueft_am": "2026-10-12T05:59:24+00:00",
+   "geprueft_am": "2026-10-12T06:12:08+00:00",
    "gruende": [
     "Abruf fehlgeschlagen nach 3 Versuchen (500)"
    ],
@@ -2886,7 +2891,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:48+00:00",
+   "geprueft_am": "2026-10-12T06:13:22+00:00",
    "gruende": [],
    "id": "cardhome",
    "impressum": {
@@ -2964,7 +2969,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:22+00:00",
+   "geprueft_am": "2026-10-12T06:13:04+00:00",
    "gruende": [],
    "id": "cardknights",
    "impressum": {
@@ -3061,7 +3066,7 @@
     ],
     "stufe": "mittel"
    },
-   "geprueft_am": "2026-10-12T05:57:29+00:00",
+   "geprueft_am": "2026-10-12T06:10:20+00:00",
    "gruende": [
     "liefert laut Shopdaten nicht nach Deutschland"
    ],
@@ -3150,7 +3155,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:44+00:00",
+   "geprueft_am": "2026-10-12T06:14:16+00:00",
    "gruende": [],
    "id": "cardport",
    "impressum": {
@@ -3231,7 +3236,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:49+00:00",
+   "geprueft_am": "2026-10-12T06:13:27+00:00",
    "gruende": [],
    "id": "cardsplace",
    "impressum": {
@@ -3333,7 +3338,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:44+00:00",
+   "geprueft_am": "2026-10-12T06:14:18+00:00",
    "gruende": [],
    "id": "cardsrfun",
    "impressum": {
@@ -3422,7 +3427,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:17+00:00",
+   "geprueft_am": "2026-10-12T06:11:10+00:00",
    "gruende": [],
    "id": "cardverse",
    "impressum": {
@@ -3518,7 +3523,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:15+00:00",
+   "geprueft_am": "2026-10-12T06:12:58+00:00",
    "gruende": [
     "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)"
    ],
@@ -3591,7 +3596,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:05+00:00",
+   "geprueft_am": "2026-10-12T06:10:57+00:00",
    "gruende": [],
    "id": "cartinhabrilhante",
    "impressum": {
@@ -3659,7 +3664,7 @@
     ],
     "stufe": "hoch"
    },
-   "geprueft_am": "2026-10-12T05:57:44+00:00",
+   "geprueft_am": "2026-10-12T06:10:33+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite",
     "Fake-Shop-Verdacht (hoch, 5 Punkte): kein Impressum auffindbar; Rechtstexte fehlen: widerruf, datenschutz"
@@ -3723,7 +3728,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:00+00:00",
+   "geprueft_am": "2026-10-12T06:11:46+00:00",
    "gruende": [],
    "id": "catchemcards",
    "impressum": {
@@ -3773,7 +3778,7 @@
    "domain": "ccgtrader.net",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-12T03:38:19+00:00",
-   "geprueft_am": "2026-10-12T06:01:39+00:00",
+   "geprueft_am": "2026-10-12T06:14:10+00:00",
    "gruende": [
     "unerwarteter HTTP-Status 522"
    ],
@@ -3821,7 +3826,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:47+00:00",
+   "geprueft_am": "2026-10-12T06:11:34+00:00",
    "gruende": [],
    "id": "chaoscards",
    "impressum_url": null,
@@ -3865,9 +3870,9 @@
    "domain": "collect-it.de",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T14:08:19+00:00",
-   "geprueft_am": "2026-10-12T05:59:28+00:00",
+   "geprueft_am": "2026-10-12T06:12:12+00:00",
    "gruende": [
-    "robots.txt mit HTTP 403 verweigert"
+    "robots.txt nicht abrufbar (HTTP 503)"
    ],
    "http_status": null,
    "id": "collectit",
@@ -3919,7 +3924,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:27+00:00",
+   "geprueft_am": "2026-10-12T06:14:00+00:00",
    "gruende": [
     "Land US nicht in Europa",
     "liefert laut Shopdaten nicht nach Deutschland"
@@ -3959,87 +3964,20 @@
    "waehrung": "USD"
   },
   "comicplanet": {
-   "basis_url": "https://www.comicplanet.de",
    "domain": "comicplanet.de",
-   "entdeckung": [
-    {
-     "art": "shopsuche",
-     "url": "https://www.comicplanet.de/search?search=naruto"
-    },
-    {
-     "art": "kategorie_vorbestellung",
-     "url": "https://www.comicplanet.de/sammelkarten/yu-gi-oh/vorbestellungen/yu-gi-oh-yugi-muto-reprint-structure-deck"
-    },
-    {
-     "art": "kategorie_vorbestellung",
-     "url": "https://www.comicplanet.de/sammelkarten/yu-gi-oh/vorbestellungen/yu-gi-oh-beyond-the-brave-booster-display-deutsch"
-    },
-    {
-     "art": "kategorie_bandai",
-     "url": "https://www.comicplanet.de/sammelkarten/digimon/starter-dim/digimon-card-game-starter-deck-rubeusdramon-st-25-englisch"
-    },
-    {
-     "art": "kategorie_bandai",
-     "url": "https://www.comicplanet.de/sammelkarten/gundam-card-game/booster-displays/gundam-card-game-gd07-booster-display-englisch"
-    },
-    {
-     "art": "sitemap",
-     "url": "https://www.comicplanet.de/sitemap.xml"
-    }
-   ],
+   "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T13:59:11+00:00",
-   "fake_check": {
-    "domain_alter_tage": null,
-    "punkte": 0,
-    "signale": [],
-    "stufe": "gering"
-   },
-   "geprueft_am": "2026-10-12T05:56:56+00:00",
-   "gruende": [],
+   "geprueft_am": "2026-10-12T06:09:45+00:00",
+   "gruende": [
+    "robots.txt nicht abrufbar (HTTP 503)"
+   ],
+   "http_status": null,
    "id": "comicplanet",
-   "impressum": {
-    "beleg": "msatzsteuer: Umsatzsteuer-Identifikationsnummer gemäß §27 a Umsatzsteuergesetz: DE 265157790 Streitschlichtung: Wir sind nicht berei",
-    "rechtsform": "GmbH",
-    "register": true,
-    "ust_id": "DE265157790"
-   },
-   "impressum_url": "https://www.comicplanet.de/comic-planet-service/impressum/",
    "land": "DE",
-   "land_quelle": "Kandidatenliste",
    "name": "Comic Planet",
-   "naruto_erwaehnt": false,
-   "plattform": "shopware",
    "quelle": "Suche Gundam 2026-10-07",
-   "shop_merkmale": true,
-   "sitemaps": [
-    "https://www.comicplanet.de/sitemap.xml"
-   ],
-   "status": "geeignet",
-   "tcg_bezug": true,
-   "tcg_hinweise": [
-    "booster",
-    "digimon",
-    "display",
-    "gundam",
-    "lorcana",
-    "one piece",
-    "pokemon",
-    "pokémon",
-    "sammelkarten",
-    "tcg",
-    "trading card",
-    "yu-gi-oh"
-   ],
-   "tdm_vorbehalt": false,
-   "versand_de": "ja",
-   "versand_de_quelle": "Inlandshändler (Land DE)",
-   "versand_hinweise": {
-    "betrag_hinweis": "6,95 € (automatisch gelesen, unbestätigt)",
-    "nennt_deutschland": true,
-    "nennt_eu": true
-   },
-   "versand_url": "https://www.comicplanet.de/comic-planet-service/versand-und-zahlungsbedingungen/",
-   "vertrauen": "vorgeprueft"
+   "status": "blockiert",
+   "vertrauen": "ungeprueft"
   },
   "comicscollection": {
    "basis_url": "https://www.comicscollection.it",
@@ -4087,7 +4025,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:18+00:00",
+   "geprueft_am": "2026-10-12T06:13:01+00:00",
    "gruende": [],
    "id": "comicscollection",
    "impressum_url": null,
@@ -4167,7 +4105,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:56:30+00:00",
+   "geprueft_am": "2026-10-12T06:09:21+00:00",
    "gruende": [],
    "id": "crispycards",
    "impressum": {
@@ -4260,7 +4198,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:14+00:00",
+   "geprueft_am": "2026-10-12T06:13:46+00:00",
    "gruende": [],
    "id": "daesucards",
    "impressum": {
@@ -4354,7 +4292,7 @@
     ],
     "stufe": "mittel"
    },
-   "geprueft_am": "2026-10-12T06:01:21+00:00",
+   "geprueft_am": "2026-10-12T06:13:56+00:00",
    "gruende": [],
    "id": "de",
    "impressum": {
@@ -4441,7 +4379,7 @@
     ],
     "stufe": "mittel"
    },
-   "geprueft_am": "2026-10-12T06:01:17+00:00",
+   "geprueft_am": "2026-10-12T06:13:53+00:00",
    "gruende": [],
    "id": "de2",
    "impressum_url": null,
@@ -4511,7 +4449,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:56:56+00:00",
+   "geprueft_am": "2026-10-12T06:09:45+00:00",
    "gruende": [],
    "id": "deichcards",
    "impressum": {
@@ -4597,7 +4535,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:25+00:00",
+   "geprueft_am": "2026-10-12T06:13:06+00:00",
    "gruende": [],
    "id": "dertabletopper",
    "impressum": {
@@ -4688,7 +4626,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:57:27+00:00",
+   "geprueft_am": "2026-10-12T06:10:16+00:00",
    "gruende": [
     "liefert laut Shopdaten nicht nach Deutschland"
    ],
@@ -4740,7 +4678,7 @@
    "domain": "dortmundtcg.de",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-11T22:59:50+00:00",
-   "geprueft_am": "2026-10-12T06:01:15+00:00",
+   "geprueft_am": "2026-10-12T06:13:47+00:00",
    "gruende": [
     "robots.txt erlaubt diesen Abruf nicht – wird respektiert"
    ],
@@ -4788,7 +4726,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:31+00:00",
+   "geprueft_am": "2026-10-12T06:11:22+00:00",
    "gruende": [],
    "id": "dragonslair",
    "impressum": {
@@ -4848,7 +4786,7 @@
     ],
     "stufe": "hoch"
    },
-   "geprueft_am": "2026-10-12T06:01:16+00:00",
+   "geprueft_am": "2026-10-12T06:13:50+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite",
     "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin",
@@ -4906,7 +4844,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:07+00:00",
+   "geprueft_am": "2026-10-12T06:12:50+00:00",
    "gruende": [
     "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin"
    ],
@@ -4984,7 +4922,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:57+00:00",
+   "geprueft_am": "2026-10-12T06:12:40+00:00",
    "gruende": [],
    "id": "en",
    "impressum": {
@@ -5040,7 +4978,7 @@
    "domain": "en.tcg-shop.at",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-11T22:59:15+00:00",
-   "geprueft_am": "2026-10-12T06:00:36+00:00",
+   "geprueft_am": "2026-10-12T06:13:16+00:00",
    "gruende": [
     "robots.txt nicht abrufbar (HTTP Netzwerkfehler)"
    ],
@@ -5098,7 +5036,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:16+00:00",
+   "geprueft_am": "2026-10-12T06:12:59+00:00",
    "gruende": [
     "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin"
    ],
@@ -5171,7 +5109,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:12+00:00",
+   "geprueft_am": "2026-10-12T06:11:05+00:00",
    "gruende": [],
    "id": "evlutcg",
    "impressum": {
@@ -5266,7 +5204,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:56:43+00:00",
+   "geprueft_am": "2026-10-12T06:09:34+00:00",
    "gruende": [],
    "id": "fantasiacards",
    "impressum": {
@@ -5321,7 +5259,7 @@
    "domain": "fantasy-in.de",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T13:59:36+00:00",
-   "geprueft_am": "2026-10-12T05:57:24+00:00",
+   "geprueft_am": "2026-10-12T06:10:14+00:00",
    "gruende": [
     "robots.txt mit HTTP 403 verweigert"
    ],
@@ -5379,7 +5317,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:57:48+00:00",
+   "geprueft_am": "2026-10-12T06:10:34+00:00",
    "gruende": [],
    "id": "fantasysphere",
    "impressum": {
@@ -5435,7 +5373,7 @@
    "domain": "fantasywelt.de",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T13:59:21+00:00",
-   "geprueft_am": "2026-10-12T05:57:08+00:00",
+   "geprueft_am": "2026-10-12T06:09:54+00:00",
    "gruende": [
     "Zugriff verweigert (HTTP 403)"
    ],
@@ -5481,7 +5419,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:47+00:00",
+   "geprueft_am": "2026-10-12T06:11:37+00:00",
    "gruende": [],
    "id": "firestormgames",
    "impressum_url": null,
@@ -5527,7 +5465,7 @@
    "domain": "fujicardshop.com",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-12T03:38:04+00:00",
-   "geprueft_am": "2026-10-12T06:01:27+00:00",
+   "geprueft_am": "2026-10-12T06:14:00+00:00",
    "gruende": [
     "Zugriff verweigert (HTTP 403)"
    ],
@@ -5581,7 +5519,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:06+00:00",
+   "geprueft_am": "2026-10-12T06:12:49+00:00",
    "gruende": [
     "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)",
     "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin"
@@ -5640,7 +5578,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:05+00:00",
+   "geprueft_am": "2026-10-12T06:11:51+00:00",
    "gruende": [],
    "id": "galaxus",
    "impressum": {
@@ -5701,7 +5639,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:57:17+00:00",
+   "geprueft_am": "2026-10-12T06:10:06+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite"
    ],
@@ -5756,7 +5694,7 @@
     ],
     "stufe": "mittel"
    },
-   "geprueft_am": "2026-10-12T06:00:03+00:00",
+   "geprueft_am": "2026-10-12T06:12:46+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite"
    ],
@@ -5821,7 +5759,7 @@
     ],
     "stufe": "mittel"
    },
-   "geprueft_am": "2026-10-12T05:59:31+00:00",
+   "geprueft_am": "2026-10-12T06:12:17+00:00",
    "gruende": [],
    "id": "gamersheaven",
    "impressum": {
@@ -5913,7 +5851,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:38+00:00",
+   "geprueft_am": "2026-10-12T06:11:27+00:00",
    "gruende": [],
    "id": "gamescape",
    "impressum_url": null,
@@ -5980,7 +5918,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:44+00:00",
+   "geprueft_am": "2026-10-12T06:14:20+00:00",
    "gruende": [],
    "id": "gameshopmarli",
    "impressum": {
@@ -6028,102 +5966,26 @@
    "vertrauen": "ungeprueft"
   },
   "gamesisland": {
-   "basis_url": "https://games-island.eu",
    "domain": "games-island.eu",
-   "eigene_bot_regeln": true,
-   "entdeckung": [
-    {
-     "art": "shopsuche",
-     "url": "https://games-island.eu/search/?qs=naruto"
-    },
-    {
-     "art": "kategorie_vorbestellung",
-     "url": "https://games-island.eu/c/Magic-The-Gathering/e/Star-Trek"
-    },
-    {
-     "art": "kategorie_vorbestellung",
-     "url": "https://games-island.eu/c/Games-Workshop/Vorbestellungen"
-    },
-    {
-     "art": "kategorie_bandai",
-     "url": "https://games-island.eu/c/Kartenspiele/Digimon-TCG"
-    },
-    {
-     "art": "kategorie_bandai",
-     "url": "https://games-island.eu/c/Kartenspiele/Digimon-Premium-Packs"
-    },
-    {
-     "art": "sitemap",
-     "url": "https://games-island.eu/sitemap_index.xml"
-    }
-   ],
+   "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T13:59:15+00:00",
-   "fake_check": {
-    "domain_alter_tage": null,
-    "punkte": 0,
-    "signale": [
-     "Bewertungs-/Gütesiegel-Hinweis (positiv, nicht überprüft)"
-    ],
-    "stufe": "gering"
-   },
-   "geprueft_am": "2026-10-12T05:57:00+00:00",
+   "geprueft_am": "2026-10-12T06:09:49+00:00",
    "gruende": [
-    "Shop legt eigene Regeln für automatische Abrufe fest – nur über deren Vorgaben nutzbar"
+    "robots.txt nicht abrufbar (HTTP Netzwerkfehler)"
    ],
+   "http_status": null,
    "id": "gamesisland",
-   "impressum": {
-    "beleg": "4856 Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz (UStG): DE358523532 Dieses Dokument wurde erstellt und wird",
-    "rechtsform": "GmbH",
-    "register": true,
-    "ust_id": "DE358523532"
-   },
-   "impressum_url": "https://games-island.eu/Impressum",
    "land": "DE",
-   "land_quelle": "Kandidatenliste",
    "name": "Games Island",
-   "naruto_erwaehnt": false,
-   "plattform": "unbekannt",
    "quelle": "Suche One Piece 2026-10-06 (eigene Bot-Regeln)",
-   "shop_merkmale": true,
-   "sitemaps": [
-    "https://games-island.eu/sitemap_index.xml"
-   ],
-   "status": "eingeschraenkt",
-   "tcg_bezug": true,
-   "tcg_hinweise": [
-    "booster",
-    "digimon",
-    "display",
-    "dragon ball",
-    "gundam",
-    "lorcana",
-    "magic: the gathering",
-    "mtg",
-    "one piece",
-    "pokemon",
-    "pokémon",
-    "sammelkarten",
-    "tcg",
-    "trading card",
-    "yu-gi-oh",
-    "yugioh"
-   ],
-   "tdm_vorbehalt": true,
-   "versand_de": "ja",
-   "versand_de_quelle": "Inlandshändler (Land DE)",
-   "versand_hinweise": {
-    "betrag_hinweis": null,
-    "nennt_deutschland": false,
-    "nennt_eu": false
-   },
-   "versand_url": "https://games-island.eu/c/TCG-Zubehoer/gepolsterte-versandumschlaege",
+   "status": "blockiert",
    "vertrauen": "ungeprueft"
   },
   "gamespot": {
    "domain": "gamespot.com",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-11T22:58:52+00:00",
-   "geprueft_am": "2026-10-12T06:00:12+00:00",
+   "geprueft_am": "2026-10-12T06:12:54+00:00",
    "gruende": [
     "robots.txt mit HTTP 403 verweigert"
    ],
@@ -6139,7 +6001,7 @@
    "domain": "gameware.at",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T13:59:38+00:00",
-   "geprueft_am": "2026-10-12T05:57:28+00:00",
+   "geprueft_am": "2026-10-12T06:10:18+00:00",
    "gruende": [
     "robots.txt mit HTTP 403 verweigert"
    ],
@@ -6191,7 +6053,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:56:43+00:00",
+   "geprueft_am": "2026-10-12T06:09:30+00:00",
    "gruende": [],
    "id": "gatetothegames",
    "impressum": {
@@ -6262,7 +6124,7 @@
     ],
     "stufe": "hoch"
    },
-   "geprueft_am": "2026-10-12T06:01:02+00:00",
+   "geprueft_am": "2026-10-12T06:13:40+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite",
     "Fake-Shop-Verdacht (hoch, 5 Punkte): kein Impressum auffindbar; Rechtstexte fehlen: agb, widerruf"
@@ -6324,7 +6186,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:18+00:00",
+   "geprueft_am": "2026-10-12T06:11:10+00:00",
    "gruende": [],
    "id": "geekpeak",
    "impressum": {
@@ -6411,7 +6273,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:56:43+00:00",
+   "geprueft_am": "2026-10-12T06:09:34+00:00",
    "gruende": [],
    "id": "geeksheaven",
    "impressum": {
@@ -6502,7 +6364,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:56:52+00:00",
+   "geprueft_am": "2026-10-12T06:09:41+00:00",
    "gruende": [],
    "id": "gemcards",
    "impressum": {
@@ -6592,7 +6454,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:17+00:00",
+   "geprueft_am": "2026-10-12T06:11:07+00:00",
    "gruende": [],
    "id": "giaxstore",
    "impressum": {
@@ -6677,7 +6539,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:48+00:00",
+   "geprueft_am": "2026-10-12T06:11:37+00:00",
    "gruende": [],
    "id": "godofcards",
    "impressum": {
@@ -6764,7 +6626,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:56:56+00:00",
+   "geprueft_am": "2026-10-12T06:09:45+00:00",
    "gruende": [],
    "id": "godofgames",
    "impressum": {
@@ -6859,7 +6721,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:05+00:00",
+   "geprueft_am": "2026-10-12T06:10:58+00:00",
    "gruende": [],
    "id": "goldenpullscards",
    "impressum": {
@@ -6941,7 +6803,7 @@
     ],
     "stufe": "mittel"
    },
-   "geprueft_am": "2026-10-12T05:57:25+00:00",
+   "geprueft_am": "2026-10-12T06:10:14+00:00",
    "gruende": [],
    "id": "grubico",
    "impressum": {
@@ -7013,7 +6875,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:16+00:00",
+   "geprueft_am": "2026-10-12T06:11:06+00:00",
    "gruende": [],
    "id": "gsgameon",
    "impressum": {
@@ -7081,7 +6943,7 @@
     ],
     "stufe": "mittel"
    },
-   "geprueft_am": "2026-10-12T06:01:23+00:00",
+   "geprueft_am": "2026-10-12T06:13:57+00:00",
    "gruende": [
     "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)",
     "kein erkennbares TCG-Sortiment auf der Startseite",
@@ -7112,84 +6974,20 @@
    "vertrauen": "ungeprueft"
   },
   "haendler": {
-   "basis_url": "https://haendler.comicplanet.de",
    "domain": "haendler.comicplanet.de",
-   "entdeckung": [
-    {
-     "art": "shopsuche",
-     "url": "https://haendler.comicplanet.de/search?search=naruto"
-    },
-    {
-     "art": "kategorie_vorbestellung",
-     "url": "https://haendler.comicplanet.de/sammelkarten/magic/vorbestellungen/magic-star-trek-play-booster-display-deutsch"
-    },
-    {
-     "art": "kategorie_bandai",
-     "url": "https://haendler.comicplanet.de/sammelkarten/gundam-card-game/booster-displays/gundam-card-game-gd06-booster-englisch"
-    },
-    {
-     "art": "kategorie_bandai",
-     "url": "https://haendler.comicplanet.de/sammelkarten/dragon-ball/display-db/dragonball-super-card-game-masters-ub05-b32-booster-englisch"
-    },
-    {
-     "art": "sitemap",
-     "url": "https://haendler.comicplanet.de/sitemap.xml"
-    }
-   ],
+   "entdeckung": [],
    "erstmals_geprueft": "2026-10-11T22:59:44+00:00",
-   "fake_check": {
-    "domain_alter_tage": null,
-    "punkte": 0,
-    "signale": [],
-    "stufe": "gering"
-   },
-   "geprueft_am": "2026-10-12T06:01:06+00:00",
-   "gruende": [],
+   "geprueft_am": "2026-10-12T06:13:43+00:00",
+   "gruende": [
+    "robots.txt nicht abrufbar (HTTP 503)"
+   ],
+   "http_status": null,
    "id": "haendler",
-   "impressum": {
-    "beleg": "msatzsteuer: Umsatzsteuer-Identifikationsnummer gemäß §27 a Umsatzsteuergesetz: DE 265157790 Streitschlichtung: Wir sind nicht berei",
-    "rechtsform": "GmbH",
-    "register": true,
-    "ust_id": "DE265157790"
-   },
-   "impressum_url": "https://haendler.comicplanet.de/comic-planet-service/impressum/",
    "land": "DE",
-   "land_quelle": "Kandidatenliste",
    "name": "haendler.comicplanet.de",
-   "naruto_erwaehnt": false,
-   "plattform": "shopware",
    "quelle": "Brave-Suche 2026-10-11: Gundam Card Game Display kaufen",
-   "shop_merkmale": true,
-   "sitemaps": [
-    "https://haendler.comicplanet.de/sitemap.xml"
-   ],
-   "status": "geeignet",
-   "tcg_bezug": true,
-   "tcg_hinweise": [
-    "booster",
-    "digimon",
-    "display",
-    "dragon ball",
-    "gundam",
-    "lorcana",
-    "one piece",
-    "pokemon",
-    "pokémon",
-    "sammelkarten",
-    "tcg",
-    "trading card",
-    "yu-gi-oh"
-   ],
-   "tdm_vorbehalt": false,
-   "versand_de": "ja",
-   "versand_de_quelle": "Inlandshändler (Land DE)",
-   "versand_hinweise": {
-    "betrag_hinweis": "6,95 € (automatisch gelesen, unbestätigt)",
-    "nennt_deutschland": true,
-    "nennt_eu": true
-   },
-   "versand_url": "https://haendler.comicplanet.de/comic-planet-service/versand-und-zahlungsbedingungen/",
-   "vertrauen": "vorgeprueft"
+   "status": "blockiert",
+   "vertrauen": "ungeprueft"
   },
   "halloftoys": {
    "basis_url": "https://www.halloftoys.de",
@@ -7211,7 +7009,7 @@
     ],
     "stufe": "hoch"
    },
-   "geprueft_am": "2026-10-12T06:01:36+00:00",
+   "geprueft_am": "2026-10-12T06:14:08+00:00",
    "gruende": [
     "Fake-Shop-Verdacht (hoch, 6 Punkte): kein Impressum auffindbar; Rechtstexte fehlen: agb, widerruf, datenschutz; Reißer-Werbung (Totalverkauf, extreme Rabatte)"
    ],
@@ -7259,14 +7057,15 @@
    ],
    "erstmals_geprueft": "2026-10-07T14:00:07+00:00",
    "fake_check": {
-    "domain_alter_tage": null,
-    "punkte": 1,
+    "domain_alter_tage": 266,
+    "punkte": 2,
     "signale": [
+     "Domain jünger als 1 Jahr (266 Tage)",
      "keine Kontaktdaten auf Startseite/Impressum"
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:05+00:00",
+   "geprueft_am": "2026-10-12T06:10:50+00:00",
    "gruende": [],
    "id": "higanbanatcg",
    "impressum": {
@@ -7340,7 +7139,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:32+00:00",
+   "geprueft_am": "2026-10-12T06:12:18+00:00",
    "gruende": [],
    "id": "hiveworld",
    "impressum": {
@@ -7438,7 +7237,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:58+00:00",
+   "geprueft_am": "2026-10-12T06:12:40+00:00",
    "gruende": [
     "Land CA nicht in Europa"
    ],
@@ -7525,7 +7324,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:09+00:00",
+   "geprueft_am": "2026-10-12T06:12:52+00:00",
    "gruende": [
     "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)",
     "kein erkennbares TCG-Sortiment auf der Startseite",
@@ -7578,7 +7377,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:19+00:00",
+   "geprueft_am": "2026-10-12T06:13:53+00:00",
    "gruende": [
     "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)",
     "kein erkennbares TCG-Sortiment auf der Startseite",
@@ -7627,11 +7426,13 @@
    "erstmals_geprueft": "2026-10-11T22:58:53+00:00",
    "fake_check": {
     "domain_alter_tage": null,
-    "punkte": 0,
-    "signale": [],
+    "punkte": 1,
+    "signale": [
+     "Rechtstexte fehlen: widerruf"
+    ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:12+00:00",
+   "geprueft_am": "2026-10-12T06:12:54+00:00",
    "gruende": [
     "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)",
     "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin"
@@ -7689,7 +7490,7 @@
     ],
     "stufe": "mittel"
    },
-   "geprueft_am": "2026-10-12T05:58:10+00:00",
+   "geprueft_am": "2026-10-12T06:11:01+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite",
     "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin"
@@ -7751,7 +7552,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:57:44+00:00",
+   "geprueft_am": "2026-10-12T06:10:33+00:00",
    "gruende": [],
    "id": "japanresell",
    "impressum": {
@@ -7838,7 +7639,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:57:36+00:00",
+   "geprueft_am": "2026-10-12T06:10:25+00:00",
    "gruende": [],
    "id": "japhunter",
    "impressum": {
@@ -7925,7 +7726,7 @@
    ],
    "erstmals_geprueft": "2026-10-07T13:59:58+00:00",
    "fake_check": {
-    "domain_alter_tage": null,
+    "domain_alter_tage": 1768,
     "punkte": 0,
     "signale": [
      "Rechtstexte fehlen: datenschutz",
@@ -7933,7 +7734,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:57:52+00:00",
+   "geprueft_am": "2026-10-12T06:10:42+00:00",
    "gruende": [],
    "id": "japondemande",
    "impressum": {
@@ -8003,7 +7804,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:54+00:00",
+   "geprueft_am": "2026-10-12T06:11:41+00:00",
    "gruende": [],
    "id": "jkentertainmentuk",
    "impressum": {
@@ -8053,7 +7854,7 @@
    "domain": "jokers.de",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T13:59:28+00:00",
-   "geprueft_am": "2026-10-12T05:57:16+00:00",
+   "geprueft_am": "2026-10-12T06:10:05+00:00",
    "gruende": [
     "robots.txt nicht abrufbar (HTTP Netzwerkfehler)"
    ],
@@ -8101,7 +7902,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:12+00:00",
+   "geprueft_am": "2026-10-12T06:11:58+00:00",
    "gruende": [],
    "id": "jumpichiban",
    "impressum": {
@@ -8151,7 +7952,7 @@
    "domain": "kaufland.de",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-11T22:59:04+00:00",
-   "geprueft_am": "2026-10-12T06:00:24+00:00",
+   "geprueft_am": "2026-10-12T06:13:05+00:00",
    "gruende": [
     "robots.txt mit HTTP 403 verweigert"
    ],
@@ -8189,7 +7990,7 @@
     },
     {
      "art": "sitemap",
-     "url": "https://keepseven.de/sitemap_index.xml"
+     "url": "https://keepseven.de/sitemap.xml"
     }
    ],
    "erstmals_geprueft": "2026-10-07T13:59:02+00:00",
@@ -8199,7 +8000,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:56:43+00:00",
+   "geprueft_am": "2026-10-12T06:09:34+00:00",
    "gruende": [],
    "id": "keepseven",
    "impressum": {
@@ -8217,7 +8018,7 @@
    "quelle": "Suche TCG DE 2026-10-07",
    "shop_merkmale": true,
    "sitemaps": [
-    "https://keepseven.de/sitemap_index.xml"
+    "https://keepseven.de/sitemap.xml"
    ],
    "status": "geeignet",
    "tcg_bezug": true,
@@ -8274,7 +8075,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:53+00:00",
+   "geprueft_am": "2026-10-12T06:13:30+00:00",
    "gruende": [],
    "id": "krokogames",
    "impressum": {
@@ -8363,7 +8164,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:24+00:00",
+   "geprueft_am": "2026-10-12T06:13:06+00:00",
    "gruende": [],
    "id": "ktcards",
    "impressum": {
@@ -8451,7 +8252,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:51+00:00",
+   "geprueft_am": "2026-10-12T06:13:28+00:00",
    "gruende": [],
    "id": "lakecards",
    "impressum": {
@@ -8522,7 +8323,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:30+00:00",
+   "geprueft_am": "2026-10-12T06:14:03+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite"
    ],
@@ -8576,7 +8377,7 @@
     ],
     "stufe": "hoch"
    },
-   "geprueft_am": "2026-10-12T05:57:48+00:00",
+   "geprueft_am": "2026-10-12T06:10:34+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite",
     "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin",
@@ -8637,7 +8438,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:02+00:00",
+   "geprueft_am": "2026-10-12T06:13:35+00:00",
    "gruende": [],
    "id": "lmshandel",
    "impressum": {
@@ -8731,7 +8532,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:57:48+00:00",
+   "geprueft_am": "2026-10-12T06:10:34+00:00",
    "gruende": [],
    "id": "lorenzone",
    "impressum": {
@@ -8808,7 +8609,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:50+00:00",
+   "geprueft_am": "2026-10-12T06:11:37+00:00",
    "gruende": [],
    "id": "lotticards",
    "impressum": {
@@ -8868,7 +8669,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:18+00:00",
+   "geprueft_am": "2026-10-12T06:13:01+00:00",
    "gruende": [
     "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)",
     "kein erkennbares TCG-Sortiment auf der Startseite",
@@ -8945,12 +8746,12 @@
    ],
    "erstmals_geprueft": "2026-10-07T14:00:03+00:00",
    "fake_check": {
-    "domain_alter_tage": null,
+    "domain_alter_tage": 1130,
     "punkte": 0,
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:04+00:00",
+   "geprueft_am": "2026-10-12T06:10:49+00:00",
    "gruende": [
     "liefert laut Shopdaten nicht nach Deutschland"
    ],
@@ -9011,7 +8812,7 @@
     ],
     "stufe": "mittel"
    },
-   "geprueft_am": "2026-10-12T05:57:48+00:00",
+   "geprueft_am": "2026-10-12T06:10:37+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite",
     "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin"
@@ -9057,7 +8858,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:47+00:00",
+   "geprueft_am": "2026-10-12T06:12:30+00:00",
    "gruende": [],
    "id": "magicboosterbox",
    "impressum": {
@@ -9083,7 +8884,8 @@
     "booster",
     "display",
     "magic: the gathering",
-    "mtg"
+    "mtg",
+    "tcg"
    ],
    "tdm_vorbehalt": false,
    "versand_de": "ja",
@@ -9105,10 +8907,6 @@
      "url": "https://www.magic-feel.de/search?query=naruto"
     },
     {
-     "art": "kategorie_bandai",
-     "url": "https://www.magic-feel.de/funko-figuren/funko-pop-one-piece-luffy-in-kimono-54460_10554_14124/"
-    },
-    {
      "art": "sitemap",
      "url": "https://www.magic-feel.de/sitemap.xml"
     }
@@ -9120,7 +8918,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:49+00:00",
+   "geprueft_am": "2026-10-12T06:12:31+00:00",
    "gruende": [],
    "id": "magicfeel",
    "impressum": {
@@ -9146,7 +8944,6 @@
     "booster",
     "display",
     "mtg",
-    "one piece",
     "pokemon",
     "sammelkarten",
     "tcg",
@@ -9210,7 +9007,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:46+00:00",
+   "geprueft_am": "2026-10-12T06:11:34+00:00",
    "gruende": [],
    "id": "magicmadhouse",
    "impressum_url": null,
@@ -9285,7 +9082,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:56:39+00:00",
+   "geprueft_am": "2026-10-12T06:09:30+00:00",
    "gruende": [],
    "id": "manofgames",
    "impressum": {
@@ -9366,7 +9163,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:20+00:00",
+   "geprueft_am": "2026-10-12T06:12:05+00:00",
    "gruende": [],
    "id": "mcgillicuddystoyshop",
    "impressum": {
@@ -9414,7 +9211,7 @@
    "domain": "mediamarkt.de",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T13:59:32+00:00",
-   "geprueft_am": "2026-10-12T05:57:20+00:00",
+   "geprueft_am": "2026-10-12T06:10:09+00:00",
    "gruende": [
     "Zugriff verweigert (HTTP 403)"
    ],
@@ -9474,7 +9271,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:36+00:00",
+   "geprueft_am": "2026-10-12T06:13:17+00:00",
    "gruende": [],
    "id": "merchfox",
    "impressum": {
@@ -9573,7 +9370,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:08+00:00",
+   "geprueft_am": "2026-10-12T06:12:50+00:00",
    "gruende": [],
    "id": "metamorphcenter",
    "impressum": {
@@ -9645,7 +9442,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:43+00:00",
+   "geprueft_am": "2026-10-12T06:11:33+00:00",
    "gruende": [],
    "id": "mewtwo",
    "impressum_url": null,
@@ -9716,7 +9513,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:56+00:00",
+   "geprueft_am": "2026-10-12T06:11:46+00:00",
    "gruende": [
     "liefert laut Shopdaten nicht nach Deutschland"
    ],
@@ -9801,7 +9598,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:57:12+00:00",
+   "geprueft_am": "2026-10-12T06:10:01+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite"
    ],
@@ -9857,7 +9654,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:13+00:00",
+   "geprueft_am": "2026-10-12T06:12:56+00:00",
    "gruende": [
     "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)",
     "kein erkennbares TCG-Sortiment auf der Startseite",
@@ -9918,7 +9715,7 @@
     ],
     "stufe": "hoch"
    },
-   "geprueft_am": "2026-10-12T05:57:24+00:00",
+   "geprueft_am": "2026-10-12T06:10:13+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite",
     "Fake-Shop-Verdacht (hoch, 6 Punkte): kein Impressum auffindbar; Rechtstexte fehlen: agb, widerruf, datenschutz; keine Kontaktdaten auf Startseite/Impressum"
@@ -9937,7 +9734,9 @@
    ],
    "status": "ungeeignet",
    "tcg_bezug": false,
-   "tcg_hinweise": [],
+   "tcg_hinweise": [
+    "display"
+   ],
    "tdm_vorbehalt": false,
    "versand_de": "ja",
    "versand_de_quelle": "Inlandshändler (Land DE)",
@@ -9976,7 +9775,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:44+00:00",
+   "geprueft_am": "2026-10-12T06:12:27+00:00",
    "gruende": [],
    "id": "mulligantcg",
    "impressum": {
@@ -10056,7 +9855,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:37+00:00",
+   "geprueft_am": "2026-10-12T06:11:27+00:00",
    "gruende": [],
    "id": "mythicvault",
    "impressum_url": null,
@@ -10120,7 +9919,7 @@
     ],
     "stufe": "mittel"
    },
-   "geprueft_am": "2026-10-12T05:57:28+00:00",
+   "geprueft_am": "2026-10-12T06:10:18+00:00",
    "gruende": [],
    "id": "n8owlcards",
    "impressum": {
@@ -10193,7 +9992,7 @@
     ],
     "stufe": "mittel"
    },
-   "geprueft_am": "2026-10-12T05:59:55+00:00",
+   "geprueft_am": "2026-10-12T06:12:39+00:00",
    "gruende": [
     "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)",
     "kein erkennbares TCG-Sortiment auf der Startseite",
@@ -10224,19 +10023,72 @@
    "vertrauen": "ungeprueft"
   },
   "near07": {
+   "basis_url": "https://near07.com",
    "domain": "near07.com",
-   "entdeckung": [],
-   "erstmals_geprueft": "2026-10-07T14:00:17+00:00",
-   "geprueft_am": "2026-10-12T05:58:15+00:00",
-   "gruende": [
-    "unerwarteter HTTP-Status 520"
+   "entdeckung": [
+    {
+     "art": "woo_api",
+     "url": "https://near07.com/wp-json/wc/store/v1/products?search=naruto&per_page=50"
+    },
+    {
+     "art": "woo_neueste",
+     "url": "https://near07.com/wp-json/wc/store/v1/products?orderby=date&order=desc&per_page=50"
+    },
+    {
+     "art": "shopsuche",
+     "url": "https://near07.com/?post_type=product&s=naruto"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://near07.com/one-piece/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://near07.com/one-piece/booster-box/"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://near07.com/sitemap.xml"
+    }
    ],
-   "http_status": 520,
+   "erstmals_geprueft": "2026-10-07T14:00:17+00:00",
+   "fake_check": {
+    "domain_alter_tage": null,
+    "punkte": 1,
+    "signale": [
+     "Rechtstexte fehlen: datenschutz"
+    ],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-10-12T06:11:06+00:00",
+   "gruende": [],
    "id": "near07",
+   "impressum_url": null,
    "land": "IT",
+   "land_quelle": "Kandidatenliste",
    "name": "Near07",
+   "naruto_erwaehnt": false,
+   "plattform": "woocommerce",
    "quelle": "Suche One Piece IT 2026-10-07",
-   "status": "nicht_erreichbar",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://near07.com/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "dragon ball",
+    "one piece",
+    "pokemon",
+    "tcg",
+    "yu-gi-oh",
+    "yugioh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "unbekannt",
+   "versand_de_quelle": "",
+   "versand_url": null,
    "vertrauen": "ungeprueft"
   },
   "nerdbank": {
@@ -10277,7 +10129,7 @@
     ],
     "stufe": "mittel"
    },
-   "geprueft_am": "2026-10-12T05:59:38+00:00",
+   "geprueft_am": "2026-10-12T06:12:23+00:00",
    "gruende": [],
    "id": "nerdbank",
    "impressum": {
@@ -10353,7 +10205,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:12+00:00",
+   "geprueft_am": "2026-10-12T06:12:53+00:00",
    "gruende": [
     "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)",
     "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin"
@@ -10425,7 +10277,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:19+00:00",
+   "geprueft_am": "2026-10-12T06:12:05+00:00",
    "gruende": [],
    "id": "northerncardgaming",
    "impressum": {
@@ -10521,7 +10373,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:53+00:00",
+   "geprueft_am": "2026-10-12T06:14:27+00:00",
    "gruende": [
     "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)"
    ],
@@ -10576,12 +10428,14 @@
    ],
    "erstmals_geprueft": "2026-10-07T14:00:01+00:00",
    "fake_check": {
-    "domain_alter_tage": null,
-    "punkte": 0,
-    "signale": [],
+    "domain_alter_tage": 245,
+    "punkte": 1,
+    "signale": [
+     "Domain jünger als 1 Jahr (245 Tage)"
+    ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:57:56+00:00",
+   "geprueft_am": "2026-10-12T06:10:49+00:00",
    "gruende": [],
    "id": "onepiececard",
    "impressum": {
@@ -10659,7 +10513,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:14+00:00",
+   "geprueft_am": "2026-10-12T06:13:47+00:00",
    "gruende": [],
    "id": "opcards",
    "impressum": {
@@ -10752,7 +10606,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:28+00:00",
+   "geprueft_am": "2026-10-12T06:11:18+00:00",
    "gruende": [],
    "id": "oppacards",
    "impressum_url": null,
@@ -10834,7 +10688,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:05+00:00",
+   "geprueft_am": "2026-10-12T06:12:48+00:00",
    "gruende": [
     "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)"
    ],
@@ -10912,14 +10766,14 @@
    "erstmals_geprueft": "2026-10-07T13:58:50+00:00",
    "fake_check": {
     "domain_alter_tage": 1132,
-    "punkte": 1,
+    "punkte": 0,
     "signale": [
-     "Rechtstexte fehlen: agb, datenschutz",
+     "Rechtstexte fehlen: agb",
      "Bewertungs-/Gütesiegel-Hinweis (positiv, nicht überprüft)"
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:56:29+00:00",
+   "geprueft_am": "2026-10-12T06:09:20+00:00",
    "gruende": [],
    "id": "otakura",
    "impressum": {
@@ -10972,7 +10826,7 @@
    ],
    "erstmals_geprueft": "2026-10-07T14:00:11+00:00",
    "fake_check": {
-    "domain_alter_tage": null,
+    "domain_alter_tage": 4610,
     "punkte": 3,
     "signale": [
      "Rechtstexte fehlen: agb, widerruf, datenschutz",
@@ -10980,7 +10834,7 @@
     ],
     "stufe": "mittel"
    },
-   "geprueft_am": "2026-10-12T05:58:09+00:00",
+   "geprueft_am": "2026-10-12T06:10:58+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite",
     "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin"
@@ -11053,7 +10907,7 @@
     ],
     "stufe": "mittel"
    },
-   "geprueft_am": "2026-10-12T06:01:02+00:00",
+   "geprueft_am": "2026-10-12T06:13:40+00:00",
    "gruende": [],
    "id": "panini",
    "impressum_url": null,
@@ -11082,8 +10936,8 @@
    "versand_de_quelle": "Inlandshändler (Land DE)",
    "versand_hinweise": {
     "betrag_hinweis": null,
-    "nennt_deutschland": false,
-    "nennt_eu": false
+    "nennt_deutschland": true,
+    "nennt_eu": true
    },
    "versand_url": "https://www.panini.de/lieferbedingungen-und-preise",
    "vertrauen": "ungeprueft"
@@ -11120,7 +10974,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:24+00:00",
+   "geprueft_am": "2026-10-12T06:13:57+00:00",
    "gruende": [],
    "id": "peeronline",
    "impressum": {
@@ -11195,7 +11049,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:57:12+00:00",
+   "geprueft_am": "2026-10-12T06:10:05+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite"
    ],
@@ -11262,12 +11116,12 @@
    ],
    "erstmals_geprueft": "2026-10-07T14:00:05+00:00",
    "fake_check": {
-    "domain_alter_tage": null,
+    "domain_alter_tage": 9550,
     "punkte": 0,
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:04+00:00",
+   "geprueft_am": "2026-10-12T06:10:50+00:00",
    "gruende": [],
    "id": "philibertnet",
    "impressum": {
@@ -11328,7 +11182,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:41+00:00",
+   "geprueft_am": "2026-10-12T06:14:12+00:00",
    "gruende": [
     "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)",
     "kein erkennbares TCG-Sortiment auf der Startseite",
@@ -11410,7 +11264,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:04+00:00",
+   "geprueft_am": "2026-10-12T06:10:50+00:00",
    "gruende": [],
    "id": "pixelheart",
    "impressum": {
@@ -11448,7 +11302,7 @@
    "domain": "pk-pro.de",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-12T03:37:59+00:00",
-   "geprueft_am": "2026-10-12T06:01:24+00:00",
+   "geprueft_am": "2026-10-12T06:13:57+00:00",
    "gruende": [
     "robots.txt mit HTTP 403 verweigert"
    ],
@@ -11488,7 +11342,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:21+00:00",
+   "geprueft_am": "2026-10-12T06:12:06+00:00",
    "gruende": [],
    "id": "playingcardshop",
    "impressum_url": null,
@@ -11562,7 +11416,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:57:28+00:00",
+   "geprueft_am": "2026-10-12T06:10:17+00:00",
    "gruende": [],
    "id": "playpeak",
    "impressum": {
@@ -11605,20 +11459,99 @@
    "vertrauen": "ungeprueft"
   },
   "playpublic": {
+   "basis_url": "https://playpublic.de",
    "domain": "playpublic.de",
-   "entdeckung": [],
-   "erstmals_geprueft": "2026-10-11T22:59:00+00:00",
-   "geprueft_am": "2026-10-12T06:00:20+00:00",
-   "gruende": [
-    "robots.txt nicht abrufbar (HTTP Netzwerkfehler)"
+   "entdeckung": [
+    {
+     "art": "shopsuche",
+     "url": "https://playpublic.de/search/?qs=naruto"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://playpublic.de/Vorbestellungen-Naruto"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://playpublic.de/TCGs-Naruto"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://playpublic.de/Vorbestellungen"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://playpublic.de/Vorbestellen-Lorcana"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://playpublic.de/Sports/Topps/Topps-Allen-and-Ginter-Baseball-2026-Value-Box"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://playpublic.de/Vorbestellen-One-Piece"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://playpublic.de/sitemap_index.xml"
+    }
    ],
-   "http_status": null,
+   "erstmals_geprueft": "2026-10-11T22:59:00+00:00",
+   "fake_check": {
+    "domain_alter_tage": null,
+    "punkte": 1,
+    "signale": [
+     "Rechtstexte fehlen: widerruf"
+    ],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-10-12T06:13:02+00:00",
+   "gruende": [],
    "id": "playpublic",
+   "impressum": {
+    "beleg": "r: HRB 35315 Geschäftsführer: Benedikt Junk Umsatzsteuer-Identifikationsnummer: DE352623557 Wirtschafts-Identifikationsnummer: DE35",
+    "rechtsform": "GmbH",
+    "register": true,
+    "ust_id": "DE352623557"
+   },
+   "impressum_url": "https://playpublic.de/Impressum",
    "land": "DE",
+   "land_quelle": "Kandidatenliste",
    "name": "playpublic.de",
+   "naruto_erwaehnt": true,
+   "plattform": "unbekannt",
    "quelle": "Brave-Suche 2026-10-11: One Piece Card Game Display Vorbestellung Shop",
-   "status": "blockiert",
-   "vertrauen": "ungeprueft"
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://playpublic.de/sitemap_index.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "display",
+    "dragon ball",
+    "gundam",
+    "lorcana",
+    "magic: the gathering",
+    "naruto",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "sammelkarten",
+    "tcg",
+    "trading card",
+    "union arena",
+    "yu-gi-oh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "Inlandshändler (Land DE)",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": false,
+    "nennt_eu": true
+   },
+   "versand_url": "https://playpublic.de/Versandinformationen",
+   "vertrauen": "vorgeprueft"
   },
   "pocabo": {
    "basis_url": "https://www.pocabo.de",
@@ -11658,7 +11591,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:00+00:00",
+   "geprueft_am": "2026-10-12T06:13:32+00:00",
    "gruende": [],
    "id": "pocabo",
    "impressum": {
@@ -11727,7 +11660,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:47+00:00",
+   "geprueft_am": "2026-10-12T06:13:20+00:00",
    "gruende": [],
    "id": "pocketcards",
    "impressum": {
@@ -11792,7 +11725,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:58+00:00",
+   "geprueft_am": "2026-10-12T06:12:43+00:00",
    "gruende": [
     "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)",
     "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin"
@@ -11862,7 +11795,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:04+00:00",
+   "geprueft_am": "2026-10-12T06:11:49+00:00",
    "gruende": [],
    "id": "pokegeodude",
    "impressum": {
@@ -11947,7 +11880,7 @@
     ],
     "stufe": "mittel"
    },
-   "geprueft_am": "2026-10-12T05:58:43+00:00",
+   "geprueft_am": "2026-10-12T06:11:34+00:00",
    "gruende": [],
    "id": "pokepower",
    "impressum": {
@@ -11998,7 +11931,7 @@
    "domain": "poke-sammelshop.de",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-11T22:59:27+00:00",
-   "geprueft_am": "2026-10-12T06:00:49+00:00",
+   "geprueft_am": "2026-10-12T06:13:27+00:00",
    "gruende": [
     "robots.txt nicht abrufbar (HTTP Netzwerkfehler)"
    ],
@@ -12050,7 +11983,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:56:29+00:00",
+   "geprueft_am": "2026-10-12T06:09:20+00:00",
    "gruende": [],
    "id": "pokitrio",
    "impressum": {
@@ -12127,7 +12060,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:16+00:00",
+   "geprueft_am": "2026-10-12T06:13:48+00:00",
    "gruende": [],
    "id": "popatcg",
    "impressum": {
@@ -12195,7 +12128,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:37+00:00",
+   "geprueft_am": "2026-10-12T06:11:26+00:00",
    "gruende": [],
    "id": "poromagia",
    "impressum_url": null,
@@ -12266,7 +12199,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:56:29+00:00",
+   "geprueft_am": "2026-10-12T06:09:20+00:00",
    "gruende": [],
    "id": "primeprotector",
    "impressum": {
@@ -12370,7 +12303,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:14+00:00",
+   "geprueft_am": "2026-10-12T06:12:57+00:00",
    "gruende": [],
    "id": "progct",
    "impressum_url": null,
@@ -12434,7 +12367,7 @@
     ],
     "stufe": "hoch"
    },
-   "geprueft_am": "2026-10-12T06:00:41+00:00",
+   "geprueft_am": "2026-10-12T06:13:19+00:00",
    "gruende": [
     "Fake-Shop-Verdacht (hoch, 5 Punkte): kein Impressum auffindbar; Rechtstexte fehlen: agb, widerruf, datenschutz"
    ],
@@ -12515,7 +12448,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:28+00:00",
+   "geprueft_am": "2026-10-12T06:11:19+00:00",
    "gruende": [],
    "id": "renexx",
    "impressum_url": null,
@@ -12603,7 +12536,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:06+00:00",
+   "geprueft_am": "2026-10-12T06:13:43+00:00",
    "gruende": [
     "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)"
    ],
@@ -12681,7 +12614,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:30+00:00",
+   "geprueft_am": "2026-10-12T06:11:20+00:00",
    "gruende": [],
    "id": "rogerz",
    "impressum": {
@@ -12732,7 +12665,7 @@
    "domain": "rollntrade.com",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T14:00:47+00:00",
-   "geprueft_am": "2026-10-12T05:58:43+00:00",
+   "geprueft_am": "2026-10-12T06:11:34+00:00",
    "gruende": [
     "robots.txt mit HTTP 403 verweigert"
    ],
@@ -12771,7 +12704,7 @@
    ],
    "erstmals_geprueft": "2026-10-07T13:59:58+00:00",
    "fake_check": {
-    "domain_alter_tage": null,
+    "domain_alter_tage": 411,
     "punkte": 4,
     "signale": [
      "Rechtstexte fehlen: widerruf, datenschutz",
@@ -12780,7 +12713,7 @@
     ],
     "stufe": "mittel"
    },
-   "geprueft_am": "2026-10-12T05:57:52+00:00",
+   "geprueft_am": "2026-10-12T06:10:37+00:00",
    "gruende": [],
    "id": "royaltcg",
    "impressum_url": null,
@@ -12828,7 +12761,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:36+00:00",
+   "geprueft_am": "2026-10-12T06:13:17+00:00",
    "gruende": [],
    "id": "sammelkartenshop",
    "impressum": {
@@ -12893,7 +12826,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:39+00:00",
+   "geprueft_am": "2026-10-12T06:13:17+00:00",
    "gruende": [],
    "id": "sammelmania",
    "impressum": {
@@ -12959,7 +12892,7 @@
     ],
     "stufe": "hoch"
    },
-   "geprueft_am": "2026-10-12T05:59:47+00:00",
+   "geprueft_am": "2026-10-12T06:12:31+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite",
     "Fake-Shop-Verdacht (hoch, 7 Punkte): kein Impressum auffindbar; Rechtstexte fehlen: agb, widerruf, datenschutz; Domain-Endung häufig bei Fake-Shops (shop); keine Kontaktdaten auf Startseite/Impressum"
@@ -13020,7 +12953,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:52+00:00",
+   "geprueft_am": "2026-10-12T06:14:23+00:00",
    "gruende": [
     "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)"
    ],
@@ -13070,7 +13003,7 @@
    "domain": "sapphire-cards.de",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T13:58:50+00:00",
-   "geprueft_am": "2026-10-12T05:56:29+00:00",
+   "geprueft_am": "2026-10-12T06:09:20+00:00",
    "gruende": [
     "robots.txt mit HTTP 403 verweigert"
    ],
@@ -13086,7 +13019,7 @@
    "domain": "saturn.de",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T14:08:44+00:00",
-   "geprueft_am": "2026-10-12T05:59:51+00:00",
+   "geprueft_am": "2026-10-12T06:12:36+00:00",
    "gruende": [
     "Zugriff verweigert (HTTP 403)"
    ],
@@ -13137,7 +13070,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:10+00:00",
+   "geprueft_am": "2026-10-12T06:12:52+00:00",
    "gruende": [
     "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)"
    ],
@@ -13229,7 +13162,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:01+00:00",
+   "geprueft_am": "2026-10-12T06:12:43+00:00",
    "gruende": [],
    "id": "shoptcg",
    "impressum": {
@@ -13311,7 +13244,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:25+00:00",
+   "geprueft_am": "2026-10-12T06:12:11+00:00",
    "gruende": [
     "Land CA nicht in Europa",
     "liefert laut Shopdaten nicht nach Deutschland"
@@ -13377,7 +13310,7 @@
     ],
     "stufe": "hoch"
    },
-   "geprueft_am": "2026-10-12T05:57:24+00:00",
+   "geprueft_am": "2026-10-12T06:10:13+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite",
     "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin",
@@ -13440,7 +13373,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:36+00:00",
+   "geprueft_am": "2026-10-12T06:11:25+00:00",
    "gruende": [],
    "id": "spelexperten",
    "impressum_url": null,
@@ -13504,7 +13437,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:26+00:00",
+   "geprueft_am": "2026-10-12T06:11:18+00:00",
    "gruende": [],
    "id": "spellenwinkel",
    "impressum_url": null,
@@ -13563,7 +13496,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:57:12+00:00",
+   "geprueft_am": "2026-10-12T06:10:01+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite"
    ],
@@ -13623,7 +13556,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:22+00:00",
+   "geprueft_am": "2026-10-12T06:13:04+00:00",
    "gruende": [],
    "id": "spieletastisch",
    "impressum": {
@@ -13691,13 +13624,11 @@
    "erstmals_geprueft": "2026-10-07T14:08:22+00:00",
    "fake_check": {
     "domain_alter_tage": null,
-    "punkte": 1,
-    "signale": [
-     "Rechtstexte fehlen: widerruf"
-    ],
+    "punkte": 0,
+    "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:30+00:00",
+   "geprueft_am": "2026-10-12T06:12:15+00:00",
    "gruende": [],
    "id": "spielraum",
    "impressum": {
@@ -13795,7 +13726,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:31+00:00",
+   "geprueft_am": "2026-10-12T06:14:04+00:00",
    "gruende": [],
    "id": "spielwarenparadies24",
    "impressum": {
@@ -13872,7 +13803,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:54+00:00",
+   "geprueft_am": "2026-10-12T06:12:37+00:00",
    "gruende": [],
    "id": "starzcollectibles",
    "impressum": {
@@ -13948,7 +13879,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:08+00:00",
+   "geprueft_am": "2026-10-12T06:11:53+00:00",
    "gruende": [],
    "id": "stickerpoint",
    "impressum": {
@@ -14042,7 +13973,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:37+00:00",
+   "geprueft_am": "2026-10-12T06:14:10+00:00",
    "gruende": [
     "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)"
    ],
@@ -14118,7 +14049,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:15+00:00",
+   "geprueft_am": "2026-10-12T06:13:48+00:00",
    "gruende": [],
    "id": "superelfcards",
    "impressum": {
@@ -14204,7 +14135,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:40+00:00",
+   "geprueft_am": "2026-10-12T06:14:12+00:00",
    "gruende": [],
    "id": "tabletopdragon",
    "impressum": {
@@ -14272,7 +14203,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:28+00:00",
+   "geprueft_am": "2026-10-12T06:14:01+00:00",
    "gruende": [
     "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)",
     "kein erkennbares TCG-Sortiment auf der Startseite"
@@ -14318,7 +14249,7 @@
     ],
     "stufe": "hoch"
    },
-   "geprueft_am": "2026-10-12T05:57:09+00:00",
+   "geprueft_am": "2026-10-12T06:09:57+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite",
     "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin",
@@ -14346,97 +14277,20 @@
    "vertrauen": "ungeprueft"
   },
   "tcg24": {
-   "basis_url": "https://tcg-24.de",
    "domain": "tcg-24.de",
-   "entdeckung": [
-    {
-     "art": "woo_api",
-     "url": "https://tcg-24.de/wp-json/wc/store/v1/products?search=naruto&per_page=50"
-    },
-    {
-     "art": "woo_neueste",
-     "url": "https://tcg-24.de/wp-json/wc/store/v1/products?orderby=date&order=desc&per_page=50"
-    },
-    {
-     "art": "shopsuche",
-     "url": "https://tcg-24.de/?post_type=product&s=naruto"
-    },
-    {
-     "art": "kategorie_vorbestellung",
-     "url": "https://tcg-24.de/produkt-kategorie/vorbestellungen/"
-    },
-    {
-     "art": "kategorie_vorbestellung",
-     "url": "https://tcg-24.de/produkt-kategorie/vorbestellungen/01-07-22/"
-    },
-    {
-     "art": "kategorie_neuheiten",
-     "url": "https://tcg-24.de/produkt-kategorie/brandneu/"
-    },
-    {
-     "art": "kategorie_bandai",
-     "url": "https://tcg-24.de/produkt-kategorie/one-piece-card-game/"
-    },
-    {
-     "art": "kategorie_bandai",
-     "url": "https://tcg-24.de/produkt/one-piece-card-game-op-16-booster-display-en/"
-    },
-    {
-     "art": "sitemap",
-     "url": "https://tcg-24.de/sitemap_index.xml"
-    }
-   ],
+   "entdeckung": [],
    "erstmals_geprueft": "2026-10-12T03:38:07+00:00",
-   "fake_check": {
-    "domain_alter_tage": null,
-    "punkte": 0,
-    "signale": [],
-    "stufe": "gering"
-   },
-   "geprueft_am": "2026-10-12T06:01:31+00:00",
-   "gruende": [],
+   "geprueft_am": "2026-10-12T06:14:06+00:00",
+   "gruende": [
+    "robots.txt mit HTTP 403 verweigert"
+   ],
+   "http_status": null,
    "id": "tcg24",
-   "impressum": {
-    "beleg": "n: 0160-97992018 Mail: [email protected] Umsatzsteuer-Identifikationsnummer(n): DE329548464 Die Europäische Kommission stellt eine",
-    "rechtsform": null,
-    "register": true,
-    "ust_id": "DE329548464"
-   },
-   "impressum_url": "https://tcg-24.de/impressum/",
    "land": "DE",
-   "land_quelle": "Kandidatenliste",
    "name": "tcg-24.de",
-   "naruto_erwaehnt": false,
-   "plattform": "woocommerce",
    "quelle": "Brave-Suche 2026-10-12: One Piece OP15 Display Shop",
-   "shop_merkmale": true,
-   "sitemaps": [
-    "https://tcg-24.de/sitemap_index.xml"
-   ],
-   "status": "geeignet",
-   "tcg_bezug": true,
-   "tcg_hinweise": [
-    "booster",
-    "display",
-    "lorcana",
-    "one piece",
-    "pokemon",
-    "pokémon",
-    "sammelkarten",
-    "tcg",
-    "trading card",
-    "yu-gi-oh"
-   ],
-   "tdm_vorbehalt": false,
-   "versand_de": "ja",
-   "versand_de_quelle": "Inlandshändler (Land DE)",
-   "versand_hinweise": {
-    "betrag_hinweis": null,
-    "nennt_deutschland": true,
-    "nennt_eu": false
-   },
-   "versand_url": "https://tcg-24.de/versand/",
-   "vertrauen": "vorgeprueft"
+   "status": "blockiert",
+   "vertrauen": "ungeprueft"
   },
   "tcgcorner": {
    "basis_url": "https://tcg-corner.com",
@@ -14482,7 +14336,7 @@
     ],
     "stufe": "hoch"
    },
-   "geprueft_am": "2026-10-12T05:57:04+00:00",
+   "geprueft_am": "2026-10-12T06:09:49+00:00",
    "gruende": [
     "Fake-Shop-Verdacht (hoch, 6 Punkte): kein Impressum auffindbar; Rechtstexte fehlen: agb, datenschutz; keine Kontaktdaten auf Startseite/Impressum"
    ],
@@ -14549,7 +14403,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:49+00:00",
+   "geprueft_am": "2026-10-12T06:13:25+00:00",
    "gruende": [],
    "id": "tcgdealers",
    "impressum": {
@@ -14616,7 +14470,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:56:43+00:00",
+   "geprueft_am": "2026-10-12T06:09:34+00:00",
    "gruende": [],
    "id": "tcgfee",
    "impressum": {
@@ -14701,7 +14555,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:19+00:00",
+   "geprueft_am": "2026-10-12T06:12:00+00:00",
    "gruende": [],
    "id": "tcghaven",
    "impressum": {
@@ -14790,7 +14644,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:26+00:00",
+   "geprueft_am": "2026-10-12T06:13:59+00:00",
    "gruende": [
     "Land TW nicht in Europa"
    ],
@@ -14879,7 +14733,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:08+00:00",
+   "geprueft_am": "2026-10-12T06:11:56+00:00",
    "gruende": [],
    "id": "tcgshopmoers",
    "impressum": {
@@ -14968,7 +14822,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:31+00:00",
+   "geprueft_am": "2026-10-12T06:11:22+00:00",
    "gruende": [
     "liefert laut Shopdaten nicht nach Deutschland"
    ],
@@ -15073,7 +14927,7 @@
     ],
     "stufe": "mittel"
    },
-   "geprueft_am": "2026-10-12T05:57:28+00:00",
+   "geprueft_am": "2026-10-12T06:10:18+00:00",
    "gruende": [],
    "id": "tcgtreasure",
    "impressum": {
@@ -15167,7 +15021,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:57:11+00:00",
+   "geprueft_am": "2026-10-12T06:09:57+00:00",
    "gruende": [],
    "id": "tcgviert",
    "impressum": {
@@ -15252,7 +15106,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:56:56+00:00",
+   "geprueft_am": "2026-10-12T06:09:45+00:00",
    "gruende": [],
    "id": "teamsamuringer",
    "impressum": {
@@ -15303,7 +15157,7 @@
    "domain": "tf-robots.nl",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T14:00:33+00:00",
-   "geprueft_am": "2026-10-12T05:58:29+00:00",
+   "geprueft_am": "2026-10-12T06:11:19+00:00",
    "gruende": [
     "robots.txt mit HTTP 403 verweigert"
    ],
@@ -15319,7 +15173,7 @@
    "domain": "thalia.de",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T13:59:35+00:00",
-   "geprueft_am": "2026-10-12T05:57:24+00:00",
+   "geprueft_am": "2026-10-12T06:10:13+00:00",
    "gruende": [
     "robots.txt mit HTTP 403 verweigert"
    ],
@@ -15377,7 +15231,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:57:36+00:00",
+   "geprueft_am": "2026-10-12T06:10:22+00:00",
    "gruende": [],
    "id": "themanashop",
    "impressum": {
@@ -15481,7 +15335,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:29+00:00",
+   "geprueft_am": "2026-10-12T06:12:12+00:00",
    "gruende": [],
    "id": "theuncommonshop",
    "impressum": {
@@ -15538,7 +15392,7 @@
    "domain": "threads.com",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-12T03:38:35+00:00",
-   "geprueft_am": "2026-10-12T06:01:56+00:00",
+   "geprueft_am": "2026-10-12T06:14:28+00:00",
    "gruende": [
     "robots.txt erlaubt diesen Abruf nicht – wird respektiert"
    ],
@@ -15576,7 +15430,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:29+00:00",
+   "geprueft_am": "2026-10-12T06:11:19+00:00",
    "gruende": [],
    "id": "threeforonetrading",
    "impressum": {
@@ -15654,7 +15508,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:44+00:00",
+   "geprueft_am": "2026-10-12T06:11:34+00:00",
    "gruende": [],
    "id": "totalcards",
    "impressum": {
@@ -15748,7 +15602,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:32+00:00",
+   "geprueft_am": "2026-10-12T06:14:06+00:00",
    "gruende": [],
    "id": "toytreasure",
    "impressum": {
@@ -15804,7 +15658,7 @@
    "domain": "trader-online.de",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T13:59:35+00:00",
-   "geprueft_am": "2026-10-12T05:57:24+00:00",
+   "geprueft_am": "2026-10-12T06:10:13+00:00",
    "gruende": [
     "Zugriff verweigert (HTTP 403)"
    ],
@@ -15855,7 +15709,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:06+00:00",
+   "geprueft_am": "2026-10-12T06:11:51+00:00",
    "gruende": [],
    "id": "tradingtoys",
    "impressum": {
@@ -15933,7 +15787,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:41+00:00",
+   "geprueft_am": "2026-10-12T06:11:30+00:00",
    "gruende": [],
    "id": "triplacegames",
    "impressum_url": null,
@@ -15972,7 +15826,7 @@
    "domain": "turolgames.com",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-07T14:00:10+00:00",
-   "geprueft_am": "2026-10-12T05:58:05+00:00",
+   "geprueft_am": "2026-10-12T06:10:58+00:00",
    "gruende": [
     "unerwarteter HTTP-Status 202"
    ],
@@ -16026,7 +15880,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:32+00:00",
+   "geprueft_am": "2026-10-12T06:12:18+00:00",
    "gruende": [],
    "id": "twomoons",
    "impressum": {
@@ -16119,7 +15973,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:57:48+00:00",
+   "geprueft_am": "2026-10-12T06:10:37+00:00",
    "gruende": [],
    "id": "ultrajeux",
    "impressum": {
@@ -16202,7 +16056,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:26+00:00",
+   "geprueft_am": "2026-10-12T06:13:58+00:00",
    "gruende": [
     "Land US nicht in Europa",
     "liefert laut Shopdaten nicht nach Deutschland"
@@ -16289,7 +16143,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:53+00:00",
+   "geprueft_am": "2026-10-12T06:14:24+00:00",
    "gruende": [],
    "id": "unicorncards",
    "impressum_url": null,
@@ -16377,7 +16231,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:56:29+00:00",
+   "geprueft_am": "2026-10-12T06:09:20+00:00",
    "gruende": [],
    "id": "universetcg",
    "impressum": {
@@ -16449,10 +16303,8 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:18+00:00",
-   "gruende": [
-    "kein erkennbares TCG-Sortiment auf der Startseite"
-   ],
+   "geprueft_am": "2026-10-12T06:11:12+00:00",
+   "gruende": [],
    "id": "uplay",
    "impressum_url": null,
    "land": "IT",
@@ -16465,10 +16317,12 @@
    "sitemaps": [
     "https://www.uplay.it/sitemap.xml"
    ],
-   "status": "ungeeignet",
-   "tcg_bezug": false,
+   "status": "geeignet",
+   "tcg_bezug": true,
    "tcg_hinweise": [
-    "booster"
+    "booster",
+    "dragon ball",
+    "mtg"
    ],
    "tdm_vorbehalt": false,
    "versand_de": "vermutlich",
@@ -16521,7 +16375,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:03+00:00",
+   "geprueft_am": "2026-10-12T06:13:40+00:00",
    "gruende": [],
    "id": "vanessastcgshop",
    "impressum": {
@@ -16613,7 +16467,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:01:12+00:00",
+   "geprueft_am": "2026-10-12T06:13:44+00:00",
    "gruende": [],
    "id": "varietycards",
    "impressum": {
@@ -16687,15 +16541,16 @@
    ],
    "erstmals_geprueft": "2026-10-07T14:00:06+00:00",
    "fake_check": {
-    "domain_alter_tage": null,
-    "punkte": 0,
+    "domain_alter_tage": 97,
+    "punkte": 1,
     "signale": [
+     "Domain jünger als 1 Jahr (97 Tage)",
      "keine Kontaktdaten auf Startseite/Impressum",
      "Bewertungs-/Gütesiegel-Hinweis (positiv, nicht überprüft)"
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:04+00:00",
+   "geprueft_am": "2026-10-12T06:10:50+00:00",
    "gruende": [],
    "id": "vault29tcg",
    "impressum": {
@@ -16761,7 +16616,7 @@
     ],
     "stufe": "mittel"
    },
-   "geprueft_am": "2026-10-12T05:58:13+00:00",
+   "geprueft_am": "2026-10-12T06:11:05+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite",
     "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin"
@@ -16821,7 +16676,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:08+00:00",
+   "geprueft_am": "2026-10-12T06:12:51+00:00",
    "gruende": [
     "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)",
     "kein erkennbares TCG-Sortiment auf der Startseite",
@@ -16855,7 +16710,7 @@
    "domain": "whiterabbit-cgs.de",
    "entdeckung": [],
    "erstmals_geprueft": "2026-10-11T22:59:12+00:00",
-   "geprueft_am": "2026-10-12T06:00:33+00:00",
+   "geprueft_am": "2026-10-12T06:13:14+00:00",
    "gruende": [
     "Bot-Schutz/Captcha erkannt"
    ],
@@ -16902,7 +16757,7 @@
     ],
     "stufe": "mittel"
    },
-   "geprueft_am": "2026-10-12T05:57:32+00:00",
+   "geprueft_am": "2026-10-12T06:10:21+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite"
    ],
@@ -16956,7 +16811,7 @@
     ],
     "stufe": "hoch"
    },
-   "geprueft_am": "2026-10-12T06:01:17+00:00",
+   "geprueft_am": "2026-10-12T06:13:53+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite",
     "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin",
@@ -17006,7 +16861,7 @@
     ],
     "stufe": "hoch"
    },
-   "geprueft_am": "2026-10-12T05:57:00+00:00",
+   "geprueft_am": "2026-10-12T06:09:46+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite",
     "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin",
@@ -17083,7 +16938,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:56:29+00:00",
+   "geprueft_am": "2026-10-12T06:09:20+00:00",
    "gruende": [],
    "id": "yonkotcg",
    "impressum": {
@@ -17164,7 +17019,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T06:00:59+00:00",
+   "geprueft_am": "2026-10-12T06:13:31+00:00",
    "gruende": [],
    "id": "yugioase",
    "impressum": {
@@ -17263,7 +17118,7 @@
     ],
     "stufe": "mittel"
    },
-   "geprueft_am": "2026-10-12T05:57:40+00:00",
+   "geprueft_am": "2026-10-12T06:10:29+00:00",
    "gruende": [
     "liefert laut Shopdaten nicht nach Deutschland"
    ],
@@ -17361,7 +17216,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:43+00:00",
+   "geprueft_am": "2026-10-12T06:11:34+00:00",
    "gruende": [],
    "id": "zatu",
    "impressum": {
@@ -17460,7 +17315,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:58:16+00:00",
+   "geprueft_am": "2026-10-12T06:11:06+00:00",
    "gruende": [],
    "id": "zillerstore",
    "impressum": {
@@ -17544,7 +17399,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:56:43+00:00",
+   "geprueft_am": "2026-10-12T06:09:34+00:00",
    "gruende": [],
    "id": "zurisshop",
    "impressum": {
@@ -17620,7 +17475,7 @@
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-12T05:59:44+00:00",
+   "geprueft_am": "2026-10-12T06:12:30+00:00",
    "gruende": [],
    "id": "zwergenschmiede",
    "impressum": {
@@ -17663,7 +17518,7 @@
  },
  "version": 1,
  "zusammenfassung": {
-  "geeignet": 161,
+  "geeignet": 160,
   "kandidaten": 249,
   "land": {
    "?": 24,
@@ -17690,10 +17545,10 @@
    "UK": 7,
    "US": 2
   },
-  "mit_entdeckungsweg": 161,
-  "naruto_erwaehnt": 84,
+  "mit_entdeckungsweg": 160,
+  "naruto_erwaehnt": 86,
   "plattform": {
-   "?": 28,
+   "?": 30,
    "ecwid": 2,
    "gambio": 1,
    "jtl": 7,
@@ -17703,28 +17558,27 @@
    "plentymarkets": 1,
    "prestashop": 1,
    "shopify": 92,
-   "shopware": 10,
+   "shopware": 8,
    "unbekannt": 69,
    "wix": 3,
    "woocommerce": 22
   },
   "status": {
-   "blockiert": 24,
-   "eingeschraenkt": 1,
-   "geeignet": 161,
-   "nicht_erreichbar": 4,
+   "blockiert": 27,
+   "geeignet": 160,
+   "nicht_erreichbar": 3,
    "ungeeignet": 59
   },
   "versand_de": {
-   "?": 28,
-   "ja": 130,
+   "?": 30,
+   "ja": 127,
    "nein": 10,
-   "unbekannt": 65,
+   "unbekannt": 66,
    "vermutlich": 16
   },
   "vertrauen": {
-   "ungeprueft": 174,
-   "vorgeprueft": 75
+   "ungeprueft": 177,
+   "vorgeprueft": 72
   }
  }
 }
