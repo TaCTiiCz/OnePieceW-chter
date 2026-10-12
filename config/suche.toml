@@ -102,7 +102,13 @@ begriffe = ["förbeställ", "köp"]
 ignorieren = ["amazon.", "ebay.", "etsy.", "aliexpress.", "temu.", "facebook.", "instagram.", "tiktok.", "youtube.",
   "reddit.", "x.com", "twitter.", "cardmarket.", "cardtrader.", "idealo.", "geizhals.", "trovaprezzi.", "prisjakt.",
   "pricecharting.", "tcgplayer.", "wikipedia.", "fandom.", "bandai.", "naruto-cardgame.com", "onepiece-cardgame.com",
-  "prnewswire.", "crunchyroll.", "vinted.", "kleinanzeigen.", "whatnot.", "google.", "bing.", "pinterest."]
+  "prnewswire.", "crunchyroll.", "vinted.", "kleinanzeigen.", "whatnot.", "google.", "bing.", "pinterest.",
+  # Marktplätze, Preisvergleiche, News/Magazine/Blogs (keine Händler)
+  "kaufland.", "otto.de", "allegro.", "bol.com", "cdiscount.", "fnac.", "rakuten.", "mediamarkt.", "saturn.", "galaxus.",
+  "ign.com", "gamespot.", "icv2.", "moomoo.", "gameblog.", "vidaextra.", "hobbyconsolas.", "everyeye.", "animeclick.",
+  "anime2you.", "brettspiel-news.", "luccacomicsandgames.", "naruto-official.", "gebraucht-kaufen.", "campustech.",
+  "furansujapon.", "editioncollector.", "otakuland-mangapassion.", "mangapassion.", "shonenjump.", "viz.com",
+  "blog.", "news.", "forum.", "wiki", "magazin", "nordic.", "medium.com", "substack.", "twitch.", "discord."]
 # Nur europäische Länderendungen bzw. .com/.eu/.shop werden als Kandidaten übernommen
 endungen = [".de", ".at", ".ch", ".fr", ".es", ".it", ".nl", ".be", ".lu", ".dk", ".se", ".fi", ".pl", ".cz", ".sk",
   ".hu", ".pt", ".ie", ".gr", ".si", ".hr", ".ro", ".bg", ".ee", ".lv", ".lt", ".eu", ".com", ".shop", ".store", ".net", ".co.uk"]

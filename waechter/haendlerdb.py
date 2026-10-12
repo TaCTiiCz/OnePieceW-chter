@@ -112,6 +112,33 @@ def lade_kandidaten(datei: Path = KANDIDATEN) -> list[dict]:
     return kandidaten
 
 
+TLD_LAND = {".de": "DE", ".at": "AT", ".ch": "CH", ".fr": "FR", ".es": "ES", ".it": "IT", ".nl": "NL", ".be": "BE",
+            ".lu": "LU", ".dk": "DK", ".se": "SE", ".fi": "FI", ".no": "NO", ".pl": "PL", ".cz": "CZ", ".sk": "SK",
+            ".hu": "HU", ".si": "SI", ".hr": "HR", ".pt": "PT", ".ie": "IE", ".gr": "GR", ".ro": "RO", ".bg": "BG",
+            ".ee": "EE", ".lv": "LV", ".lt": "LT", ".mt": "MT", ".cy": "CY", ".co.uk": "UK", ".uk": "UK", ".eu": "EU"}
+UST_LAND = {"ATU": "AT", "DE": "DE", "IT": "IT", "FR": "FR", "ES": "ES", "NL": "NL", "BE": "BE", "PL": "PL", "SE": "SE",
+            "DK": "DK", "FI": "FI", "CZ": "CZ", "SK": "SK", "HU": "HU", "PT": "PT", "IE": "IE", "EL": "GR", "LU": "LU",
+            "SI": "SI", "HR": "HR", "RO": "RO", "BG": "BG", "EE": "EE", "LV": "LV", "LT": "LT", "MT": "MT", "CY": "CY",
+            "CHE": "CH", "GB": "UK"}
+
+
+def land_aus_tld(domain: str) -> Optional[str]:
+    d = domain.lower()
+    for tld in sorted(TLD_LAND, key=len, reverse=True):
+        if d.endswith(tld):
+            return TLD_LAND[tld]
+    return None
+
+
+def land_aus_ust(ust: Optional[str]) -> Optional[str]:
+    if not ust:
+        return None
+    for prefix in sorted(UST_LAND, key=len, reverse=True):
+        if ust.upper().startswith(prefix):
+            return UST_LAND[prefix]
+    return None
+
+
 def _kompakt(s: str) -> str:
     return re.sub(r"[^a-z0-9]", "", s.lower())
 
@@ -221,7 +248,11 @@ def kategorien_finden(alle_links: list[tuple[str, str]]) -> list[dict]:
 def pruefe_haendler(k: dict, abrufer, vorher: Optional[dict] = None, log: Callable[[str], None] = print) -> dict:
     """Prüft einen Kandidaten. Jeder Befund wird mit Quelle gespeichert."""
     domain = k["domain"]
-    e = {"id": _kompakt(domain.split(".")[0]) or _kompakt(domain), "domain": domain, "name": k["name"], "land": k["land"],
+    # Land: aus der Kandidatenliste; fehlt es ("?", z. B. Brave-Suche), aus Domain-Endung, Shopify-Shopdaten oder USt-ID
+    land, land_quelle = k["land"], "Kandidatenliste"
+    if land in ("?", ""):
+        land, land_quelle = (land_aus_tld(domain) or "?"), "Domain-Endung"
+    e = {"id": _kompakt(domain.split(".")[0]) or _kompakt(domain), "domain": domain, "name": k["name"], "land": land,
          "quelle": k["quelle"], "geprueft_am": _jetzt(), "gruende": [], "entdeckung": [],
          "erstmals_geprueft": (vorher or {}).get("erstmals_geprueft") or _jetzt()}
     grund = ausschlussgrund(domain, k["name"])
@@ -295,7 +326,15 @@ def pruefe_haendler(k: dict, abrufer, vorher: Optional[dict] = None, log: Callab
         if w.ok and w.text.lstrip().startswith("["):
             e["entdeckung"].append({"art": "woo_api", "url": api})
             e["entdeckung"].append({"art": "woo_neueste", "url": basis + "/wp-json/wc/store/v1/products?orderby=date&order=desc&per_page=50"})
-    if e["versand_de"] == "unbekannt" and k["land"] == "DE":
+    if land in ("?", "EU"):
+        meta_land = {"GB": "UK"}.get(str(e.get("shop_land_meta") or "").upper(), str(e.get("shop_land_meta") or "").upper())
+        ust_land = land_aus_ust((e.get("impressum") or {}).get("ust_id"))
+        if meta_land:
+            land, land_quelle = meta_land, "Shopify-Shopdaten (meta.json)"
+        elif ust_land:
+            land, land_quelle = ust_land, "USt-ID im Impressum"
+    e["land"], e["land_quelle"] = land, land_quelle
+    if e["versand_de"] == "unbekannt" and land == "DE":
         e["versand_de"], e["versand_de_quelle"] = "ja", "Inlandshändler (Land DE)"
     versand = next((u for u, t in alle_links if re.search(VERSAND_MUSTER, u.lower() + " " + t.lower())), None)
     if not versand and e["plattform"] == "shopify":
@@ -325,15 +364,16 @@ def pruefe_haendler(k: dict, abrufer, vorher: Optional[dict] = None, log: Callab
 
     # Bewertung
     imp_info = e.get("impressum") or {}
-    if k["land"] not in EUROPA:
-        e["gruende"].append(f"Land {k['land']} nicht in Europa")
+    if land not in EUROPA:
+        e["gruende"].append(f"Land {land} nicht in Europa" if land != "?" else
+                            "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)")
     if not e["tcg_bezug"]:
         e["gruende"].append("kein erkennbares TCG-Sortiment auf der Startseite")
     if e["versand_de"] == "nein":
         e["gruende"].append("liefert laut Shopdaten nicht nach Deutschland")
-    if k["land"] in NICHT_EU:
+    if land in NICHT_EU:
         e["zoll_hinweis"] = "Versand aus Nicht-EU-Land: Zoll/Einfuhrumsatzsteuer möglich"
-    geeignet = k["land"] in EUROPA and e["tcg_bezug"] and e["versand_de"] != "nein" and not e.get("eigene_bot_regeln")
+    geeignet = land in EUROPA and e["tcg_bezug"] and e["versand_de"] != "nein" and not e.get("eigene_bot_regeln")
     e["status"] = "geeignet" if geeignet else ("eingeschraenkt" if e.get("eigene_bot_regeln") else "ungeeignet")
     vorgeprueft = (bool(imp_info.get("ust_id") or imp_info.get("register")) and e["versand_de"] == "ja")
     e["vertrauen"] = "vorgeprueft" if (geeignet and vorgeprueft) else "ungeprueft"
@@ -341,7 +381,7 @@ def pruefe_haendler(k: dict, abrufer, vorher: Optional[dict] = None, log: Callab
         e["gruende"].append("kein automatischer Entdeckungsweg gefunden (Abdeckungslücke)")
     try:   # Fake-Shop-Überwachung: darf die Prüfung nie scheitern lassen
         from . import fakecheck
-        fakecheck.anwenden(e, fakecheck.bewerte_shop(domain, k["land"], seite, alle_links, imp_info, abrufer))
+        fakecheck.anwenden(e, fakecheck.bewerte_shop(domain, land, seite, alle_links, imp_info, abrufer))
         if e["fake_check"]["stufe"] != "gering":
             log(f"  ! {domain}: Fake-Shop-Risiko {e['fake_check']['stufe']} ({e['fake_check']['punkte']} P.)")
     except Exception as ex:  # pragma: no cover

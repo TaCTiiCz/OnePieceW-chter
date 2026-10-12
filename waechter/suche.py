@@ -17,7 +17,7 @@ from pathlib import Path
 from typing import Callable, Optional
 from urllib.parse import urlparse
 
-from .haendlerdb import KANDIDATEN, ausschlussgrund, lade_kandidaten
+from .haendlerdb import KANDIDATEN, ausschlussgrund, lade_kandidaten, land_aus_tld
 from .konfig import KONFIG_DIR
 
 API = "https://api.search.brave.com/res/v1/web/search"
@@ -123,7 +123,7 @@ def suche(log: Callable[[str], None] = print, transport: Optional[Callable] = No
     if neu:
         with open(kandidaten_datei, "a", encoding="utf-8") as f:
             for d, q in neu:
-                f.write(f"{d};{d};?;Brave-Suche {heute}: {q.replace(';', ',')}\n")
+                f.write(f"{d};{d};{land_aus_tld(d) or '?'};Brave-Suche {heute}: {q.replace(';', ',')}\n")
     zustand["verbraucht"] = int(zustand.get("verbraucht", 0)) + gesendet
     zustand["cursor"] = (int(zustand.get("cursor", 0)) + gesendet) % max(1, gesamt)
     zustand_datei.parent.mkdir(parents=True, exist_ok=True)

@@ -67,6 +67,30 @@ class Suche(unittest.TestCase):
                         heute=dt.date(2026, 10, 12))
             self.assertEqual(erg["suchen"], 0)   # nach dem ersten 429 sofort Schluss, nichts verbraucht
 
+    def test_land_aus_domain_wird_eingetragen(self):
+        ergebnisse = {"web": {"results": [{"url": "https://www.cardbuddys.de/x"}, {"url": "https://shop-tcg.fr/y"},
+                                          {"url": "https://tcg-laden.com/z"}, {"url": "https://www.kaufland.de/z"},
+                                          {"url": "https://blog.cardzia.fr/a"}]}}
+        with tempfile.TemporaryDirectory() as d:
+            datei = Path(d) / "k.csv"
+            datei.write_text("domain;name;land;quelle\n", encoding="utf-8")
+            suche(log=lambda s: None, transport=lambda url: ergebnisse, kandidaten_datei=datei,
+                  zustand_datei=Path(d) / "z.json", heute=dt.date(2026, 10, 12))
+            zeilen = datei.read_text(encoding="utf-8").splitlines()[1:]
+        laender = {z.split(";")[0]: z.split(";")[2] for z in zeilen}
+        self.assertEqual(laender, {"cardbuddys.de": "DE", "shop-tcg.fr": "FR", "tcg-laden.com": "?"})
+
+
+class Land(unittest.TestCase):
+    def test_tld_und_ust(self):
+        from waechter.haendlerdb import land_aus_tld, land_aus_ust
+        self.assertEqual(land_aus_tld("cardcorner.at"), "AT")
+        self.assertEqual(land_aus_tld("shop.co.uk"), "UK")
+        self.assertIsNone(land_aus_tld("tcg-corner.com"))
+        self.assertEqual(land_aus_ust("ATU12345678"), "AT")
+        self.assertEqual(land_aus_ust("DE123456789"), "DE")
+        self.assertIsNone(land_aus_ust(None))
+
 
 if __name__ == "__main__":
     unittest.main()
