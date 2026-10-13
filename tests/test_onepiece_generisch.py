@@ -108,13 +108,16 @@ class Lauf(unittest.TestCase):
             self.assertEqual(len(alarme), 1, z2["ereignisse"])
             self.assertIn("OP15", alarme[0]["text"])
 
-    def test_ohne_vertrauen_kein_alarm(self):
+    def test_ohne_vertrauen_nur_mit_warnung(self):
         with tempfile.TemporaryDirectory() as t:
             seiten = {LISTE: LISTE_HTML, DISPLAY_URL: produktseite(False)}
             self.lauf(t, Fake(seiten), vertrauen="ungeprueft")
             seiten[DISPLAY_URL] = produktseite(True)
             z = self.lauf(t, Fake(seiten), vertrauen="ungeprueft")
-            self.assertEqual([e for e in z["ereignisse"] if e["alarm"]], [])
+            alarme = [e for e in z["ereignisse"] if e["alarm"]]
+            self.assertEqual(len(alarme), 1)
+            self.assertTrue(alarme[0]["text"].startswith("⚠️ UNGEPRÜFTER SHOP"))
+            self.assertTrue(alarme[0]["daten"]["ungeprueft"])
 
     def test_bekanntes_angebot_wird_auch_ohne_liste_geprueft(self):
         with tempfile.TemporaryDirectory() as t:
