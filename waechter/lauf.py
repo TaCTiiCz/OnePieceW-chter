@@ -228,6 +228,17 @@ def _alter_tage(ts: Optional[str], jetzt: dt.datetime) -> Optional[float]:
 PREISGEBUNDEN = (m.RESTOCK, m.PREISRUECKGANG)   # nur hier gilt die Preisgrenze; Vorbestellungen/Neuheiten immer melden
 
 
+def _sonder_grenze(ziel_id: str, produkte: dict) -> Optional[float]:
+    """Preisgrenze (EUR) für Sonderprodukte: Anniversary-Sets und sonstige Sonderprodukte mit max_eur."""
+    anni = produkte.get("anniversary", {})
+    for sp in list(anni.get("sets", [])) + list(produkte.get("sonderprodukte", [])):
+        if sp.get("id") == ziel_id:
+            return float(sp["max_eur"]) if sp.get("max_eur") else None
+    if "anniversary" in ziel_id and anni:
+        return float(anni.get("max_eur_unbekannt", 250))
+    return None
+
+
 def preisbewertung(zustand: dict, b: m.Beobachtung, produkte: dict, typ: str = m.RESTOCK) -> dict:
     """Preisprüfung für Display-Alarme. Rückgabe: {"sperre": Grund oder None, "zusatz": Infozeile}.
 
@@ -236,10 +247,13 @@ def preisbewertung(zustand: dict, b: m.Beobachtung, produkte: dict, typ: str = m
     - Neue Vorbestellung / neu gelistet: IMMER melden (nur Plausibilität: unter display_min_eur ist es kein Display);
       ist der Preis über dem Marktpreis, steht das deutlich in der Meldung."""
     pg = produkte.get("preisgrenzen", {})
-    if b.kategorie != "display" or b.preis_cent is None:
+    if b.kategorie not in ("display", "sonder") or b.preis_cent is None:
         return {}
     euro = lambda c: f"{c / 100:,.2f} €".replace(",", "X").replace(".", ",").replace("X", ".")
-    min_cent = float(pg.get("display_min_eur", 40)) * 100
+    sonder_grenze = _sonder_grenze(b.ziel_id, produkte) if b.kategorie == "sonder" else None
+    if b.kategorie == "sonder" and sonder_grenze is None:
+        return {}
+    min_cent = float(pg.get("display_min_eur", 40)) * 100 if b.kategorie == "display" else 1
     if b.waehrung == "EUR" and b.preis_cent < min_cent:
         return {"sperre": f"Preis {euro(b.preis_cent)} ist für ein Display unplausibel (Einzelbooster/Fehler?)"}
     if b.waehrung != "EUR":
@@ -255,7 +269,9 @@ def preisbewertung(zustand: dict, b: m.Beobachtung, produkte: dict, typ: str = m
     median = statistics.median(preise) if preise else None
     eigen = pg.get((b.set_code or "").upper())
     max_kauf = float(pg.get("max_kaufpreis_eur", 0) or 0)
-    if isinstance(eigen, (int, float)) and eigen > 0:
+    if sonder_grenze is not None:
+        grenze, art = sonder_grenze * 100, f"deinem Limit für {b.ziel_anzeige}"
+    elif isinstance(eigen, (int, float)) and eigen > 0:
         grenze, art = eigen * 100, f"deinem Limit für {b.set_code}"
     elif max_kauf > 0:
         grenze, art = max_kauf * 100, "deinem Höchstpreis"
@@ -273,6 +289,18 @@ def preisbewertung(zustand: dict, b: m.Beobachtung, produkte: dict, typ: str = m
     if median is not None and b.preis_cent > median * 1.1:
         return {"sperre": None, "zusatz": f"Im Limit, aber über Marktpreis – {markt}"}
     return {"sperre": None, "zusatz": f"Marktvergleich: {markt}" if markt else ""}
+
+
+def _ungeprueft_warnung(shop: Shop) -> str:
+    fc = (shop.pruefung or {}).get("fake_check") or {}
+    zeile = "⚠️ UNGEPRÜFTER SHOP – vor dem Kauf Impressum, Bewertungen und Versand prüfen, nicht per Vorkasse zahlen"
+    if fc:
+        zeile += f"\nFake-Shop-Check: Risiko {fc.get('stufe', '?')} ({fc.get('punkte', '?')} Punkte)"
+        if fc.get("signale"):
+            zeile += " – " + "; ".join(str(x) for x in fc["signale"][:3])
+    else:
+        zeile += "\nFake-Shop-Check: noch nicht durchgeführt"
+    return zeile
 
 
 def plane_shops(shops: list[Shop], zustand: dict, jetzt: dt.datetime, einst: dict) -> list[tuple[Shop, str]]:
@@ -377,7 +405,8 @@ def fuehre_aus(konfig: Konfig, abrufer, speicher: Speicher, *, testdaten: bool =
         # "Neu gelistet" nur für Produkte, die WIRKLICH neu im Shop sind – nicht für alte Produkte, die der Wächter
         # nur zum ersten Mal sieht (Katalog-Grenze, neuer Suchweg, Seitenbudget). Merkmale: Schlüssel war in keiner
         # früheren Liste UND (falls bekannt) Veröffentlichungsdatum jung.
-        migration = "kandidaten_bekannt" not in sz
+        pv = einstellungen.get("produkt_version", 1)
+        migration = "kandidaten_bekannt" not in sz or sz.get("produkt_version", 1) != pv
         bekannt_vorher = set(sz.get("kandidaten_bekannt") or [])
         veroeff = bericht.get("veroeffentlicht") or {}
         max_tage = float(einstellungen.get("neu_gelistet_max_tage", 14))
@@ -393,6 +422,18 @@ def fuehre_aus(konfig: Konfig, abrufer, speicher: Speicher, *, testdaten: bool =
                                              shop_freigegeben=shop.kaufalarm_freigegeben,
                                              einstellungen=einstellungen, jetzt=jetzt)
             for e_ in ereig:
+                ungeprueft = (not e_.alarm and e_.typ in m.ALARM_TYPEN and b.sicherheit == m.SICHER
+                              and e_.alarm_grund == "Händler nicht für Kaufalarme freigegeben"
+                              and einstellungen.get("ungepruefte_shops_melden", True)
+                              # nur automatisch gefundene Händler; von Hand gesperrte (shops.toml) bleiben still
+                              and (shop.pruefung or {}).get("quelle") == "Händlerdatenbank"
+                              and ((shop.pruefung or {}).get("fake_check") or {}).get("stufe") != "hoch")
+                if ungeprueft:
+                    # Treffer bei noch nicht geprüftem Shop: melden, wenn der Preis passt – mit deutlicher Warnung
+                    e_.alarm = True
+                    e_.alarm_grund = "ungeprüfter Shop – Hinweis mit Warnung"
+                    e_.daten["ungeprueft"] = True
+                    e_.text = f"{_ungeprueft_warnung(shop)}\n{e_.text}"
                 if not e_.alarm or e_.typ not in m.ALARM_TYPEN:
                     continue
                 # Preisgrenze ("guter Preis") für Restocks/Preisrückgänge; Vorbestellungen und Neuheiten immer melden
@@ -402,6 +443,10 @@ def fuehre_aus(konfig: Konfig, abrufer, speicher: Speicher, *, testdaten: bool =
                 if bewertung.get("sperre"):
                     e_.alarm = False
                     e_.alarm_grund = bewertung["sperre"]
+                    continue
+                if ungeprueft and e_.typ in (m.NEUE_VORBESTELLUNG, m.NEU_LIEFERBAR) and "💸" in (bewertung.get("zusatz") or ""):
+                    e_.alarm = False   # ungeprüfter Shop UND über deiner Grenze: nur im Bericht
+                    e_.alarm_grund = "ungeprüfter Shop, Preis über deiner Grenze"
                     continue
                 # Fake-Shop-Überwachung: auffallend billig -> Alarm mit deutlicher Warnung
                 if e_.typ in (m.RESTOCK, m.NEU_LIEFERBAR, m.NEUE_VORBESTELLUNG):
@@ -429,6 +474,7 @@ def fuehre_aus(konfig: Konfig, abrufer, speicher: Speicher, *, testdaten: bool =
             bericht["basis_jetzt_erfasst"] = True
         if bericht["listen_ok"] and bericht.get("modus", "voll") == "voll":
             sz["letzte_vollsuche"] = zeitpunkt
+            sz["produkt_version"] = pv
         sz["zuletzt_geprueft"] = zeitpunkt
         sz["letzter_fehler"] = bericht["fehler"][-1] if bericht["fehler"] else None
         shop_berichte[shop.id] = bericht

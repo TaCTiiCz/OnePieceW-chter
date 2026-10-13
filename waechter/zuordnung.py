@@ -2,10 +2,65 @@
 
 from __future__ import annotations
 
+import re
 from typing import Optional
 
 from . import modelle as m
 from .klassifizierung import normalisiere
+
+_ANNI_NUMMER = re.compile(r"(?<![a-z0-9])(\d{1,2})\s*(?:st|nd|rd|th|\.)?\s*(?:year\s+)?anniversary")
+_ANNI_WORT = {"first": 1, "second": 2, "third": 3, "fourth": 4, "fifth": 5, "sixth": 6}
+_JP_WOERTER = re.compile(r"(?<![a-z0-9])(japanese|japanisch\w*|japonais\w*|japon[eé]s\w*|giapponese|jpn|jap|jp)(?![a-z0-9])")
+_ORDINAL = {1: "st", 2: "nd", 3: "rd"}
+
+
+def _anniversary(titeltext: str, k: m.Klassifizierung, produkte: dict) -> Optional[tuple[Optional[m.Treffer], str]]:
+    """Alle Anniversary-Sets: bekannte aus [anniversary.sets], künftige automatisch ("<n>th Anniversary Set")."""
+    cfg = produkte.get("anniversary")
+    if not cfg or k.typ != m.ANNIVERSARY_SET:
+        return None
+    n = normalisiere(titeltext)
+    verboten = [b for b in cfg.get("darf_nicht_enthalten", []) if normalisiere(b) in n]
+    if verboten:
+        return None, f"Anniversary: Verwechslungsgefahr ('{verboten[0]}' im Titel)"
+    t = _ANNI_NUMMER.search(n)
+    nummer = int(t.group(1)) if t else next((z for w, z in _ANNI_WORT.items() if re.search(rf"\b{w}\s+anniversary", n)), None)
+    if nummer is not None and nummer > 10:
+        return None, f"{nummer}. Anniversary ist kein One-Piece-Card-Game-Set (z. B. Anime-Jubiläum)"
+    jp = bool(_JP_WOERTER.search(n))
+    if k.sprache not in (m.EN, m.UNBEKANNT, m.WIDERSPRUCH, "JP"):
+        return None, f"Anniversary: Sprache {k.sprache}"
+    if nummer is None:
+        return m.Treffer("anniversary-unbekannt", "Anniversary Set (Nummer unklar)", "sonder", m.UNSICHER, False,
+                         ["Anniversary Set erkannt, aber welches (1st/2nd/…)? – bitte prüfen"]), ""
+    edition = "JP" if jp else "EN"
+    kandidaten = [s for s in cfg.get("sets", []) if int(s.get("nummer", 0)) == nummer]
+    sp = next((s for s in kandidaten if s.get("edition") == edition), None) or \
+        next((s for s in kandidaten if s.get("edition") == "ALLE"), None)
+    gruende = []
+    if sp:
+        treffer = m.Treffer(sp["id"], sp["anzeige"], "sonder", m.SICHER, False, [f"Titel passt zu '{sp['anzeige']}'"])
+    elif cfg.get("automatisch_kuenftige", True):
+        name = f"{nummer}{_ORDINAL.get(nummer, 'th')} Anniversary Set" + (" (Japanese)" if jp else "")
+        treffer = m.Treffer(f"{nummer}{_ORDINAL.get(nummer, 'th')}-anniversary-set-{edition.lower()}-auto", name, "sonder",
+                            m.SICHER, False, [f"'{name}' automatisch erkannt (noch nicht in der Produktliste – Inhalt/UVP prüfen)"])
+    else:
+        return None, f"{nummer}. Anniversary Set ({edition}) nicht in der Produktliste"
+    if edition == "JP":
+        gruende.append("Japanese-Ausgabe (offiziell so benannt, Kartentext Englisch)")
+    elif k.sprache == m.EN:
+        gruende.append("Sprache Englisch erkannt")
+    elif sp is not None and sp.get("edition") == "ALLE":
+        gruende.append("Ausgabe/Sprache noch nicht offiziell festgelegt")
+    else:
+        treffer.sicherheit = m.UNSICHER
+        gruende.append(f"Sprache {k.sprache} – englische oder japanische Ausgabe?")
+    unsicher = [b for b in cfg.get("unsichere_begriffe", []) if normalisiere(b) in n]
+    if unsicher:
+        treffer.sicherheit = m.UNSICHER
+        gruende.append(f"Bezeichnung '{unsicher[0]}' ist offiziell nicht belegt – Identität prüfen")
+    treffer.gruende += gruende
+    return treffer, ""
 
 
 def _set_nummer(code: str) -> int:
@@ -52,6 +107,9 @@ def ordne_zu(titeltext: str, k: m.Klassifizierung, produkte: dict) -> tuple[Opti
         return None, "kein One-Piece-Produkt"
     prio = [p.upper() for p in produkte.get("displays", {}).get("prioritaet", [])]
 
+    anni = _anniversary(titeltext, k, produkte)
+    if anni is not None:
+        return anni
     sonder = _sonderprodukt(titeltext, k, produkte, prio)
     if sonder is not None:
         return sonder

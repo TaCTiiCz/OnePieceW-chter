@@ -54,5 +54,5 @@ def mit_datenbank(konfig: Konfig, db_datei: Path, *, max_seiten: int = 4, max_an
             kaufalarm_freigegeben=h.get("vertrauen") in ALARM_VERTRAUEN,
             versand_de=Versand("unbekannt", [], "Versandkosten nach DE nicht belegt", "", ""),
             pruefung={"quelle": "Händlerdatenbank", "vertrauen": h.get("vertrauen", "ungeprueft"), "listen": listen,
-                       "waehrung_aus_pruefung": bool(h.get("waehrung"))}))
+                       "waehrung_aus_pruefung": bool(h.get("waehrung")), "fake_check": h.get("fake_check")}))
     return replace(konfig, shops=list(konfig.shops) + sorted(neu, key=lambda s: s.id))

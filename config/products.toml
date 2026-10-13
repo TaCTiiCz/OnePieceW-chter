@@ -17,6 +17,12 @@ wiederholsperre_stunden = 24
 # "Neu gelistet" nur, wenn das Produkt laut Shop höchstens so viele Tage veröffentlicht ist (Shopify: published_at).
 # Ältere Produkte, die der Wächter nur erstmals SIEHT (z. B. über einen neuen Suchweg), werden still übernommen.
 neu_gelistet_max_tage = 14
+# Wird erhöht, wenn neue Produkte aufgenommen werden: Der erste volle Lauf je Shop übernimmt bereits gelistete
+# Angebote dieser Produkte still (kein "neu gelistet"-Schwall für alte Angebote).
+produkt_version = 2
+# Treffer bei Shops, die noch nicht für Kaufalarme geprüft sind: trotzdem melden (mit Warnung + Fake-Shop-Check),
+# wenn der Preis innerhalb deiner Grenze liegt
+ungepruefte_shops_melden = true
 
 # ---------------------------------------------------------------------
 # Preisgrenzen für Kaufalarme
@@ -89,17 +95,85 @@ darf_nicht_enthalten = ["25th", "best selection", "live action", "6 assort", "ac
 identitaet = "bestaetigt"
 offizielle_quelle = "https://en.onepiece-cardgame.com/products/cardcollection29th.html"
 offizieller_inhalt = "P-159 in 2 Versionen: Normal x4 und Premium-Finish x4; UVP USD 10; Premium Bandai (US/AU/NZ)"
+max_eur = 40
 
-[[sonderprodukte]]
-id = "2nd-anniversary-set-en"
-anzeige = "ONE PIECE CARD GAME English Version 2nd Anniversary Set"
-typ = "ANNIVERSARY_SET"
-muss_enthalten = [["2nd anniversary", "set"], ["2nd anniversary", "limited collection"]]
-darf_nicht_enthalten = ["complete guide", "official book", "guide book", "base shop", "tournament", "1st anniversary", "3rd anniversary", "4th anniversary", "25th"]
-# Ein offizielles Produkt namens "2nd Anniversary LIMITED COLLECTION" wurde
-# auf der offiziellen Seite NICHT gefunden. Angebote mit diesem Namen werden
-# deshalb nur als "unsicher" geführt (kein Kaufalarm).
-identitaet = "teilweise"
+
+# ---------------------------------------------------------------------
+# 4) Anniversary-Sets (Premium Bandai) – ALLE bekannten + künftige automatisch
+#    Erkennung: "<Zahl> Anniversary Set" (1st/2nd/3./4th …) im Titel. "Japanese …"-Ausgaben
+#    (englischer Kartentext, offiziell so benannt) sind eigene Produkte.
+#    Quellen: en.onepiece-cardgame.com/products/other/ (Stand 13.10.2026)
+# ---------------------------------------------------------------------
+[anniversary]
+# Künftige Sets (z. B. 5th) werden automatisch erkannt und gemeldet, auch bevor sie hier stehen
+automatisch_kuenftige = true
+max_eur_unbekannt = 250        # Preisgrenze für Restocks automatisch erkannter Sets
+darf_nicht_enthalten = ["complete guide", "official book", "guide book", "base shop", "tournament", "25th",
+                        "nur playmat", "playmat only", "only playmat", "promo only", "einzelkarte", "single card",
+                        "leer", "empty box", "ohne karten", "without cards"]
+# Name offiziell nicht belegt -> nur "unsicher" (kein Kaufalarm)
 unsichere_begriffe = ["limited collection"]
+# Restock/Preisrückgang nur bis max_eur melden; Vorbestellungen und Neulistungen immer (mit 💸, wenn darüber)
+
+[[anniversary.sets]]
+id = "1st-anniversary-set-en"
+nummer = 1
+edition = "EN"
+anzeige = "English Version 1st Anniversary Set"
+max_eur = 200
+offizieller_inhalt = "Storage Box x1, Karten (Holo + Textured Foil) x10, Playmat x1, Sleeves x100; UVP USD 90; Lieferung Juni 2024"
+offizielle_quelle = "https://en.onepiece-cardgame.com/products/other/1st_anniversary_set.php"
+
+[[anniversary.sets]]
+id = "2nd-anniversary-set-en"
+nummer = 2
+edition = "EN"
+anzeige = "English Version 2nd Anniversary Set"
+max_eur = 200
+offizieller_inhalt = "Playmat x1, Leader Card x4, Character Card x4, DON!! Card x10, Storage Box x1; UVP USD 90; Lieferung Juni 2025"
 offizielle_quelle = "https://en.onepiece-cardgame.com/products/other/2nd_anniversary_set.php"
-offizieller_inhalt = "Playmat x1, Leader Card x4, Character Card x4, DON!! Card x10, Storage Box x1; UVP USD 90; Lieferung Juni 2025; Premium Bandai"
+
+[[anniversary.sets]]
+id = "3rd-anniversary-set-en"
+nummer = 3
+edition = "EN"
+anzeige = "English Version 3rd Anniversary Set"
+max_eur = 250
+offizieller_inhalt = "Leather Card Case x1, Leader Card x3, Character Card x4, DON!! Card x10, Storage Box x1; UVP USD 120; Lieferung Aug./Sept. 2026"
+offizielle_quelle = "https://en.onepiece-cardgame.com/products/other/3rd_anniversary_set.php"
+
+[[anniversary.sets]]
+id = "1st-anniversary-set-jp"
+nummer = 1
+edition = "JP"
+anzeige = "Japanese 1st Anniversary Set"
+max_eur = 200
+offizieller_inhalt = "Storage Box x1, 3 Karten (englischer Text), Holo-Playmat x1, Sleeves 2x100, Card Case x1; UVP USD 100; Lieferung März 2024"
+offizielle_quelle = "https://en.onepiece-cardgame.com/products/other/goods_set_1st-anniversary.php"
+
+[[anniversary.sets]]
+id = "2nd-anniversary-set-jp"
+nummer = 2
+edition = "JP"
+anzeige = "Japanese 2nd Anniversary Set"
+max_eur = 350
+offizieller_inhalt = "9 Karten (englischer Text), Storage Box, Playmat, Card Case, Playmat Case, 4 Würfel, 70 Sleeves; UVP USD 180; Lieferung März 2025"
+offizielle_quelle = "https://en.onepiece-cardgame.com/products/other/goods_set_2nd-anniversary.php"
+
+[[anniversary.sets]]
+id = "3rd-anniversary-set-jp"
+nummer = 3
+edition = "JP"
+anzeige = "Japanese 3rd Anniversary Set"
+max_eur = 400
+offizieller_inhalt = "10 Promo-Karten, 10 DON!!, 70 Sleeves, Leather Card Case, Leather Storage Box, 6 Power Counter; UVP USD 200; Lieferung März 2026"
+offizielle_quelle = "https://en.onepiece-cardgame.com/products/other/anniversaryset3rd.php"
+
+[[anniversary.sets]]
+id = "4th-anniversary-set"
+nummer = 4
+edition = "ALLE"   # Sprache der Ausgabe noch nicht offiziell bekannt
+anzeige = "4th Anniversary Set"
+max_eur = 300
+offizieller_inhalt = "9 Promo-Karten, 70 Sleeves, Playmat, Card Case; 18.700 Yen; Japan: Lotterie bis 02.09.2026, Versand Feb. 2027; US/EU noch offen"
+offizielle_quelle = "https://essential-japan.com/news/one-piece-card-game-announces-4th-anniversary-set-as-9-new-promo-cards-revealed/"

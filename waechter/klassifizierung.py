@@ -105,6 +105,10 @@ def _hat(norm: str, *phrasen: str) -> bool:
     return any(re.search(r"(?<![a-z0-9])" + re.escape(p) + r"(?![a-z0-9])", norm) for p in phrasen)
 
 
+_DISPLAY_INHALT = re.compile(r"(?<![0-9])24\s*(x\s*)?(booster\s*packs?|boosters?|packs?|sobres|bustine|buste|paquetes|pochettes|"
+                             r"packungen|tüten)(?![a-z])")
+
+
 def erkenne_typ(text: str) -> tuple[str, str]:
     """Reihenfolge ist wichtig: spezifische Typen vor allgemeinen."""
     n = normalisiere(text)
@@ -186,6 +190,10 @@ def klassifiziere(titel: str, variante: str = "", handle: str = "", tags: Iterab
         if vtyp in (m.BOOSTER_PACK, m.CASE, m.EINZELKARTE, m.SLEEVED_BOOSTER, m.ZUBEHOER) and typ != vtyp:
             typ, typgrund = vtyp, f"Variante '{var}': {vgrund}"
     set_code, setgrund = erkenne_set(titeltext, setnamen)
+    if typ == m.TYP_UNBEKANNT and set_code and beschreibung:
+        # Titel ohne Produkttyp (z. B. "One Piece OP-17 4th Anniversary"): Packungsinhalt aus der Beschreibung
+        if _DISPLAY_INHALT.search(normalisiere(beschreibung[:4000])):
+            typ, typgrund = m.DISPLAY, "Beschreibung nennt 24 Booster (Display)"
     versiegelt, vgrund = erkenne_versiegelung(titeltext, tags, beschreibung)
     vollst, vollgrund = erkenne_vollstaendigkeit(titeltext, beschreibung, typ)
     op = ist_one_piece(f"{titeltext} {handle} {' '.join(tags)} {hersteller} {produktart}", set_code)
