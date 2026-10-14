@@ -1,36 +1,36 @@
 {
- "updated": "2026-10-13T23:47:56+00:00",
+ "updated": "2026-10-14T23:48:16+00:00",
  "quelle": "github",
  "state": "checking",
  "current": null,
- "last_run": "2026-10-13T23:47:44+00:00",
- "run_seconds": 11.0,
+ "last_run": "2026-10-14T23:48:12+00:00",
+ "run_seconds": 3.1,
  "sites": [
   {
    "id": "produkt",
    "name": "Produkte",
    "agent": "naruto",
    "status": "ok",
-   "im_lauf": false,
-   "last_checked": "2026-10-13T23:47:14+00:00",
-   "detail": "12 Aufgaben"
+   "im_lauf": true,
+   "last_checked": "2026-10-14T23:48:12+00:00",
+   "detail": "17 Aufgaben"
   },
   {
    "id": "entdeckung",
    "name": "Entdeckung",
    "agent": "naruto",
    "status": "ok",
-   "im_lauf": true,
-   "last_checked": "2026-10-13T23:47:50+00:00",
-   "detail": "1160 Aufgaben, 42 mit Fehlern"
+   "im_lauf": false,
+   "last_checked": "2026-10-14T23:47:16+00:00",
+   "detail": "1270 Aufgaben, 60 mit Fehlern"
   },
   {
    "id": "op_restock",
    "name": "Restock",
    "agent": "onepiece",
    "status": "ok",
-   "im_lauf": true,
-   "last_checked": "2026-10-13T23:47:55+00:00",
+   "im_lauf": false,
+   "last_checked": "2026-10-14T23:46:37+00:00",
    "detail": "1 Aufgaben"
   },
   {
@@ -38,12 +38,16 @@
    "name": "Vorbestellung",
    "agent": "onepiece",
    "status": "ok",
-   "im_lauf": true,
-   "last_checked": "2026-10-13T23:47:55+00:00",
+   "im_lauf": false,
+   "last_checked": "2026-10-14T23:46:37+00:00",
    "detail": "1 Aufgaben"
   }
  ],
  "events": [
+  {
+   "time": "2026-10-14T09:51:15+00:00",
+   "text": "OP_VORBESTELLUNG: Neue Vorbestellung: 4th Anniversary Set bei TCG Shop Moers Im Limit, aber über Marktpreis – Median 222,22 € b…"
+  },
   {
    "time": "2026-10-13T19:34:05+00:00",
    "text": "FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Naruto Card Game Booster Box (Pre-o…"
@@ -87,10 +91,6 @@
   {
    "time": "2026-10-13T09:04:01+00:00",
    "text": "FRUEHHINWEIS: Offizielle Naruto-Meldung: NARUTO CARD GAME New Info Revealed! Oct. 2026 Event Information EVENTS Oct. 13, 20…"
-  },
-  {
-   "time": "2026-10-12T12:06:37+00:00",
-   "text": "OP_RESTOCK: Restock: OP16 Booster Display (EN, 24 Packs) bei Gate to the Games (vorher SOLD OUT) Im Limit, aber über Mark…"
   }
  ],
  "naruto": {
@@ -104,9 +104,9 @@
   }
  },
  "stats": {
-  "haendler": 186,
-  "aufgaben": 1173,
-  "aufgaben_mit_fehlern": 42,
+  "haendler": 203,
+  "aufgaben": 1288,
+  "aufgaben_mit_fehlern": 60,
   "push_problem": false
  }
 }
