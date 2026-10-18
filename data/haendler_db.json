@@ -1,5 +1,5 @@
 {
- "aktualisiert": "2026-10-17T03:46:35+00:00",
+ "aktualisiert": "2026-10-18T03:45:44+00:00",
  "haendler": {
   "1piecetcg": {
    "basis_url": "https://1piecetcg.fr",
@@ -3617,64 +3617,69 @@
    "waehrung": "EUR"
   },
   "cardcosmos2": {
-   "basis_url": "https://cardcosmos.es",
-   "domain": "cardcosmos.es",
+   "basis_url": "https://cardcosmos.nl",
+   "domain": "cardcosmos.nl",
    "entdeckung": [
     {
      "art": "shopify_neueste",
-     "url": "https://cardcosmos.es/products.json?limit=100"
+     "url": "https://cardcosmos.nl/products.json?limit=100"
     },
     {
      "art": "shopify_katalog",
-     "url": "https://cardcosmos.es/products.json?limit=250"
+     "url": "https://cardcosmos.nl/products.json?limit=250"
     },
     {
      "art": "kategorie_vorbestellung",
-     "url": "https://cardcosmos.es/collections/calendario-de-lanzamientos-de-pokemon-2026"
+     "url": "https://cardcosmos.nl/collections/tcg-vorbestellung"
     },
     {
-     "art": "kategorie_vorbestellung",
-     "url": "https://cardcosmos.es/collections/reservar-pokemon-30th-celebration"
+     "art": "kategorie_neuheiten",
+     "url": "https://cardcosmos.nl/blogs/nieuws/terugkeer-naar-de-wereld-van-lorwyn-eclipsed-de-nieuwe-set-van-magic-the-gathering"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://cardcosmos.nl/blogs/nieuws"
     },
     {
      "art": "kategorie_bandai",
-     "url": "https://cardcosmos.es/collections/comprar-cartas-de-one-piece"
+     "url": "https://cardcosmos.nl/collections/one-piece-kaarten-kopen"
     },
     {
      "art": "kategorie_bandai",
-     "url": "https://cardcosmos.es/collections/exhibidores-de-sobres-de-one-piece"
+     "url": "https://cardcosmos.nl/collections/one-piece-boosterdisplays"
     },
     {
      "art": "sitemap",
-     "url": "https://cardcosmos.es/sitemap.xml"
+     "url": "https://cardcosmos.nl/sitemap.xml"
     }
    ],
-   "erstmals_geprueft": "2026-10-17T03:45:49+00:00",
+   "erstmals_geprueft": "2026-10-18T03:45:32+00:00",
    "fake_check": {
-    "domain_alter_tage": null,
+    "domain_alter_tage": 210,
     "punkte": 0,
     "signale": [
+     "Domain jünger als 1 Jahr (210 Tage)",
      "Bewertungs-/Gütesiegel-Hinweis (positiv, nicht überprüft)"
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-17T03:45:49+00:00",
+   "geprueft_am": "2026-10-18T03:45:32+00:00",
    "gruende": [],
    "id": "cardcosmos2",
    "impressum": {
     "fehler": "robots.txt erlaubt diesen Abruf nicht – wird respektiert"
    },
-   "impressum_url": "https://cardcosmos.es/policies/legal-notice",
-   "land": "ES",
+   "impressum_url": "https://cardcosmos.nl/policies/legal-notice",
+   "land": "NL",
    "land_quelle": "Kandidatenliste",
-   "name": "cardcosmos.es",
+   "name": "cardcosmos.nl",
    "naruto_erwaehnt": false,
    "plattform": "shopify",
-   "quelle": "Brave-Suche 2026-10-13: One Piece Card Game display comprar",
+   "quelle": "Brave-Suche 2026-10-14: One Piece Card Game display kopen",
    "shop_land_meta": "DE",
    "shop_merkmale": true,
    "sitemaps": [
-    "https://cardcosmos.es/sitemap.xml"
+    "https://cardcosmos.nl/sitemap.xml"
    ],
    "status": "geeignet",
    "tcg_bezug": true,
@@ -3696,8 +3701,8 @@
    ],
    "tdm_vorbehalt": false,
    "versand_de": "ja",
-   "versand_de_quelle": "https://cardcosmos.es/meta.json (ships_to_countries)",
-   "versand_url": "https://cardcosmos.es/policies/shipping-policy",
+   "versand_de_quelle": "https://cardcosmos.nl/meta.json (ships_to_countries)",
+   "versand_url": "https://cardcosmos.nl/policies/shipping-policy",
    "vertrauen": "ungeprueft",
    "waehrung": "EUR"
   },
@@ -7742,19 +7747,97 @@
    "vertrauen": "ungeprueft"
   },
   "en2": {
-   "domain": "en.tcg-shop.at",
-   "entdeckung": [],
-   "erstmals_geprueft": "2026-10-17T03:45:49+00:00",
-   "geprueft_am": "2026-10-17T03:45:49+00:00",
-   "gruende": [
-    "robots.txt nicht abrufbar (HTTP Netzwerkfehler)"
+   "basis_url": "https://en.fantasysphere.net",
+   "domain": "en.fantasysphere.net",
+   "entdeckung": [
+    {
+     "art": "shopsuche",
+     "url": "https://en.fantasysphere.net/search?q=naruto"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://en.fantasysphere.net/jeux-de-cartes-a-collectionner/naruto-mythos-tcg/"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://en.fantasysphere.net/jeux-de-cartes-a-collectionner/naruto-mythos-tcg/boite-de-boosters-display-841/"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://en.fantasysphere.net/preorder"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://en.fantasysphere.net/jeux-de-cartes-a-collectionner/one-piece-tcg/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://en.fantasysphere.net/jeux-de-cartes-a-collectionner/one-piece-tcg/boite-de-boosters-one-piece/"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://www.fantasysphere.net/sitemap_index.xml"
+    }
    ],
-   "http_status": null,
+   "erstmals_geprueft": "2026-10-18T03:45:32+00:00",
+   "fake_check": {
+    "domain_alter_tage": null,
+    "punkte": 1,
+    "signale": [
+     "Rechtstexte fehlen: datenschutz"
+    ],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-10-18T03:45:32+00:00",
+   "gruende": [],
    "id": "en2",
-   "land": "AT",
-   "name": "en.tcg-shop.at",
-   "quelle": "Brave-Suche 2026-10-11: TCG Shop Österreich Booster Display",
-   "status": "blockiert",
+   "impressum": {
+    "beleg": ": FANTASY SPHERE Siret number: 901 518 647 00010 - with capital of €10,000 VAT: FR13901518647 - RCS TOULOUSE - APE CODE: 4765Z https:",
+    "rechtsform": null,
+    "register": true,
+    "ust_id": "FR13901518647"
+   },
+   "impressum_url": "https://en.fantasysphere.net/page/mentions-legales",
+   "land": "FR",
+   "land_quelle": "USt-ID im Impressum",
+   "name": "en.fantasysphere.net",
+   "naruto_erwaehnt": true,
+   "plattform": "unbekannt",
+   "quelle": "Brave-Suche 2026-10-11: \"Naruto Card Game\" Bandai vorbestellen",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://www.fantasysphere.net/sitemap_index.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "digimon",
+    "display",
+    "dragon ball",
+    "gundam",
+    "lorcana",
+    "magic: the gathering",
+    "mtg",
+    "naruto",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "tcg",
+    "trading card",
+    "union arena",
+    "yu-gi-oh",
+    "yugioh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "unbekannt",
+   "versand_de_quelle": "",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": false,
+    "nennt_eu": false
+   },
+   "versand_url": "https://en.fantasysphere.net/page/livraisons",
    "vertrauen": "ungeprueft"
   },
   "es": {
@@ -18220,6 +18303,60 @@
    "waehrung": "CHF",
    "zoll_hinweis": "Versand aus Nicht-EU-Land: Zoll/Einfuhrumsatzsteuer möglich"
   },
+  "narutocardgamesimulator": {
+   "basis_url": "https://narutocardgamesimulator.com",
+   "domain": "narutocardgamesimulator.com",
+   "entdeckung": [
+    {
+     "art": "kategorie_naruto",
+     "url": "https://narutocardgamesimulator.com/en"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://narutocardgamesimulator.com/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-18T03:45:32+00:00",
+   "fake_check": {
+    "domain_alter_tage": 79,
+    "punkte": 6,
+    "signale": [
+     "Domain erst 79 Tage alt",
+     "Rechtstexte fehlen: agb, widerruf, datenschutz",
+     "keine Kontaktdaten auf Startseite/Impressum"
+    ],
+    "stufe": "hoch"
+   },
+   "geprueft_am": "2026-10-18T03:45:32+00:00",
+   "gruende": [
+    "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)",
+    "kein erkennbares TCG-Sortiment auf der Startseite",
+    "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin",
+    "Fake-Shop-Verdacht (hoch, 6 Punkte): Domain erst 79 Tage alt; Rechtstexte fehlen: agb, widerruf, datenschutz; keine Kontaktdaten auf Startseite/Impressum"
+   ],
+   "id": "narutocardgamesimulator",
+   "impressum_url": null,
+   "land": "?",
+   "land_quelle": "Domain-Endung",
+   "name": "narutocardgamesimulator.com",
+   "naruto_erwaehnt": true,
+   "plattform": "unbekannt",
+   "quelle": "Brave-Suche 2026-10-18: Naruto Card Game Bandai zamów",
+   "shop_merkmale": false,
+   "sitemaps": [
+    "https://narutocardgamesimulator.com/sitemap.xml"
+   ],
+   "status": "ungeeignet",
+   "tcg_bezug": false,
+   "tcg_hinweise": [
+    "naruto"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "unbekannt",
+   "versand_de_quelle": "",
+   "versand_url": null,
+   "vertrauen": "ungeprueft"
+  },
   "narutokarty": {
    "basis_url": "https://narutokarty.pl",
    "domain": "narutokarty.pl",
@@ -26946,6 +27083,79 @@
    "versand_url": null,
    "vertrauen": "ungeprueft"
   },
+  "tcgsoulcraft": {
+   "basis_url": "https://tcg-soulcraft.de",
+   "domain": "tcg-soulcraft.de",
+   "entdeckung": [
+    {
+     "art": "shopify_neueste",
+     "url": "https://tcg-soulcraft.de/products.json?limit=100"
+    },
+    {
+     "art": "shopify_katalog",
+     "url": "https://tcg-soulcraft.de/products.json?limit=250"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://tcg-soulcraft.de/collections/one-piece-vorbestellungen"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://tcg-soulcraft.de/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-18T03:45:32+00:00",
+   "fake_check": {
+    "domain_alter_tage": null,
+    "punkte": 0,
+    "signale": [],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-10-18T03:45:32+00:00",
+   "gruende": [],
+   "id": "tcgsoulcraft",
+   "impressum": {
+    "beleg": "003eUmsatzsteuer-Identifikationsnummer gemäß § 5 Digitale-Dienste-Gesetz (DDG): DE369181437\\u003c\\/p\\u003e\\n\\u003cp\\u003eUmsatzsteu",
+    "rechtsform": null,
+    "register": true,
+    "ust_id": "DE369181437"
+   },
+   "impressum_url": "https://tcg-soulcraft.de/pages/impressum",
+   "land": "DE",
+   "land_quelle": "Kandidatenliste",
+   "name": "tcg-soulcraft.de",
+   "naruto_erwaehnt": false,
+   "plattform": "shopify",
+   "quelle": "Brave-Suche 2026-10-18: One Piece Card Game Display Vorbestellung",
+   "shop_land_meta": "DE",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://tcg-soulcraft.de/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "display",
+    "lorcana",
+    "magic: the gathering",
+    "one piece",
+    "pokémon",
+    "tcg",
+    "yu-gi-oh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "https://tcg-soulcraft.de/meta.json (ships_to_countries)",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": true,
+    "nennt_eu": true
+   },
+   "versand_url": "https://tcg-soulcraft.de/policies/shipping-policy",
+   "vertrauen": "vorgeprueft",
+   "waehrung": "EUR"
+  },
   "tcgstore": {
    "domain": "tcg-store.it",
    "entdeckung": [],
@@ -31318,27 +31528,27 @@
  },
  "version": 1,
  "zusammenfassung": {
-  "geeignet": 240,
-  "kandidaten": 475,
+  "geeignet": 242,
+  "kandidaten": 477,
   "land": {
-   "?": 84,
-   "AT": 19,
+   "?": 85,
+   "AT": 18,
    "BE": 12,
    "CA": 3,
    "CH": 15,
-   "DE": 110,
+   "DE": 111,
    "DK": 1,
-   "ES": 30,
+   "ES": 29,
    "EU": 8,
    "FI": 1,
-   "FR": 40,
+   "FR": 41,
    "GR": 2,
    "HU": 1,
    "IE": 2,
    "IT": 38,
    "JP": 1,
    "MX": 1,
-   "NL": 36,
+   "NL": 37,
    "NO": 1,
    "PL": 29,
    "PT": 1,
@@ -31348,10 +31558,10 @@
    "UK": 9,
    "US": 14
   },
-  "mit_entdeckungsweg": 240,
-  "naruto_erwaehnt": 147,
+  "mit_entdeckungsweg": 242,
+  "naruto_erwaehnt": 149,
   "plattform": {
-   "?": 75,
+   "?": 74,
    "ecwid": 2,
    "gambio": 1,
    "jtl": 7,
@@ -31361,28 +31571,28 @@
    "oxid": 1,
    "plentymarkets": 1,
    "prestashop": 2,
-   "shopify": 152,
+   "shopify": 153,
    "shopware": 9,
-   "unbekannt": 151,
+   "unbekannt": 153,
    "wix": 5,
    "woocommerce": 49
   },
   "status": {
-   "blockiert": 70,
-   "geeignet": 240,
+   "blockiert": 69,
+   "geeignet": 242,
    "nicht_erreichbar": 5,
-   "ungeeignet": 160
+   "ungeeignet": 161
   },
   "versand_de": {
-   "?": 75,
-   "ja": 166,
+   "?": 74,
+   "ja": 167,
    "nein": 29,
-   "unbekannt": 165,
+   "unbekannt": 167,
    "vermutlich": 40
   },
   "vertrauen": {
-   "ungeprueft": 393,
-   "vorgeprueft": 82
+   "ungeprueft": 394,
+   "vorgeprueft": 83
   }
  }
 }
