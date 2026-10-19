@@ -146,6 +146,14 @@ jobs:
           if git fetch -q origin waechter-daten 2>/dev/null && git show FETCH_HEAD:server.json > /tmp/server.json 2>/dev/null; then
             cp /tmp/server.json server.json
           fi
+          # Sicherheitsnetz: GitHub lehnt Dateien über 100 MB ab -> große JSONL-Dateien auf die jüngere Hälfte kürzen
+          find . -path ./.git -prune -o -type f -size +80M -print | while read -r f; do
+            case "$f" in
+              *.jsonl) echo "::warning::$f über 80 MB – wird auf die jüngere Hälfte gekürzt"
+                       n=$(wc -l < "$f"); tail -n $((n / 2)) "$f" > "$f.tmp" && mv "$f.tmp" "$f" ;;
+              *) echo "::error::$f über 80 MB – bitte prüfen" ;;
+            esac
+          done
           git add -A
           if git diff --cached --quiet; then echo "Keine Änderungen"; exit 0; fi
           # pro Tag ein Commit (wird im Tagesverlauf ergänzt), damit der Zweig nicht mit tausenden Commits wächst
