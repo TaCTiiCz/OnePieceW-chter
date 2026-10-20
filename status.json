@@ -1,10 +1,10 @@
 {
- "updated": "2026-10-19T23:44:54+00:00",
+ "updated": "2026-10-20T23:55:34+00:00",
  "quelle": "github",
  "state": "checking",
  "current": null,
- "last_run": "2026-10-19T23:43:52+00:00",
- "run_seconds": 60.6,
+ "last_run": "2026-10-20T23:54:31+00:00",
+ "run_seconds": 61.9,
  "sites": [
   {
    "id": "produkt",
@@ -12,7 +12,7 @@
    "agent": "naruto",
    "status": "ok",
    "im_lauf": true,
-   "last_checked": "2026-10-19T23:44:02+00:00",
+   "last_checked": "2026-10-20T23:54:41+00:00",
    "detail": "17 Aufgaben"
   },
   {
@@ -21,8 +21,8 @@
    "agent": "naruto",
    "status": "ok",
    "im_lauf": true,
-   "last_checked": "2026-10-19T23:44:25+00:00",
-   "detail": "1481 Aufgaben, 118 mit Fehlern"
+   "last_checked": "2026-10-20T23:55:24+00:00",
+   "detail": "1481 Aufgaben, 128 mit Fehlern"
   },
   {
    "id": "op_restock",
@@ -30,7 +30,7 @@
    "agent": "onepiece",
    "status": "ok",
    "im_lauf": false,
-   "last_checked": "2026-10-19T23:39:52+00:00",
+   "last_checked": "2026-10-20T23:50:31+00:00",
    "detail": "1 Aufgaben"
   },
   {
@@ -39,11 +39,15 @@
    "agent": "onepiece",
    "status": "ok",
    "im_lauf": false,
-   "last_checked": "2026-10-19T23:39:52+00:00",
+   "last_checked": "2026-10-20T23:50:31+00:00",
    "detail": "1 Aufgaben"
   }
  ],
  "events": [
+  {
+   "time": "2026-10-20T13:23:39+00:00",
+   "text": "OP_RESTOCK: Restock: OP16 Booster Display (EN, 24 Packs) bei BreakTheCase (vorher SOLD OUT) Im Limit, aber über Marktprei…"
+  },
   {
    "time": "2026-10-19T10:13:09+00:00",
    "text": "OP_RESTOCK: Restock: OP14 Booster Display (EN, 24 Packs) bei GeeksHeaven (vorher SOLD OUT) Im Limit, aber über Marktpreis…"
@@ -87,10 +91,6 @@
   {
    "time": "2026-10-15T09:50:26+00:00",
    "text": "OP_RESTOCK: Neu gelistet und lieferbar: OP13 Booster Display (EN, 24 Packs) bei TCGViert 💸 Über deinem Höchstpreis (250,0…"
-  },
-  {
-   "time": "2026-10-15T06:57:37+00:00",
-   "text": "OP_RESTOCK: ⚠️ UNGEPRÜFTER SHOP – vor dem Kauf Impressum, Bewertungen und Versand prüfen, nicht per Vorkasse zahlen Fake-…"
   }
  ],
  "naruto": {
@@ -106,7 +106,7 @@
  "stats": {
   "haendler": 242,
   "aufgaben": 1499,
-  "aufgaben_mit_fehlern": 118,
+  "aufgaben_mit_fehlern": 128,
   "push_problem": false
  }
 }
