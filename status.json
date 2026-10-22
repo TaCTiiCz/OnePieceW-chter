@@ -1,19 +1,19 @@
 {
- "updated": "2026-10-21T23:29:25+00:00",
+ "updated": "2026-10-22T23:53:27+00:00",
  "quelle": "github",
  "state": "checking",
  "current": null,
- "last_run": "2026-10-21T23:28:04+00:00",
- "run_seconds": 80.1,
+ "last_run": "2026-10-22T23:51:58+00:00",
+ "run_seconds": 88.0,
  "sites": [
   {
    "id": "produkt",
    "name": "Produkte",
    "agent": "naruto",
-   "status": "ok",
+   "status": "error",
    "im_lauf": true,
-   "last_checked": "2026-10-21T23:28:13+00:00",
-   "detail": "18 Aufgaben, 1 mit Fehlern"
+   "last_checked": "2026-10-22T23:52:01+00:00",
+   "detail": "5 von 18 Aufgaben mit Fehlern"
   },
   {
    "id": "entdeckung",
@@ -21,16 +21,16 @@
    "agent": "naruto",
    "status": "ok",
    "im_lauf": true,
-   "last_checked": "2026-10-21T23:28:39+00:00",
-   "detail": "1549 Aufgaben, 154 mit Fehlern"
+   "last_checked": "2026-10-22T23:53:04+00:00",
+   "detail": "1553 Aufgaben, 117 mit Fehlern"
   },
   {
    "id": "op_restock",
    "name": "Restock",
    "agent": "onepiece",
    "status": "ok",
-   "im_lauf": false,
-   "last_checked": "2026-10-21T22:57:25+00:00",
+   "im_lauf": true,
+   "last_checked": "2026-10-22T23:53:26+00:00",
    "detail": "1 Aufgaben"
   },
   {
@@ -38,8 +38,8 @@
    "name": "Vorbestellung",
    "agent": "onepiece",
    "status": "ok",
-   "im_lauf": false,
-   "last_checked": "2026-10-21T22:57:25+00:00",
+   "im_lauf": true,
+   "last_checked": "2026-10-22T23:53:26+00:00",
    "detail": "1 Aufgaben"
   }
  ],
@@ -83,14 +83,6 @@
   {
    "time": "2026-10-16T11:58:59+00:00",
    "text": "OP_VORBESTELLUNG: ⚠️ UNGEPRÜFTER SHOP – vor dem Kauf Impressum, Bewertungen und Versand prüfen, nicht per Vorkasse zahlen Fake-…"
-  },
-  {
-   "time": "2026-10-15T15:56:22+00:00",
-   "text": "OP_RESTOCK: Neu gelistet und lieferbar: OP05 Booster Display (EN, 24 Packs) bei FantasiaCards 💸 Über deinem Höchstpreis (…"
-  },
-  {
-   "time": "2026-10-15T13:35:37+00:00",
-   "text": "OP_RESTOCK: Neu gelistet und lieferbar: OP15 Booster Display (EN, 24 Packs) bei Card Corner Im Limit, aber über Marktprei…"
   }
  ],
  "naruto": {
@@ -105,8 +97,8 @@
  },
  "stats": {
   "haendler": 252,
-  "aufgaben": 1568,
-  "aufgaben_mit_fehlern": 155,
+  "aufgaben": 1572,
+  "aufgaben_mit_fehlern": 122,
   "push_problem": false
  }
 }
