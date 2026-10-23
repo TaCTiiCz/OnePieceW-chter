@@ -11,6 +11,7 @@ import datetime as dt
 import hashlib
 import json
 import os
+import re
 import statistics
 import threading
 import time
@@ -22,7 +23,7 @@ from typing import Callable, Optional
 from urllib.parse import urlparse
 
 from . import modelle as m
-from . import entdeckung, naruto, push, seite
+from . import entdeckung, naruto, pokemon, push, seite
 from .haendler import shopify
 from .haendlerdb import ausschlussgrund
 from .klassifizierung import normalisiere
@@ -43,6 +44,41 @@ PRIO = {"produkt": 1, "offiziell": 2, "naruto": 3, "schnell": 4, "langsam": 5, "
 NARUTO_WEGE = {"kategorie_naruto", "shopsuche"}
 SCHNELL = {"shopify_neueste", "woo_api", "woo_neueste", "kategorie_vorbestellung"}
 LANGSAM = {"kategorie_neuheiten", "kategorie_bandai", "shopify_katalog"}
+
+
+# ---------------------------------------------------------------------------
+# Themen: derselbe Prüflauf bedient Naruto und den Pokémon-Normalpreis-Wächter
+# ---------------------------------------------------------------------------
+@dataclass(frozen=True)
+class Thema:
+    id: str                   # Schlüssel im Zustand ("naruto" / "pokemon")
+    name: str                 # Anzeige in Meldungen und Protokoll
+    pruefe: Callable          # (titel, url, tags, hersteller, cfg) -> NarutoTreffer
+    suchwort: "re.Pattern"    # grober Vorfilter für die Entdeckung
+    nur_normalpreis: bool = False   # Pokémon: jedes bestellbare Angebot bis zur Grenze melden, teurere gar nicht
+
+
+NARUTO = Thema("naruto", "Naruto", naruto.pruefe, entdeckung.SUCHWORT)
+POKEMON = Thema("pokemon", "Pokémon 30 Jahre", pokemon.pruefe, pokemon.SUCHWORT, nur_normalpreis=True)
+
+
+def pokemon_wege(entdeckung_quellen: list, cfg: dict) -> list[dict]:
+    """Entdeckungswege eines Shops für den Pokémon-Wächter: Naruto-/Bandai-Kategorien entfallen,
+    die Shopsuche nach "naruto" wird mit den Pokémon-Suchbegriffen aufgerufen."""
+    begriffe = (cfg.get("pruefung") or {}).get("suchbegriffe") or ["30th celebration"]
+    erg: list[dict] = []
+    for e in entdeckung_quellen:
+        art, url = e.get("art", ""), e.get("url", "")
+        if art in ("kategorie_naruto", "kategorie_bandai"):
+            continue
+        if art in ("shopsuche", "woo_api"):
+            if not re.search(r"naruto", url, re.I):
+                continue
+            for b in begriffe:
+                erg.append({"art": art, "url": re.sub(r"naruto", b.replace(" ", "+"), url, flags=re.I)})
+            continue
+        erg.append({"art": art, "url": url})
+    return erg
 
 
 def lade_betrieb(datei: Optional[Path] = None) -> dict:
@@ -140,7 +176,12 @@ def _gruppe(art: str) -> str:
     return art
 
 
-def intervall_fuer(art: str, betrieb: dict, fokus: bool = False) -> int:
+def intervall_fuer(art: str, betrieb: dict, fokus: bool = False, thema_cfg: Optional[dict] = None) -> int:
+    pr = (thema_cfg or {}).get("pruefung") if (thema_cfg or {}).get("thema") == "pokemon" else None
+    if pr:   # Pokémon: eigene, ruhigere Takte
+        if art == "produkt":
+            return int(pr.get("produktseite_sekunden", 300))
+        return int(intervall_fuer(art, betrieb, False) * float(pr.get("intervall_faktor", 2)))
     i = betrieb["intervalle"]
     g = _gruppe(art)
     if g == "produkt":
@@ -155,12 +196,12 @@ def intervall_fuer(art: str, betrieb: dict, fokus: bool = False) -> int:
                 "onepiece": i["onepiece"]}.get(g, i["entdeckung_langsam"]))
 
 
-def fokus_shops(zustand: dict, ncfg: dict, betrieb: dict, jetzt: dt.datetime) -> set[str]:
+def fokus_shops(zustand: dict, ncfg: dict, betrieb: dict, jetzt: dt.datetime, bereich: str = "naruto") -> set[str]:
     """Shops mit einem bekannten Vorbestellstart im Fokusfenster ("*" = alle)."""
     vor = dt.timedelta(minutes=betrieb["fokus"]["minuten_vorher"])
     nach = dt.timedelta(hours=betrieb["fokus"]["stunden_nachher"])
     termine = [(t.get("shop") or "*", t["zeitpunkt"], t.get("stunden_nachher")) for t in ncfg.get("termine", [])]
-    termine += [(t["shop"], t["zeitpunkt"], t.get("stunden_nachher")) for t in zustand["naruto"].get("termine", {}).values()]
+    termine += [(t["shop"], t["zeitpunkt"], t.get("stunden_nachher")) for t in zustand[bereich].get("termine", {}).values()]
     erg = set()
     for shop, zp, eigene_stunden in termine:
         zp = str(zp)
@@ -179,17 +220,17 @@ def fokus_shops(zustand: dict, ncfg: dict, betrieb: dict, jetzt: dt.datetime) ->
 
 
 def synchronisiere(zustand: dict, haendler: list[Haendler], ncfg: dict, betrieb: dict, jetzt: dt.datetime,
-                   onepiece: bool = True) -> None:
+                   onepiece: bool = True, thema: Thema = NARUTO) -> None:
     aufg = zustand.setdefault("aufgaben", {})
     soll: dict[str, dict] = {}
-    fokus = fokus_shops(zustand, ncfg, betrieb, jetzt)
+    fokus = fokus_shops(zustand, ncfg, betrieb, jetzt, thema.id)
     for h in haendler:
-        for e in h.entdeckung:
+        for e in (pokemon_wege(h.entdeckung, ncfg) if thema.id == "pokemon" else h.entdeckung):
             tid = f"{h.id}|{e['art']}|{e['url']}"
             soll[tid] = {"art": e["art"], "shop": h.id, "url": e["url"]}
     for q in ncfg.get("offizielle_quellen", []):
         soll[f"offiziell|{q['id']}"] = {"art": "offiziell", "shop": "offiziell", "url": q["url"], "quelle": q}
-    for aid, a in zustand["naruto"]["angebote"].items():
+    for aid, a in zustand[thema.id]["angebote"].items():
         if a.get("letzte") and a["letzte"].get("passend") is False:
             continue  # ausgeschlossene Seiten (z. B. Mythos TCG) nicht weiter abrufen
         soll[f"produkt|{aid}"] = {"art": "produkt", "shop": a["shop"], "url": a["url"], "angebot": aid}
@@ -200,7 +241,7 @@ def synchronisiere(zustand: dict, haendler: list[Haendler], ncfg: dict, betrieb:
             del aufg[tid]
     for tid, s in soll.items():
         f = s["shop"] in fokus or "*" in fokus
-        intervall = intervall_fuer(s["art"], betrieb, fokus=f)
+        intervall = intervall_fuer(s["art"], betrieb, fokus=f, thema_cfg=ncfg)
         if tid not in aufg:
             versatz = 0 if s["art"] in ("produkt", "offiziell") else _hash(tid, intervall)
             aufg[tid] = {**s, "faellig": _iso(jetzt + dt.timedelta(seconds=versatz)), "fehlerserie": 0}
@@ -288,7 +329,7 @@ def _angebot_id(shop: str, url: str, variante: Optional[str] = None) -> str:
     return f"{shop}|{url.split('?')[0].split('#')[0]}|{variante or '-'}"
 
 
-def pruefe_produktseite(h: Haendler, url: str, abrufer, ncfg: dict, heute: dt.date) -> list[NBeob]:
+def pruefe_produktseite(h: Haendler, url: str, abrufer, ncfg: dict, heute: dt.date, thema: Thema = NARUTO) -> list[NBeob]:
     """Ruft die konkrete Produktseite ab. Fehler werden als Fehler gemeldet, nie als ausverkauft."""
     zeit = _iso(dt.datetime.now(dt.timezone.utc))
     start = time.monotonic()
@@ -329,7 +370,7 @@ def pruefe_produktseite(h: Haendler, url: str, abrufer, ncfg: dict, heute: dt.da
             b.coming_soon = bool(seite.COMING_SOON.search(beschr + " " + titel)) and st not in m.KAUFBAR
             dates = [d for d in seite.finde_daten(beschr) if d >= heute]
             b.release = min(dates).isoformat() if dates else None
-            _naruto_einordnen(b, js.get("vendor", ""), tuple(js.get("tags", []) or []), ncfg)
+            _naruto_einordnen(b, js.get("vendor", ""), tuple(js.get("tags", []) or []), ncfg, thema)
             beobs.append(b)
     else:
         a = abrufer.hole(url)
@@ -343,7 +384,7 @@ def pruefe_produktseite(h: Haendler, url: str, abrufer, ncfg: dict, heute: dt.da
                      "coming_soon": si.coming_soon, "warteliste": si.warteliste, "kauf_knopf": si.kauf_knopf,
                      "nur_text": si.schema_status is None, "release": si.release, "termine": si.termine,
                      "warenkorb_url": seite.warenkorb_link(a.text, url), "storno": si.storno})
-        _naruto_einordnen(b, "", (), ncfg)
+        _naruto_einordnen(b, "", (), ncfg, thema)
         beobs.append(b)
     dauer = int((time.monotonic() - start) * 1000)
     for b in beobs:
@@ -362,8 +403,8 @@ def _shop_stub(h: Haendler):
     return S()
 
 
-def _naruto_einordnen(b: NBeob, hersteller: str, tags: tuple, ncfg: dict) -> None:
-    t = naruto.pruefe(b.titel, b.url, tags, hersteller, ncfg)
+def _naruto_einordnen(b: NBeob, hersteller: str, tags: tuple, ncfg: dict, thema: Thema = NARUTO) -> None:
+    t = thema.pruefe(b.titel, b.url, tags, hersteller, ncfg)
     b.passend, b.sicherheit, b.sprache, b.sprache_offiziell, b.variante = (t.passend, t.sicherheit, t.sprache,
                                                                            t.sprache_offiziell, t.variante)
     b.ausschluss = t.ausschluss
@@ -399,7 +440,7 @@ def _fp(*teile) -> str:
 def _teuer(b: NBeob, zustand: dict, ncfg: dict) -> Optional[str]:
     if b.preis_cent is None:
         return None
-    vergleich = [a["letzte"]["preis_cent"] for a in zustand["naruto"]["angebote"].values()
+    vergleich = [a["letzte"]["preis_cent"] for a in zustand[ncfg.get("thema", "naruto")]["angebote"].values()
                  if a.get("letzte") and a["letzte"].get("preis_cent") and a["letzte"].get("variante") == b.variante
                  and a["letzte"].get("sprache") == b.sprache and a["letzte"].get("sicherheit") == m.SICHER
                  and a["letzte"].get("status") in m.KAUFBAR]
@@ -441,7 +482,9 @@ class Lauf:
     def __init__(self, konfig: Optional[Konfig], abrufer, daten_dir: Path, *, db_datei: Optional[Path] = None,
                  jetzt: Optional[dt.datetime] = None, push_kanal: Optional[push.Kanal] = None,
                  log: Callable[[str], None] = print, ncfg: Optional[dict] = None, betrieb: Optional[dict] = None,
-                 onepiece: bool = True, testmodus: bool = False):
+                 onepiece: bool = True, testmodus: bool = False, thema: Thema = NARUTO):
+        self.thema = thema
+        self.bereich = thema.id
         self.konfig = konfig
         self.abrufer = abrufer
         self.dir = Path(daten_dir)
@@ -449,7 +492,8 @@ class Lauf:
         (self.dir / "verlauf").mkdir(exist_ok=True)
         self.db_datei = db_datei or (PROJEKT / "data" / "haendler_db.json")
         self.jetzt = jetzt or dt.datetime.now(dt.timezone.utc)
-        self.ncfg = ncfg or naruto.lade_naruto()
+        self.ncfg = ncfg or (pokemon.lade_pokemon() if thema.id == "pokemon" else naruto.lade_naruto())
+        self.alarme_in_diesem_lauf = 0
         self.betrieb = betrieb or lade_betrieb()
         self.push = push_kanal or push.Kanal.aus_umgebung()
         self.log = log
@@ -465,10 +509,10 @@ class Lauf:
     def _lade(self) -> dict:
         p = self.dir / "zustand.json"
         z = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
-        z.setdefault("naruto", {}).setdefault("angebote", {})
-        z["naruto"].setdefault("shops", {})
-        z["naruto"].setdefault("offiziell", {})
-        z["naruto"].setdefault("termine", {})
+        z.setdefault(self.bereich, {}).setdefault("angebote", {})
+        z[self.bereich].setdefault("shops", {})
+        z[self.bereich].setdefault("offiziell", {})
+        z[self.bereich].setdefault("termine", {})
         z.setdefault("aufgaben", {})
         z.setdefault("hosts", {})
         z.setdefault("meldungen", {})
@@ -491,7 +535,7 @@ class Lauf:
     # -- Ereignis anlegen und ggf. sofort senden ---------------------------------
     def _ereignis(self, typ: str, b: Optional[NBeob], text: str, extra: Optional[dict] = None, senden: bool = True) -> dict:
         jetzt = dt.datetime.now(dt.timezone.utc)
-        e = {"typ": typ, "zeit": _iso(jetzt), "text": text, "testmodus": self.testmodus, **(extra or {})}
+        e = {"typ": typ, "zeit": _iso(jetzt), "text": text, "testmodus": self.testmodus, "thema": self.bereich, **(extra or {})}
         if b is not None:
             e.update(angebot=b.angebot_id, shop=b.shop, shop_name=b.shop_name, url=b.url, titel=b.titel,
                      status=b.status, sprache=b.sprache, variante=b.variante, preis_cent=b.preis_cent,
@@ -541,9 +585,9 @@ class Lauf:
     def verarbeite(self, b: NBeob, h: Haendler, quelle: str = "produktseite", erkannt_t: Optional[float] = None) -> None:
         erkannt_t = erkannt_t or time.monotonic()
         with self.lock:
-            ang = self.zustand["naruto"]["angebote"]
+            ang = self.zustand[self.bereich]["angebote"]
             neu = b.angebot_id not in ang
-            shop_z = self.zustand["naruto"]["shops"].setdefault(h.id, {"basis_erfasst": False})
+            shop_z = self.zustand[self.bereich]["shops"].setdefault(h.id, {"basis_erfasst": False})
             alt = ang.get(b.angebot_id) or {"erstmals": b.zeit, "shop": h.id, "url": b.url.split("?")[0] if "?variant" not in b.url else b.url,
                                              "nach_basis": shop_z["basis_erfasst"], "quelle": quelle,
                                              "letzter_sicherer_status": None, "fehlerserie": 0}
@@ -560,7 +604,7 @@ class Lauf:
                 self._verlauf(b, letzte)
                 if alt["fehlerserie"] == self.betrieb["grenzen"]["fehler_push_ab"] and alt.get("letzte", {}).get("sicherheit") == m.SICHER:
                     self._ereignis(FEHLER, b2, f"Abruf fehlgeschlagen ({alt['fehlerserie']}x in Folge) – Status UNBEKANNT, "
-                                               f"NICHT ausverkauft: {b2.titel or b.url}")
+                                               f"NICHT ausverkauft: {b2.titel or b.url}", senden=not self.thema.nur_normalpreis)
                 return
             alt["fehlerserie"] = 0
             alt["letzter_fehler"] = None
@@ -576,12 +620,13 @@ class Lauf:
             # erkannte Vorbestellstarts -> Frühhinweis + Fokus
             for t in b.termine:
                 key = f"{h.id}|{t}"
-                if key not in self.zustand["naruto"]["termine"]:
-                    self.zustand["naruto"]["termine"][key] = {"shop": h.id, "zeitpunkt": t,
+                if key not in self.zustand[self.bereich]["termine"]:
+                    self.zustand[self.bereich]["termine"][key] = {"shop": h.id, "zeitpunkt": t,
                                                               "quelle": b.url, "erkannt": b.zeit}
                     if shop_z["basis_erfasst"] or not neu:
                         self._ereignis(FRUEHHINWEIS, b, f"Angekündigter Vorbestellstart {t}: {b.titel} bei {h.name} – "
-                                                        "noch NICHT bestellbar, Prüfung wird darauf ausgerichtet")
+                                                        "noch NICHT bestellbar, Prüfung wird darauf ausgerichtet",
+                                       senden=not self.thema.nur_normalpreis)
             if sicher:
                 alt["letzter_sicherer_status"] = b.status
                 if vorher != b.status:
@@ -593,16 +638,37 @@ class Lauf:
                 kandidat = True
             else:
                 kandidat = False
+            if self.thema.nur_normalpreis:
+                kandidat = self._normalpreis_kandidat(b, alt, sicher)
             if neu and alt["nach_basis"] and not (b.status in m.KAUFBAR):
                 via = " (über Sitemap gefunden – Seite evtl. schon länger online)" if quelle == "sitemap" else ""
                 self._ereignis(FRUEHHINWEIS if h.vertrauen != "ungeprueft" else UNGEPRUEFT, b,
-                               f"Neue passende Produktseite{via}: {b.titel} bei {h.name} – noch NICHT bestellbar ({b.status})")
+                               f"Neue passende Produktseite{via}: {b.titel} bei {h.name} – noch NICHT bestellbar ({b.status})",
+                               senden=not self.thema.nur_normalpreis)
         if kandidat:
             self._kaufalarm_pruefen(b, h, erkannt_t)
 
+    def _normalpreis_kandidat(self, b: NBeob, alt: dict, sicher: bool) -> bool:
+        """Pokémon: Kandidat für eine Meldung ist JEDES bestellbare Angebot bis zur Preisgrenze, das in dieser
+        Bestellbar-Phase noch nicht gemeldet wurde (Restock, neue Vorbestellung oder einfach noch nicht ausverkauft).
+        Nicht mehr bestellbar oder teurer als die Grenze -> beim nächsten Mal wieder meldefähig."""
+        if sicher and b.status not in m.KAUFBAR:
+            alt["gemeldet"] = False
+            return False
+        if b.status not in m.KAUFBAR:
+            return False
+        stufe, _ = preis_stufe(b, self.ncfg)
+        alt["preisstufe"] = stufe
+        if stufe in (None, "ueber"):   # kein Euro-Preis oder über der Grenze: nicht melden, später erneut prüfen
+            alt["gemeldet"] = False
+            return False
+        if not b.passend or (b.sicherheit != m.SICHER and not self.ncfg["alarm"].get("unsichere_melden", False)):
+            return False
+        return not alt.get("gemeldet")
+
     def _erinnerung_pruefen(self, b: NBeob, h: Haendler, sicher: bool) -> None:
         """Offener Kaufalarm: nach x Minuten erneut erinnern, solange bestellbar und nicht mit /gekauft quittiert."""
-        offen = self.zustand["naruto"].setdefault("offene_alarme", {})
+        offen = self.zustand[self.bereich].setdefault("offene_alarme", {})
         o = offen.get(b.angebot_id)
         if not o:
             return
@@ -625,29 +691,38 @@ class Lauf:
 
     def _kaufalarm_pruefen(self, b: NBeob, h: Haendler, erkannt_t: float) -> None:
         """Vor jedem Kaufalarm: Produktseite ERNEUT abrufen und streng prüfen."""
+        if self.thema.nur_normalpreis:
+            max_lauf = int((self.ncfg.get("pruefung") or {}).get("max_meldungen_pro_lauf", 8))
+            with self.lock:
+                if self.alarme_in_diesem_lauf >= max_lauf:
+                    return   # Rest kommt im nächsten Lauf (noch nicht als gemeldet markiert)
+                self.alarme_in_diesem_lauf += 1
         neu = [x for x in pruefe_produktseite(h, b.url.split("?")[0] if "?variant=" not in b.url else b.url.split("?")[0],
-                                              self.abrufer, self.ncfg, self.jetzt.date())
+                                              self.abrufer, self.ncfg, self.jetzt.date(), self.thema)
                if x.angebot_id == b.angebot_id]
         b2 = neu[0] if neu else NBeob(**{**asdict(b), "abruf_ok": False, "fehler": "Variante beim erneuten Abruf nicht gefunden"})
         ok, grund = bestellbar_bestaetigt(b2)
         wort = "Jetzt lieferbar" if b2.status == m.IN_STOCK else "Vorbestellbar"
         with self.lock:
             self._verlauf(b2, asdict(b))
-            self.zustand["naruto"]["angebote"][b.angebot_id]["letzte"] = asdict(b2)
-            self.zustand["naruto"]["angebote"][b.angebot_id]["zweitpruefung"] = {"zeit": b2.zeit, "ok": ok, "grund": grund}
+            self.zustand[self.bereich]["angebote"][b.angebot_id]["letzte"] = asdict(b2)
+            self.zustand[self.bereich]["angebote"][b.angebot_id]["zweitpruefung"] = {"zeit": b2.zeit, "ok": ok, "grund": grund}
             extra = {"erkannt_monotonic": erkannt_t, "zweitpruefung": grund, "teuer": _teuer(b2, self.zustand, self.ncfg),
                      "nur_text": b2.nur_text,
                      "spekulativ": not self.ncfg["identitaet"].get("produkte_offiziell_angekuendigt", False),
                      **_kauf_extra(b2, self.ncfg)}
+            if self.thema.nur_normalpreis:
+                self._normalpreis_melden(b, b2, h, ok, grund, extra)
+                return
             if not ok:
                 # nicht als "bestellbar" merken, damit die nächste Prüfung es erneut versucht
-                self.zustand["naruto"]["angebote"][b.angebot_id]["letzter_sicherer_status"] = "UNBESTAETIGT"
+                self.zustand[self.bereich]["angebote"][b.angebot_id]["letzter_sicherer_status"] = "UNBESTAETIGT"
                 if b2.abruf_ok and b2.status in m.KAUFBAR:
                     self._ereignis(FRUEHHINWEIS, b2, f"Seite wirkt bestellbar, aber nicht bestätigt ({grund}): {b2.titel} bei {h.name}",
                                    extra)
                 return
             if b2.sicherheit != m.SICHER:
-                self.zustand["naruto"]["angebote"][b.angebot_id]["letzter_sicherer_status"] = "UNBESTAETIGT"
+                self.zustand[self.bereich]["angebote"][b.angebot_id]["letzter_sicherer_status"] = "UNBESTAETIGT"
                 self._ereignis(FRUEHHINWEIS, b2, f"Bestellbar, aber Zuordnung unsicher ({'; '.join(b2.gruende[-2:])}): "
                                                  f"{b2.titel} bei {h.name}", extra)
             elif h.vertrauen == "ungeprueft":
@@ -658,8 +733,27 @@ class Lauf:
                 else:
                     e = self._ereignis(KAUFALARM_SPRACHE, b2, f"{wort} ({b2.sprache}): {b2.titel} bei {h.name}", extra)
                 if e.get("gesendet") and extra.get("preisstufe") != "ueber":
-                    self.zustand["naruto"].setdefault("offene_alarme", {})[b.angebot_id] = {
+                    self.zustand[self.bereich].setdefault("offene_alarme", {})[b.angebot_id] = {
                         "zeit": e["zeit"], "zuletzt": e["zeit"], "erinnerungen": 0, "titel": b2.titel, "shop": h.name}
+
+    def _normalpreis_melden(self, b: NBeob, b2: NBeob, h: Haendler, ok: bool, grund: str, extra: dict) -> None:
+        """Pokémon: nach der Zweitprüfung nur melden, wenn wirklich bestellbar, sicher zugeordnet und bis zur Grenze."""
+        alt = self.zustand[self.bereich]["angebote"][b.angebot_id]
+        if not ok:
+            alt["letzter_sicherer_status"] = "UNBESTAETIGT"   # nächste Prüfung versucht es erneut
+            return
+        if extra.get("preisstufe") in (None, "ueber"):
+            alt["gemeldet"] = False
+            return
+        if b2.sicherheit != m.SICHER and not self.ncfg["alarm"].get("unsichere_melden", False):
+            return
+        wort = "Jetzt lieferbar" if b2.status == m.IN_STOCK else "Vorbestellbar"
+        extra = {**extra, "grenze_text": pokemon.grenze_text(b2.variante, self.ncfg), "spekulativ": False}
+        typ = UNGEPRUEFT if h.vertrauen == "ungeprueft" else KAUFALARM
+        zusatz = " (UNGEPRÜFTER Shop – vor dem Kauf prüfen)" if typ == UNGEPRUEFT else ""
+        e = self._ereignis(typ, b2, f"{wort} zum Normalpreis ({b2.sprache}): {b2.titel} bei {h.name}{zusatz}", extra)
+        alt["gemeldet"] = bool(e.get("gesendet") or e.get("unterdrueckt") or not self.push.aktiv)
+        alt["gemeldet_zeit"] = e["zeit"]
 
     def _verlauf(self, b: NBeob, letzte: dict) -> None:
         felder = ("abruf_ok", "status", "preis_cent", "waehrung", "gesamt_cent", "sprache", "variante", "fehler")
@@ -674,48 +768,51 @@ class Lauf:
         jetzt = dt.datetime.now(dt.timezone.utc)
         art = a["art"]
         if art == "produkt":
-            ang = self.zustand["naruto"]["angebote"].get(a.get("angebot"), {})
+            ang = self.zustand[self.bereich]["angebote"].get(a.get("angebot"), {})
             url = ang.get("url", a["url"]).split("?variant=")[0]
             t0 = time.monotonic()
-            beobs = pruefe_produktseite(h, url, self.abrufer, self.ncfg, self.jetzt.date())
+            beobs = pruefe_produktseite(h, url, self.abrufer, self.ncfg, self.jetzt.date(), self.thema)
             for b in beobs:
                 self.verarbeite(b, h, erkannt_t=t0)
             ok = all(b.abruf_ok for b in beobs)
             if ok and a.get("angebot") and all(b.angebot_id != a["angebot"] for b in beobs):
                 # Platzhalter aus einem früheren Abruffehler: die Seite hat jetzt eigene Varianten-Einträge
                 with self.lock:
-                    self.zustand["naruto"]["angebote"].pop(a["angebot"], None)
+                    self.zustand[self.bereich]["angebote"].pop(a["angebot"], None)
             with self.lock:
                 erledigt(a, ok, jetzt, self.betrieb, None if ok else beobs[0].fehler)
             return
         if art == "offiziell":
             self._offiziell(tid, a)
             return
-        ok, kandidaten, fehler, cursor = entdeckung.fuehre_aus(a, self.abrufer, h.basis_url)
+        ok, kandidaten, fehler, cursor = entdeckung.fuehre_aus(a, self.abrufer, h.basis_url, self.thema.suchwort)
         with self.lock:
             a["cursor"] = cursor
             erledigt(a, ok, jetzt, self.betrieb, fehler)
             a["letzte_kandidaten"] = len(kandidaten)
         for k in kandidaten:
-            t = naruto.pruefe(k.titel, k.url, k.tags, k.hersteller, self.ncfg)
+            t = self.thema.pruefe(k.titel, k.url, k.tags, k.hersteller, self.ncfg)
             if not t.passend:
                 with self.lock:
-                    self.zustand["naruto"].setdefault("ausgeschlossen", {})[k.url] = {
-                        "titel": k.titel, "grund": t.ausschluss, "shop": h.id, "zeit": _iso(jetzt)}
+                    aus = self.zustand[self.bereich].setdefault("ausgeschlossen", {})
+                    aus[k.url] = {"titel": k.titel, "grund": t.ausschluss, "shop": h.id, "zeit": _iso(jetzt)}
+                    if len(aus) > 3000:   # begrenzen: nur die jüngsten behalten
+                        for alt_url in sorted(aus, key=lambda u: aus[u]["zeit"])[:len(aus) - 2500]:
+                            del aus[alt_url]
                 continue
             bekannt = any(x.get("url", "").split("?")[0] == k.url.split("?")[0]
-                          for x in self.zustand["naruto"]["angebote"].values())
+                          for x in self.zustand[self.bereich]["angebote"].values())
             if bekannt:
                 continue
-            self.log(f"  + neue Naruto-Seite bei {h.name}: {k.titel} ({k.url})")
+            self.log(f"  + neue {self.thema.name}-Seite bei {h.name}: {k.titel} ({k.url})")
             t0 = time.monotonic()
-            for b in pruefe_produktseite(h, k.url, self.abrufer, self.ncfg, self.jetzt.date()):
+            for b in pruefe_produktseite(h, k.url, self.abrufer, self.ncfg, self.jetzt.date(), self.thema):
                 self.verarbeite(b, h, quelle="sitemap" if a["art"] == "sitemap" else a["art"], erkannt_t=t0)
 
     def _offiziell(self, tid: str, a: dict) -> None:
         jetzt = dt.datetime.now(dt.timezone.utc)
         ant = self.abrufer.hole(a["url"])
-        z = self.zustand["naruto"]["offiziell"].setdefault(tid, {"bekannt": [], "erstmals": _iso(jetzt)})
+        z = self.zustand[self.bereich]["offiziell"].setdefault(tid, {"bekannt": [], "erstmals": _iso(jetzt)})
         if not ant.ok:
             with self.lock:
                 erledigt(a, False, jetzt, self.betrieb, ant.fehler)
@@ -763,7 +860,7 @@ class Lauf:
         if not any(w in text for w in woerter):
             return ""
         stunden = float(v.get("auto_fokus_stunden", 48))
-        self.zustand["naruto"]["termine"][f"offiziell|{schluessel}"] = {
+        self.zustand[self.bereich]["termine"][f"offiziell|{schluessel}"] = {
             "shop": "*", "zeitpunkt": _iso(dt.datetime.now(dt.timezone.utc)), "stunden_nachher": stunden,
             "quelle": schluessel.split("|")[0], "erkannt": _iso(dt.datetime.now(dt.timezone.utc))}
         return f" – Fokus-Modus für {stunden:g} h: alle Shops werden jetzt deutlich häufiger geprüft"
@@ -779,7 +876,7 @@ class Lauf:
         for h in haendler:
             self.abrufer.setze_host_regeln(h.host, float(g["min_abstand_sekunden"]), int(g["max_anfragen_pro_shop_und_lauf"]))
         self.abrufer.setze_host_regeln("www.naruto-cardgame.com", 5.0, 6)
-        synchronisiere(self.zustand, haendler, self.ncfg, self.betrieb, self.jetzt, onepiece=self.onepiece)
+        synchronisiere(self.zustand, haendler, self.ncfg, self.betrieb, self.jetzt, onepiece=self.onepiece, thema=self.thema)
         f = faellige(self.zustand, self.jetzt) if nur_faellige else list(self.zustand["aufgaben"].items())
         # nach Host gruppieren: pro Host nacheinander, Hosts parallel
         gruppen: dict[str, list] = {}
@@ -793,10 +890,10 @@ class Lauf:
             if host is None:
                 continue
             gruppen.setdefault(host, []).append((tid, a, h))
-        self.log(f"Naruto-Lauf: {len(haendler)} Händler, {len(self.zustand['aufgaben'])} Aufgaben, "
+        self.log(f"{self.thema.name}-Lauf: {len(haendler)} Händler, {len(self.zustand['aufgaben'])} Aufgaben, "
                  f"{sum(len(v) for v in gruppen.values())} fällig auf {len(gruppen)} Hosts")
         abgearbeitet = {"produkt": 0, "entdeckung": 0, "offiziell": 0}
-        zeitlimit = float(g["max_laufzeit_sekunden"])
+        zeitlimit = float((self.ncfg.get("pruefung") or {}).get("max_laufzeit_sekunden") or g["max_laufzeit_sekunden"])
 
         def host_arbeiten(eintraege):
             for tid, a, h in eintraege:
@@ -820,14 +917,14 @@ class Lauf:
         # Ausgangsbasis je Shop: erfasst, sobald alle schnellen/langsamen Entdeckungswege einmal erfolgreich waren
         neue_basis = []
         for h in haendler:
-            sz = self.zustand["naruto"]["shops"].setdefault(h.id, {"basis_erfasst": False})
+            sz = self.zustand[self.bereich]["shops"].setdefault(h.id, {"basis_erfasst": False})
             wege = [a for a in self.zustand["aufgaben"].values() if a["shop"] == h.id and a["art"] not in ("produkt", "sitemap")]
             if wege and not sz["basis_erfasst"] and all(a.get("zuletzt_ok") for a in wege):
                 sz["basis_erfasst"], sz["basis_seit"] = True, _iso(self.jetzt)
                 neue_basis.append(h)
             ok_zeiten = [a.get("zuletzt_ok") for a in self.zustand["aufgaben"].values() if a["shop"] == h.id and a.get("zuletzt_ok")]
             sz["letzter_erfolg"] = max(ok_zeiten) if ok_zeiten else sz.get("letzter_erfolg")
-        if neue_basis:
+        if neue_basis and not self.thema.nur_normalpreis:   # Pokémon meldet bestellbare Angebote ohnehin einzeln
             self._ausgangslage(neue_basis)
         self._offene_pushes()
         dauer = time.monotonic() - t_start
@@ -851,7 +948,7 @@ class Lauf:
 
     def _ausgangslage(self, shops: list[Haendler]) -> None:
         ids = {h.id for h in shops}
-        bestellbar = [a["letzte"] for a in self.zustand["naruto"]["angebote"].values()
+        bestellbar = [a["letzte"] for a in self.zustand[self.bereich]["angebote"].values()
                       if a["shop"] in ids and a.get("letzte") and a["letzte"].get("passend")
                       and a["letzte"].get("sicherheit") == m.SICHER and a["letzte"].get("status") in m.KAUFBAR]
         if not bestellbar:

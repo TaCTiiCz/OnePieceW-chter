@@ -34,7 +34,7 @@ def _seite_setzen(url: str, seite: int) -> str:
     return urlunparse(p._replace(query=urlencode({k: v[0] for k, v in q.items()})))
 
 
-def aus_shopify_json(text: str, basis: str, quelle: str) -> tuple[list[Kandidat], int]:
+def aus_shopify_json(text: str, basis: str, quelle: str, suchwort: re.Pattern = SUCHWORT) -> tuple[list[Kandidat], int]:
     daten = json.loads(text)
     produkte = daten.get("products", []) if isinstance(daten, dict) else []
     erg = []
@@ -42,26 +42,26 @@ def aus_shopify_json(text: str, basis: str, quelle: str) -> tuple[list[Kandidat]
         titel = p.get("title", "")
         tags = p.get("tags", [])
         tags = tuple(tags if isinstance(tags, list) else str(tags).split(","))
-        if SUCHWORT.search(titel) or SUCHWORT.search(p.get("handle", "")) or any(SUCHWORT.search(t) for t in tags):
+        if suchwort.search(titel) or suchwort.search(p.get("handle", "")) or any(suchwort.search(t) for t in tags):
             erg.append(Kandidat(f"{basis}/products/{p.get('handle')}", titel, quelle, p.get("vendor", ""), tags))
     return erg, len(produkte)
 
 
-def aus_woo_json(text: str, quelle: str) -> list[Kandidat]:
+def aus_woo_json(text: str, quelle: str, suchwort: re.Pattern = SUCHWORT) -> list[Kandidat]:
     daten = json.loads(text)
     erg = []
     for p in daten if isinstance(daten, list) else []:
         titel = re.sub(r"<[^>]+>", "", str(p.get("name", "")))
         url = p.get("permalink", "")
-        if url and (SUCHWORT.search(titel) or SUCHWORT.search(url)):
+        if url and (suchwort.search(titel) or suchwort.search(url)):
             erg.append(Kandidat(url, titel, quelle))
     return erg
 
 
-def aus_html(text: str, basis: str, quelle: str) -> list[Kandidat]:
+def aus_html(text: str, basis: str, quelle: str, suchwort: re.Pattern = SUCHWORT) -> list[Kandidat]:
     gesehen: dict[str, Kandidat] = {}
     for url, linktext in links(text, basis):
-        if not (SUCHWORT.search(linktext) or SUCHWORT.search(urlparse(url).path)):
+        if not (suchwort.search(linktext) or suchwort.search(urlparse(url).path)):
             continue
         pfad = urlparse(url).path.lower()
         if any(x in pfad for x in ("/blog", "/news", "/pages/", "/collections/", "/category/", "/kategorie/", "/tag/",
@@ -73,19 +73,21 @@ def aus_html(text: str, basis: str, quelle: str) -> list[Kandidat]:
     return list(gesehen.values())
 
 
-def aus_sitemap(text: str, quelle: str) -> tuple[list[Kandidat], list[str]]:
+def aus_sitemap(text: str, quelle: str, suchwort: re.Pattern = SUCHWORT) -> tuple[list[Kandidat], list[str]]:
     """Gibt (Produkt-Kandidaten, Unter-Sitemaps) zurück."""
     locs = _LOC.findall(text[:8_000_000])
     if "<sitemapindex" in text[:2000].lower():
         unter = [u for u in locs if "product" in u.lower() or "produkt" in u.lower() or "artikel" in u.lower()] or locs
         return [], unter[:50]
     erg = [Kandidat(u, urlparse(u).path.rsplit("/", 1)[-1].replace("-", " ").replace(".html", ""), quelle)
-           for u in locs if SUCHWORT.search(u)]
+           for u in locs if suchwort.search(u)]
     return erg, []
 
 
-def fuehre_aus(aufgabe: dict, abrufer, basis: str) -> tuple[bool, list[Kandidat], Optional[str], dict]:
-    """Führt eine Entdeckungsaufgabe aus. Rückgabe: (ok, Kandidaten, Fehler, neuer_Cursor)."""
+def fuehre_aus(aufgabe: dict, abrufer, basis: str, suchwort: re.Pattern = SUCHWORT) -> tuple[bool, list[Kandidat], Optional[str], dict]:
+    """Führt eine Entdeckungsaufgabe aus. Rückgabe: (ok, Kandidaten, Fehler, neuer_Cursor).
+
+    `suchwort` filtert die Kandidaten grob vor (Standard: Naruto; der Pokémon-Wächter gibt sein eigenes Muster mit)."""
     art = aufgabe["art"]
     cursor = dict(aufgabe.get("cursor") or {})
     quelle = f"{art}: {aufgabe['url']}"
@@ -97,7 +99,7 @@ def fuehre_aus(aufgabe: dict, abrufer, basis: str) -> tuple[bool, list[Kandidat]
                 a = abrufer.hole(_seite_setzen(aufgabe["url"], seite))
                 if not a.ok:
                     return False, kandidaten, a.fehler, cursor
-                k, anzahl = aus_shopify_json(a.text, basis, quelle)
+                k, anzahl = aus_shopify_json(a.text, basis, quelle, suchwort)
                 kandidaten += k
                 if anzahl < 250 or seite >= 40:
                     seite = 1
@@ -113,7 +115,7 @@ def fuehre_aus(aufgabe: dict, abrufer, basis: str) -> tuple[bool, list[Kandidat]
                 a = abrufer.hole(url)
                 if not a.ok:
                     return False, kandidaten, a.fehler, cursor
-                k, _ = aus_sitemap(a.text, quelle)
+                k, _ = aus_sitemap(a.text, quelle, suchwort)
                 kandidaten += k
             pos += 2
             cursor = {} if pos >= len(unter) else {"unter": unter, "pos": pos}
@@ -122,12 +124,12 @@ def fuehre_aus(aufgabe: dict, abrufer, basis: str) -> tuple[bool, list[Kandidat]
         if not a.ok:
             return False, [], a.fehler, cursor
         if art == "shopify_neueste":
-            return True, aus_shopify_json(a.text, basis, quelle)[0], None, cursor
+            return True, aus_shopify_json(a.text, basis, quelle, suchwort)[0], None, cursor
         if art in ("woo_api", "woo_neueste"):
-            return True, aus_woo_json(a.text, quelle), None, cursor
+            return True, aus_woo_json(a.text, quelle, suchwort), None, cursor
         if art == "sitemap":
-            k, unter = aus_sitemap(a.text, quelle)
+            k, unter = aus_sitemap(a.text, quelle, suchwort)
             return True, k, None, ({"unter": unter, "pos": 0} if unter else {})
-        return True, aus_html(a.text, basis, quelle), None, cursor
+        return True, aus_html(a.text, basis, quelle, suchwort), None, cursor
     except (json.JSONDecodeError, ValueError) as e:
         return False, [], f"Antwort nicht lesbar ({type(e).__name__})", cursor

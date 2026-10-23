@@ -68,7 +68,7 @@ def main(argv: list[str] | None = None) -> int:
     at = sub.add_parser("alarm-test", help="TEST-Alarm für Naruto und One Piece (Dojo + Telegram)")
     at.add_argument("--daten", default="data")
     at.add_argument("--ziel", default=None, help="Verzeichnis für status.json (Standard: Elternordner von --daten)")
-    at.add_argument("--welche", default="naruto,onepiece")
+    at.add_argument("--welche", default="naruto,onepiece", help="naruto, onepiece und/oder pokemon (Komma-getrennt)")
     at.add_argument("--ohne-telegram", action="store_true")
     args = p.parse_args(argv)
 
@@ -91,7 +91,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.befehl == "alarm-test":
         from .alarmtest import ausfuehren
         daten = Path(args.daten)
-        welche = tuple(x for x in args.welche.split(",") if x in ("naruto", "onepiece"))
+        welche = tuple(x for x in args.welche.split(",") if x in ("naruto", "onepiece", "pokemon"))
         ok = ausfuehren(daten, Path(args.ziel) if args.ziel else daten.parent, welche=welche, senden=not args.ohne_telegram)
         return 0 if ok else 1
 
@@ -146,6 +146,9 @@ def main(argv: list[str] | None = None) -> int:
                 th = (hg or {}).get("thread")
                 if th is not None and th.is_alive():   # laufende One-Piece-Prüfung sauber abwarten (Budget begrenzt sie)
                     th.join(timeout=240)
+                pth = (hg or {}).get("pokemon_thread")
+                if pth is not None and pth.is_alive():  # laufende Pokémon-Prüfung sauber abwarten (Zeitlimit begrenzt sie)
+                    pth.join(timeout=180)
                     naruto_lauf(konfig, daten, Path(args.db), dash, onepiece=not args.ohne_onepiece,
                                 ohne_push=args.ohne_push, alle=False, max_sekunden=args.max_sekunden, hintergrund=hg)
                 return 0
@@ -202,6 +205,34 @@ def _op_pruefung(konfig, daten: Path, db: Path, budget: float, parallel: int, oh
     return zus
 
 
+def pokemon_aktiv() -> bool:
+    try:
+        from .pokemon import lade_pokemon
+        return bool((lade_pokemon().get("pruefung") or {}).get("aktiv", True))
+    except Exception:  # pragma: no cover
+        return False
+
+
+def pokemon_lauf(konfig, daten: Path, db: Path, ohne_push: bool = False, log=print, alle: bool = False) -> dict:
+    """Pokémon-30-Jahre-Wächter (Normalpreise, EN + DE): eigener Zustand unter <daten>/pokemon."""
+    from . import push as pushmod
+    from .naruto_lauf import POKEMON, Lauf
+    kanal = pushmod.Kanal("Telegram", False, None, "für diesen Lauf abgeschaltet") if ohne_push else None
+    l = Lauf(konfig, Abrufer({}, protokoll=log, pausen=(5.0,)), daten / "pokemon", db_datei=db, push_kanal=kanal, log=log,
+             onepiece=False, thema=POKEMON)
+    info = l.ausfuehren(nur_faellige=not alle)
+    l.speichern()
+    return info
+
+
+def lade_pokemon_zustand(daten: Path) -> Optional[dict]:
+    p = daten / "pokemon" / "zustand.json"
+    try:
+        return json.loads(p.read_text(encoding="utf-8")) if p.exists() else None
+    except (OSError, ValueError):
+        return None
+
+
 def naruto_lauf(konfig, daten: Path, db: Path, dash: Path, onepiece: bool = True, ohne_push: bool = False,
                 log=print, alle: bool = False, max_sekunden: int = 0, hintergrund: Optional[dict] = None) -> float:
     """Ein Lauf. Gibt die Sekunden bis zur nächsten fälligen Aufgabe zurück."""
@@ -254,6 +285,23 @@ def naruto_lauf(konfig, daten: Path, db: Path, dash: Path, onepiece: bool = True
                 import threading
                 hintergrund["thread"] = threading.Thread(target=arbeit, daemon=True)
                 hintergrund["thread"].start()
+    if pokemon_aktiv():
+        if hintergrund is None:   # Einzellauf: synchron
+            try:
+                pokemon_lauf(konfig, daten, db, ohne_push=ohne_push, log=log, alle=alle)
+            except Exception as ex:  # darf Naruto nie stören
+                log(f"Hinweis: Pokémon-Prüfung fehlgeschlagen: {type(ex).__name__}: {ex}")
+        else:                     # Dauerbetrieb: im Hintergrund, Naruto wird nie aufgehalten
+            pth = hintergrund.get("pokemon_thread")
+            if pth is None or not pth.is_alive():
+                def pokemon_arbeit():
+                    try:
+                        pokemon_lauf(konfig, daten, db, ohne_push=ohne_push, log=log)
+                    except Exception as ex:
+                        log(f"Hinweis: Pokémon-Prüfung fehlgeschlagen: {type(ex).__name__}: {ex}")
+                import threading
+                hintergrund["pokemon_thread"] = threading.Thread(target=pokemon_arbeit, daemon=True)
+                hintergrund["pokemon_thread"].start()
     if not ohne_push and not getattr(l, "testmodus", False):
         try:   # Telegram-Befehle (/status, /lieferbar, /hilfe) – darf den Lauf nie stören
             from . import befehle
@@ -269,7 +317,7 @@ def naruto_lauf(konfig, daten: Path, db: Path, dash: Path, onepiece: bool = True
                                     dt.datetime.now(dt.timezone.utc), op), encoding="utf-8")
     try:  # Pixel-Dojo: status.json + Seite neben das Dashboard legen (darf den Lauf nie stören)
         from . import dojo
-        dojo.schreibe(l.zustand, dash.parent)
+        dojo.schreibe(l.zustand, dash.parent, pokemon=lade_pokemon_zustand(daten))
     except Exception as ex:  # pragma: no cover
         log(f"Hinweis: Dojo-Status konnte nicht geschrieben werden: {type(ex).__name__}: {ex}")
     faellig =[dt.datetime.fromisoformat(a["faellig"]) for a in l.zustand["aufgaben"].values()]

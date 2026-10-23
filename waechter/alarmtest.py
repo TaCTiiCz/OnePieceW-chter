@@ -21,6 +21,8 @@ TESTS = {
                "🚨 <b>🧪 TEST – NARUTO-KAUFALARM</b>\nDas ist nur ein Test des Wächters. Es ist nichts bestellbar."),
     "onepiece": ("OP_RESTOCK", "One Piece OP16 Display (EN) wieder lieferbar",
                  "🟢 <b>🧪 TEST – ONE-PIECE-RESTOCK</b>\nDas ist nur ein Test des Wächters. Es ist nichts bestellbar."),
+    "pokemon": ("KAUFALARM", "Pokémon 30th Celebration Ditto Premium Collection (EN) zum Normalpreis bestellbar",
+                "🎴 <b>🧪 TEST – POKÉMON 30 JAHRE ZUM NORMALPREIS</b>\nDas ist nur ein Test des Wächters. Es ist nichts bestellbar."),
 }
 
 
@@ -35,11 +37,14 @@ def ausfuehren(daten: Path, ziel_dir: Path, *, welche=("naruto", "onepiece"), se
         z["aufgaben"].setdefault("onepiece", {"art": "onepiece", "shop": "onepiece", "url": "", "zuletzt_ok": jetzt.isoformat(),
                                               "fehlerserie": 0})
     kurz = z.setdefault("ereignisse_kurz", [])
+    pzd = Path(daten) / "pokemon" / "zustand.json"
+    pz = json.loads(pzd.read_text(encoding="utf-8")) if pzd.exists() else ({} if "pokemon" in welche else None)
     alles_ok = True
     aktiv, info = telegram.konfiguration()
     for name in welche:
         typ, text, nachricht = TESTS[name]
-        kurz.append({"zeit": jetzt.replace(microsecond=0).isoformat(), "typ": typ, "text": "🧪 TEST: " + text,
+        ziel = pz.setdefault("ereignisse_kurz", []) if name == "pokemon" else kurz
+        ziel.append({"zeit": jetzt.replace(microsecond=0).isoformat(), "typ": typ, "text": "🧪 TEST: " + text,
                      "testmodus": True})
         if not senden:
             log(f"{name}: Test-Alarm im Dojo, Telegram nicht verlangt")
@@ -52,6 +57,9 @@ def ausfuehren(daten: Path, ziel_dir: Path, *, welche=("naruto", "onepiece"), se
             alles_ok = alles_ok and ok
     zd.parent.mkdir(parents=True, exist_ok=True)
     zd.write_text(json.dumps(z, ensure_ascii=False, indent=1, sort_keys=True) + "\n", encoding="utf-8")
-    dojo.schreibe(z, Path(ziel_dir), jetzt)
+    if pz is not None and "pokemon" in welche:
+        pzd.parent.mkdir(parents=True, exist_ok=True)
+        pzd.write_text(json.dumps(pz, ensure_ascii=False, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+    dojo.schreibe(z, Path(ziel_dir), jetzt, pokemon=pz)
     log("Dojo-Status geschrieben.")
     return alles_ok

@@ -20,6 +20,7 @@ on:
           - simulation-mit-echtem-telegram
           - telegram-test
           - alarm-test-beide
+          - alarm-test-pokemon
         default: dauerbetrieb
 
   # ------------------------------------------------------------------
@@ -106,6 +107,10 @@ jobs:
       - name: Alarm-Test für Naruto und One Piece (Dojo + echtes Telegram, deutlich als TEST markiert)
         if: ${{ inputs.aktion == 'alarm-test-beide' }}
         run: python -m waechter alarm-test --daten _daten/laufzeit --ziel _daten
+
+      - name: Alarm-Test für den Pokémon-Angler (Dojo + echtes Telegram, deutlich als TEST markiert)
+        if: ${{ inputs.aktion == 'alarm-test-pokemon' }}
+        run: python -m waechter alarm-test --daten _daten/laufzeit --ziel _daten --welche pokemon
 
       - name: Telegram-Testnachricht
         if: ${{ inputs.aktion == 'telegram-test' }}

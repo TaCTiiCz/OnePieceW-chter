@@ -31,6 +31,8 @@ ALARM_TYPEN = {"KAUFALARM", "KAUFALARM_ANDERE_SPRACHE"}
 OP_ALARM_TYPEN = {"OP_RESTOCK", "OP_VORBESTELLUNG"}  # One-Piece-Prüfung
 OP_STATION = {"OP_RESTOCK": "op_restock", "OP_VORBESTELLUNG": "op_vorbestellung"}
 ERGEBNIS_ZEILEN = 12
+# Pokémon-Wächter (Angler am Teich): diese Ereignisse bedeuten "Fund zum Normalpreis"
+POKEMON_FANG_TYPEN = {"KAUFALARM", "KAUFALARM_ANDERE_SPRACHE", "UNGEPRUEFTER_HINWEIS"}
 
 
 def _zeit(s: Optional[str]) -> Optional[dt.datetime]:
@@ -59,8 +61,44 @@ def _kurz(text: str, n: int = 110) -> str:
     return t if len(t) <= n else t[: n - 1] + "…"
 
 
+def pokemon_kurz(pz: Optional[dict], jetzt: dt.datetime, *, alarm_stunden: float = 3.0, fehler_ab: int = 3) -> Optional[dict]:
+    """Kurzstatus für den Angler am Teich: angelt (prüft), Fang (Normalpreis-Fund) oder Problem."""
+    if not pz:
+        return None
+    from . import modelle as m
+    aufgaben = list((pz.get("aufgaben") or {}).values())
+    ok_zeiten = [z for z in (_zeit(a.get("zuletzt_ok")) for a in aufgaben) if z]
+    zuletzt = max(ok_zeiten) if ok_zeiten else None
+    fehler = [a for a in aufgaben if a.get("fehlerserie", 0) >= fehler_ab]
+    faenge = []
+    for e in pz.get("ereignisse_kurz") or []:
+        z = _zeit(e.get("zeit"))
+        fenster = dt.timedelta(minutes=15) if e.get("testmodus") else dt.timedelta(hours=alarm_stunden)
+        if z and jetzt - z <= fenster and e.get("typ") in POKEMON_FANG_TYPEN:
+            faenge.append(e)
+    angebote = (pz.get("pokemon") or {}).get("angebote") or {}
+    bestellbar = 0
+    for a in angebote.values():
+        l = a.get("letzte") or {}
+        if l.get("passend") and l.get("sicherheit") == m.SICHER and l.get("status") in m.KAUFBAR \
+                and a.get("preisstufe") in ("fair", "ok"):
+            bestellbar += 1
+    if faenge:
+        status, detail = "catch", _kurz(faenge[-1].get("text", "Fund zum Normalpreis"), 90)
+    elif aufgaben and len(fehler) * 4 >= len(aufgaben):
+        status, detail = "error", f"{len(fehler)} von {len(aufgaben)} Aufgaben mit Fehlern"
+    elif zuletzt and jetzt - zuletzt <= dt.timedelta(minutes=60):
+        status, detail = "fishing", f"angelt nach Normalpreisen · {len(aufgaben)} Aufgaben" + \
+            (f", {bestellbar} zum Normalpreis bestellbar" if bestellbar else "")
+    else:
+        status, detail = "stale", f"{len(aufgaben)} Aufgaben, kein aktueller Lauf"
+    return {"status": status, "detail": detail, "last_checked": _iso(zuletzt) if zuletzt else None,
+            "aufgaben": len(aufgaben), "bestellbar": bestellbar, "fang": _kurz(faenge[-1].get("text", ""), 120) if faenge else None,
+            "test": bool(faenge and faenge[-1].get("testmodus"))}
+
+
 def erzeuge(zustand: dict, jetzt: dt.datetime, *, alarm_stunden: float = 3.0, aktuell_minuten: float = 30.0,
-            fehler_ab: int = 3) -> dict:
+            fehler_ab: int = 3, pokemon: Optional[dict] = None) -> dict:
     """Baut den Status aus dem gespeicherten Wächter-Zustand (nichts wird geschätzt)."""
     lauf = zustand.get("letzter_lauf") or {}
     lauf_zeit = _zeit(lauf.get("zeit"))
@@ -113,7 +151,8 @@ def erzeuge(zustand: dict, jetzt: dt.datetime, *, alarm_stunden: float = 3.0, ak
         e_zeit = _zeit(push.get("letzter_erfolg"))
         push_problem = bool(f_zeit and (e_zeit is None or f_zeit > e_zeit) and jetzt - f_zeit <= dt.timedelta(hours=6))
 
-    if alarme or op_alarme:
+    pk = pokemon_kurz(pokemon, jetzt, alarm_stunden=alarm_stunden, fehler_ab=fehler_ab)
+    if alarme or op_alarme or (pk and pk["status"] == "catch"):
         state = "alert"
     elif not lauf_zeit or jetzt - lauf_zeit > dt.timedelta(minutes=aktuell_minuten):
         state = "stale"
@@ -122,9 +161,13 @@ def erzeuge(zustand: dict, jetzt: dt.datetime, *, alarm_stunden: float = 3.0, ak
     else:
         state = "checking"
 
+    alle = [(e, "") for e in ereignisse[-ERGEBNIS_ZEILEN:]]
+    if pokemon:
+        alle += [(e, "🎴 ") for e in (pokemon.get("ereignisse_kurz") or [])[-ERGEBNIS_ZEILEN:]]
+    alle.sort(key=lambda x: x[0].get("zeit") or "")
     events = []
-    for e in reversed(ereignisse[-ERGEBNIS_ZEILEN:]):
-        events.append({"time": e.get("zeit"), "text": ("🧪 " if e.get("testmodus") else "") + f"{e.get('typ', '')}: {_kurz(e.get('text', ''))}"})
+    for e, vor in reversed(alle[-ERGEBNIS_ZEILEN:]):
+        events.append({"time": e.get("zeit"), "text": vor + ("🧪 " if e.get("testmodus") else "") + f"{e.get('typ', '')}: {_kurz(e.get('text', ''))}"})
 
     return {
         "updated": _iso(jetzt),
@@ -136,6 +179,7 @@ def erzeuge(zustand: dict, jetzt: dt.datetime, *, alarm_stunden: float = 3.0, ak
         "sites": stationen,
         "events": events,
         "naruto": _naruto_kurz(zustand),
+        "pokemon": pk,
         "stats": {
             "haendler": lauf.get("haendler"),
             "aufgaben": len(aufgaben),
@@ -161,14 +205,14 @@ def _naruto_kurz(zustand: dict) -> dict:
                             "preis_cent": g.get("preis_cent"), "status": g.get("status"), "url": g.get("url")} if g else None}
 
 
-def schreibe(zustand: dict, ziel_dir: Path, jetzt: Optional[dt.datetime] = None) -> Path:
+def schreibe(zustand: dict, ziel_dir: Path, jetzt: Optional[dt.datetime] = None, pokemon: Optional[dict] = None) -> Path:
     """Schreibt status.json und kopiert die Dojo-Seite daneben."""
     jetzt = jetzt or dt.datetime.now(dt.timezone.utc)
     ziel_dir = Path(ziel_dir)
     ziel_dir.mkdir(parents=True, exist_ok=True)
     datei = ziel_dir / "status.json"
     tmp = datei.with_suffix(".json.tmp")   # atomar: der Server-Abgleich darf nie eine halbe Datei hochladen
-    tmp.write_text(json.dumps(erzeuge(zustand, jetzt), ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    tmp.write_text(json.dumps(erzeuge(zustand, jetzt, pokemon=pokemon), ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     os.replace(tmp, datei)
     if DOJO_HTML.exists():
         shutil.copyfile(DOJO_HTML, ziel_dir / "index.html")

@@ -31,6 +31,11 @@ KOPF = {
     "AUSGANGSLAGE": "📋 AUSGANGSLAGE",
     "ERINNERUNG": "⏰ ERINNERUNG – immer noch bestellbar",
 }
+# Pokémon-Normalpreis-Wächter: eigene Überschriften
+KOPF_POKEMON = {
+    "KAUFALARM": "🎴 POKÉMON 30 JAHRE – zum Normalpreis bestellbar",
+    "UNGEPRUEFTER_HINWEIS": "🎴⚠️ POKÉMON 30 JAHRE – Normalpreis bei UNGEPRÜFTEM Shop",
+}
 KAUFTYPEN = ("KAUFALARM", "KAUFALARM_ANDERE_SPRACHE", "ERINNERUNG")
 VERTRAUEN = {"freigegeben": "✅ geprüft (dokumentiert)", "vorgeprueft": "☑️ automatisch vorgeprüft (Impressum/Versand DE)",
              "ungeprueft": "❗ UNGEPRÜFT"}
@@ -58,8 +63,10 @@ def formatiere(e: dict, ncfg: Optional[dict] = None, nachgesendet: bool = False,
     z: list[str] = []
     if test or e.get("testmodus"):
         z.append("🧪 <b>TEST – SIMULIERTER RESTOCK – KEIN ECHTES ANGEBOT</b>")
+    poke = e.get("thema") == "pokemon"
     feuer = "🔥 " if e.get("preisstufe") == "fair" and e["typ"] in KAUFTYPEN else ""
-    z.append(f"{feuer}<b>{KOPF.get(e['typ'], e['typ'])}</b>" + (" (nachgesendet)" if nachgesendet else ""))
+    kopf = (KOPF_POKEMON.get(e["typ"]) if poke else None) or KOPF.get(e["typ"], e["typ"])
+    z.append(f"{feuer}<b>{kopf}</b>" + (" (nachgesendet)" if nachgesendet else ""))
     z.append(html.escape(e.get("text", "")))
     if e.get("warenkorb_url") and e["typ"] in KAUFTYPEN:
         z.append(f'🛒 <b><a href="{html.escape(e["warenkorb_url"], quote=True)}">DIREKT ZUR KASSE</a></b> '
@@ -85,7 +92,13 @@ def formatiere(e: dict, ncfg: Optional[dict] = None, nachgesendet: bool = False,
             z.append(f"⚠️ <b>Stornierung evtl. ausgeschlossen:</b> „{html.escape(e['storno'][:160])}“ – vor dem Kauf prüfen")
         if e.get("teuer"):
             z.append(f"💰 <b>Teuer:</b> {html.escape(e['teuer'])}")
-        z.append(f"<b>Release:</b> {html.escape(e.get('release') or '❓ unbekannt (offiziell: Sommer 2027)')}")
+        if e.get("grenze_text"):
+            z.append(f"🏷️ {html.escape(e['grenze_text'])}")
+        if poke:
+            if e.get("release"):
+                z.append(f"<b>Release:</b> {html.escape(e['release'])}")
+        else:
+            z.append(f"<b>Release:</b> {html.escape(e.get('release') or '❓ unbekannt (offiziell: Sommer 2027)')}")
         z.append(f"<b>Prüfzeit:</b> {zeit_de(e.get('pruefzeit') or e.get('zeit'))}")
         if e.get("nur_text"):
             z.append("ℹ️ Bestellbarkeit nur aus dem Seitentext erkannt (keine strukturierten Shopdaten).")
@@ -93,7 +106,7 @@ def formatiere(e: dict, ncfg: Optional[dict] = None, nachgesendet: bool = False,
             z.append("⚠️ <b>SPEKULATIV:</b> Bandai hat noch keine Naruto-Produkte, Preise oder Termine offiziell angekündigt.")
     if e.get("url"):
         z.append(f'👉 <a href="{html.escape(e["url"], quote=True)}">{"Bestelllink" if e["typ"].startswith("KAUFALARM") else "Zur Seite"}</a>')
-    if e["typ"] in KAUFTYPEN and e.get("preisstufe") != "ueber":
+    if e["typ"] in KAUFTYPEN and e.get("preisstufe") != "ueber" and not poke:
         z.append("<i>Keine automatische Bestellung. Gekauft? Sende /gekauft, dann kommen keine Erinnerungen mehr.</i>")
     else:
         z.append("<i>Keine automatische Bestellung.</i>")

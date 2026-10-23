@@ -268,6 +268,30 @@ die Sonderprodukte aus `config/products.toml`.
 - **Bericht:** `laufzeit/onepiece_bericht.md` im Zweig `waechter-daten`. Im Dojo erscheint der Alarm am One-Piece-Tisch
   (der Seemann springt auf, der Rahmen blinkt).
 
+## 8a. Pokémon 30 Jahre / 30th Celebration (Normalpreise)
+
+Der dritte Wächter sucht **alle Produkte der Pokémon-Erweiterung „30 Jahre“ / „30th Celebration“ auf Englisch und Deutsch**
+(Top-Trainer-/Elite-Trainer-Box, Pokémon-Center-ETB, Ultra-Premium-Kollektion, Ditto-Premium-Kollektion, Figuren-,
+Ordner-, Poster-, Sticker-Kollektionen, Kampfdecks, ex-Boxen, Mini-Tins, Knock-out-Kollektion, 2er-Blister, Booster Bundle,
+Einzelbooster) und meldet per Telegram, sobald ein Shop eines davon **zum Normalpreis bestellbar** hat – egal ob Restock,
+neue Vorbestellung oder ein Shop, der es einfach noch nicht ausverkauft hat.
+
+- **Preisgrenzen:** je Produktart in `config/pokemon.toml` (`normalpreis` = ca. UVP, `grenze` = höchster gemeldeter Preis).
+  Bis `normalpreis` kommt die Meldung mit 🔥, bis `grenze` normal. Teurere Angebote werden gespeichert, aber **nicht** gemeldet.
+  Nur die deutsche UVP der Top-Trainer-Box (54,99 €) ist belegt; die übrigen Werte sind aus den US-/UK-Preisen abgeleitet
+  und sollten angepasst werden, sobald deutsche UVPs bekannt sind.
+- **Ausgeschlossen:** Einzelkarten (Kartennummer wie 151/128), Gradings, andere Sprachen (JP, FR, IT, …), Cases/Mehrfachpakete,
+  Zubehör und das alte „Celebrations“ (25 Jahre).
+- **Händler:** dieselben wie bei Naruto. Statt der Naruto-Suche wird nach „30th celebration“ und „pokemon 30 jahre“ gesucht;
+  Neuheiten-, Vorbestell- und Produktlisten werden mitgelesen. Takt: halb so oft wie Naruto, bekannte Produktseiten alle 5 Minuten.
+- **Meldungen:** pro Angebot einmal je Bestellbar-Phase (wird es ausverkauft oder teurer und kommt dann zurück, gibt es eine
+  neue Meldung). Höchstens 8 Meldungen pro Lauf, der Rest folgt im nächsten Lauf.
+- **Ausschalten:** `aktiv = false` unter `[pruefung]` in `config/pokemon.toml`.
+- **Zustand:** `laufzeit/pokemon/zustand.json` im Zweig `waechter-daten`.
+- **Dojo:** Am Teich sitzt ein Angler (eigene Figur). Er angelt, solange der Pokémon-Wächter prüft. Bei einem Fund taucht ein
+  Seedrache aus dem Teich auf, der Angler springt auf und bewirft ihn mit leuchtenden Fangkugeln („FANG!“).
+  Test: Aktion **`alarm-test-pokemon`** oder die Dojo-Adresse mit `?pokemon=catch`.
+
 ## 9. Probleme lösen
 
 | Problem | Lösung |

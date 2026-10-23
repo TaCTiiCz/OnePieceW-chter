@@ -1,0 +1,176 @@
+# =====================================================================
+#  POKÉMON 30 JAHRE / 30th CELEBRATION – Normalpreis-Wächter
+#  Englische UND deutsche Produkte der Sonder-Erweiterung (Release ab 16.09.2026).
+#  Gemeldet wird, sobald ein Shop ein Produkt zum NORMALPREIS bestellbar hat:
+#  Restock, neue Vorbestellung oder ein Shop, der es schlicht noch nicht ausverkauft hat.
+#  Teurere Angebote (Scalper-/Aufschlagpreise) werden gespeichert, aber NICHT gemeldet.
+# =====================================================================
+
+[identitaet]
+offizieller_name = "Pokémon-Sammelkartenspiel: 30 Jahre / 30th Celebration"
+hersteller = "The Pokémon Company International"
+# keine offizielle Shop-Quelle, die geprüft wird
+produkte_offiziell_angekuendigt = true
+
+[erkennung]
+# Mindestens eine dieser Phrasen muss im Titel/URL stehen (nach Vereinheitlichung, ohne Akzente):
+set_phrasen = ["30th celebration", "30th anniversary", "30 jahre", "30 jahr", "30 ans", "30 anni", "30 anos",
+               "30jahre", "30thcelebration"]
+# "30 Jahre" allein ist zu allgemein: dann muss zusätzlich "pokemon" vorkommen
+braucht_pokemon = ["30 jahre", "30 jahr", "30jahre", "30 ans", "30 anni", "30 anos"]
+# Diese Wörter schließen ein Angebot aus (Einzelkarten, Gradings, andere Sprachen, Mehrfachpakete …)
+ausschluss = [
+  "japanisch", "japanese", "japan", "jpn", "jap.", "koreanisch", "korean", "chinesisch", "chinese", "simplified", "traditional",
+  "franzosisch", "french", "francais", "italienisch", "italian", "italiano", "spanisch", "spanish", "espanol",
+  "portugiesisch", "portuguese", "thai", "indonesian",
+  "psa", "cgc", "bgs", "beckett", "graded", "gegradet", "einzelkarte", "single card", "holo rare", "illustration rare",
+  "full art", "secret rare", "reverse holo", "promo karte", "promokarte einzeln",
+  "case", "lot ", "bundle of", "set of", "sammlung von", "kiste",
+  "sleeves", "kartenhullen", "toploader", "binder only", "acryl case", "acrylic case", "magnetic", "display case", "schutzhulle",
+  "celebrations 25", "25th", "25 jahre",
+]
+# Einzelkarten erkennt man auch an der Kartennummer "151/128" – das schließt sie aus:
+kartennummer_ausschliessen = true
+
+# Sprachen, die gemeldet werden (beide gleich wichtig)
+sprache_prioritaet = ["EN", "DE"]
+weitere_sprachen = []
+
+# Produktarten: Reihenfolge = Prüfreihenfolge (das Speziellste zuerst). Jede Art hat Suchmuster (Regex, Kleinschrift).
+[[produkte]]
+id = "UPC"
+name = "Ultra-Premium Collection / Ultra-Premium-Kollektion (Tag/Nacht)"
+muster = ['ultra[\s\-]*premium']
+normalpreis = 199.99
+grenze = 225
+
+[[produkte]]
+id = "PC_ETB"
+name = "Pokémon Center Elite Trainer Box"
+muster = ['pokemon[\s\-]*center.*(elite[\s\-]*trainer|top[\s\-]*trainer|\betb\b)', '(elite[\s\-]*trainer|top[\s\-]*trainer|\betb\b).*pokemon[\s\-]*center']
+normalpreis = 64.99
+grenze = 75
+
+[[produkte]]
+id = "ETB"
+name = "Elite Trainer Box / Top-Trainer-Box"
+muster = ['elite[\s\-]*trainer', 'top[\s\-]*trainer', '\betb\b', '\bttb\b']
+normalpreis = 54.99   # deutsche UVP laut Handel (54,99 €)
+grenze = 62
+
+[[produkte]]
+id = "DITTO"
+name = "Ditto Premium Collection / Premium-Kollektion Ditto"
+muster = ['ditto', 'premium[\s\-]*(collection|kollektion)']
+normalpreis = 44.99
+grenze = 52
+
+[[produkte]]
+id = "FIGUR"
+name = "Figure Collection / Figuren-Kollektion (Mew/Mewtu)"
+muster = ['figure[\s\-]*collection', 'figuren']
+normalpreis = 34.99
+grenze = 40
+
+[[produkte]]
+id = "ORDNER"
+name = "Binder Collection / Ordner-Kollektion"
+muster = ['binder', 'ordner']
+normalpreis = 39.99
+grenze = 45
+
+[[produkte]]
+id = "POSTER"
+name = "Poster Collection / Poster-Kollektion"
+muster = ['poster']
+normalpreis = 19.99
+grenze = 23
+
+[[produkte]]
+id = "STICKER"
+name = "Tech Sticker Collection / Tech-Sticker-Kollektion"
+muster = ['sticker']
+normalpreis = 17.99
+grenze = 21
+
+[[produkte]]
+id = "KAMPFDECK"
+name = "Battle Deck / Kampfdeck (Psiana-ex/Nachtara-ex)"
+muster = ['battle[\s\-]*deck', 'kampf[\s\-]*deck', 'espeon', 'umbreon', 'psiana', 'nachtara']
+normalpreis = 22.99
+grenze = 26
+
+[[produkte]]
+id = "EXBOX"
+name = "Pokémon-ex-Box / Kollektion (Feelinara-ex/Quajutsu-ex)"
+muster = ['sylveon', 'greninja', 'feelinara', 'quajutsu', '\bex[\s\-]*box']
+normalpreis = 24.99
+grenze = 29
+
+[[produkte]]
+id = "MINITIN"
+name = "Mini Tin / Mini-Tin-Box"
+muster = ['mini[\s\-]*tin']
+normalpreis = 12.99
+grenze = 15
+
+[[produkte]]
+id = "KNOCKOUT"
+name = "Knock Out Collection / Knock-out-Kollektion"
+muster = ['knock[\s\-]*out']
+normalpreis = 10.99
+grenze = 13
+
+[[produkte]]
+id = "BLISTER"
+name = "2-Pack Blister / 2er-Pack-Blister"
+muster = ['2[\s\-]*pack', '2er', 'blister']
+normalpreis = 10.99
+grenze = 13
+
+[[produkte]]
+id = "BUNDLE"
+name = "Booster Bundle (6 Booster)"
+muster = ['booster[\s\-]*bundle', 'bundle']
+normalpreis = 32.99
+grenze = 38
+
+[[produkte]]
+id = "BOOSTER"
+name = "Einzelner Booster"
+muster = ['booster(pack|[\s\-]*pack)?\b', 'boosterpack']
+normalpreis = 5.49
+grenze = 6.5
+
+[alarm]
+wiederholsperre_stunden = 12
+# unsicher zugeordnete Angebote (z. B. Sprache unklar) nicht per Telegram melden, nur speichern
+unsichere_melden = false
+# teurer als die Grenze -> gar nicht melden (nur gespeichert)
+ueber_grenze_melden = false
+teuer_faktor_median = 1.5
+teuer_ab_euro_display = 0
+spekulative_vorbestellungen_melden = false
+
+[vorbestellung]
+# wird aus [[produkte]] gefüllt (normalpreis -> fair_bis_euro, grenze -> max_euro)
+leise_ueber_grenze = true
+# keine Erinnerungen (der /gekauft-Befehl gilt nur für Naruto)
+erinnerung_minuten = 10
+erinnerungen_max = 0
+auto_fokus_woerter = []
+auto_fokus_stunden = 0
+
+[pruefung]
+# Pokémon-Wächter ein-/ausschalten
+aktiv = true
+# höchstens so viele Meldungen pro Lauf (der erste Lauf findet evtl. viele noch nicht ausverkaufte Angebote)
+max_meldungen_pro_lauf = 8
+# Pokémon ist nicht so zeitkritisch wie ein Naruto-Release: Entdeckungswege seltener als bei Naruto prüfen.
+intervall_faktor = 2
+# Produktseiten bekannter Angebote: alle 5 Minuten
+produktseite_sekunden = 300
+# Pro Lauf höchstens so lange (der Rest kommt im nächsten Lauf dran)
+max_laufzeit_sekunden = 120
+# Suchbegriffe, mit denen die Shopsuche/WooCommerce-Suche statt "naruto" aufgerufen wird
+suchbegriffe = ["30th celebration", "pokemon 30 jahre"]
