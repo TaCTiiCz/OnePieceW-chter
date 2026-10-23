@@ -288,8 +288,8 @@ neue Vorbestellung oder ein Shop, der es einfach noch nicht ausverkauft hat.
   neue Meldung). Höchstens 8 Meldungen pro Lauf, der Rest folgt im nächsten Lauf.
 - **Ausschalten:** `aktiv = false` unter `[pruefung]` in `config/pokemon.toml`.
 - **Zustand:** `laufzeit/pokemon/zustand.json` im Zweig `waechter-daten`.
-- **Dojo:** Am Teich sitzt ein Angler (eigene Figur). Er angelt, solange der Pokémon-Wächter prüft. Bei einem Fund taucht ein
-  Seedrache aus dem Teich auf, der Angler springt auf und bewirft ihn mit leuchtenden Fangkugeln („FANG!“).
+- **Dojo:** Am Teich sitzt ein Angler (eigene Figur). Er angelt, solange der Pokémon-Wächter prüft. Bei einem Fund taucht eine
+  violette Tiefsee-Schlange (eigene Kreatur) aus dem Teich auf, der Angler springt auf und bewirft sie mit leuchtenden Fangkugeln („FANG!“).
   Test: Aktion **`alarm-test-pokemon`** oder die Dojo-Adresse mit `?pokemon=catch`.
 
 ## 9. Probleme lösen
