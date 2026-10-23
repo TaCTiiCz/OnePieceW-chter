@@ -1,5 +1,5 @@
 {
- "aktualisiert": "2026-10-22T03:59:06+00:00",
+ "aktualisiert": "2026-10-23T03:48:33+00:00",
  "haendler": {
   "1piecetcg": {
    "basis_url": "https://1piecetcg.fr",
@@ -3953,65 +3953,64 @@
    "waehrung": "EUR"
   },
   "cardcosmos2": {
-   "basis_url": "https://cardcosmos.de",
-   "domain": "cardcosmos.de",
+   "basis_url": "https://cardcosmos.es",
+   "domain": "cardcosmos.es",
    "entdeckung": [
     {
      "art": "shopify_neueste",
-     "url": "https://cardcosmos.de/products.json?limit=100"
+     "url": "https://cardcosmos.es/products.json?limit=100"
     },
     {
      "art": "shopify_katalog",
-     "url": "https://cardcosmos.de/products.json?limit=250"
+     "url": "https://cardcosmos.es/products.json?limit=250"
     },
     {
      "art": "kategorie_vorbestellung",
-     "url": "https://cardcosmos.de/collections/pokemon-release-kalender-2026"
+     "url": "https://cardcosmos.es/collections/calendario-de-lanzamientos-de-pokemon-2026"
     },
     {
      "art": "kategorie_vorbestellung",
-     "url": "https://cardcosmos.de/collections/magic-the-gathering-release"
+     "url": "https://cardcosmos.es/collections/reservar-pokemon-30th-celebration"
     },
     {
      "art": "kategorie_bandai",
-     "url": "https://cardcosmos.de/collections/one-piece-karten-kaufen"
+     "url": "https://cardcosmos.es/collections/comprar-cartas-de-one-piece"
     },
     {
      "art": "kategorie_bandai",
-     "url": "https://cardcosmos.de/collections/one-piece-booster-displays"
+     "url": "https://cardcosmos.es/collections/exhibidores-de-sobres-de-one-piece"
     },
     {
      "art": "sitemap",
-     "url": "https://cardcosmos.de/sitemap.xml"
+     "url": "https://cardcosmos.es/sitemap.xml"
     }
    ],
-   "erstmals_geprueft": "2026-10-22T03:49:02+00:00",
+   "erstmals_geprueft": "2026-10-23T03:48:25+00:00",
    "fake_check": {
     "domain_alter_tage": null,
-    "punkte": 2,
+    "punkte": 0,
     "signale": [
-     "kein Impressum auffindbar",
      "Bewertungs-/Gütesiegel-Hinweis (positiv, nicht überprüft)"
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-10-22T03:49:02+00:00",
+   "geprueft_am": "2026-10-23T03:48:25+00:00",
    "gruende": [],
    "id": "cardcosmos2",
    "impressum": {
     "fehler": "robots.txt erlaubt diesen Abruf nicht – wird respektiert"
    },
-   "impressum_url": "https://cardcosmos.de/policies/legal-notice",
-   "land": "DE",
+   "impressum_url": "https://cardcosmos.es/policies/legal-notice",
+   "land": "ES",
    "land_quelle": "Kandidatenliste",
-   "name": "cardcosmos",
+   "name": "cardcosmos.es",
    "naruto_erwaehnt": false,
    "plattform": "shopify",
-   "quelle": "Prüfung 2026-10-06 (dokumentiert)",
+   "quelle": "Brave-Suche 2026-10-13: One Piece Card Game display comprar",
    "shop_land_meta": "DE",
    "shop_merkmale": true,
    "sitemaps": [
-    "https://cardcosmos.de/sitemap.xml"
+    "https://cardcosmos.es/sitemap.xml"
    ],
    "status": "geeignet",
    "tcg_bezug": true,
@@ -4033,8 +4032,8 @@
    ],
    "tdm_vorbehalt": false,
    "versand_de": "ja",
-   "versand_de_quelle": "https://cardcosmos.de/meta.json (ships_to_countries)",
-   "versand_url": "https://cardcosmos.de/policies/shipping-policy",
+   "versand_de_quelle": "https://cardcosmos.es/meta.json (ships_to_countries)",
+   "versand_url": "https://cardcosmos.es/policies/shipping-policy",
    "vertrauen": "ungeprueft",
    "waehrung": "EUR"
   },
@@ -25558,19 +25557,65 @@
    "vertrauen": "ungeprueft"
   },
   "shop2": {
-   "domain": "shop.drcommodore.it",
-   "entdeckung": [],
-   "erstmals_geprueft": "2026-10-22T03:49:02+00:00",
-   "geprueft_am": "2026-10-22T03:49:02+00:00",
-   "gruende": [
-    "robots.txt nicht abrufbar (HTTP Netzwerkfehler)"
+   "basis_url": "https://shop.bandainamco-am.com",
+   "domain": "shop.bandainamco-am.com",
+   "entdeckung": [
+    {
+     "art": "kategorie_bandai",
+     "url": "https://shop.bandainamco-am.com/bandainamcocrossstoreus/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://shop.bandainamco-am.com/gashapon-bandai-officialshop/"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://shop.bandainamco-am.com/sitemap.xml"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://shop.bandainamco-am.com/sitemap.rss"
+    }
    ],
-   "http_status": null,
+   "erstmals_geprueft": "2026-10-23T03:48:25+00:00",
+   "fake_check": {
+    "domain_alter_tage": null,
+    "punkte": 3,
+    "signale": [
+     "Rechtstexte fehlen: agb, widerruf, datenschutz",
+     "keine Kontaktdaten auf Startseite/Impressum"
+    ],
+    "stufe": "mittel"
+   },
+   "geprueft_am": "2026-10-23T03:48:25+00:00",
+   "gruende": [
+    "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)",
+    "kein erkennbares TCG-Sortiment auf der Startseite",
+    "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin"
+   ],
    "id": "shop2",
-   "land": "IT",
-   "name": "shop.drcommodore.it",
-   "quelle": "Brave-Suche 2026-10-22: One Piece Card Game display acquista",
-   "status": "blockiert",
+   "impressum_url": null,
+   "land": "?",
+   "land_quelle": "Domain-Endung",
+   "name": "shop.bandainamco-am.com",
+   "naruto_erwaehnt": false,
+   "plattform": "unbekannt",
+   "quelle": "Brave-Suche 2026-10-21: One Piece Card Game Display Shop",
+   "shop_merkmale": false,
+   "sitemaps": [
+    "https://shop.bandainamco-am.com/sitemap.xml",
+    "https://shop.bandainamco-am.com/sitemap.rss"
+   ],
+   "status": "ungeeignet",
+   "tcg_bezug": false,
+   "tcg_hinweise": [
+    "gundam",
+    "one piece"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "unbekannt",
+   "versand_de_quelle": "",
+   "versand_url": null,
    "vertrauen": "ungeprueft"
   },
   "shopgracz": {
@@ -25800,6 +25845,107 @@
    "quelle": "Brave-Suche 2026-10-16: One Piece Card Game display przedsprzedaż",
    "status": "blockiert",
    "vertrauen": "ungeprueft"
+  },
+  "skyboxct": {
+   "basis_url": "https://skyboxct.com",
+   "domain": "skyboxct.com",
+   "entdeckung": [
+    {
+     "art": "shopify_neueste",
+     "url": "https://skyboxct.com/products.json?limit=100"
+    },
+    {
+     "art": "shopify_katalog",
+     "url": "https://skyboxct.com/products.json?limit=250"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://skyboxct.com/collections/pre-orders"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://skyboxct.com/collections/yu-gi-oh-pre-order"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://skyboxct.com/collections/yu-gi-oh-new-releases"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://skyboxct.com/collections/new-releases"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://skyboxct.com/collections/digimon"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://skyboxct.com/collections/dragon-ball-super"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://skyboxct.com/sitemap.xml"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://skyboxct.com/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-23T03:48:25+00:00",
+   "fake_check": {
+    "domain_alter_tage": 2359,
+    "punkte": 0,
+    "signale": [],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-10-23T03:48:25+00:00",
+   "gruende": [
+    "Land US nicht in Europa",
+    "liefert laut Shopdaten nicht nach Deutschland"
+   ],
+   "id": "skyboxct",
+   "impressum": {
+    "fehler": "robots.txt erlaubt diesen Abruf nicht – wird respektiert"
+   },
+   "impressum_url": "https://skyboxct.com/policies/legal-notice",
+   "land": "US",
+   "land_quelle": "Shopify-Shopdaten (meta.json)",
+   "name": "skyboxct.com",
+   "naruto_erwaehnt": false,
+   "plattform": "shopify",
+   "quelle": "Brave-Suche 2026-10-23: One Piece TCG booster box EU pre-order",
+   "shop_land_meta": "US",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://skyboxct.com/sitemap.xml",
+    "https://skyboxct.com/sitemap.xml",
+    "https://skyboxct.com/sitemap.xml"
+   ],
+   "status": "ungeeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "digimon",
+    "dragon ball",
+    "gundam",
+    "lorcana",
+    "magic: the gathering",
+    "mtg",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "tcg",
+    "trading card",
+    "union arena",
+    "yu-gi-oh",
+    "yugioh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "nein",
+   "versand_de_quelle": "https://skyboxct.com/meta.json (ships_to_countries)",
+   "versand_url": "https://skyboxct.com/policies/shipping-policy",
+   "vertrauen": "ungeprueft",
+   "waehrung": "USD"
   },
   "skyfoxgames": {
    "basis_url": "https://skyfoxgames.com",
@@ -33691,23 +33837,23 @@
  "version": 1,
  "zusammenfassung": {
   "geeignet": 254,
-  "kandidaten": 506,
+  "kandidaten": 507,
   "land": {
-   "?": 89,
+   "?": 90,
    "AT": 22,
    "BE": 13,
    "CA": 3,
    "CH": 19,
-   "DE": 119,
+   "DE": 118,
    "DK": 1,
-   "ES": 29,
+   "ES": 30,
    "EU": 9,
    "FI": 1,
    "FR": 46,
    "GR": 2,
    "HU": 1,
    "IE": 2,
-   "IT": 39,
+   "IT": 38,
    "JP": 2,
    "MX": 1,
    "NL": 37,
@@ -33718,12 +33864,12 @@
    "SI": 1,
    "TW": 1,
    "UK": 9,
-   "US": 14
+   "US": 15
   },
   "mit_entdeckungsweg": 254,
   "naruto_erwaehnt": 160,
   "plattform": {
-   "?": 77,
+   "?": 76,
    "ecwid": 2,
    "gambio": 1,
    "jtl": 7,
@@ -33733,28 +33879,28 @@
    "oxid": 1,
    "plentymarkets": 1,
    "prestashop": 2,
-   "shopify": 166,
+   "shopify": 167,
    "shopware": 11,
-   "unbekannt": 162,
+   "unbekannt": 163,
    "wix": 6,
    "woocommerce": 49
   },
   "status": {
-   "blockiert": 70,
+   "blockiert": 69,
    "eingeschraenkt": 1,
    "geeignet": 254,
    "nicht_erreichbar": 7,
-   "ungeeignet": 174
+   "ungeeignet": 176
   },
   "versand_de": {
-   "?": 77,
+   "?": 76,
    "ja": 181,
-   "nein": 31,
-   "unbekannt": 175,
+   "nein": 32,
+   "unbekannt": 176,
    "vermutlich": 42
   },
   "vertrauen": {
-   "ungeprueft": 413,
+   "ungeprueft": 414,
    "vorgeprueft": 93
   }
  }
