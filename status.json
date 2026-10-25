@@ -1,28 +1,28 @@
 {
- "updated": "2026-10-24T23:53:30+00:00",
+ "updated": "2026-10-25T23:48:23+00:00",
  "quelle": "github",
  "state": "checking",
  "current": null,
- "last_run": "2026-10-24T23:53:29+00:00",
- "run_seconds": 0.0,
+ "last_run": "2026-10-25T23:48:11+00:00",
+ "run_seconds": 12.2,
  "sites": [
   {
    "id": "produkt",
    "name": "Produkte",
    "agent": "naruto",
    "status": "ok",
-   "im_lauf": false,
-   "last_checked": "2026-10-24T23:53:15+00:00",
-   "detail": "18 Aufgaben, 1 mit Fehlern"
+   "im_lauf": true,
+   "last_checked": "2026-10-25T23:48:20+00:00",
+   "detail": "18 Aufgaben"
   },
   {
    "id": "entdeckung",
    "name": "Entdeckung",
    "agent": "naruto",
    "status": "ok",
-   "im_lauf": false,
-   "last_checked": "2026-10-24T23:52:25+00:00",
-   "detail": "1574 Aufgaben, 130 mit Fehlern"
+   "im_lauf": true,
+   "last_checked": "2026-10-25T23:48:14+00:00",
+   "detail": "1599 Aufgaben, 129 mit Fehlern"
   },
   {
    "id": "op_restock",
@@ -30,7 +30,7 @@
    "agent": "onepiece",
    "status": "ok",
    "im_lauf": false,
-   "last_checked": "2026-10-24T23:51:56+00:00",
+   "last_checked": "2026-10-25T23:45:40+00:00",
    "detail": "1 Aufgaben"
   },
   {
@@ -39,58 +39,58 @@
    "agent": "onepiece",
    "status": "ok",
    "im_lauf": false,
-   "last_checked": "2026-10-24T23:51:56+00:00",
+   "last_checked": "2026-10-25T23:45:40+00:00",
    "detail": "1 Aufgaben"
   }
  ],
  "events": [
   {
-   "time": "2026-10-24T23:49:13+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Mini Tin Display"
-  },
-  {
-   "time": "2026-10-24T23:49:13+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Ultra Premium Coll…"
-  },
-  {
-   "time": "2026-10-24T23:49:13+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Sylveon ex Box [Li…"
-  },
-  {
-   "time": "2026-10-24T23:49:13+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Mini Tin [Live]"
-  },
-  {
-   "time": "2026-10-24T23:49:13+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Mewtwo Figure Coll…"
-  },
-  {
-   "time": "2026-10-24T23:49:13+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Booster Pack [Live]"
-  },
-  {
-   "time": "2026-10-24T23:48:08+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon TCG: 30th Celebration Poste…"
-  },
-  {
-   "time": "2026-10-24T23:48:08+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon TCG: 30th Celebration Mini …"
-  },
-  {
-   "time": "2026-10-24T23:48:08+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon TCG: 30th Celebration ex Ti…"
-  },
-  {
-   "time": "2026-10-24T23:48:07+00:00",
+   "time": "2026-10-25T23:33:58+00:00",
    "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration ex Tin [Sylveon ex…"
   },
   {
-   "time": "2026-10-24T23:48:07+00:00",
+   "time": "2026-10-25T23:33:58+00:00",
    "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Pokemon Center Eli…"
   },
   {
-   "time": "2026-10-24T23:48:07+00:00",
+   "time": "2026-10-25T23:33:58+00:00",
    "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Battle Deck [Umbre…"
+  },
+  {
+   "time": "2026-10-25T23:33:58+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Battle Deck [Espeo…"
+  },
+  {
+   "time": "2026-10-25T23:33:58+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Mini Tin Display"
+  },
+  {
+   "time": "2026-10-25T23:29:12+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokemon: 30 Jahre - Top Trainer Box"
+  },
+  {
+   "time": "2026-10-25T23:29:12+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokemon: 30 Jahre 2-Pack Blister - …"
+  },
+  {
+   "time": "2026-10-25T23:29:12+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon Tin-Box 30 Jahre: Tag – Fee…"
+  },
+  {
+   "time": "2026-10-25T23:29:12+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon Karmesin & Purpur – 30 Jahr…"
+  },
+  {
+   "time": "2026-10-25T23:29:12+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon Karmesin & Purpur – 30 Jahr…"
+  },
+  {
+   "time": "2026-10-25T23:29:12+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon Karmesin & Purpur – 30 Jahr…"
+  },
+  {
+   "time": "2026-10-25T23:29:12+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon 30 Jahre Ordner-Kollektion …"
   }
  ],
  "naruto": {
@@ -105,17 +105,17 @@
  },
  "pokemon": {
   "status": "fishing",
-  "detail": "angelt nach Normalpreisen · 2100 Aufgaben, 49 zum Normalpreis bestellbar",
-  "last_checked": "2026-10-24T23:51:39+00:00",
-  "aufgaben": 2100,
-  "bestellbar": 49,
+  "detail": "angelt nach Normalpreisen · 2262 Aufgaben, 42 zum Normalpreis bestellbar",
+  "last_checked": "2026-10-25T23:44:12+00:00",
+  "aufgaben": 2262,
+  "bestellbar": 42,
   "fang": null,
   "test": false
  },
  "stats": {
-  "haendler": 256,
-  "aufgaben": 1593,
-  "aufgaben_mit_fehlern": 131,
+  "haendler": 261,
+  "aufgaben": 1618,
+  "aufgaben_mit_fehlern": 129,
   "push_problem": false
  }
 }
