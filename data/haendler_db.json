@@ -1,5 +1,5 @@
 {
- "aktualisiert": "2026-10-26T03:25:13+00:00",
+ "aktualisiert": "2026-10-26T03:51:14+00:00",
  "haendler": {
   "1piecetcg": {
    "basis_url": "https://1piecetcg.fr",
@@ -1481,6 +1481,82 @@
    "versand_url": "https://b2b.tc-tradingcorner.de/policies/shipping-policy",
    "vertrauen": "vorgeprueft",
    "waehrung": "EUR"
+  },
+  "bangerpack": {
+   "basis_url": "https://bangerpack.se",
+   "domain": "bangerpack.se",
+   "entdeckung": [
+    {
+     "art": "shopsuche",
+     "url": "https://bangerpack.se/shop/search?s=naruto"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://bangerpack.se/products?sort=pid_0"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://bangerpack.se/tcg-samlarkort/one-piece"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://bangerpack.se/tcg-samlarkort/one-piece/japanska-utgavor-one-piece"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://bangerpack.se/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-26T03:51:01+00:00",
+   "fake_check": {
+    "domain_alter_tage": null,
+    "punkte": 0,
+    "signale": [
+     "Bewertungs-/Gütesiegel-Hinweis (positiv, nicht überprüft)"
+    ],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-10-26T03:51:01+00:00",
+   "gruende": [],
+   "id": "bangerpack",
+   "impressum_url": null,
+   "land": "SE",
+   "land_quelle": "Kandidatenliste",
+   "name": "bangerpack.se",
+   "naruto_erwaehnt": false,
+   "plattform": "unbekannt",
+   "quelle": "Brave-Suche 2026-10-26: One Piece Card Game display köp",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://bangerpack.se/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "digimon",
+    "display",
+    "dragon ball",
+    "gundam",
+    "lorcana",
+    "magic: the gathering",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "tcg",
+    "union arena",
+    "yu-gi-oh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "vermutlich",
+   "versand_de_quelle": "https://bangerpack.se/sidor/kopvillkor nennt EU/international",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": false,
+    "nennt_eu": true
+   },
+   "versand_url": "https://bangerpack.se/sidor/kopvillkor",
+   "vertrauen": "ungeprueft"
   },
   "baruzcard": {
    "basis_url": "https://baruzcard.it",
@@ -15847,6 +15923,93 @@
    "vertrauen": "ungeprueft",
    "waehrung": "EUR"
   },
+  "kantgame21": {
+   "basis_url": "https://www.kantgame21.com",
+   "domain": "kantgame21.com",
+   "entdeckung": [
+    {
+     "art": "woo_api",
+     "url": "https://www.kantgame21.com/wp-json/wc/store/v1/products?search=naruto&per_page=50"
+    },
+    {
+     "art": "woo_neueste",
+     "url": "https://www.kantgame21.com/wp-json/wc/store/v1/products?orderby=date&order=desc&per_page=50"
+    },
+    {
+     "art": "shopsuche",
+     "url": "https://www.kantgame21.com/?post_type=product&s=naruto"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://www.kantgame21.com/categoria-prodotto/home/naruto/"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://www.kantgame21.com/prodotto/naruto-card-game-2/"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://www.kantgame21.com/categoria-prodotto/pre-order/"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://www.kantgame21.com/prodotto/pre-order-one-piece-card-game-super-premium-collection-spc-01-japan-edition/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://www.kantgame21.com/categoria-prodotto/home/box-one-piece-carte-collezionabili/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://www.kantgame21.com/categoria-prodotto/home/box-one-piece/"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://www.kantgame21.com/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-26T03:51:01+00:00",
+   "fake_check": {
+    "domain_alter_tage": 637,
+    "punkte": 1,
+    "signale": [
+     "Rechtstexte fehlen: agb"
+    ],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-10-26T03:51:01+00:00",
+   "gruende": [
+    "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)"
+   ],
+   "id": "kantgame21",
+   "impressum_url": null,
+   "land": "?",
+   "land_quelle": "Domain-Endung",
+   "name": "kantgame21.com",
+   "naruto_erwaehnt": true,
+   "plattform": "woocommerce",
+   "quelle": "Brave-Suche 2026-10-26: \"Naruto Card Game\" Bandai pre-order booster box",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://www.kantgame21.com/sitemap.xml"
+   ],
+   "status": "ungeeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "naruto",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "tcg",
+    "trading card"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "unbekannt",
+   "versand_de_quelle": "",
+   "versand_url": null,
+   "vertrauen": "ungeprueft"
+  },
   "kantocards": {
    "basis_url": "https://kantocards.com",
    "domain": "kantocards.com",
@@ -17330,6 +17493,84 @@
    "versand_url": "https://lms-handel.de/policies/shipping-policy",
    "vertrauen": "vorgeprueft",
    "waehrung": "EUR"
+  },
+  "lootquest": {
+   "basis_url": "https://lootquest.pl",
+   "domain": "lootquest.pl",
+   "entdeckung": [
+    {
+     "art": "woo_api",
+     "url": "https://lootquest.pl/wp-json/wc/store/v1/products?search=naruto&per_page=50"
+    },
+    {
+     "art": "woo_neueste",
+     "url": "https://lootquest.pl/wp-json/wc/store/v1/products?orderby=date&order=desc&per_page=50"
+    },
+    {
+     "art": "shopsuche",
+     "url": "https://lootquest.pl/?post_type=product&dgwt_wcas=1&s=naruto"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://lootquest.pl/tag-produktu/pokemon-tcg-preorder/"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://lootquest.pl/tag-produktu/30th-celebration/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://lootquest.pl/kategoria-produktu/karciane/one-piece-cg/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://lootquest.pl/kategoria-produktu/karciane/dragon-ball-super//"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://lootquest.pl/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-26T03:51:01+00:00",
+   "fake_check": {
+    "domain_alter_tage": 3462,
+    "punkte": 0,
+    "signale": [],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-10-26T03:51:01+00:00",
+   "gruende": [],
+   "id": "lootquest",
+   "impressum_url": null,
+   "land": "PL",
+   "land_quelle": "Kandidatenliste",
+   "name": "lootquest.pl",
+   "naruto_erwaehnt": false,
+   "plattform": "woocommerce",
+   "quelle": "Brave-Suche 2026-10-26: One Piece Card Game display kup",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://lootquest.pl/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "dragon ball",
+    "lorcana",
+    "magic: the gathering",
+    "mtg",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "tcg",
+    "yu-gi-oh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "unbekannt",
+   "versand_de_quelle": "",
+   "versand_url": null,
+   "vertrauen": "ungeprueft"
   },
   "lorenzone": {
    "basis_url": "https://lorenzone.fr",
@@ -31956,6 +32197,75 @@
    "status": "nicht_erreichbar",
    "vertrauen": "ungeprueft"
   },
+  "twojekarty": {
+   "basis_url": "https://twojekarty.pl",
+   "domain": "twojekarty.pl",
+   "entdeckung": [
+    {
+     "art": "kategorie_naruto",
+     "url": "https://twojekarty.pl/naruto-c-194.html"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://twojekarty.pl/nowosci.html"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://twojekarty.pl/dragon-ball-c-152.html"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://twojekarty.pl/one-piece-card-game-c-165.html"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://pokeshop.pl/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-26T03:51:01+00:00",
+   "fake_check": {
+    "domain_alter_tage": 338,
+    "punkte": 2,
+    "signale": [
+     "Domain jünger als 1 Jahr (338 Tage)",
+     "Rechtstexte fehlen: widerruf"
+    ],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-10-26T03:51:01+00:00",
+   "gruende": [],
+   "id": "twojekarty",
+   "impressum_url": null,
+   "land": "PL",
+   "land_quelle": "Kandidatenliste",
+   "name": "twojekarty.pl",
+   "naruto_erwaehnt": true,
+   "plattform": "unbekannt",
+   "quelle": "Brave-Suche 2026-10-26: One Piece Card Game display sklep",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://pokeshop.pl/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "dragon ball",
+    "lorcana",
+    "magic: the gathering",
+    "naruto",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "tcg",
+    "yu-gi-oh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "unbekannt",
+   "versand_de_quelle": "",
+   "versand_url": null,
+   "vertrauen": "ungeprueft"
+  },
   "twomoons": {
    "basis_url": "https://www.twomoons.ch",
    "domain": "twomoons.ch",
@@ -35011,10 +35321,10 @@
  },
  "version": 1,
  "zusammenfassung": {
-  "geeignet": 267,
-  "kandidaten": 525,
+  "geeignet": 270,
+  "kandidaten": 529,
   "land": {
-   "?": 95,
+   "?": 96,
    "AT": 22,
    "BE": 15,
    "CA": 3,
@@ -35034,16 +35344,16 @@
    "MX": 1,
    "NL": 37,
    "NO": 1,
-   "PL": 31,
+   "PL": 33,
    "PT": 1,
-   "SE": 15,
+   "SE": 16,
    "SI": 1,
    "TW": 1,
    "UK": 10,
    "US": 15
   },
-  "mit_entdeckungsweg": 267,
-  "naruto_erwaehnt": 159,
+  "mit_entdeckungsweg": 270,
+  "naruto_erwaehnt": 161,
   "plattform": {
    "?": 77,
    "ecwid": 2,
@@ -35057,25 +35367,25 @@
    "prestashop": 2,
    "shopify": 175,
    "shopware": 10,
-   "unbekannt": 170,
+   "unbekannt": 172,
    "wix": 7,
-   "woocommerce": 49
+   "woocommerce": 51
   },
   "status": {
    "blockiert": 72,
-   "geeignet": 267,
+   "geeignet": 270,
    "nicht_erreichbar": 5,
-   "ungeeignet": 181
+   "ungeeignet": 182
   },
   "versand_de": {
    "?": 77,
    "ja": 189,
    "nein": 34,
-   "unbekannt": 182,
-   "vermutlich": 43
+   "unbekannt": 185,
+   "vermutlich": 44
   },
   "vertrauen": {
-   "ungeprueft": 427,
+   "ungeprueft": 431,
    "vorgeprueft": 98
   }
  }
