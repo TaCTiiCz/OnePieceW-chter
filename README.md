@@ -286,6 +286,7 @@ neue Vorbestellung oder ein Shop, der es einfach noch nicht ausverkauft hat.
   Neuheiten-, Vorbestell- und Produktlisten werden mitgelesen. Takt: halb so oft wie Naruto, bekannte Produktseiten alle 5 Minuten.
 - **Meldungen:** pro Angebot einmal je Bestellbar-Phase (wird es ausverkauft oder teurer und kommt dann zurück, gibt es eine
   neue Meldung). Höchstens 8 Meldungen pro Lauf, der Rest folgt im nächsten Lauf.
+- **Shops ausnehmen:** `shops_ausschliessen` unter `[pruefung]` in `config/pokemon.toml` (gilt nur für Pokémon; derzeit tcgsniper.nl).
 - **Ausschalten:** `aktiv = false` unter `[pruefung]` in `config/pokemon.toml`.
 - **Zustand:** `laufzeit/pokemon/zustand.json` im Zweig `waechter-daten`.
 - **Dojo:** Am Teich sitzt ein Angler (eigene Figur). Er angelt, solange der Pokémon-Wächter prüft. Bei einem Fund taucht eine

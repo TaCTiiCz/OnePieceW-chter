@@ -109,6 +109,18 @@ class Meldungen(unittest.TestCase):
         self.assertEqual(status["pokemon"]["status"], "catch")
         self.assertEqual(status["state"], "alert")
 
+    def test_ausgeschlossener_shop_wird_nicht_geprueft(self):
+        s = Szenario()
+        cfg = copy.deepcopy(CFG)
+        cfg["pruefung"]["shops_ausschliessen"] = ["shop.test"]
+        seiten = {KAT: f'<a href="/p/x">{s.titel}</a>', PROD: produktseite(s.titel, "InStock", "54.99")}
+        ab = FakeAbrufer(seiten)
+        l = Lauf(None, ab, s.tmp / "daten", db_datei=s.tmp / "db.json", ncfg=cfg, betrieb=s.betrieb,
+                 push_kanal=s.kanal, log=lambda x: None, onepiece=False, jetzt=s.zeit, thema=POKEMON)
+        l.ausfuehren(nur_faellige=False)
+        self.assertEqual(ab.aufrufe, [])
+        self.assertEqual(s.kanal.nachrichten, [])
+
     def test_push_text(self):
         t = push.formatiere({"typ": KAUFALARM, "thema": "pokemon", "text": "x", "titel": "ETB", "grenze_text": "bis 62 €"})
         self.assertNotIn("/gekauft", t)

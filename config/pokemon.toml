@@ -174,3 +174,6 @@ produktseite_sekunden = 300
 max_laufzeit_sekunden = 120
 # Suchbegriffe, mit denen die Shopsuche/WooCommerce-Suche statt "naruto" aufgerufen wird
 suchbegriffe = ["30th celebration", "pokemon 30 jahre"]
+# Diese Shops werden für Pokémon NICHT geprüft und nie gemeldet (Shop-ID aus der Händlerdatenbank oder Domain).
+# Für Naruto und One Piece bleiben sie unverändert aktiv.
+shops_ausschliessen = ["tcgsniper"]   # tcgsniper.nl – auf Wunsch entfernt (26.10.2026)

@@ -230,7 +230,10 @@ def synchronisiere(zustand: dict, haendler: list[Haendler], ncfg: dict, betrieb:
             soll[tid] = {"art": e["art"], "shop": h.id, "url": e["url"]}
     for q in ncfg.get("offizielle_quellen", []):
         soll[f"offiziell|{q['id']}"] = {"art": "offiziell", "shop": "offiziell", "url": q["url"], "quelle": q}
+    aktive_shops = {h.id for h in haendler}
     for aid, a in zustand[thema.id]["angebote"].items():
+        if a.get("shop") not in aktive_shops:
+            continue  # Shop nicht (mehr) in der Liste, z. B. für dieses Thema ausgeschlossen
         if a.get("letzte") and a["letzte"].get("passend") is False:
             continue  # ausgeschlossene Seiten (z. B. Mythos TCG) nicht weiter abrufen
         soll[f"produkt|{aid}"] = {"art": "produkt", "shop": a["shop"], "url": a["url"], "angebot": aid}
@@ -869,6 +872,9 @@ class Lauf:
     def ausfuehren(self, nur_faellige: bool = True) -> dict:
         t_start = time.monotonic()
         haendler = lade_haendler(self.konfig, self.db_datei)
+        aus = {str(x).lower().removeprefix("www.") for x in (self.ncfg.get("pruefung") or {}).get("shops_ausschliessen", [])}
+        if aus:   # nur für dieses Thema (z. B. Pokémon) ausgeschlossene Shops
+            haendler = [h for h in haendler if h.id.lower() not in aus and h.domain.lower() not in aus]
         index = {h.id: h for h in haendler}
         if hasattr(self.abrufer, "host_zustand"):
             self.abrufer.host_zustand = self.zustand["hosts"]
