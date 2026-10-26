@@ -38,7 +38,8 @@ KOPF_POKEMON = {
 }
 KAUFTYPEN = ("KAUFALARM", "KAUFALARM_ANDERE_SPRACHE", "ERINNERUNG")
 VERTRAUEN = {"freigegeben": "✅ geprüft (dokumentiert)", "vorgeprueft": "☑️ automatisch vorgeprüft (Impressum/Versand DE)",
-             "ungeprueft": "❗ UNGEPRÜFT"}
+             "ungeprueft": "❗ UNGEPRÜFT",
+             "fakecheck": "🛡️ Fake-Shop-Check bestanden (Impressum/Versand DE nicht vollständig belegt)"}
 
 
 def euro(cent: Optional[int], waehrung: Optional[str] = "EUR") -> str:
@@ -94,6 +95,10 @@ def formatiere(e: dict, ncfg: Optional[dict] = None, nachgesendet: bool = False,
             z.append(f"💰 <b>Teuer:</b> {html.escape(e['teuer'])}")
         if e.get("grenze_text"):
             z.append(f"🏷️ {html.escape(e['grenze_text'])}")
+        if e.get("fake_text"):
+            z.append(f"🛡️ {html.escape(e['fake_text'])}")
+        if e.get("preis_warnung"):
+            z.append(f"<b>{html.escape(e['preis_warnung'])}</b>")
         if poke:
             if e.get("release"):
                 z.append(f"<b>Release:</b> {html.escape(e['release'])}")

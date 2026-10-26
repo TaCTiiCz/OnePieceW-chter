@@ -58,11 +58,13 @@ PROD = B + "/p/pokemon-30th-celebration-elite-trainer-box-en"
 
 
 class Szenario:
-    def __init__(self):
+    def __init__(self, vertrauen="vorgeprueft", fake=None):
         self.tmp = Path(tempfile.mkdtemp())
         shops = {"shop": {"id": "shop", "name": "Testshop", "domain": "shop.test", "basis_url": B, "land": "DE",
-                          "plattform": "unbekannt", "status": "geeignet", "vertrauen": "vorgeprueft",
+                          "plattform": "unbekannt", "status": "geeignet", "vertrauen": vertrauen,
                           "entdeckung": [{"art": "kategorie_vorbestellung", "url": KAT}]}}
+        if fake:
+            shops["shop"]["fake_check"] = fake
         (self.tmp / "db.json").write_text(json.dumps({"haendler": shops}))
         self.titel = "Pokémon 30th Celebration Elite Trainer Box (EN)"
         self.status, self.knopf, self.preis = "InStock", True, "54.99"
@@ -120,6 +122,25 @@ class Meldungen(unittest.TestCase):
         l.ausfuehren(nur_faellige=False)
         self.assertEqual(ab.aufrufe, [])
         self.assertEqual(s.kanal.nachrichten, [])
+
+    def test_fakecheck_gering_ergibt_normalen_alarm(self):
+        s = Szenario(vertrauen="ungeprueft", fake={"stufe": "gering", "punkte": 1, "signale": ["Rechtstexte fehlen: agb"]})
+        e, _ = s.lauf()
+        self.assertEqual([x["typ"] for x in e], [KAUFALARM])
+        self.assertIn("Fake-Shop-Check bestanden", s.kanal.nachrichten[-1])
+        self.assertIn("Risiko gering", s.kanal.nachrichten[-1])
+        self.assertNotIn("UNGEPRÜFTEM", s.kanal.nachrichten[-1])
+
+    def test_fakecheck_hoch_wird_nie_gemeldet(self):
+        s = Szenario(vertrauen="ungeprueft", fake={"stufe": "hoch", "punkte": 6, "signale": ["Domain erst 20 Tage alt"]})
+        self.assertEqual(s.lauf()[0], [])
+        self.assertEqual(s.kanal.nachrichten, [])
+
+    def test_fakecheck_mittel_bleibt_ungeprueft_mit_warnung(self):
+        s = Szenario(vertrauen="ungeprueft", fake={"stufe": "mittel", "punkte": 3, "signale": ["kein Impressum auffindbar"]})
+        e, _ = s.lauf()
+        self.assertEqual([x["typ"] for x in e], ["UNGEPRUEFTER_HINWEIS"])
+        self.assertIn("kein Impressum", s.kanal.nachrichten[-1])
 
     def test_push_text(self):
         t = push.formatiere({"typ": KAUFALARM, "thema": "pokemon", "text": "x", "titel": "ETB", "grenze_text": "bis 62 €"})

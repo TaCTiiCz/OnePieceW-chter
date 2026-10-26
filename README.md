@@ -286,6 +286,10 @@ neue Vorbestellung oder ein Shop, der es einfach noch nicht ausverkauft hat.
   Neuheiten-, Vorbestell- und Produktlisten werden mitgelesen. Takt: halb so oft wie Naruto, bekannte Produktseiten alle 5 Minuten.
 - **Meldungen:** pro Angebot einmal je Bestellbar-Phase (wird es ausverkauft oder teurer und kommt dann zurück, gibt es eine
   neue Meldung). Höchstens 8 Meldungen pro Lauf, der Rest folgt im nächsten Lauf.
+- **Fake-Shop-Check entscheidet:** Shops mit bestandener Fake-Shop-Prüfung (Risiko „gering“) melden einen normalen Kaufalarm
+  mit dem Prüfergebnis, auch wenn Impressum/Versand DE nicht vollständig belegt sind. Risiko „mittel“ kommt als
+  „ungeprüfter Shop“ mit den Warnsignalen, Risiko „hoch“ wird gar nicht gemeldet. Ist ein Angebot verdächtig billig
+  (unter 60 % des Medians anderer Shops), gibt es eine deutliche Warnung.
 - **Shops ausnehmen:** `shops_ausschliessen` unter `[pruefung]` in `config/pokemon.toml` (gilt nur für Pokémon; derzeit tcgsniper.nl).
 - **Ausschalten:** `aktiv = false` unter `[pruefung]` in `config/pokemon.toml`.
 - **Zustand:** `laufzeit/pokemon/zustand.json` im Zweig `waechter-daten`.

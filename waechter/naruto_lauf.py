@@ -119,6 +119,7 @@ class Haendler:
     versand_staffel: Optional[object] = None
     versand_hinweis: str = "Versand nach DE unbekannt"
     zoll_hinweis: Optional[str] = None
+    fake_check: Optional[dict] = None   # Ergebnis der Fake-Shop-Prüfung aus der Händlerdatenbank
 
     @property
     def host(self) -> str:
@@ -139,7 +140,8 @@ def lade_haendler(konfig: Optional[Konfig], db_datei: Path) -> list[Haendler]:
         dom = urlparse(basis).netloc.removeprefix("www.")
         x = Haendler(id=h["id"], name=h.get("name", dom), domain=dom, basis_url=basis, land=h.get("land", "?"),
                      plattform=h.get("plattform", "unbekannt"), vertrauen=h.get("vertrauen", "ungeprueft"),
-                     entdeckung=list(h.get("entdeckung", [])), zoll_hinweis=h.get("zoll_hinweis"))
+                     entdeckung=list(h.get("entdeckung", [])), zoll_hinweis=h.get("zoll_hinweis"),
+                     fake_check=h.get("fake_check"))
         hv = (h.get("versand_hinweise") or {}).get("betrag_hinweis")
         x.versand_hinweis = f"Versand DE laut Shopseite ca. {hv}" if hv else "Versand nach DE unbekannt"
         erg[dom] = x
@@ -752,11 +754,48 @@ class Lauf:
             return
         wort = "Jetzt lieferbar" if b2.status == m.IN_STOCK else "Vorbestellbar"
         extra = {**extra, "grenze_text": pokemon.grenze_text(b2.variante, self.ncfg), "spekulativ": False}
-        typ = UNGEPRUEFT if h.vertrauen == "ungeprueft" else KAUFALARM
+        # Fake-Shop-Prüfung entscheidet bei Pokémon über die Einstufung des Shops
+        fk = h.fake_check or {}
+        stufe = fk.get("stufe")
+        if stufe == "hoch":
+            alt["gemeldet"], alt["gesperrt"] = True, "Fake-Shop-Verdacht (hoch)"   # nie melden, nicht ständig neu prüfen
+            return
+        if stufe:
+            signale = "; ".join(fk.get("signale", [])[:3])
+            extra["fake_text"] = f"Fake-Shop-Check: Risiko {stufe} ({fk.get('punkte', 0)} Punkte)" + (f" – {signale}" if signale else "")
+        warn = self._preis_verdacht(b2)
+        if warn:
+            extra["preis_warnung"] = warn
+        if h.vertrauen != "ungeprueft":
+            typ = KAUFALARM
+        elif stufe == "gering" and not warn:
+            typ = KAUFALARM
+            b2 = NBeob(**{**asdict(b2), "vertrauen": "fakecheck"})
+        else:
+            typ = UNGEPRUEFT
         zusatz = " (UNGEPRÜFTER Shop – vor dem Kauf prüfen)" if typ == UNGEPRUEFT else ""
         e = self._ereignis(typ, b2, f"{wort} zum Normalpreis ({b2.sprache}): {b2.titel} bei {h.name}{zusatz}", extra)
         alt["gemeldet"] = bool(e.get("gesendet") or e.get("unterdrueckt") or not self.push.aktiv)
         alt["gemeldet_zeit"] = e["zeit"]
+
+    def _preis_verdacht(self, b: NBeob, faktor: float = 0.6, min_proben: int = 3) -> Optional[str]:
+        """Pokémon: verdächtig billig im Vergleich zu anderen Shops (gleiches Produkt, gleiche Sprache)?"""
+        if not b.preis_cent or (b.waehrung or "").rstrip("?") != "EUR":
+            return None
+        preise, shops = [], set()
+        for a in self.zustand[self.bereich]["angebote"].values():
+            l = a.get("letzte") or {}
+            if l.get("shop") == b.shop or l.get("shop") in shops or l.get("variante") != b.variante or l.get("sprache") != b.sprache:
+                continue
+            if l.get("abruf_ok") and l.get("status") in m.KAUFBAR and (l.get("preis_cent") or 0) > 0:
+                preise.append(l["preis_cent"]); shops.add(l.get("shop"))
+        if len(preise) < min_proben:
+            return None
+        med = statistics.median(preise)
+        if b.preis_cent < faktor * med:
+            return (f"⚠️ PREIS VERDÄCHTIG NIEDRIG: {100 - b.preis_cent / med * 100:.0f} % unter dem Median von "
+                    f"{len(preise)} anderen Shops – Shop vor dem Kauf prüfen, nicht per Vorkasse zahlen!")
+        return None
 
     def _verlauf(self, b: NBeob, letzte: dict) -> None:
         felder = ("abruf_ok", "status", "preis_cent", "waehrung", "gesamt_cent", "sprache", "variante", "fehler")
