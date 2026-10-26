@@ -21,8 +21,11 @@ from .naruto import NarutoTreffer as Treffer
 POKEMON_DATEI = KONFIG_DIR / "pokemon.toml"
 
 # Suchwort für die Entdeckung (Shopify-/WooCommerce-Listen, Sitemaps, Links): nur grob vorfiltern
-SUCHWORT = re.compile(r"30th[\s\-_+]*(celebration|anniversary)|30[\s\-_+]*jahre|30thcelebration|pokemon.*30|30.*pok[eé]mon",
-                      re.I)
+SUCHWORT = re.compile(r"30th[\s\-_+]*(celebration|anniversary)|30[\s\-_+]*jahre|30thcelebration|pokemon.*30|30.*pok[eé]mon|"
+                      r"ditto", re.I)
+_DITTO_OHNE_SET = re.compile(r"ditto.*premium|premium.*ditto")
+# Einzelkarten/Promos wie "Ditto 115", "Ditto MEP DE 106"
+_EINZELKARTE = re.compile(r"\b(ditto|mewtu|mewtwo|mew|pikachu)\s+(mep\s+)?(de\s+|en\s+)?\d{2,3}\b|\bmep\b|promo[\s\-]*sammelkarte")
 
 # Einzelkarten: Kartennummer wie "151/128" oder "#151"
 _KARTENNUMMER = re.compile(r"(?<![0-9])\d{1,3}\s?/\s?\d{2,3}(?![0-9])|#\s?\d{2,3}\b")
@@ -79,6 +82,9 @@ def pruefe(titel: str, url: str = "", tags: tuple = (), hersteller: str = "", cf
         return Treffer(False, m.UNSICHER, m.UNBEKANNT, False, m.TYP_UNBEKANNT, ausschluss=grund)
 
     phrase = next((p for p in er["set_phrasen"] if p in titel_text), None)
+    if phrase is None and "DITTO" in (cfg.get("prioritaet") or {}).get("ohne_setname", []) \
+            and _DITTO_OHNE_SET.search(titel_text) and "pokemon" in text:
+        phrase = "ditto premium"   # die Ditto-Premium-Kollektion gibt es nur in dieser Erweiterung
     if phrase is None:
         return nein("kein '30th Celebration'/'30 Jahre' im Titel")
     if phrase in er.get("braucht_pokemon", []) and "pokemon" not in text:
@@ -86,11 +92,12 @@ def pruefe(titel: str, url: str = "", tags: tuple = (), hersteller: str = "", cf
     for a in er.get("ausschluss", []):
         if _wortgrenze(_ohne_akzente(normalisiere(a)), titel_text):
             return nein(f"ausgeschlossen: '{a.strip()}'")
-    if er.get("kartennummer_ausschliessen", True) and _KARTENNUMMER.search(titel_text):
+    if er.get("kartennummer_ausschliessen", True) and (_KARTENNUMMER.search(titel_text) or _EINZELKARTE.search(titel_text)):
         return nein("Einzelkarte (Kartennummer im Titel)")
     gruende.append(f"Titel enthält '{phrase}'")
 
-    art = produktart(titel_text, cfg)
+    # Produktart zuerst nur am Titel erkennen (die URL kann von einem anderen Produkt stammen), sonst Titel + URL
+    art = produktart(_ohne_akzente(normalisiere(titel)), cfg) or produktart(titel_text, cfg)
     if art is None:
         return nein("Produktart unbekannt (kein versiegeltes 30-Jahre-Produkt erkannt)")
     if art["id"] == "BOOSTER" and re.search(r"display|box|\d+\s*x|x\s*\d+", titel_text):
@@ -119,6 +126,17 @@ def pruefe(titel: str, url: str = "", tags: tuple = (), hersteller: str = "", cf
         sicherheit = m.UNSICHER
         gruende.append("Pokémon-Center-Box gibt es nur auf Englisch")
     return Treffer(True, sicherheit, sprache, sprache in erlaubt, art["id"], gruende)
+
+
+def preis_plausibel(variante: str, preis_cent: Optional[int], cfg: dict, faktor: float = 0.5) -> bool:
+    """Ein versiegeltes Produkt für weniger als die Hälfte des Normalpreises ist kein echtes Angebot
+    (Einzelkarte, Anzahlung, Platzhalter oder Fake)."""
+    if preis_cent is None:
+        return False
+    for p in cfg.get("produkte", []):
+        if p["id"] == variante:
+            return preis_cent >= faktor * p["normalpreis"] * 100
+    return True
 
 
 def grenze_text(variante: str, cfg: dict) -> str:

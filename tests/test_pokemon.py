@@ -142,6 +142,33 @@ class Meldungen(unittest.TestCase):
         self.assertEqual([x["typ"] for x in e], ["UNGEPRUEFTER_HINWEIS"])
         self.assertIn("kein Impressum", s.kanal.nachrichten[-1])
 
+    def test_ditto_ohne_setname(self):
+        t = pokemon.pruefe("Pokémon Sammelkartenspiel Premium-Kollektion Ditto (DE)", cfg=CFG)
+        self.assertTrue(t.passend)
+        self.assertEqual((t.variante, t.sprache), ("DITTO", "DE"))
+        self.assertFalse(pokemon.pruefe("Ditto Plüschfigur 20 cm", cfg=CFG).passend)
+
+    def test_ditto_takte_und_fokus(self):
+        from waechter.naruto_lauf import fokus_shops, intervall_fuer
+        b = lade_betrieb()
+        self.assertEqual(intervall_fuer("produkt", b, thema_cfg=CFG, prioritaet=True), 60)
+        self.assertEqual(intervall_fuer("produkt", b, fokus=True, thema_cfg=CFG, prioritaet=True), 30)
+        self.assertEqual(intervall_fuer("produkt", b, thema_cfg=CFG), 300)
+        self.assertLessEqual(intervall_fuer("shopsuche", b, fokus=True, thema_cfg=CFG), 240)
+        z = {"pokemon": {"termine": {}}}
+        release = dt.datetime(2026, 11, 6, 8, 0, tzinfo=dt.timezone.utc)
+        self.assertIn("*", fokus_shops(z, CFG, b, release, "pokemon"))
+        self.assertNotIn("*", fokus_shops(z, CFG, b, dt.datetime(2026, 10, 26, 8, 0, tzinfo=dt.timezone.utc), "pokemon"))
+
+    def test_ditto_alarm_mit_prioritaet(self):
+        s = Szenario()
+        s.titel = "Pokémon 30th Celebration Ditto Premium Collection (EN)"
+        s.preis = "49.99"
+        e, l = s.lauf()
+        self.assertEqual([x["typ"] for x in e], [KAUFALARM])
+        self.assertIn("DITTO PREMIUM", s.kanal.nachrichten[-1])
+        self.assertIn(e[0]["angebot"], l.zustand["pokemon"]["offene_alarme"])
+
     def test_push_text(self):
         t = push.formatiere({"typ": KAUFALARM, "thema": "pokemon", "text": "x", "titel": "ETB", "grenze_text": "bis 62 €"})
         self.assertNotIn("/gekauft", t)

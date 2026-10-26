@@ -290,6 +290,10 @@ neue Vorbestellung oder ein Shop, der es einfach noch nicht ausverkauft hat.
   mit dem Prüfergebnis, auch wenn Impressum/Versand DE nicht vollständig belegt sind. Risiko „mittel“ kommt als
   „ungeprüfter Shop“ mit den Warnsignalen, Risiko „hoch“ wird gar nicht gemeldet. Ist ein Angebot verdächtig billig
   (unter 60 % des Medians anderer Shops), gibt es eine deutliche Warnung.
+- **Priorität Ditto Premium Collection (Release 06.11.2026):** bekannte Ditto-Seiten jede Minute, vom 04.11. 18 Uhr bis
+  09.11. Fokus-Modus für alle Shops (Produktseiten alle 30 s, Suchen/Neuheiten alle 4 Min.), zusätzliche Shopsuche nach
+  „ditto premium“, Meldung auch bei unklarer Sprache, keine Obergrenze pro Lauf, 🔥🔥-Überschrift und 2 Erinnerungen im
+  Abstand von 5 Minuten. Grenze 55 €. Einstellungen unter `[prioritaet]`, `[fokus]` und `[[termine]]` in `config/pokemon.toml`.
 - **Shops ausnehmen:** `shops_ausschliessen` unter `[pruefung]` in `config/pokemon.toml` (gilt nur für Pokémon; derzeit tcgsniper.nl).
 - **Ausschalten:** `aktiv = false` unter `[pruefung]` in `config/pokemon.toml`.
 - **Zustand:** `laufzeit/pokemon/zustand.json` im Zweig `waechter-daten`.

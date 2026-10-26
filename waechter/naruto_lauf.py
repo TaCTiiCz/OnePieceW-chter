@@ -178,12 +178,22 @@ def _gruppe(art: str) -> str:
     return art
 
 
-def intervall_fuer(art: str, betrieb: dict, fokus: bool = False, thema_cfg: Optional[dict] = None) -> int:
+def intervall_fuer(art: str, betrieb: dict, fokus: bool = False, thema_cfg: Optional[dict] = None,
+                   prioritaet: bool = False) -> int:
     pr = (thema_cfg or {}).get("pruefung") if (thema_cfg or {}).get("thema") == "pokemon" else None
-    if pr:   # Pokémon: eigene, ruhigere Takte
+    if pr:   # Pokémon: eigene, ruhigere Takte; Fokus (Release) und Prioritätsprodukte schneller
+        fk, pz = thema_cfg.get("fokus") or {}, thema_cfg.get("prioritaet") or {}
         if art == "produkt":
-            return int(pr.get("produktseite_sekunden", 300))
-        return int(intervall_fuer(art, betrieb, False) * float(pr.get("intervall_faktor", 2)))
+            t = int(pr.get("produktseite_sekunden", 300))
+            if prioritaet:
+                t = min(t, int(pz.get("produktseite_sekunden", 60)))
+            if fokus:
+                t = min(t, int(fk.get("produktseite_sekunden", 30)))
+            return t
+        t = int(intervall_fuer(art, betrieb, False) * float(pr.get("intervall_faktor", 2)))
+        if fokus and _gruppe(art) in ("naruto", "schnell"):
+            t = min(t, int(fk.get("entdeckung_sekunden", 240)))
+        return t
     i = betrieb["intervalle"]
     g = _gruppe(art)
     if g == "produkt":
@@ -238,7 +248,8 @@ def synchronisiere(zustand: dict, haendler: list[Haendler], ncfg: dict, betrieb:
             continue  # Shop nicht (mehr) in der Liste, z. B. für dieses Thema ausgeschlossen
         if a.get("letzte") and a["letzte"].get("passend") is False:
             continue  # ausgeschlossene Seiten (z. B. Mythos TCG) nicht weiter abrufen
-        soll[f"produkt|{aid}"] = {"art": "produkt", "shop": a["shop"], "url": a["url"], "angebot": aid}
+        soll[f"produkt|{aid}"] = {"art": "produkt", "shop": a["shop"], "url": a["url"], "angebot": aid,
+                                  "prio": (a.get("letzte") or {}).get("variante") in ((ncfg.get("prioritaet") or {}).get("produkte") or [])}
     if onepiece:
         soll["onepiece"] = {"art": "onepiece", "shop": "onepiece", "url": ""}
     for tid in list(aufg):
@@ -246,7 +257,7 @@ def synchronisiere(zustand: dict, haendler: list[Haendler], ncfg: dict, betrieb:
             del aufg[tid]
     for tid, s in soll.items():
         f = s["shop"] in fokus or "*" in fokus
-        intervall = intervall_fuer(s["art"], betrieb, fokus=f, thema_cfg=ncfg)
+        intervall = intervall_fuer(s["art"], betrieb, fokus=f, thema_cfg=ncfg, prioritaet=bool(s.get("prio")))
         if tid not in aufg:
             versatz = 0 if s["art"] in ("produkt", "offiziell") else _hash(tid, intervall)
             aufg[tid] = {**s, "faellig": _iso(jetzt + dt.timedelta(seconds=versatz)), "fehlerserie": 0}
@@ -261,7 +272,7 @@ def synchronisiere(zustand: dict, haendler: list[Haendler], ncfg: dict, betrieb:
 def faellige(zustand: dict, jetzt: dt.datetime) -> list[tuple[str, dict]]:
     aufg = zustand.get("aufgaben", {})
     f = [(tid, a) for tid, a in aufg.items() if _zeit(a["faellig"]) <= jetzt]
-    return sorted(f, key=lambda x: (PRIO.get(_gruppe(x[1]["art"]), 9), x[1]["faellig"]))
+    return sorted(f, key=lambda x: (PRIO.get(_gruppe(x[1]["art"]), 9), not x[1].get("prio"), x[1]["faellig"]))
 
 
 def erledigt(a: dict, ok: bool, jetzt: dt.datetime, betrieb: dict, fehler: Optional[str] = None) -> None:
@@ -468,11 +479,11 @@ def preis_stufe(b: NBeob, ncfg: dict) -> tuple[Optional[str], str]:
     grenze = (v.get("max_euro") or {}).get(b.variante)
     preis = b.preis_cent / 100
     if grenze and preis > grenze:
-        return "ueber", f"über deiner Grenze von {grenze} € – vermutlich Platzhalter- oder Aufschlagpreis"
+        return "ueber", f"über deiner Grenze von {str(grenze).replace('.', ',')} € – vermutlich Platzhalter- oder Aufschlagpreis"
     if fair and preis <= fair:
-        return "fair", f"fairer Preis (bis {fair} €)"
+        return "fair", f"fairer Preis (bis {str(fair).replace('.', ',')} €)"
     if grenze:
-        return "ok", f"unter deiner Grenze von {grenze} €"
+        return "ok", f"unter deiner Grenze von {str(grenze).replace('.', ',')} €"
     return None, ""
 
 
@@ -667,7 +678,8 @@ class Lauf:
         if stufe in (None, "ueber"):   # kein Euro-Preis oder über der Grenze: nicht melden, später erneut prüfen
             alt["gemeldet"] = False
             return False
-        if not b.passend or (b.sicherheit != m.SICHER and not self.ncfg["alarm"].get("unsichere_melden", False)):
+        prio = b.variante in ((self.ncfg.get("prioritaet") or {}).get("produkte") or [])
+        if not b.passend or (b.sicherheit != m.SICHER and not prio and not self.ncfg["alarm"].get("unsichere_melden", False)):
             return False
         return not alt.get("gemeldet")
 
@@ -683,12 +695,17 @@ class Lauf:
         v = self.ncfg.get("vorbestellung", {})
         maxi = int(v.get("erinnerungen_max", 2))
         abstand = dt.timedelta(minutes=float(v.get("erinnerung_minuten", 10)))
+        pz = self.ncfg.get("prioritaet") or {}
+        if self.thema.nur_normalpreis and b.variante in (pz.get("produkte") or []):
+            maxi = int(pz.get("erinnerungen", 2))
+            abstand = dt.timedelta(minutes=float(pz.get("erinnerung_minuten", 5)))
         jetzt = dt.datetime.now(dt.timezone.utc)
         if b.status not in m.KAUFBAR or o.get("erinnerungen", 0) >= maxi or jetzt - _zeit(o["zuletzt"]) < abstand:
             return
         n = o.get("erinnerungen", 0) + 1
         e = self._ereignis(ERINNERUNG, b, f"Immer noch bestellbar ({n}. Erinnerung): {b.titel} bei {h.name}",
-                           {**_kauf_extra(b, self.ncfg), "fp_zusatz": f"erinnerung{n}|{o['zeit']}"})
+                           {**_kauf_extra(b, self.ncfg), "fp_zusatz": f"erinnerung{n}|{o['zeit']}",
+                            "prioritaet": b.variante in ((self.ncfg.get("prioritaet") or {}).get("produkte") or [])})
         o["erinnerungen"] = n
         o["zuletzt"] = e["zeit"]
         if n >= maxi:
@@ -696,7 +713,8 @@ class Lauf:
 
     def _kaufalarm_pruefen(self, b: NBeob, h: Haendler, erkannt_t: float) -> None:
         """Vor jedem Kaufalarm: Produktseite ERNEUT abrufen und streng prüfen."""
-        if self.thema.nur_normalpreis:
+        prio = b.variante in ((self.ncfg.get("prioritaet") or {}).get("produkte") or [])
+        if self.thema.nur_normalpreis and not prio:   # Prioritätsprodukte (Ditto) zählen nicht gegen die Obergrenze
             max_lauf = int((self.ncfg.get("pruefung") or {}).get("max_meldungen_pro_lauf", 8))
             with self.lock:
                 if self.alarme_in_diesem_lauf >= max_lauf:
@@ -750,8 +768,12 @@ class Lauf:
         if extra.get("preisstufe") in (None, "ueber"):
             alt["gemeldet"] = False
             return
-        if b2.sicherheit != m.SICHER and not self.ncfg["alarm"].get("unsichere_melden", False):
+        if not pokemon.preis_plausibel(b2.variante, b2.preis_cent, self.ncfg):
+            alt["gemeldet"], alt["gesperrt"] = True, "Preis unplausibel niedrig (Einzelkarte, Anzahlung oder Fehler)"
             return
+        if b2.sicherheit != m.SICHER and not self.ncfg["alarm"].get("unsichere_melden", False) \
+                and b2.variante not in ((self.ncfg.get("prioritaet") or {}).get("produkte") or []):
+            return   # Prioritätsprodukte (Ditto) werden auch bei unklarer Sprache gemeldet
         wort = "Jetzt lieferbar" if b2.status == m.IN_STOCK else "Vorbestellbar"
         extra = {**extra, "grenze_text": pokemon.grenze_text(b2.variante, self.ncfg), "spekulativ": False}
         # Fake-Shop-Prüfung entscheidet bei Pokémon über die Einstufung des Shops
@@ -774,9 +796,15 @@ class Lauf:
         else:
             typ = UNGEPRUEFT
         zusatz = " (UNGEPRÜFTER Shop – vor dem Kauf prüfen)" if typ == UNGEPRUEFT else ""
+        prio = b2.variante in ((self.ncfg.get("prioritaet") or {}).get("produkte") or [])
+        if prio:
+            extra["prioritaet"] = True
         e = self._ereignis(typ, b2, f"{wort} zum Normalpreis ({b2.sprache}): {b2.titel} bei {h.name}{zusatz}", extra)
         alt["gemeldet"] = bool(e.get("gesendet") or e.get("unterdrueckt") or not self.push.aktiv)
         alt["gemeldet_zeit"] = e["zeit"]
+        if prio and e.get("gesendet"):   # Erinnerungen, solange bestellbar
+            self.zustand[self.bereich].setdefault("offene_alarme", {})[b.angebot_id] = {
+                "zeit": e["zeit"], "zuletzt": e["zeit"], "erinnerungen": 0, "titel": b2.titel, "shop": h.name}
 
     def _preis_verdacht(self, b: NBeob, faktor: float = 0.6, min_proben: int = 3) -> Optional[str]:
         """Pokémon: verdächtig billig im Vergleich zu anderen Shops (gleiches Produkt, gleiche Sprache)?"""
@@ -918,8 +946,9 @@ class Lauf:
         if hasattr(self.abrufer, "host_zustand"):
             self.abrufer.host_zustand = self.zustand["hosts"]
         g = self.betrieb["grenzen"]
+        pro_shop = int((self.ncfg.get("pruefung") or {}).get("max_anfragen_pro_shop_und_lauf") or g["max_anfragen_pro_shop_und_lauf"])
         for h in haendler:
-            self.abrufer.setze_host_regeln(h.host, float(g["min_abstand_sekunden"]), int(g["max_anfragen_pro_shop_und_lauf"]))
+            self.abrufer.setze_host_regeln(h.host, float(g["min_abstand_sekunden"]), pro_shop)
         self.abrufer.setze_host_regeln("www.naruto-cardgame.com", 5.0, 6)
         synchronisiere(self.zustand, haendler, self.ncfg, self.betrieb, self.jetzt, onepiece=self.onepiece, thema=self.thema)
         f = faellige(self.zustand, self.jetzt) if nur_faellige else list(self.zustand["aufgaben"].items())

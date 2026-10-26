@@ -67,6 +67,8 @@ def formatiere(e: dict, ncfg: Optional[dict] = None, nachgesendet: bool = False,
     poke = e.get("thema") == "pokemon"
     feuer = "🔥 " if e.get("preisstufe") == "fair" and e["typ"] in KAUFTYPEN else ""
     kopf = (KOPF_POKEMON.get(e["typ"]) if poke else None) or KOPF.get(e["typ"], e["typ"])
+    if poke and e.get("prioritaet") and e["typ"] in ("KAUFALARM", "UNGEPRUEFTER_HINWEIS", "ERINNERUNG"):
+        kopf = "🔥🔥 DITTO PREMIUM – JETZT SCHNELL SEIN! " + kopf
     z.append(f"{feuer}<b>{kopf}</b>" + (" (nachgesendet)" if nachgesendet else ""))
     z.append(html.escape(e.get("text", "")))
     if e.get("warenkorb_url") and e["typ"] in KAUFTYPEN:
