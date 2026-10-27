@@ -36,6 +36,7 @@ KOPF_POKEMON = {
     "KAUFALARM": "🎴 POKÉMON 30 JAHRE – zum Normalpreis bestellbar",
     "UNGEPRUEFTER_HINWEIS": "🎴⚠️ POKÉMON 30 JAHRE – Normalpreis bei UNGEPRÜFTEM Shop",
 }
+PRIO_NAME = {"DITTO": "DITTO PREMIUM", "UPC": "ULTRA-PREMIUM-KOLLEKTION"}   # Pokémon-Prioritätsprodukte
 KAUFTYPEN = ("KAUFALARM", "KAUFALARM_ANDERE_SPRACHE", "ERINNERUNG")
 VERTRAUEN = {"freigegeben": "✅ geprüft (dokumentiert)", "vorgeprueft": "☑️ automatisch vorgeprüft (Impressum/Versand DE)",
              "ungeprueft": "❗ UNGEPRÜFT",
@@ -68,7 +69,8 @@ def formatiere(e: dict, ncfg: Optional[dict] = None, nachgesendet: bool = False,
     feuer = "🔥 " if e.get("preisstufe") == "fair" and e["typ"] in KAUFTYPEN else ""
     kopf = (KOPF_POKEMON.get(e["typ"]) if poke else None) or KOPF.get(e["typ"], e["typ"])
     if poke and e.get("prioritaet") and e["typ"] in ("KAUFALARM", "UNGEPRUEFTER_HINWEIS", "ERINNERUNG"):
-        kopf = "🔥🔥 DITTO PREMIUM – JETZT SCHNELL SEIN! " + kopf
+        name = PRIO_NAME.get(e.get("variante") or "", "PRIORITÄT")
+        kopf = f"🔥🔥 {name} – JETZT SCHNELL SEIN! " + kopf
     z.append(f"{feuer}<b>{kopf}</b>" + (" (nachgesendet)" if nachgesendet else ""))
     z.append(html.escape(e.get("text", "")))
     if e.get("warenkorb_url") and e["typ"] in KAUFTYPEN:
