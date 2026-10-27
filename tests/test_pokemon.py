@@ -169,6 +169,22 @@ class Meldungen(unittest.TestCase):
         self.assertIn("DITTO PREMIUM", s.kanal.nachrichten[-1])
         self.assertIn(e[0]["angebot"], l.zustand["pokemon"]["offene_alarme"])
 
+    def test_upc_alarm_mit_prioritaet(self):
+        s = Szenario()
+        s.titel = "Pokémon TCG: 30th Celebration Ultra-Premium Collection Day (EN)"
+        s.preis = "199.99"
+        e, l = s.lauf()
+        self.assertEqual([x["typ"] for x in e], [KAUFALARM])
+        self.assertIn("ULTRA-PREMIUM-KOLLEKTION", s.kanal.nachrichten[-1])
+        self.assertIn(e[0]["angebot"], l.zustand["pokemon"]["offene_alarme"])
+
+    def test_upc_ueber_grenze_still(self):
+        s = Szenario()
+        s.titel = "Pokémon TCG: 30th Celebration Ultra-Premium Collection Night (EN)"
+        s.preis = "499.99"
+        e, _ = s.lauf()
+        self.assertEqual([x["typ"] for x in e if x.get("gesendet")], [])
+
     def test_push_text(self):
         t = push.formatiere({"typ": KAUFALARM, "thema": "pokemon", "text": "x", "titel": "ETB", "grenze_text": "bis 62 €"})
         self.assertNotIn("/gekauft", t)
