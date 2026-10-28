@@ -1,6 +1,51 @@
 {
- "aktualisiert": "2026-10-27T03:49:37+00:00",
+ "aktualisiert": "2026-10-28T03:57:23+00:00",
  "haendler": {
+  "1001hobbies": {
+   "basis_url": "https://www.1001hobbies.es",
+   "domain": "1001hobbies.es",
+   "entdeckung": [
+    {
+     "art": "sitemap",
+     "url": "https://www.1001hobbies.es/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-28T03:57:11+00:00",
+   "fake_check": {
+    "domain_alter_tage": null,
+    "punkte": 3,
+    "signale": [
+     "Rechtstexte fehlen: agb, widerruf, datenschutz",
+     "keine Kontaktdaten auf Startseite/Impressum"
+    ],
+    "stufe": "mittel"
+   },
+   "geprueft_am": "2026-10-28T03:57:11+00:00",
+   "gruende": [
+    "kein erkennbares TCG-Sortiment auf der Startseite",
+    "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin"
+   ],
+   "id": "1001hobbies",
+   "impressum_url": null,
+   "land": "ES",
+   "land_quelle": "Kandidatenliste",
+   "name": "1001hobbies.es",
+   "naruto_erwaehnt": false,
+   "plattform": "unbekannt",
+   "quelle": "Brave-Suche 2026-10-28: Naruto Card Game Bandai comprar",
+   "shop_merkmale": false,
+   "sitemaps": [
+    "https://www.1001hobbies.es/sitemap.xml"
+   ],
+   "status": "ungeeignet",
+   "tcg_bezug": false,
+   "tcg_hinweise": [],
+   "tdm_vorbehalt": false,
+   "versand_de": "unbekannt",
+   "versand_de_quelle": "",
+   "versand_url": null,
+   "vertrauen": "ungeprueft"
+  },
   "1piecetcg": {
    "basis_url": "https://1piecetcg.fr",
    "domain": "1piecetcg.fr",
@@ -19027,6 +19072,75 @@
    "versand_url": null,
    "vertrauen": "ungeprueft"
   },
+  "maxtcg": {
+   "basis_url": "https://www.maxtcg.com",
+   "domain": "maxtcg.com",
+   "entdeckung": [
+    {
+     "art": "shopsuche",
+     "url": "https://www.maxtcg.com/?s=naruto"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://www.maxtcg.com/one-piece-preorder/"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://www.maxtcg.com/product-category/onepiece/eb-05/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://www.maxtcg.com/product-category/onepiece/maxtcg-one-piece-mystery-box/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://www.maxtcg.com/onepiece-products/"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://www.maxtcg.com/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-28T03:57:11+00:00",
+   "fake_check": {
+    "domain_alter_tage": 1364,
+    "punkte": 3,
+    "signale": [
+     "Rechtstexte fehlen: agb, widerruf, datenschutz",
+     "keine Kontaktdaten auf Startseite/Impressum"
+    ],
+    "stufe": "mittel"
+   },
+   "geprueft_am": "2026-10-28T03:57:11+00:00",
+   "gruende": [
+    "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)"
+   ],
+   "id": "maxtcg",
+   "impressum_url": null,
+   "land": "?",
+   "land_quelle": "Domain-Endung",
+   "name": "maxtcg.com",
+   "naruto_erwaehnt": false,
+   "plattform": "woocommerce",
+   "quelle": "Brave-Suche 2026-10-28: One Piece Booster Box Shop",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://www.maxtcg.com/sitemap.xml"
+   ],
+   "status": "ungeeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "one piece",
+    "tcg",
+    "trading card"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "unbekannt",
+   "versand_de_quelle": "",
+   "versand_url": null,
+   "vertrauen": "ungeprueft"
+  },
   "mcgillicuddystoyshop": {
    "basis_url": "https://mcgillicuddystoyshop.ie",
    "domain": "mcgillicuddystoyshop.ie",
@@ -32160,6 +32274,83 @@
    "vertrauen": "vorgeprueft",
    "waehrung": "EUR"
   },
+  "tradingcardtemple": {
+   "basis_url": "https://tradingcard-temple.de",
+   "domain": "tradingcard-temple.de",
+   "entdeckung": [
+    {
+     "art": "shopify_neueste",
+     "url": "https://tradingcard-temple.de/products.json?limit=100"
+    },
+    {
+     "art": "shopify_katalog",
+     "url": "https://tradingcard-temple.de/products.json?limit=250"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://tradingcard-temple.de/collections/one-piece-booster"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://tradingcard-temple.de/collections/one-piece-display"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://tradingcard-temple.de/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-28T03:57:11+00:00",
+   "fake_check": {
+    "domain_alter_tage": null,
+    "punkte": 0,
+    "signale": [],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-10-28T03:57:11+00:00",
+   "gruende": [],
+   "id": "tradingcardtemple",
+   "impressum": {
+    "beleg": "hkeporsch@gmail.com \\u003cbr\\u003e\\u003cbr\\u003e\\u003cbr\\u003e\\u003cstrong\\u003eUmsatzsteuer-ID:\\u003c\\/strong\\u003e \\u003cbr\\u003eD",
+    "rechtsform": "GbR",
+    "register": true,
+    "ust_id": null
+   },
+   "impressum_url": "https://tradingcard-temple.de/policies/legal-notice",
+   "land": "DE",
+   "land_quelle": "Kandidatenliste",
+   "name": "tradingcard-temple.de",
+   "naruto_erwaehnt": false,
+   "plattform": "shopify",
+   "quelle": "Brave-Suche 2026-10-28: One Piece Card Game Display Shop",
+   "shop_land_meta": "DE",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://tradingcard-temple.de/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "display",
+    "lorcana",
+    "magic: the gathering",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "sammelkarten"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "https://tradingcard-temple.de/meta.json (ships_to_countries)",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": true,
+    "nennt_eu": false
+   },
+   "versand_url": "https://tradingcard-temple.de/policies/shipping-policy",
+   "vertrauen": "vorgeprueft",
+   "waehrung": "EUR"
+  },
   "tradingtoys": {
    "basis_url": "https://tradingtoys.de",
    "domain": "tradingtoys.de",
@@ -35452,17 +35643,17 @@
  },
  "version": 1,
  "zusammenfassung": {
-  "geeignet": 271,
-  "kandidaten": 531,
+  "geeignet": 272,
+  "kandidaten": 534,
   "land": {
-   "?": 96,
+   "?": 97,
    "AT": 22,
    "BE": 15,
    "CA": 3,
    "CH": 19,
-   "DE": 121,
+   "DE": 122,
    "DK": 1,
-   "ES": 30,
+   "ES": 31,
    "EU": 9,
    "FI": 1,
    "FR": 50,
@@ -35483,7 +35674,7 @@
    "UK": 10,
    "US": 15
   },
-  "mit_entdeckungsweg": 271,
+  "mit_entdeckungsweg": 272,
   "naruto_erwaehnt": 161,
   "plattform": {
    "?": 77,
@@ -35496,28 +35687,28 @@
    "oxid": 2,
    "plentymarkets": 1,
    "prestashop": 2,
-   "shopify": 176,
+   "shopify": 177,
    "shopware": 10,
-   "unbekannt": 173,
+   "unbekannt": 174,
    "wix": 7,
-   "woocommerce": 51
+   "woocommerce": 52
   },
   "status": {
    "blockiert": 72,
-   "geeignet": 271,
+   "geeignet": 272,
    "nicht_erreichbar": 5,
-   "ungeeignet": 183
+   "ungeeignet": 185
   },
   "versand_de": {
    "?": 77,
-   "ja": 191,
+   "ja": 192,
    "nein": 34,
-   "unbekannt": 185,
+   "unbekannt": 187,
    "vermutlich": 44
   },
   "vertrauen": {
-   "ungeprueft": 433,
-   "vorgeprueft": 98
+   "ungeprueft": 435,
+   "vorgeprueft": 99
   }
  }
 }
