@@ -1,5 +1,5 @@
 {
- "aktualisiert": "2026-10-28T03:57:23+00:00",
+ "aktualisiert": "2026-10-29T03:59:39+00:00",
  "haendler": {
   "1001hobbies": {
    "basis_url": "https://www.1001hobbies.es",
@@ -737,6 +737,99 @@
    },
    "versand_url": "https://allyoucanplay.eu/policies/shipping-policy",
    "vertrauen": "ungeprueft",
+   "waehrung": "EUR"
+  },
+  "alphahype": {
+   "basis_url": "https://alphahype.de",
+   "domain": "alphahype.de",
+   "entdeckung": [
+    {
+     "art": "shopify_neueste",
+     "url": "https://alphahype.de/products.json?limit=100"
+    },
+    {
+     "art": "shopify_katalog",
+     "url": "https://alphahype.de/products.json?limit=250"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://alphahype.de/collections/naruto"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://alphahype.de/collections/preorder"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://alphahype.de/collections/neu"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://alphahype.de/collections/one-piece"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://alphahype.de/collections/dragon-ball"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://alphahype.de/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-29T03:59:21+00:00",
+   "fake_check": {
+    "domain_alter_tage": null,
+    "punkte": 0,
+    "signale": [
+     "Bewertungs-/Gütesiegel-Hinweis (positiv, nicht überprüft)"
+    ],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-10-29T03:59:21+00:00",
+   "gruende": [],
+   "id": "alphahype",
+   "impressum": {
+    "beleg": "76 79864372\\u003cbr\\u003eE-Mail: info@alphahype.de\\u003c\\/p\\u003e\\n\\u003cp\\u003eUmsatzsteuer-Identifikationsnummer gemäß § 27a Umsat",
+    "rechtsform": null,
+    "register": true,
+    "ust_id": null
+   },
+   "impressum_url": "https://alphahype.de/pages/impressum",
+   "land": "DE",
+   "land_quelle": "Kandidatenliste",
+   "name": "alphahype.de",
+   "naruto_erwaehnt": true,
+   "plattform": "shopify",
+   "quelle": "Brave-Suche 2026-10-29: One Piece OP15 Display auf Lager",
+   "shop_land_meta": "DE",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://alphahype.de/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "display",
+    "dragon ball",
+    "magic: the gathering",
+    "naruto",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "sammelkarten",
+    "tcg"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "https://alphahype.de/meta.json (ships_to_countries)",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": false,
+    "nennt_eu": false
+   },
+   "versand_url": "https://alphahype.de/collections/48h-express-versand",
+   "vertrauen": "vorgeprueft",
    "waehrung": "EUR"
   },
   "alphaspel": {
@@ -18500,6 +18593,84 @@
    "versand_url": null,
    "vertrauen": "ungeprueft"
   },
+  "majincards": {
+   "basis_url": "https://majincards.de",
+   "domain": "majincards.de",
+   "entdeckung": [
+    {
+     "art": "shopify_neueste",
+     "url": "https://majincards.de/products.json?limit=100"
+    },
+    {
+     "art": "shopify_katalog",
+     "url": "https://majincards.de/products.json?limit=250"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://majincards.de/collections/naruto-kayou"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://majincards.de/collections/one-piece"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://majincards.de/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-29T03:59:21+00:00",
+   "fake_check": {
+    "domain_alter_tage": null,
+    "punkte": 0,
+    "signale": [],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-10-29T03:59:21+00:00",
+   "gruende": [],
+   "id": "majincards",
+   "impressum": {
+    "beleg": "rds.de\\u003cbr \\/\\u003e\\n\\u003cbr \\/\\u003e\\nUmsatzsteuer-Identifikationsnummer: DE367810396\\u003cbr \\/\\u003e\\nUmsatzsteuerbefreit (",
+    "rechtsform": null,
+    "register": true,
+    "ust_id": "DE367810396"
+   },
+   "impressum_url": "https://majincards.de/policies/legal-notice",
+   "land": "DE",
+   "land_quelle": "Kandidatenliste",
+   "name": "majincards.de",
+   "naruto_erwaehnt": true,
+   "plattform": "shopify",
+   "quelle": "Brave-Suche 2026-10-29: One Piece Card Game Display Restock",
+   "shop_land_meta": "DE",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://majincards.de/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "display",
+    "dragon ball",
+    "naruto",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "sammelkarten",
+    "tcg"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "https://majincards.de/meta.json (ships_to_countries)",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": true,
+    "nennt_eu": true
+   },
+   "versand_url": "https://majincards.de/pages/versand",
+   "vertrauen": "vorgeprueft",
+   "waehrung": "EUR"
+  },
   "manavortex": {
    "basis_url": "https://manavortex.es",
    "domain": "manavortex.es",
@@ -24601,6 +24772,78 @@
    "status": "blockiert",
    "vertrauen": "ungeprueft"
   },
+  "pokeunlimited": {
+   "basis_url": "https://pokeunlimited.com",
+   "domain": "pokeunlimited.com",
+   "entdeckung": [
+    {
+     "art": "shopify_neueste",
+     "url": "https://pokeunlimited.com/products.json?limit=100"
+    },
+    {
+     "art": "shopify_katalog",
+     "url": "https://pokeunlimited.com/products.json?limit=250"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://pokeunlimited.com/collections/one-piece-simplified-chinese-booster-boxes"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://pokeunlimited.com/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-29T03:59:21+00:00",
+   "fake_check": {
+    "domain_alter_tage": 1334,
+    "punkte": 0,
+    "signale": [],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-10-29T03:59:21+00:00",
+   "gruende": [
+    "Land US nicht in Europa",
+    "liefert laut Shopdaten nicht nach Deutschland"
+   ],
+   "id": "pokeunlimited",
+   "impressum": {
+    "fehler": "Seite nicht gefunden (404)"
+   },
+   "impressum_url": "https://pokeunlimited.com/policies/legal-notice",
+   "land": "US",
+   "land_quelle": "Shopify-Shopdaten (meta.json)",
+   "name": "pokeunlimited.com",
+   "naruto_erwaehnt": false,
+   "plattform": "shopify",
+   "quelle": "Brave-Suche 2026-10-29: One Piece Booster Box Restock",
+   "shop_land_meta": "US",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://pokeunlimited.com/sitemap.xml"
+   ],
+   "status": "ungeeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "display",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "tcg",
+    "trading card"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "nein",
+   "versand_de_quelle": "https://pokeunlimited.com/meta.json (ships_to_countries)",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": false,
+    "nennt_eu": false
+   },
+   "versand_url": "https://pokeunlimited.com/policies/shipping-policy",
+   "vertrauen": "ungeprueft",
+   "waehrung": "USD"
+  },
   "pokezenith": {
    "basis_url": "https://www.pokezenith.com",
    "domain": "pokezenith.com",
@@ -25348,6 +25591,78 @@
    "versand_url": "https://rarus.at/collections/48h-lieferung",
    "vertrauen": "vorgeprueft",
    "waehrung": "EUR"
+  },
+  "ravecards": {
+   "basis_url": "https://ravecards.com",
+   "domain": "ravecards.com",
+   "entdeckung": [
+    {
+     "art": "shopsuche",
+     "url": "https://ravecards.com/search?sSearch=naruto"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://ravecards.com/onepiece/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://ravecards.com/onepiece/displays/"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://ravecards.com/sitemap_index.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-29T03:59:21+00:00",
+   "fake_check": {
+    "domain_alter_tage": 2072,
+    "punkte": 0,
+    "signale": [],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-10-29T03:59:21+00:00",
+   "gruende": [],
+   "id": "ravecards",
+   "impressum": {
+    "beleg": "-Mail: service@ravecards.com Umsatzsteuer-Identifikations- Nr. gem. § 27a UStG: DE338281070 Inhalte: Verantwortlich für den Inhalt",
+    "rechtsform": "GbR",
+    "register": true,
+    "ust_id": "DE338281070"
+   },
+   "impressum_url": "https://ravecards.com/impressum",
+   "land": "DE",
+   "land_quelle": "USt-ID im Impressum",
+   "name": "ravecards.com",
+   "naruto_erwaehnt": false,
+   "plattform": "unbekannt",
+   "quelle": "Brave-Suche 2026-10-29: One Piece Card Game Display Restock",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://ravecards.com/sitemap_index.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "digimon",
+    "display",
+    "dragon ball",
+    "gundam",
+    "lorcana",
+    "pokemon",
+    "tcg",
+    "yu-gi-oh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "Inlandshändler (Land DE)",
+   "versand_hinweise": {
+    "betrag_hinweis": "5,99 € (automatisch gelesen, unbestätigt)",
+    "nennt_deutschland": true,
+    "nennt_eu": true
+   },
+   "versand_url": "https://ravecards.com/versand-und-zahlungsbedingungen",
+   "vertrauen": "vorgeprueft"
   },
   "rayskartenhaus": {
    "basis_url": "https://rays-kartenhaus.at",
@@ -32726,6 +33041,70 @@
    "versand_url": null,
    "vertrauen": "ungeprueft"
   },
+  "uagna": {
+   "basis_url": "https://www.uagna.it",
+   "domain": "uagna.it",
+   "entdeckung": [
+    {
+     "art": "shopsuche",
+     "url": "https://www.uagna.it/?s=naruto"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://www.uagna.it/videogiochi/xbox-year-in-review-diventa-xbox-playback-ecco-tutte-le-novita-per-il-25-anniversario-218958"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://www.uagna.it/videogiochi/arc-raiders-le-novita-di-frozen-trail-218311"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://www.uagna.it/videogiochi/one-piece-grand-gourmet-recensione-218789"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://www.uagna.it/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-10-29T03:59:21+00:00",
+   "fake_check": {
+    "domain_alter_tage": null,
+    "punkte": 2,
+    "signale": [
+     "Rechtstexte fehlen: agb, widerruf"
+    ],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-10-29T03:59:21+00:00",
+   "gruende": [
+    "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin"
+   ],
+   "id": "uagna",
+   "impressum_url": null,
+   "land": "IT",
+   "land_quelle": "Kandidatenliste",
+   "name": "uagna.it",
+   "naruto_erwaehnt": false,
+   "plattform": "unbekannt",
+   "quelle": "Brave-Suche 2026-10-29: Naruto Card Game Bandai negozio",
+   "shop_merkmale": false,
+   "sitemaps": [
+    "https://www.uagna.it/sitemap.xml"
+   ],
+   "status": "ungeeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "display",
+    "one piece",
+    "pokemon",
+    "pokémon"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "unbekannt",
+   "versand_de_quelle": "",
+   "versand_url": null,
+   "vertrauen": "ungeprueft"
+  },
   "ubuy": {
    "domain": "ubuy.co.nl",
    "entdeckung": [],
@@ -35643,15 +36022,15 @@
  },
  "version": 1,
  "zusammenfassung": {
-  "geeignet": 272,
-  "kandidaten": 534,
+  "geeignet": 275,
+  "kandidaten": 539,
   "land": {
    "?": 97,
    "AT": 22,
    "BE": 15,
    "CA": 3,
    "CH": 19,
-   "DE": 122,
+   "DE": 125,
    "DK": 1,
    "ES": 31,
    "EU": 9,
@@ -35661,7 +36040,7 @@
    "HR": 1,
    "HU": 1,
    "IE": 2,
-   "IT": 39,
+   "IT": 40,
    "JP": 2,
    "MX": 1,
    "NL": 38,
@@ -35672,10 +36051,10 @@
    "SI": 1,
    "TW": 1,
    "UK": 10,
-   "US": 15
+   "US": 16
   },
-  "mit_entdeckungsweg": 272,
-  "naruto_erwaehnt": 161,
+  "mit_entdeckungsweg": 275,
+  "naruto_erwaehnt": 163,
   "plattform": {
    "?": 77,
    "ecwid": 2,
@@ -35687,28 +36066,28 @@
    "oxid": 2,
    "plentymarkets": 1,
    "prestashop": 2,
-   "shopify": 177,
+   "shopify": 180,
    "shopware": 10,
-   "unbekannt": 174,
+   "unbekannt": 176,
    "wix": 7,
    "woocommerce": 52
   },
   "status": {
    "blockiert": 72,
-   "geeignet": 272,
+   "geeignet": 275,
    "nicht_erreichbar": 5,
-   "ungeeignet": 185
+   "ungeeignet": 187
   },
   "versand_de": {
    "?": 77,
-   "ja": 192,
-   "nein": 34,
-   "unbekannt": 187,
+   "ja": 195,
+   "nein": 35,
+   "unbekannt": 188,
    "vermutlich": 44
   },
   "vertrauen": {
-   "ungeprueft": 435,
-   "vorgeprueft": 99
+   "ungeprueft": 437,
+   "vorgeprueft": 102
   }
  }
 }
