@@ -1,10 +1,10 @@
 {
- "updated": "2026-10-31T23:50:31+00:00",
+ "updated": "2026-11-01T23:47:00+00:00",
  "quelle": "github",
- "state": "alert",
+ "state": "checking",
  "current": null,
- "last_run": "2026-10-31T23:50:17+00:00",
- "run_seconds": 13.1,
+ "last_run": "2026-11-01T23:46:38+00:00",
+ "run_seconds": 21.3,
  "sites": [
   {
    "id": "produkt",
@@ -12,8 +12,8 @@
    "agent": "naruto",
    "status": "ok",
    "im_lauf": true,
-   "last_checked": "2026-10-31T23:50:21+00:00",
-   "detail": "17 Aufgaben"
+   "last_checked": "2026-11-01T23:46:57+00:00",
+   "detail": "19 Aufgaben"
   },
   {
    "id": "entdeckung",
@@ -21,8 +21,8 @@
    "agent": "naruto",
    "status": "ok",
    "im_lauf": true,
-   "last_checked": "2026-10-31T23:50:28+00:00",
-   "detail": "1758 Aufgaben, 150 mit Fehlern"
+   "last_checked": "2026-11-01T23:46:38+00:00",
+   "detail": "1809 Aufgaben, 168 mit Fehlern"
   },
   {
    "id": "op_restock",
@@ -30,7 +30,7 @@
    "agent": "onepiece",
    "status": "ok",
    "im_lauf": true,
-   "last_checked": "2026-10-31T23:50:30+00:00",
+   "last_checked": "2026-11-01T23:47:00+00:00",
    "detail": "1 Aufgaben"
   },
   {
@@ -39,57 +39,57 @@
    "agent": "onepiece",
    "status": "ok",
    "im_lauf": true,
-   "last_checked": "2026-10-31T23:50:30+00:00",
+   "last_checked": "2026-11-01T23:47:00+00:00",
    "detail": "1 Aufgaben"
   }
  ],
  "events": [
   {
-   "time": "2026-10-31T23:49:37+00:00",
+   "time": "2026-11-01T23:46:48+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-10-31T23:48:32+00:00",
+   "time": "2026-11-01T23:42:17+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-10-31T23:47:34+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Ultra Premium Coll…"
-  },
-  {
-   "time": "2026-10-31T23:47:21+00:00",
+   "time": "2026-11-01T23:39:13+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-10-31T23:45:10+00:00",
+   "time": "2026-11-01T23:36:57+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-10-31T23:43:14+00:00",
+   "time": "2026-11-01T23:35:53+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-10-31T23:39:56+00:00",
+   "time": "2026-11-01T23:34:15+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-10-31T23:36:07+00:00",
+   "time": "2026-11-01T23:25:40+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-10-31T23:35:09+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon - Pokémon 30th Celebration …"
-  },
-  {
-   "time": "2026-10-31T23:35:01+00:00",
+   "time": "2026-11-01T23:24:11+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-10-31T23:34:02+00:00",
+   "time": "2026-11-01T23:23:00+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-10-31T23:32:49+00:00",
+   "time": "2026-11-01T23:21:41+00:00",
+   "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
+  },
+  {
+   "time": "2026-11-01T23:20:37+00:00",
+   "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
+  },
+  {
+   "time": "2026-11-01T23:18:45+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   }
  ],
@@ -104,18 +104,18 @@
   }
  },
  "pokemon": {
-  "status": "catch",
-  "detail": "Neue passende Produktseite: Pokemon TCG: 30th Celebration - Figure Collection - Mewtwo be…",
-  "last_checked": "2026-10-31T23:50:12+00:00",
-  "aufgaben": 3171,
-  "bestellbar": 77,
-  "fang": "Neue passende Produktseite: Pokemon TCG: 30th Celebration - Figure Collection - Mewtwo bei strefakart.pl – noch NICHT b…",
+  "status": "fishing",
+  "detail": "angelt nach Normalpreisen · 3297 Aufgaben, 58 zum Normalpreis bestellbar",
+  "last_checked": "2026-11-01T23:46:33+00:00",
+  "aufgaben": 3297,
+  "bestellbar": 58,
+  "fang": null,
   "test": false
  },
  "stats": {
-  "haendler": 285,
-  "aufgaben": 1776,
-  "aufgaben_mit_fehlern": 150,
+  "haendler": 295,
+  "aufgaben": 1829,
+  "aufgaben_mit_fehlern": 168,
   "push_problem": false
  }
 }
