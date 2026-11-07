@@ -1,37 +1,37 @@
 {
- "updated": "2026-11-06T23:41:31+00:00",
+ "updated": "2026-11-07T23:45:54+00:00",
  "quelle": "github",
- "state": "checking",
+ "state": "alert",
  "current": null,
- "last_run": "2026-11-06T23:41:18+00:00",
- "run_seconds": 12.3,
+ "last_run": "2026-11-07T23:42:11+00:00",
+ "run_seconds": 222.1,
  "sites": [
   {
    "id": "produkt",
    "name": "Produkte",
    "agent": "naruto",
-   "status": "ok",
+   "status": "restock",
    "im_lauf": true,
-   "last_checked": "2026-11-06T23:41:27+00:00",
-   "detail": "31 Aufgaben"
+   "last_checked": "2026-11-07T23:42:29+00:00",
+   "detail": "Vorbestellbar: Bandai Naruto TCG Display Set 1 (Englisch) - Spielwarenparadies bei spielw…"
   },
   {
    "id": "entdeckung",
    "name": "Entdeckung",
    "agent": "naruto",
    "status": "ok",
-   "im_lauf": false,
-   "last_checked": "2026-11-06T23:38:58+00:00",
-   "detail": "2017 Aufgaben, 128 mit Fehlern"
+   "im_lauf": true,
+   "last_checked": "2026-11-07T23:44:53+00:00",
+   "detail": "2017 Aufgaben, 151 mit Fehlern"
   },
   {
    "id": "op_restock",
    "name": "Restock",
    "agent": "onepiece",
-   "status": "ok",
+   "status": "restock",
    "im_lauf": false,
-   "last_checked": "2026-11-06T23:38:32+00:00",
-   "detail": "1 Aufgaben"
+   "last_checked": "2026-11-07T23:40:07+00:00",
+   "detail": "⚠️ UNGEPRÜFTER SHOP – vor dem Kauf Impressum, Bewertungen und Versand prüfen, nicht per V…"
   },
   {
    "id": "op_vorbestellung",
@@ -39,62 +39,62 @@
    "agent": "onepiece",
    "status": "ok",
    "im_lauf": false,
-   "last_checked": "2026-11-06T23:38:32+00:00",
+   "last_checked": "2026-11-07T23:40:07+00:00",
    "detail": "1 Aufgaben"
   }
  ],
  "events": [
   {
-   "time": "2026-11-06T23:40:54+00:00",
+   "time": "2026-11-07T23:42:20+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-11-06T23:39:59+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon - Pokémon 30th Celebration …"
+   "time": "2026-11-07T23:41:34+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon Karmesin & Purpur – 30 Jahr…"
   },
   {
-   "time": "2026-11-06T23:39:59+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon - Pokémon 30 Jahre Booster …"
+   "time": "2026-11-07T23:41:34+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon Karmesin & Purpur – 30 Jahr…"
   },
   {
-   "time": "2026-11-06T23:39:59+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon - 30th Celebration Sylveon …"
+   "time": "2026-11-07T23:41:34+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon Karmesin & Purpur – 30 Jahr…"
   },
   {
-   "time": "2026-11-06T23:39:59+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon - 30th Celebration Greninja…"
+   "time": "2026-11-07T23:41:34+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon Karmesin & Purpur – 30 Jahr…"
   },
   {
-   "time": "2026-11-06T23:39:59+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon - 30th Celebration Binder C…"
-  },
-  {
-   "time": "2026-11-06T23:39:59+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon - 30 Jahre Ultra-Premium-Ko…"
-  },
-  {
-   "time": "2026-11-06T23:39:59+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon - 30 Jahre Ultra-Premium-Ko…"
-  },
-  {
-   "time": "2026-11-06T23:39:54+00:00",
+   "time": "2026-11-07T23:37:21+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-11-06T23:38:52+00:00",
+   "time": "2026-11-07T23:34:33+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-11-06T23:37:28+00:00",
+   "time": "2026-11-07T23:33:17+00:00",
+   "text": "KAUFALARM: Vorbestellbar: Bandai Naruto TCG Display Set 1 (Englisch) - Spielwarenparadies bei spielwarenparadies24.de"
+  },
+  {
+   "time": "2026-11-07T23:33:13+00:00",
+   "text": "FRUEHHINWEIS: Angekündigter Vorbestellstart 2027-08-31: Bandai Naruto TCG Display Set 1 (Englisch) - Spielwarenparadies bei…"
+  },
+  {
+   "time": "2026-11-07T23:33:03+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-11-06T23:36:20+00:00",
+   "time": "2026-11-07T23:31:50+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
+  },
+  {
+   "time": "2026-11-07T23:30:47+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokemon 30th Celebration - Booster"
   }
  ],
  "naruto": {
-  "bestellbar": 3,
+  "bestellbar": 4,
   "guenstigste": {
    "titel": "Naruto Card Game - Display 01 [ENG] PreOrder - Release: 2027",
    "shop": "Brickznmore",
@@ -105,17 +105,17 @@
  },
  "pokemon": {
   "status": "fishing",
-  "detail": "angelt nach Normalpreisen · 3671 Aufgaben, 65 zum Normalpreis bestellbar",
-  "last_checked": "2026-11-06T23:40:31+00:00",
-  "aufgaben": 3671,
+  "detail": "angelt nach Normalpreisen · 3664 Aufgaben, 65 zum Normalpreis bestellbar",
+  "last_checked": "2026-11-07T23:42:07+00:00",
+  "aufgaben": 3664,
   "bestellbar": 65,
   "fang": null,
   "test": false
  },
  "stats": {
-  "haendler": 329,
-  "aufgaben": 2049,
-  "aufgaben_mit_fehlern": 128,
+  "haendler": 330,
+  "aufgaben": 2050,
+  "aufgaben_mit_fehlern": 151,
   "push_problem": false
  }
 }
