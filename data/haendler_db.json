@@ -1,5 +1,5 @@
 {
- "aktualisiert": "2026-11-09T03:46:46+00:00",
+ "aktualisiert": "2026-11-09T11:39:04+00:00",
  "haendler": {
   "1001hobbies": {
    "basis_url": "https://www.1001hobbies.es",
@@ -2250,6 +2250,52 @@
    "versand_url": "https://b2b.tc-tradingcorner.de/policies/shipping-policy",
    "vertrauen": "vorgeprueft",
    "waehrung": "EUR"
+  },
+  "banduawargames": {
+   "basis_url": "https://banduawargames.com",
+   "domain": "banduawargames.com",
+   "entdeckung": [
+    {
+     "art": "sitemap",
+     "url": "https://banduawargames.com/1_index_sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-09T11:38:35+00:00",
+   "fake_check": {
+    "domain_alter_tage": 5620,
+    "punkte": 3,
+    "signale": [
+     "Rechtstexte fehlen: agb, widerruf, datenschutz",
+     "keine Kontaktdaten auf Startseite/Impressum"
+    ],
+    "stufe": "mittel"
+   },
+   "geprueft_am": "2026-11-09T11:38:35+00:00",
+   "gruende": [
+    "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)",
+    "kein erkennbares TCG-Sortiment auf der Startseite",
+    "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin"
+   ],
+   "id": "banduawargames",
+   "impressum_url": null,
+   "land": "?",
+   "land_quelle": "Domain-Endung",
+   "name": "banduawargames.com",
+   "naruto_erwaehnt": false,
+   "plattform": "unbekannt",
+   "quelle": "Brave-Suche 2026-11-09: One Piece Card Game display comprar",
+   "shop_merkmale": false,
+   "sitemaps": [
+    "https://banduawargames.com/1_index_sitemap.xml"
+   ],
+   "status": "ungeeignet",
+   "tcg_bezug": false,
+   "tcg_hinweise": [],
+   "tdm_vorbehalt": false,
+   "versand_de": "unbekannt",
+   "versand_de_quelle": "",
+   "versand_url": null,
+   "vertrauen": "ungeprueft"
   },
   "bangerpack": {
    "basis_url": "https://bangerpack.se",
@@ -5437,39 +5483,39 @@
    "waehrung": "EUR"
   },
   "cardcosmos2": {
-   "basis_url": "https://cardcosmos.de",
-   "domain": "cardcosmos.de",
+   "basis_url": "https://cardcosmos.ch",
+   "domain": "cardcosmos.ch",
    "entdeckung": [
     {
      "art": "shopify_neueste",
-     "url": "https://cardcosmos.de/products.json?limit=100"
+     "url": "https://cardcosmos.ch/products.json?limit=100"
     },
     {
      "art": "shopify_katalog",
-     "url": "https://cardcosmos.de/products.json?limit=250"
+     "url": "https://cardcosmos.ch/products.json?limit=250"
     },
     {
      "art": "kategorie_vorbestellung",
-     "url": "https://cardcosmos.de/collections/pokemon-release-kalender-2026"
+     "url": "https://cardcosmos.ch/collections/pokemon-release-kalender-2026"
     },
     {
      "art": "kategorie_vorbestellung",
-     "url": "https://cardcosmos.de/collections/magic-the-gathering-release"
+     "url": "https://cardcosmos.ch/collections/magic-the-gathering-release"
     },
     {
      "art": "kategorie_bandai",
-     "url": "https://cardcosmos.de/collections/one-piece-karten-kaufen"
+     "url": "https://cardcosmos.ch/collections/one-piece-karten-kaufen"
     },
     {
      "art": "kategorie_bandai",
-     "url": "https://cardcosmos.de/collections/one-piece-booster-displays"
+     "url": "https://cardcosmos.ch/collections/one-piece-booster-displays"
     },
     {
      "art": "sitemap",
-     "url": "https://cardcosmos.de/sitemap.xml"
+     "url": "https://cardcosmos.ch/sitemap.xml"
     }
    ],
-   "erstmals_geprueft": "2026-11-02T03:31:20+00:00",
+   "erstmals_geprueft": "2026-11-09T11:38:21+00:00",
    "fake_check": {
     "domain_alter_tage": null,
     "punkte": 0,
@@ -5478,7 +5524,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-11-09T03:33:49+00:00",
+   "geprueft_am": "2026-11-09T11:38:21+00:00",
    "gruende": [],
    "id": "cardcosmos2",
    "impressum": {
@@ -5487,17 +5533,17 @@
     "register": true,
     "ust_id": "DE366668128"
    },
-   "impressum_url": "https://cardcosmos.de/policies/legal-notice",
-   "land": "DE",
+   "impressum_url": "https://cardcosmos.ch/policies/legal-notice",
+   "land": "CH",
    "land_quelle": "Kandidatenliste",
-   "name": "cardcosmos",
+   "name": "cardcosmos.ch",
    "naruto_erwaehnt": false,
    "plattform": "shopify",
-   "quelle": "Prüfung 2026-10-06 (dokumentiert)",
+   "quelle": "Brave-Suche 2026-11-09: One Piece Card Game Display Shop",
    "shop_land_meta": "DE",
    "shop_merkmale": true,
    "sitemaps": [
-    "https://cardcosmos.de/sitemap.xml"
+    "https://cardcosmos.ch/sitemap.xml"
    ],
    "status": "geeignet",
    "tcg_bezug": true,
@@ -5519,15 +5565,16 @@
    ],
    "tdm_vorbehalt": false,
    "versand_de": "ja",
-   "versand_de_quelle": "https://cardcosmos.de/meta.json (ships_to_countries)",
+   "versand_de_quelle": "https://cardcosmos.ch/meta.json (ships_to_countries)",
    "versand_hinweise": {
     "betrag_hinweis": "4,99 € (automatisch gelesen, unbestätigt)",
     "nennt_deutschland": true,
     "nennt_eu": true
    },
-   "versand_url": "https://cardcosmos.de/policies/shipping-policy",
+   "versand_url": "https://cardcosmos.ch/policies/shipping-policy",
    "vertrauen": "vorgeprueft",
-   "waehrung": "EUR"
+   "waehrung": "EUR",
+   "zoll_hinweis": "Versand aus Nicht-EU-Land: Zoll/Einfuhrumsatzsteuer möglich"
   },
   "cardcosmos3": {
    "basis_url": "https://cardcosmos.es",
@@ -6806,6 +6853,22 @@
    },
    "versand_url": "https://www.cardport.de/versandkosten",
    "vertrauen": "vorgeprueft"
+  },
+  "cardshunter": {
+   "domain": "cardshunter.fr",
+   "entdeckung": [],
+   "erstmals_geprueft": "2026-11-09T11:38:21+00:00",
+   "geprueft_am": "2026-11-09T11:38:21+00:00",
+   "gruende": [
+    "robots.txt nicht abrufbar (HTTP 503)"
+   ],
+   "http_status": null,
+   "id": "cardshunter",
+   "land": "FR",
+   "name": "cardshunter.fr",
+   "quelle": "Brave-Suche 2026-11-09: One Piece Card Game display acheter",
+   "status": "blockiert",
+   "vertrauen": "ungeprueft"
   },
   "cardsplace": {
    "basis_url": "https://cardsplace.de",
@@ -8864,6 +8927,91 @@
    "status": "ungeeignet",
    "tcg_bezug": false,
    "tcg_hinweise": [],
+   "tdm_vorbehalt": false,
+   "versand_de": "unbekannt",
+   "versand_de_quelle": "",
+   "versand_url": null,
+   "vertrauen": "ungeprueft"
+  },
+  "colossalstore": {
+   "basis_url": "https://www.colossalstore.es",
+   "domain": "colossalstore.es",
+   "entdeckung": [
+    {
+     "art": "woo_api",
+     "url": "https://www.colossalstore.es/wp-json/wc/store/v1/products?search=naruto&per_page=50"
+    },
+    {
+     "art": "woo_neueste",
+     "url": "https://www.colossalstore.es/wp-json/wc/store/v1/products?orderby=date&order=desc&per_page=50"
+    },
+    {
+     "art": "shopsuche",
+     "url": "https://www.colossalstore.es/?s=naruto&post_type=product"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://www.colossalstore.es/tienda/games-workshop/warhammer-40k/preventa-20-06-warhammer-40000-armageddon-esp/"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://www.colossalstore.es/tienda/pinceles-y-pinturas/citadel/preventa-04-04-warhammer-mango-de-pintura/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://www.colossalstore.es/tienda/swoof/product_cat-one-piece/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://www.colossalstore.es/tienda/swoof/product_cat-digimon/"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://www.colossalstore.es/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-09T11:38:35+00:00",
+   "fake_check": {
+    "domain_alter_tage": null,
+    "punkte": 0,
+    "signale": [],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-11-09T11:38:35+00:00",
+   "gruende": [],
+   "id": "colossalstore",
+   "impressum": {
+    "beleg": "re.es Nombre comercial: COLOSSAL STORE Denominación social: COLOSSAL STORE S.L. NIF: B70732862 Domicilio social: CALLE AMAD",
+    "rechtsform": null,
+    "register": true,
+    "ust_id": null
+   },
+   "impressum_url": "https://www.colossalstore.es/aviso-legal/",
+   "land": "ES",
+   "land_quelle": "Kandidatenliste",
+   "name": "colossalstore.es",
+   "naruto_erwaehnt": false,
+   "plattform": "woocommerce",
+   "quelle": "Brave-Suche 2026-11-09: One Piece Card Game display tienda",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://www.colossalstore.es/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "digimon",
+    "display",
+    "dragon ball",
+    "gundam",
+    "magic: the gathering",
+    "mtg",
+    "one piece",
+    "pokemon",
+    "tcg",
+    "yu-gi-oh"
+   ],
    "tdm_vorbehalt": false,
    "versand_de": "unbekannt",
    "versand_de_quelle": "",
@@ -14656,6 +14804,96 @@
     "nennt_eu": true
    },
    "versand_url": "https://gamerzparadize.nl/pages/shipping-returns",
+   "vertrauen": "ungeprueft",
+   "waehrung": "EUR"
+  },
+  "gamesavenue": {
+   "basis_url": "https://gamesavenue.fr",
+   "domain": "gamesavenue.fr",
+   "entdeckung": [
+    {
+     "art": "shopify_neueste",
+     "url": "https://gamesavenue.fr/products.json?limit=100"
+    },
+    {
+     "art": "shopify_katalog",
+     "url": "https://gamesavenue.fr/products.json?limit=250"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://gamesavenue.fr/collections/precommande"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://gamesavenue.fr/collections/nos-nouveautes"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://gamesavenue.fr/collections/one-piece-1"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://gamesavenue.fr/collections/display-one-piece-francais"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://gamesavenue.fr/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-09T11:38:21+00:00",
+   "fake_check": {
+    "domain_alter_tage": 1424,
+    "punkte": 1,
+    "signale": [
+     "Rechtstexte fehlen: widerruf"
+    ],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-11-09T11:38:21+00:00",
+   "gruende": [],
+   "id": "gamesavenue",
+   "impressum": {
+    "beleg": "",
+    "rechtsform": null,
+    "register": false,
+    "ust_id": null
+   },
+   "impressum_url": "https://gamesavenue.fr/pages/mentions-legales",
+   "land": "FR",
+   "land_quelle": "Kandidatenliste",
+   "name": "gamesavenue.fr",
+   "naruto_erwaehnt": false,
+   "plattform": "shopify",
+   "quelle": "Brave-Suche 2026-11-09: One Piece Card Game display précommande",
+   "shop_land_meta": "FR",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://gamesavenue.fr/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "digimon",
+    "display",
+    "gundam",
+    "lorcana",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "tcg",
+    "yu-gi-oh",
+    "yugioh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "https://gamesavenue.fr/meta.json (ships_to_countries)",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": false,
+    "nennt_eu": true
+   },
+   "versand_url": "https://gamesavenue.fr/policies/shipping-policy",
    "vertrauen": "ungeprueft",
    "waehrung": "EUR"
   },
@@ -24555,6 +24793,91 @@
    "versand_url": null,
    "vertrauen": "ungeprueft"
   },
+  "mrpackhouse": {
+   "basis_url": "https://www.mrpackhouse.ch",
+   "domain": "mrpackhouse.ch",
+   "entdeckung": [
+    {
+     "art": "shopify_neueste",
+     "url": "https://www.mrpackhouse.ch/products.json?limit=100"
+    },
+    {
+     "art": "shopify_katalog",
+     "url": "https://www.mrpackhouse.ch/products.json?limit=250"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://www.mrpackhouse.ch/collections/neuheiten"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://www.mrpackhouse.ch/collections/one-piece-sammelkarten"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://www.mrpackhouse.ch/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-09T11:38:21+00:00",
+   "fake_check": {
+    "domain_alter_tage": null,
+    "punkte": 0,
+    "signale": [],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-11-09T11:38:21+00:00",
+   "gruende": [
+    "liefert laut Shopdaten nicht nach Deutschland"
+   ],
+   "id": "mrpackhouse",
+   "impressum": {
+    "beleg": "/p\\u003e\\n\\u003cp\\u003eE-Mail: info@mrpackhouse.ch\\u003c\\/p\\u003e\\n\\u003cp\\u003eUID: \\u003cspan\\u003eCHE-303.870.890\\u003c\\",
+    "rechtsform": "GmbH",
+    "register": true,
+    "ust_id": null
+   },
+   "impressum_url": "https://www.mrpackhouse.ch/policies/contact-information",
+   "land": "CH",
+   "land_quelle": "Kandidatenliste",
+   "name": "mrpackhouse.ch",
+   "naruto_erwaehnt": true,
+   "plattform": "shopify",
+   "quelle": "Brave-Suche 2026-11-09: One Piece Card Game Display Shop",
+   "shop_land_meta": "CH",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://www.mrpackhouse.ch/sitemap.xml"
+   ],
+   "status": "ungeeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "display",
+    "dragon ball",
+    "lorcana",
+    "magic: the gathering",
+    "mtg",
+    "naruto",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "sammelkarten",
+    "tcg",
+    "trading card"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "nein",
+   "versand_de_quelle": "https://www.mrpackhouse.ch/meta.json (ships_to_countries)",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": false,
+    "nennt_eu": false
+   },
+   "versand_url": "https://www.mrpackhouse.ch/policies/shipping-policy",
+   "vertrauen": "ungeprueft",
+   "waehrung": "CHF",
+   "zoll_hinweis": "Versand aus Nicht-EU-Land: Zoll/Einfuhrumsatzsteuer möglich"
+  },
   "mrpuggy": {
    "basis_url": "https://mrpuggy.pl",
    "domain": "mrpuggy.pl",
@@ -27004,6 +27327,83 @@
    "versand_url": "https://onigiri-tcg.nl/verzenden-retourneren/",
    "vertrauen": "ungeprueft"
   },
+  "onitcgcard": {
+   "basis_url": "https://onitcgcard.com",
+   "domain": "onitcgcard.com",
+   "entdeckung": [
+    {
+     "art": "shopify_neueste",
+     "url": "https://onitcgcard.com/products.json?limit=100"
+    },
+    {
+     "art": "shopify_katalog",
+     "url": "https://onitcgcard.com/products.json?limit=250"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://onitcgcard.com/collections/reservas"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://onitcgcard.com/collections/one-piece-card-game"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://onitcgcard.com/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-09T11:38:35+00:00",
+   "fake_check": {
+    "domain_alter_tage": 90,
+    "punkte": 1,
+    "signale": [
+     "Domain jünger als 1 Jahr (90 Tage)"
+    ],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-11-09T11:38:35+00:00",
+   "gruende": [],
+   "id": "onitcgcard",
+   "impressum": {
+    "beleg": "la aceptación plena y sin reservas de todas y cada una de las disposiciones incluidas en este Aviso Legal.\\u003c\\/p\\u003e\\n",
+    "rechtsform": null,
+    "register": true,
+    "ust_id": null
+   },
+   "impressum_url": "https://onitcgcard.com/policies/legal-notice",
+   "land": "ES",
+   "land_quelle": "Shopify-Shopdaten (meta.json)",
+   "name": "onitcgcard.com",
+   "naruto_erwaehnt": false,
+   "plattform": "shopify",
+   "quelle": "Brave-Suche 2026-11-09: One Piece Card Game display tienda",
+   "shop_land_meta": "ES",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://onitcgcard.com/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "tcg",
+    "trading card"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "https://onitcgcard.com/meta.json (ships_to_countries)",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": false,
+    "nennt_eu": true
+   },
+   "versand_url": "https://onitcgcard.com/policies/shipping-policy",
+   "vertrauen": "vorgeprueft",
+   "waehrung": "EUR"
+  },
   "onitorashop": {
    "basis_url": "https://onitorashop.com",
    "domain": "onitorashop.com",
@@ -29346,6 +29746,99 @@
    "versand_url": "https://playpublic.de/Versandinformationen",
    "vertrauen": "vorgeprueft"
   },
+  "playshop": {
+   "basis_url": "https://playshop.fr",
+   "domain": "playshop.fr",
+   "entdeckung": [
+    {
+     "art": "shopify_neueste",
+     "url": "https://playshop.fr/products.json?limit=100"
+    },
+    {
+     "art": "shopify_katalog",
+     "url": "https://playshop.fr/products.json?limit=250"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://playshop.fr/pages/naruto"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://playshop.fr/pages/tcg-naruto"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://playshop.fr/blogs/actu-naruto/naruto-mythos-sorties-septembre-2026-calendrier-precommandes"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://playshop.fr/pages/one-piece"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://playshop.fr/pages/tcg-one-piece"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://playshop.fr/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-09T11:38:21+00:00",
+   "fake_check": {
+    "domain_alter_tage": 188,
+    "punkte": 1,
+    "signale": [
+     "Domain jünger als 1 Jahr (188 Tage)"
+    ],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-11-09T11:38:21+00:00",
+   "gruende": [],
+   "id": "playshop",
+   "impressum": {
+    "beleg": "u0026nbsp;656\\u003c\\/dd\\u003e\\u003c\\/div\\u003e\\r\\n \\u003cdiv\\u003e\\u003cdt\\u003eSIRET\\u003c\\/dt\\u003e\\u003cdd\\u003e107\\u0026n",
+    "rechtsform": "Limited",
+    "register": true,
+    "ust_id": null
+   },
+   "impressum_url": "https://playshop.fr/policies/legal-notice",
+   "land": "FR",
+   "land_quelle": "Kandidatenliste",
+   "name": "playshop.fr",
+   "naruto_erwaehnt": true,
+   "plattform": "shopify",
+   "quelle": "Brave-Suche 2026-11-09: One Piece Card Game display précommande",
+   "shop_land_meta": "FR",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://playshop.fr/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "display",
+    "dragon ball",
+    "lorcana",
+    "naruto",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "tcg",
+    "yu-gi-oh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "https://playshop.fr/meta.json (ships_to_countries)",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": false,
+    "nennt_eu": true
+   },
+   "versand_url": "https://playshop.fr/policies/shipping-policy",
+   "vertrauen": "vorgeprueft",
+   "waehrung": "EUR"
+  },
   "pocabo": {
    "basis_url": "https://www.pocabo.de",
    "domain": "pocabo.de",
@@ -30188,6 +30681,106 @@
    "versand_de_quelle": "Inlandshändler (Land DE)",
    "versand_url": null,
    "vertrauen": "ungeprueft"
+  },
+  "pokeswiss": {
+   "basis_url": "https://poke-swiss.ch",
+   "domain": "poke-swiss.ch",
+   "entdeckung": [
+    {
+     "art": "shopify_neueste",
+     "url": "https://poke-swiss.ch/products.json?limit=100"
+    },
+    {
+     "art": "shopify_katalog",
+     "url": "https://poke-swiss.ch/products.json?limit=250"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://poke-swiss.ch/collections/display-naruto"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://poke-swiss.ch/collections/naruto-boosters"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://poke-swiss.ch/"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://poke-swiss.ch/collections/precommande-me06-regne-delta"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://poke-swiss.ch/collections/nouveautes-restock"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://poke-swiss.ch/collections/one-piece"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://poke-swiss.ch/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-09T11:38:21+00:00",
+   "fake_check": {
+    "domain_alter_tage": null,
+    "punkte": 1,
+    "signale": [
+     "Rechtstexte fehlen: widerruf"
+    ],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-11-09T11:38:21+00:00",
+   "gruende": [
+    "liefert laut Shopdaten nicht nach Deutschland"
+   ],
+   "id": "pokeswiss",
+   "impressum": {
+    "beleg": "span\\u003eN° IDE \\/ UID :\\u003c\\/span\\u003e\\u003c\\/strong\\u003e\\u003cspan\\u003e CHE-163.396.187\\u003c\\/span\\u003e\\u003cbr\\u003e\\u003cst",
+    "rechtsform": null,
+    "register": true,
+    "ust_id": "CHE-163.396.187"
+   },
+   "impressum_url": "https://poke-swiss.ch/policies/legal-notice",
+   "land": "CH",
+   "land_quelle": "Kandidatenliste",
+   "name": "poke-swiss.ch",
+   "naruto_erwaehnt": true,
+   "plattform": "shopify",
+   "quelle": "Brave-Suche 2026-11-09: One Piece Card Game Display Shop",
+   "shop_land_meta": "CH",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://poke-swiss.ch/sitemap.xml"
+   ],
+   "status": "ungeeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "display",
+    "dragon ball",
+    "mtg",
+    "naruto",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "tcg",
+    "yu-gi-oh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "nein",
+   "versand_de_quelle": "https://poke-swiss.ch/meta.json (ships_to_countries)",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": false,
+    "nennt_eu": true
+   },
+   "versand_url": "https://poke-swiss.ch/policies/shipping-policy",
+   "vertrauen": "ungeprueft",
+   "waehrung": "CHF",
+   "zoll_hinweis": "Versand aus Nicht-EU-Land: Zoll/Einfuhrumsatzsteuer möglich"
   },
   "pokeunlimited": {
    "basis_url": "https://pokeunlimited.com",
@@ -38287,6 +38880,95 @@
    "versand_url": "https://tcgrepublic.com/page/shipping.html?type=page_right&ref=product_page",
    "vertrauen": "ungeprueft"
   },
+  "tcgshop": {
+   "basis_url": "https://naxoria.ch",
+   "domain": "tcgshop.ch",
+   "entdeckung": [
+    {
+     "art": "woo_api",
+     "url": "https://naxoria.ch/wp-json/wc/store/v1/products?search=naruto&per_page=50"
+    },
+    {
+     "art": "woo_neueste",
+     "url": "https://naxoria.ch/wp-json/wc/store/v1/products?orderby=date&order=desc&per_page=50"
+    },
+    {
+     "art": "shopsuche",
+     "url": "https://naxoria.ch/?post_type=product&s=naruto"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://naxoria.ch/neue-artikel/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://naxoria.ch/produkt-kategorie/onepiece/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://naxoria.ch/produkt-kategorie/onepiece/onepiece-en/"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://naxoria.ch/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-09T11:38:21+00:00",
+   "fake_check": {
+    "domain_alter_tage": null,
+    "punkte": 1,
+    "signale": [
+     "Rechtstexte fehlen: widerruf"
+    ],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-11-09T11:38:21+00:00",
+   "gruende": [],
+   "id": "tcgshop",
+   "impressum": {
+    "beleg": "1/79 576 46 96 info@naxoria.ch Merchant Guild GmbH Hofstrasse 9 9015 St. Gallen CHE-244.118.524 MWST Webdesign Diese Internetseite wurd",
+    "rechtsform": "GmbH",
+    "register": false,
+    "ust_id": "CHE-244.118.524"
+   },
+   "impressum_url": "https://naxoria.ch/impressum/",
+   "land": "CH",
+   "land_quelle": "Kandidatenliste",
+   "name": "tcgshop.ch",
+   "naruto_erwaehnt": false,
+   "plattform": "woocommerce",
+   "quelle": "Brave-Suche 2026-11-09: One Piece Card Game Display Shop",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://naxoria.ch/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "digimon",
+    "display",
+    "dragon ball",
+    "gundam",
+    "lorcana",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "tcg",
+    "yu-gi-oh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "unbekannt",
+   "versand_de_quelle": "",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": false,
+    "nennt_eu": false
+   },
+   "versand_url": "https://naxoria.ch/zahlung-versand/",
+   "vertrauen": "ungeprueft",
+   "zoll_hinweis": "Versand aus Nicht-EU-Land: Zoll/Einfuhrumsatzsteuer möglich"
+  },
   "tcgshopmoers": {
    "basis_url": "https://tcgshop-moers.com",
    "domain": "tcgshop-moers.com",
@@ -39689,6 +40371,90 @@
    "vertrauen": "ungeprueft",
    "waehrung": "EUR"
   },
+  "topdeck": {
+   "basis_url": "https://topdeck.es",
+   "domain": "topdeck.es",
+   "entdeckung": [
+    {
+     "art": "woo_api",
+     "url": "https://topdeck.es/wp-json/wc/store/v1/products?search=naruto&per_page=50"
+    },
+    {
+     "art": "woo_neueste",
+     "url": "https://topdeck.es/wp-json/wc/store/v1/products?orderby=date&order=desc&per_page=50"
+    },
+    {
+     "art": "shopsuche",
+     "url": "https://topdeck.es?e_search_props=3113de7-102&s=naruto"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://topdeck.es/comprar-cartas-coleccionables/magic-the-gathering/"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://topdeck.es/tienda-de-cartas-coleccionables/magic-the-gathering-marvel-darkhold-destiny-mazos-de-commander-caja-4-ingles-reserva/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://topdeck.es/comprar-cartas-coleccionables/one-piece-card-game/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://topdeck.es/comprar-cartas-coleccionables/one-piece-card-game/mazos-one-piece-tcg/"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://topdeck.es/sitemap_index.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-09T11:38:22+00:00",
+   "fake_check": {
+    "domain_alter_tage": null,
+    "punkte": 1,
+    "signale": [
+     "Rechtstexte fehlen: widerruf"
+    ],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-11-09T11:38:22+00:00",
+   "gruende": [],
+   "id": "topdeck",
+   "impressum": {
+    "beleg": "eb, www.topdeck.es , (en adelante, Sitio Web) la ostenta: Ángel Fernandez , con NIF: 05942798N , y cuyos datos de contacto",
+    "rechtsform": null,
+    "register": true,
+    "ust_id": null
+   },
+   "impressum_url": "https://topdeck.es/aviso-legal-y-condiciones-generales-de-uso/",
+   "land": "ES",
+   "land_quelle": "Kandidatenliste",
+   "name": "topdeck.es",
+   "naruto_erwaehnt": false,
+   "plattform": "woocommerce",
+   "quelle": "Brave-Suche 2026-11-09: One Piece Card Game display preventa",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://topdeck.es/sitemap_index.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "display",
+    "lorcana",
+    "magic: the gathering",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "tcg"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "unbekannt",
+   "versand_de_quelle": "",
+   "versand_url": null,
+   "vertrauen": "ungeprueft"
+  },
   "totalcards": {
    "basis_url": "https://totalcards.net",
    "domain": "totalcards.net",
@@ -40108,6 +40874,102 @@
    },
    "versand_url": "https://trader-online.de/zahlung-und-lieferung/",
    "vertrauen": "vorgeprueft"
+  },
+  "tradingcardcave": {
+   "basis_url": "https://www.tradingcardcave.ch",
+   "domain": "tradingcardcave.ch",
+   "entdeckung": [
+    {
+     "art": "shopify_neueste",
+     "url": "https://www.tradingcardcave.ch/products.json?limit=100"
+    },
+    {
+     "art": "shopify_katalog",
+     "url": "https://www.tradingcardcave.ch/products.json?limit=250"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://www.tradingcardcave.ch/collections/mtg-vorbestellen"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://www.tradingcardcave.ch/collections/pokemon-vorbestellen"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://www.tradingcardcave.ch/collections/neuheiten"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://www.tradingcardcave.ch/collections/one-piece-produkte-bestand"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://www.tradingcardcave.ch/collections/one-piece-vorbestellen"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://www.tradingcardcave.ch/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-09T11:38:21+00:00",
+   "fake_check": {
+    "domain_alter_tage": null,
+    "punkte": 0,
+    "signale": [],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-11-09T11:38:21+00:00",
+   "gruende": [],
+   "id": "tradingcardcave",
+   "impressum": {
+    "beleg": "ingcardcave.ch\\u003c\\/p\\u003e\\n\\u003cp\\u003eUmsatzsteuer-Identifikationsnummer: CHE-170.570.071\\u003cbr\\u003eUmsatzsteuerbefreit (Klein",
+    "rechtsform": null,
+    "register": true,
+    "ust_id": "CHE-170.570.071"
+   },
+   "impressum_url": "https://www.tradingcardcave.ch/policies/legal-notice",
+   "land": "CH",
+   "land_quelle": "Kandidatenliste",
+   "name": "tradingcardcave.ch",
+   "naruto_erwaehnt": false,
+   "plattform": "shopify",
+   "quelle": "Brave-Suche 2026-11-09: One Piece Card Game Display Shop",
+   "shop_land_meta": "CH",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://www.tradingcardcave.ch/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "digimon",
+    "display",
+    "dragon ball",
+    "magic: the gathering",
+    "mtg",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "sammelkarten",
+    "tcg",
+    "trading card",
+    "yu-gi-oh",
+    "yugioh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "https://www.tradingcardcave.ch/meta.json (ships_to_countries)",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": false,
+    "nennt_eu": true
+   },
+   "versand_url": "https://www.tradingcardcave.ch/policies/shipping-policy",
+   "vertrauen": "vorgeprueft",
+   "waehrung": "CHF",
+   "zoll_hinweis": "Versand aus Nicht-EU-Land: Zoll/Einfuhrumsatzsteuer möglich"
   },
   "tradingcardsxxx": {
    "basis_url": "https://tradingcardsxxx.fr",
@@ -43988,21 +44850,21 @@
  },
  "version": 1,
  "zusammenfassung": {
-  "geeignet": 335,
-  "kandidaten": 665,
+  "geeignet": 342,
+  "kandidaten": 676,
   "land": {
-   "?": 119,
+   "?": 120,
    "AT": 29,
    "BE": 25,
    "CA": 5,
-   "CH": 26,
+   "CH": 31,
    "CN": 1,
-   "DE": 134,
+   "DE": 133,
    "DK": 1,
-   "ES": 39,
+   "ES": 42,
    "EU": 9,
    "FI": 1,
-   "FR": 61,
+   "FR": 64,
    "GR": 2,
    "HR": 2,
    "HU": 1,
@@ -44020,10 +44882,10 @@
    "UK": 12,
    "US": 18
   },
-  "mit_entdeckungsweg": 335,
-  "naruto_erwaehnt": 196,
+  "mit_entdeckungsweg": 342,
+  "naruto_erwaehnt": 199,
   "plattform": {
-   "?": 96,
+   "?": 97,
    "ecwid": 3,
    "gambio": 1,
    "jtl": 6,
@@ -44033,28 +44895,28 @@
    "oxid": 2,
    "plentymarkets": 2,
    "prestashop": 4,
-   "shopify": 222,
+   "shopify": 228,
    "shopware": 13,
-   "unbekannt": 217,
+   "unbekannt": 218,
    "wix": 10,
-   "woocommerce": 70
+   "woocommerce": 73
   },
   "status": {
-   "blockiert": 91,
-   "geeignet": 335,
+   "blockiert": 92,
+   "geeignet": 342,
    "nicht_erreichbar": 5,
-   "ungeeignet": 234
+   "ungeeignet": 237
   },
   "versand_de": {
-   "?": 96,
-   "ja": 230,
-   "nein": 45,
-   "unbekannt": 245,
+   "?": 97,
+   "ja": 234,
+   "nein": 47,
+   "unbekannt": 249,
    "vermutlich": 49
   },
   "vertrauen": {
-   "ungeprueft": 538,
-   "vorgeprueft": 127
+   "ungeprueft": 546,
+   "vorgeprueft": 130
   }
  }
 }
