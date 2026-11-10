@@ -1,5 +1,5 @@
 {
- "aktualisiert": "2026-11-09T11:39:04+00:00",
+ "aktualisiert": "2026-11-10T11:16:44+00:00",
  "haendler": {
   "1001hobbies": {
    "basis_url": "https://www.1001hobbies.es",
@@ -3278,6 +3278,91 @@
    "versand_url": null,
    "vertrauen": "ungeprueft"
   },
+  "blueyesccg": {
+   "basis_url": "https://blueyesccg.it",
+   "domain": "blueyesccg.it",
+   "entdeckung": [
+    {
+     "art": "shopify_neueste",
+     "url": "https://blueyesccg.it/products.json?limit=100"
+    },
+    {
+     "art": "shopify_katalog",
+     "url": "https://blueyesccg.it/products.json?limit=250"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://blueyesccg.it/collections/preordini"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://blueyesccg.it/pages/one-piece-card-game"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://blueyesccg.it/collections/display-one-piece"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://blueyesccg.it/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-10T11:16:30+00:00",
+   "fake_check": {
+    "domain_alter_tage": null,
+    "punkte": 0,
+    "signale": [],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-11-10T11:16:30+00:00",
+   "gruende": [
+    "liefert laut Shopdaten nicht nach Deutschland"
+   ],
+   "id": "blueyesccg",
+   "impressum": {
+    "beleg": "",
+    "rechtsform": null,
+    "register": false,
+    "ust_id": null
+   },
+   "impressum_url": "https://blueyesccg.it/policies/legal-notice",
+   "land": "IT",
+   "land_quelle": "Kandidatenliste",
+   "name": "blueyesccg.it",
+   "naruto_erwaehnt": false,
+   "plattform": "shopify",
+   "quelle": "Brave-Suche 2026-11-10: One Piece Card Game display preordine",
+   "shop_land_meta": "IT",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://blueyesccg.it/sitemap.xml"
+   ],
+   "status": "ungeeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "display",
+    "dragon ball",
+    "lorcana",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "tcg",
+    "yu-gi-oh",
+    "yugioh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "nein",
+   "versand_de_quelle": "https://blueyesccg.it/meta.json (ships_to_countries)",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": false,
+    "nennt_eu": false
+   },
+   "versand_url": "https://blueyesccg.it/policies/shipping-policy",
+   "vertrauen": "ungeprueft",
+   "waehrung": "EUR"
+  },
   "boostrclub": {
    "basis_url": "https://boostrclub.com",
    "domain": "boostrclub.com",
@@ -5483,39 +5568,39 @@
    "waehrung": "EUR"
   },
   "cardcosmos2": {
-   "basis_url": "https://cardcosmos.ch",
-   "domain": "cardcosmos.ch",
+   "basis_url": "https://cardcosmos.de",
+   "domain": "cardcosmos.de",
    "entdeckung": [
     {
      "art": "shopify_neueste",
-     "url": "https://cardcosmos.ch/products.json?limit=100"
+     "url": "https://cardcosmos.de/products.json?limit=100"
     },
     {
      "art": "shopify_katalog",
-     "url": "https://cardcosmos.ch/products.json?limit=250"
+     "url": "https://cardcosmos.de/products.json?limit=250"
     },
     {
      "art": "kategorie_vorbestellung",
-     "url": "https://cardcosmos.ch/collections/pokemon-release-kalender-2026"
+     "url": "https://cardcosmos.de/collections/pokemon-release-kalender-2026"
     },
     {
      "art": "kategorie_vorbestellung",
-     "url": "https://cardcosmos.ch/collections/magic-the-gathering-release"
+     "url": "https://cardcosmos.de/collections/magic-the-gathering-release"
     },
     {
      "art": "kategorie_bandai",
-     "url": "https://cardcosmos.ch/collections/one-piece-karten-kaufen"
+     "url": "https://cardcosmos.de/collections/one-piece-karten-kaufen"
     },
     {
      "art": "kategorie_bandai",
-     "url": "https://cardcosmos.ch/collections/one-piece-booster-displays"
+     "url": "https://cardcosmos.de/collections/one-piece-booster-displays"
     },
     {
      "art": "sitemap",
-     "url": "https://cardcosmos.ch/sitemap.xml"
+     "url": "https://cardcosmos.de/sitemap.xml"
     }
    ],
-   "erstmals_geprueft": "2026-11-09T11:38:21+00:00",
+   "erstmals_geprueft": "2026-11-10T11:16:30+00:00",
    "fake_check": {
     "domain_alter_tage": null,
     "punkte": 0,
@@ -5524,7 +5609,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-11-09T11:38:21+00:00",
+   "geprueft_am": "2026-11-10T11:16:30+00:00",
    "gruende": [],
    "id": "cardcosmos2",
    "impressum": {
@@ -5533,17 +5618,17 @@
     "register": true,
     "ust_id": "DE366668128"
    },
-   "impressum_url": "https://cardcosmos.ch/policies/legal-notice",
-   "land": "CH",
+   "impressum_url": "https://cardcosmos.de/policies/legal-notice",
+   "land": "DE",
    "land_quelle": "Kandidatenliste",
-   "name": "cardcosmos.ch",
+   "name": "cardcosmos",
    "naruto_erwaehnt": false,
    "plattform": "shopify",
-   "quelle": "Brave-Suche 2026-11-09: One Piece Card Game Display Shop",
+   "quelle": "Prüfung 2026-10-06 (dokumentiert)",
    "shop_land_meta": "DE",
    "shop_merkmale": true,
    "sitemaps": [
-    "https://cardcosmos.ch/sitemap.xml"
+    "https://cardcosmos.de/sitemap.xml"
    ],
    "status": "geeignet",
    "tcg_bezug": true,
@@ -5565,16 +5650,15 @@
    ],
    "tdm_vorbehalt": false,
    "versand_de": "ja",
-   "versand_de_quelle": "https://cardcosmos.ch/meta.json (ships_to_countries)",
+   "versand_de_quelle": "https://cardcosmos.de/meta.json (ships_to_countries)",
    "versand_hinweise": {
     "betrag_hinweis": "4,99 € (automatisch gelesen, unbestätigt)",
     "nennt_deutschland": true,
     "nennt_eu": true
    },
-   "versand_url": "https://cardcosmos.ch/policies/shipping-policy",
+   "versand_url": "https://cardcosmos.de/policies/shipping-policy",
    "vertrauen": "vorgeprueft",
-   "waehrung": "EUR",
-   "zoll_hinweis": "Versand aus Nicht-EU-Land: Zoll/Einfuhrumsatzsteuer möglich"
+   "waehrung": "EUR"
   },
   "cardcosmos3": {
    "basis_url": "https://cardcosmos.es",
@@ -16207,6 +16291,22 @@
    "versand_url": "https://www.giaxstore.it/pages/resi-e-spedizioni",
    "vertrauen": "ungeprueft",
    "waehrung": "EUR"
+  },
+  "giochi": {
+   "domain": "giochi.unilibro.it",
+   "entdeckung": [],
+   "erstmals_geprueft": "2026-11-10T11:16:30+00:00",
+   "geprueft_am": "2026-11-10T11:16:30+00:00",
+   "gruende": [
+    "Zugriff verweigert (HTTP 403)"
+   ],
+   "http_status": 403,
+   "id": "giochi",
+   "land": "IT",
+   "name": "giochi.unilibro.it",
+   "quelle": "Brave-Suche 2026-11-10: One Piece Card Game display acquista",
+   "status": "blockiert",
+   "vertrauen": "ungeprueft"
   },
   "gnomsklep": {
    "basis_url": "https://gnom-sklep.pl",
@@ -38744,6 +38844,88 @@
    "versand_url": null,
    "vertrauen": "ungeprueft"
   },
+  "tcgmarkt": {
+   "basis_url": "https://tcgmarkt.nl",
+   "domain": "tcgmarkt.nl",
+   "entdeckung": [
+    {
+     "art": "woo_api",
+     "url": "https://tcgmarkt.nl/wp-json/wc/store/v1/products?search=naruto&per_page=50"
+    },
+    {
+     "art": "woo_neueste",
+     "url": "https://tcgmarkt.nl/wp-json/wc/store/v1/products?orderby=date&order=desc&per_page=50"
+    },
+    {
+     "art": "shopsuche",
+     "url": "https://tcgmarkt.nl/?post_type=product&s=naruto"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://tcgmarkt.nl/pre-orders/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://tcgmarkt.nl/one-piece-tcg/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://tcgmarkt.nl/product/one-piece-tcg-prb-01-the-best-booster-box-jp/"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://tcgmarkt.nl/sitemap.xml"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://tcgmarkt.nl/sitemap.rss"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-10T11:16:30+00:00",
+   "fake_check": {
+    "domain_alter_tage": 260,
+    "punkte": 1,
+    "signale": [
+     "Domain jünger als 1 Jahr (260 Tage)"
+    ],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-11-10T11:16:30+00:00",
+   "gruende": [],
+   "id": "tcgmarkt",
+   "impressum_url": null,
+   "land": "NL",
+   "land_quelle": "Kandidatenliste",
+   "name": "tcgmarkt.nl",
+   "naruto_erwaehnt": false,
+   "plattform": "woocommerce",
+   "quelle": "Brave-Suche 2026-11-10: One Piece Card Game display webshop",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://tcgmarkt.nl/sitemap.xml",
+    "https://tcgmarkt.nl/sitemap.rss"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "display",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "tcg"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "unbekannt",
+   "versand_de_quelle": "",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": false,
+    "nennt_eu": false
+   },
+   "versand_url": "https://tcgmarkt.nl/verzending-betaling/",
+   "vertrauen": "ungeprueft"
+  },
   "tcgoftringen": {
    "basis_url": "https://www.tcg-oftringen.ch",
    "domain": "tcg-oftringen.ch",
@@ -44558,6 +44740,65 @@
    "waehrung": "CHF",
    "zoll_hinweis": "Versand aus Nicht-EU-Land: Zoll/Einfuhrumsatzsteuer möglich"
   },
+  "zoekvoorjou": {
+   "basis_url": "https://zoekvoorjou.nl",
+   "domain": "zoekvoorjou.nl",
+   "entdeckung": [
+    {
+     "art": "shopsuche",
+     "url": "https://zoekvoorjou.nl/zoekresultaat/?directory_type=business&cityLat=&cityLng=&q=naruto"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://zoekvoorjou.nl/"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://zoekvoorjou.nl/?sort=date-desc"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://zoekvoorjou.nl/sitemap_index.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-10T11:16:30+00:00",
+   "fake_check": {
+    "domain_alter_tage": 240,
+    "punkte": 3,
+    "signale": [
+     "Domain jünger als 1 Jahr (240 Tage)",
+     "Rechtstexte fehlen: widerruf",
+     "keine Kontaktdaten auf Startseite/Impressum"
+    ],
+    "stufe": "mittel"
+   },
+   "geprueft_am": "2026-11-10T11:16:30+00:00",
+   "gruende": [],
+   "id": "zoekvoorjou",
+   "impressum_url": null,
+   "land": "NL",
+   "land_quelle": "Kandidatenliste",
+   "name": "zoekvoorjou.nl",
+   "naruto_erwaehnt": false,
+   "plattform": "unbekannt",
+   "quelle": "Brave-Suche 2026-11-10: One Piece Card Game display webshop",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://zoekvoorjou.nl/sitemap_index.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "pokemon",
+    "pokémon",
+    "tcg"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "unbekannt",
+   "versand_de_quelle": "",
+   "versand_url": null,
+   "vertrauen": "ungeprueft"
+  },
   "zulusgames": {
    "basis_url": "https://zulusgames.com",
    "domain": "zulusgames.com",
@@ -44850,16 +45091,16 @@
  },
  "version": 1,
  "zusammenfassung": {
-  "geeignet": 342,
-  "kandidaten": 676,
+  "geeignet": 344,
+  "kandidaten": 680,
   "land": {
    "?": 120,
    "AT": 29,
    "BE": 25,
    "CA": 5,
-   "CH": 31,
+   "CH": 30,
    "CN": 1,
-   "DE": 133,
+   "DE": 134,
    "DK": 1,
    "ES": 42,
    "EU": 9,
@@ -44869,10 +45110,10 @@
    "HR": 2,
    "HU": 1,
    "IE": 2,
-   "IT": 53,
+   "IT": 55,
    "JP": 4,
    "MX": 1,
-   "NL": 51,
+   "NL": 53,
    "NO": 1,
    "PL": 43,
    "PT": 1,
@@ -44882,10 +45123,10 @@
    "UK": 12,
    "US": 18
   },
-  "mit_entdeckungsweg": 342,
+  "mit_entdeckungsweg": 344,
   "naruto_erwaehnt": 199,
   "plattform": {
-   "?": 97,
+   "?": 98,
    "ecwid": 3,
    "gambio": 1,
    "jtl": 6,
@@ -44895,27 +45136,27 @@
    "oxid": 2,
    "plentymarkets": 2,
    "prestashop": 4,
-   "shopify": 228,
+   "shopify": 229,
    "shopware": 13,
-   "unbekannt": 218,
+   "unbekannt": 219,
    "wix": 10,
-   "woocommerce": 73
+   "woocommerce": 74
   },
   "status": {
-   "blockiert": 92,
-   "geeignet": 342,
+   "blockiert": 93,
+   "geeignet": 344,
    "nicht_erreichbar": 5,
-   "ungeeignet": 237
+   "ungeeignet": 238
   },
   "versand_de": {
-   "?": 97,
+   "?": 98,
    "ja": 234,
-   "nein": 47,
-   "unbekannt": 249,
+   "nein": 48,
+   "unbekannt": 251,
    "vermutlich": 49
   },
   "vertrauen": {
-   "ungeprueft": 546,
+   "ungeprueft": 550,
    "vorgeprueft": 130
   }
  }
