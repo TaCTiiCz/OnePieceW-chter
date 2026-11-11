@@ -43,7 +43,7 @@ weitere_sprachen = []
 id = "UPC"
 name = "Ultra-Premium Collection / Ultra-Premium-Kollektion (Tag/Nacht)"
 muster = ['ultra[\s\-]*premium']
-normalpreis = 199.99
+normalpreis = 199.99   # UVP DE; US 179,99 $ – PRIORITÄT (siehe [prioritaet]), Wunsch vom 27.10.2026
 grenze = 225
 
 [[produkte]]
@@ -177,20 +177,21 @@ produktseite_sekunden = 300
 # Pro Lauf höchstens so lange (der Rest kommt im nächsten Lauf dran)
 max_laufzeit_sekunden = 120
 # Suchbegriffe, mit denen die Shopsuche/WooCommerce-Suche statt "naruto" aufgerufen wird
-suchbegriffe = ["30th celebration", "pokemon 30 jahre", "ditto premium"]
+suchbegriffe = ["30th celebration", "pokemon 30 jahre", "ditto premium", "ultra premium collection", "ultra premium kollektion"]
 # Diese Shops werden für Pokémon NICHT geprüft und nie gemeldet (Shop-ID aus der Händlerdatenbank oder Domain).
 # Für Naruto und One Piece bleiben sie unverändert aktiv.
 shops_ausschliessen = ["tcgsniper"]   # tcgsniper.nl – auf Wunsch entfernt (26.10.2026)
 
 # =====================================================================
-#  PRIORITÄT: Ditto Premium Collection / Premium-Kollektion Ditto (Release 06.11.2026)
-#  - bekannte Ditto-Produktseiten werden jede Minute geprüft (im Fokus alle 30 s)
-#  - Ditto-Meldungen zählen nicht gegen die Obergrenze pro Lauf und kommen mit 🔥🔥-Überschrift
+#  PRIORITÄT: Ditto Premium Collection (Release 06.11.2026) und Ultra-Premium-Kollektion Tag/Nacht (Release 06.11.2026)
+#  - bekannte Produktseiten werden jede Minute geprüft (im Fokus alle 30 s)
+#  - Meldungen zählen nicht gegen die Obergrenze pro Lauf und kommen mit 🔥🔥-Überschrift
+#  - UPC: gemeldet wird bis "grenze" (225 €) – Vorbestellung, Restock oder noch nicht ausverkaufter Shop
 #  - bis zu 2 Erinnerungen im Abstand von 5 Minuten, solange noch bestellbar
 #  - Ditto auch ohne "30 Jahre"/"30th Celebration" im Titel erkennen (Name ist eindeutig)
 # =====================================================================
 [prioritaet]
-produkte = ["DITTO"]
+produkte = ["DITTO", "UPC"]
 produktseite_sekunden = 60
 erinnerungen = 2
 erinnerung_minuten = 5
