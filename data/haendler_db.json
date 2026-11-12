@@ -1,5 +1,5 @@
 {
- "aktualisiert": "2026-11-11T11:02:28+00:00",
+ "aktualisiert": "2026-11-12T11:19:27+00:00",
  "haendler": {
   "1001hobbies": {
    "basis_url": "https://www.1001hobbies.es",
@@ -5568,43 +5568,43 @@
    "waehrung": "EUR"
   },
   "cardcosmos2": {
-   "basis_url": "https://cardcosmos.ch",
-   "domain": "cardcosmos.ch",
+   "basis_url": "https://cardcosmos.de",
+   "domain": "cardcosmos.de",
    "entdeckung": [
     {
      "art": "shopify_neueste",
-     "url": "https://cardcosmos.ch/products.json?limit=100"
+     "url": "https://cardcosmos.de/products.json?limit=100"
     },
     {
      "art": "shopify_katalog",
-     "url": "https://cardcosmos.ch/products.json?limit=250"
+     "url": "https://cardcosmos.de/products.json?limit=250"
     },
     {
      "art": "kategorie_naruto",
-     "url": "https://cardcosmos.ch/collections/naruto-tcg"
+     "url": "https://cardcosmos.de/collections/naruto-tcg"
     },
     {
      "art": "kategorie_vorbestellung",
-     "url": "https://cardcosmos.ch/collections/pokemon-release-kalender-2026"
+     "url": "https://cardcosmos.de/collections/pokemon-release-kalender-2026"
     },
     {
      "art": "kategorie_vorbestellung",
-     "url": "https://cardcosmos.ch/collections/magic-the-gathering-release"
+     "url": "https://cardcosmos.de/collections/magic-the-gathering-release"
     },
     {
      "art": "kategorie_bandai",
-     "url": "https://cardcosmos.ch/collections/one-piece-karten-kaufen"
+     "url": "https://cardcosmos.de/collections/one-piece-karten-kaufen"
     },
     {
      "art": "kategorie_bandai",
-     "url": "https://cardcosmos.ch/collections/one-piece-booster-displays"
+     "url": "https://cardcosmos.de/collections/one-piece-booster-displays"
     },
     {
      "art": "sitemap",
-     "url": "https://cardcosmos.ch/sitemap.xml"
+     "url": "https://cardcosmos.de/sitemap.xml"
     }
    ],
-   "erstmals_geprueft": "2026-11-11T11:02:13+00:00",
+   "erstmals_geprueft": "2026-11-12T11:19:10+00:00",
    "fake_check": {
     "domain_alter_tage": null,
     "punkte": 0,
@@ -5613,7 +5613,7 @@
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-11-11T11:02:13+00:00",
+   "geprueft_am": "2026-11-12T11:19:10+00:00",
    "gruende": [],
    "id": "cardcosmos2",
    "impressum": {
@@ -5622,17 +5622,17 @@
     "register": true,
     "ust_id": "DE366668128"
    },
-   "impressum_url": "https://cardcosmos.ch/policies/legal-notice",
-   "land": "CH",
+   "impressum_url": "https://cardcosmos.de/policies/legal-notice",
+   "land": "DE",
    "land_quelle": "Kandidatenliste",
-   "name": "cardcosmos.ch",
+   "name": "cardcosmos",
    "naruto_erwaehnt": true,
    "plattform": "shopify",
-   "quelle": "Brave-Suche 2026-11-09: One Piece Card Game Display Shop",
+   "quelle": "Prüfung 2026-10-06 (dokumentiert)",
    "shop_land_meta": "DE",
    "shop_merkmale": true,
    "sitemaps": [
-    "https://cardcosmos.ch/sitemap.xml"
+    "https://cardcosmos.de/sitemap.xml"
    ],
    "status": "geeignet",
    "tcg_bezug": true,
@@ -5655,16 +5655,15 @@
    ],
    "tdm_vorbehalt": false,
    "versand_de": "ja",
-   "versand_de_quelle": "https://cardcosmos.ch/meta.json (ships_to_countries)",
+   "versand_de_quelle": "https://cardcosmos.de/meta.json (ships_to_countries)",
    "versand_hinweise": {
     "betrag_hinweis": "4,99 € (automatisch gelesen, unbestätigt)",
     "nennt_deutschland": true,
     "nennt_eu": true
    },
-   "versand_url": "https://cardcosmos.ch/policies/shipping-policy",
+   "versand_url": "https://cardcosmos.de/policies/shipping-policy",
    "vertrauen": "vorgeprueft",
-   "waehrung": "EUR",
-   "zoll_hinweis": "Versand aus Nicht-EU-Land: Zoll/Einfuhrumsatzsteuer möglich"
+   "waehrung": "EUR"
   },
   "cardcosmos3": {
    "basis_url": "https://cardcosmos.es",
@@ -6959,6 +6958,81 @@
    "quelle": "Brave-Suche 2026-11-09: One Piece Card Game display acheter",
    "status": "blockiert",
    "vertrauen": "ungeprueft"
+  },
+  "cardsinjapan": {
+   "basis_url": "https://www.cardsinjapan.com",
+   "domain": "cardsinjapan.com",
+   "entdeckung": [
+    {
+     "art": "shopify_neueste",
+     "url": "https://www.cardsinjapan.com/products.json?limit=100"
+    },
+    {
+     "art": "shopify_katalog",
+     "url": "https://www.cardsinjapan.com/products.json?limit=250"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://www.cardsinjapan.com/en/collections/dwiljefo-one-piece"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://www.cardsinjapan.com/en/collections/carte-one-piece"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://www.cardsinjapan.com/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-12T11:19:11+00:00",
+   "fake_check": {
+    "domain_alter_tage": 472,
+    "punkte": 1,
+    "signale": [
+     "keine Kontaktdaten auf Startseite/Impressum"
+    ],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-11-12T11:19:11+00:00",
+   "gruende": [
+    "Land JP nicht in Europa"
+   ],
+   "id": "cardsinjapan",
+   "impressum": {
+    "beleg": "",
+    "rechtsform": null,
+    "register": false,
+    "ust_id": null
+   },
+   "impressum_url": "https://www.cardsinjapan.com/en/policies/legal-notice",
+   "land": "JP",
+   "land_quelle": "Shopify-Shopdaten (meta.json)",
+   "name": "cardsinjapan.com",
+   "naruto_erwaehnt": false,
+   "plattform": "shopify",
+   "quelle": "Brave-Suche 2026-11-12: One Piece OP13 display buy Europe",
+   "shop_land_meta": "JP",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://www.cardsinjapan.com/sitemap.xml"
+   ],
+   "status": "ungeeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "display",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "tcg",
+    "yu-gi-oh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "https://www.cardsinjapan.com/meta.json (ships_to_countries)",
+   "versand_url": "https://www.cardsinjapan.com/policies/shipping-policy",
+   "vertrauen": "ungeprueft",
+   "waehrung": "EUR"
   },
   "cardsplace": {
    "basis_url": "https://cardsplace.de",
@@ -8550,6 +8624,78 @@
     "tcg",
     "trading card",
     "yu-gi-oh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "unbekannt",
+   "versand_de_quelle": "",
+   "versand_url": null,
+   "vertrauen": "ungeprueft"
+  },
+  "chocobonplan": {
+   "basis_url": "https://chocobonplan.com",
+   "domain": "chocobonplan.com",
+   "entdeckung": [
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://chocobonplan.com/bons-plans/c/precommandes-jeux-video-reserver-au-meilleur-prix"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://chocobonplan.com/bons-plans/c/precommandes-jeux-video-reserver-au-meilleur-prix?orderby=datefin"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://chocobonplan.com/bons-plans/c/mangas-acheter-precommandes-nouveautes-site?deal_id=304202"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://chocobonplan.com/bons-plans/mangas-acheter-precommandes-nouveautes-site/edition-speciale/black-clover-coffret-prestige-tome-1-a-14"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://chocobonplan.com/bons-plans/cartes-a-jouer/cartes-one-piece/booster-one-piece-heroines-eb05"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://chocobonplan.com/bons-plans/cartes-a-jouer/cartes-one-piece/display-one-piece-op18"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://chocobonplan.com/sitemap_index.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-12T11:19:11+00:00",
+   "fake_check": {
+    "domain_alter_tage": 3918,
+    "punkte": 0,
+    "signale": [],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-11-12T11:19:11+00:00",
+   "gruende": [
+    "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)"
+   ],
+   "id": "chocobonplan",
+   "impressum_url": null,
+   "land": "?",
+   "land_quelle": "Domain-Endung",
+   "name": "chocobonplan.com",
+   "naruto_erwaehnt": false,
+   "plattform": "unbekannt",
+   "quelle": "Brave-Suche 2026-11-12: One Piece Card Game display voorbestellen",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://chocobonplan.com/sitemap_index.xml"
+   ],
+   "status": "ungeeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "display",
+    "lorcana",
+    "one piece",
+    "pokemon",
+    "pokémon"
    ],
    "tdm_vorbehalt": false,
    "versand_de": "unbekannt",
@@ -13763,6 +13909,22 @@
    "versand_de": "unbekannt",
    "versand_de_quelle": "",
    "versand_url": null,
+   "vertrauen": "ungeprueft"
+  },
+  "ftp": {
+   "domain": "ftp.budgetspelen.nl",
+   "entdeckung": [],
+   "erstmals_geprueft": "2026-11-12T11:19:11+00:00",
+   "geprueft_am": "2026-11-12T11:19:11+00:00",
+   "gruende": [
+    "robots.txt nicht abrufbar (HTTP Netzwerkfehler)"
+   ],
+   "http_status": null,
+   "id": "ftp",
+   "land": "NL",
+   "name": "ftp.budgetspelen.nl",
+   "quelle": "Brave-Suche 2026-11-12: Naruto Card Game Bandai voorbestellen",
+   "status": "blockiert",
    "vertrauen": "ungeprueft"
   },
   "fujicardshop": {
@@ -22736,6 +22898,96 @@
    "versand_url": null,
    "vertrauen": "ungeprueft"
   },
+  "magictraders": {
+   "basis_url": "https://magictraders.nl",
+   "domain": "magictraders.nl",
+   "entdeckung": [
+    {
+     "art": "shopify_neueste",
+     "url": "https://magictraders.nl/products.json?limit=100"
+    },
+    {
+     "art": "shopify_katalog",
+     "url": "https://magictraders.nl/products.json?limit=250"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://magictraders.nl/collections/pokemon-preorder"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://magictraders.nl/collections/one-piece-pre-order"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://magictraders.nl/collections/dragon-ball-z"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://magictraders.nl/collections/digimon"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://magictraders.nl/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-12T11:19:11+00:00",
+   "fake_check": {
+    "domain_alter_tage": 1153,
+    "punkte": 1,
+    "signale": [
+     "keine Kontaktdaten auf Startseite/Impressum"
+    ],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-11-12T11:19:11+00:00",
+   "gruende": [],
+   "id": "magictraders",
+   "impressum": {
+    "beleg": "",
+    "rechtsform": null,
+    "register": false,
+    "ust_id": null
+   },
+   "impressum_url": "https://magictraders.nl/policies/legal-notice",
+   "land": "NL",
+   "land_quelle": "Kandidatenliste",
+   "name": "magictraders.nl",
+   "naruto_erwaehnt": false,
+   "plattform": "shopify",
+   "quelle": "Brave-Suche 2026-11-12: Naruto Card Game Bandai kopen",
+   "shop_land_meta": "NL",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://magictraders.nl/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "digimon",
+    "display",
+    "dragon ball",
+    "gundam",
+    "lorcana",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "tcg",
+    "yu-gi-oh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "https://magictraders.nl/meta.json (ships_to_countries)",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": false,
+    "nennt_eu": false
+   },
+   "versand_url": "https://magictraders.nl/collections",
+   "vertrauen": "ungeprueft",
+   "waehrung": "EUR"
+  },
   "magplanszowy": {
    "basis_url": "https://magplanszowy.pl",
    "domain": "magplanszowy.pl",
@@ -29024,6 +29276,76 @@
    "versand_url": null,
    "vertrauen": "ungeprueft"
   },
+  "pianetahobby": {
+   "basis_url": "https://www.pianetahobby.it",
+   "domain": "pianetahobby.it",
+   "entdeckung": [
+    {
+     "art": "kategorie_naruto",
+     "url": "https://www.pianetahobby.it/naruto/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://www.pianetahobby.it/one-piece-card-game/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://www.pianetahobby.it/bandai/"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://www.pianetahobby.it/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-12T11:19:10+00:00",
+   "fake_check": {
+    "domain_alter_tage": null,
+    "punkte": 1,
+    "signale": [
+     "Rechtstexte fehlen: widerruf"
+    ],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-11-12T11:19:10+00:00",
+   "gruende": [],
+   "id": "pianetahobby",
+   "impressum_url": null,
+   "land": "IT",
+   "land_quelle": "Kandidatenliste",
+   "name": "pianetahobby.it",
+   "naruto_erwaehnt": true,
+   "plattform": "unbekannt",
+   "quelle": "Brave-Suche 2026-11-12: Naruto Card Game Bandai negozio",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://www.pianetahobby.it/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "digimon",
+    "dragon ball",
+    "gundam",
+    "lorcana",
+    "naruto",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "tcg",
+    "union arena",
+    "yu-gi-oh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "unbekannt",
+   "versand_de_quelle": "",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": false,
+    "nennt_eu": false
+   },
+   "versand_url": "https://www.pianetahobby.it/aiuto/spedizioni/",
+   "vertrauen": "ungeprueft"
+  },
   "picclick": {
    "basis_url": "https://picclick.de",
    "domain": "picclick.de",
@@ -29074,43 +29396,43 @@
    "vertrauen": "ungeprueft"
   },
   "picclick2": {
-   "basis_url": "https://picclick.fr",
-   "domain": "picclick.fr",
+   "basis_url": "https://picclick.it",
+   "domain": "picclick.it",
    "entdeckung": [
     {
      "art": "shopsuche",
-     "url": "https://picclick.fr/?q=naruto"
+     "url": "https://picclick.it/?q=naruto"
     },
     {
      "art": "sitemap",
-     "url": "https://picclick.fr/sitemapindex.xml"
+     "url": "https://picclick.it/sitemapindex.xml"
     }
    ],
-   "erstmals_geprueft": "2026-11-11T11:02:13+00:00",
+   "erstmals_geprueft": "2026-11-12T11:19:10+00:00",
    "fake_check": {
-    "domain_alter_tage": 3799,
+    "domain_alter_tage": null,
     "punkte": 1,
     "signale": [
      "Rechtstexte fehlen: widerruf"
     ],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-11-11T11:02:13+00:00",
+   "geprueft_am": "2026-11-12T11:19:10+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite",
     "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin"
    ],
    "id": "picclick2",
    "impressum_url": null,
-   "land": "FR",
+   "land": "IT",
    "land_quelle": "Kandidatenliste",
-   "name": "picclick.fr",
+   "name": "picclick.it",
    "naruto_erwaehnt": false,
    "plattform": "unbekannt",
-   "quelle": "Brave-Suche 2026-11-11: Naruto Card Game Bandai acheter",
+   "quelle": "Brave-Suche 2026-11-05: Naruto Card Game Bandai acquista",
    "shop_merkmale": false,
    "sitemaps": [
-    "https://picclick.fr/sitemapindex.xml"
+    "https://picclick.it/sitemapindex.xml"
    ],
    "status": "ungeeignet",
    "tcg_bezug": false,
@@ -29118,7 +29440,7 @@
    "tdm_vorbehalt": false,
    "versand_de": "unbekannt",
    "versand_de_quelle": "",
-   "versand_url": "https://picclick.fr?sort=PricePlusShippingLowest",
+   "versand_url": "https://picclick.it?sort=PricePlusShippingLowest",
    "vertrauen": "ungeprueft"
   },
   "pikashop": {
@@ -40911,6 +41233,61 @@
    "status": "blockiert",
    "vertrauen": "ungeprueft"
   },
+  "toystorebiz": {
+   "basis_url": "https://toystorebiz.it",
+   "domain": "toystorebiz.it",
+   "entdeckung": [
+    {
+     "art": "shopsuche",
+     "url": "https://toystorebiz.it/?s=naruto"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://toystorebiz.it/news/dragon-ball-pop-up-store-rinascente-roma/"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://toystorebiz.it/sitemap_index.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-12T11:19:10+00:00",
+   "fake_check": {
+    "domain_alter_tage": null,
+    "punkte": 2,
+    "signale": [
+     "Rechtstexte fehlen: agb, widerruf, datenschutz"
+    ],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-11-12T11:19:10+00:00",
+   "gruende": [
+    "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin"
+   ],
+   "id": "toystorebiz",
+   "impressum_url": null,
+   "land": "IT",
+   "land_quelle": "Kandidatenliste",
+   "name": "toystorebiz.it",
+   "naruto_erwaehnt": false,
+   "plattform": "unbekannt",
+   "quelle": "Brave-Suche 2026-11-12: Naruto Card Game Bandai negozio",
+   "shop_merkmale": false,
+   "sitemaps": [
+    "https://toystorebiz.it/sitemap_index.xml"
+   ],
+   "status": "ungeeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "dragon ball",
+    "pokemon",
+    "pokémon"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "unbekannt",
+   "versand_de_quelle": "",
+   "versand_url": null,
+   "vertrauen": "ungeprueft"
+  },
   "toytreasure": {
    "basis_url": "https://toy-treasure.com",
    "domain": "toy-treasure.com",
@@ -45243,29 +45620,29 @@
  },
  "version": 1,
  "zusammenfassung": {
-  "geeignet": 344,
-  "kandidaten": 682,
+  "geeignet": 346,
+  "kandidaten": 688,
   "land": {
-   "?": 122,
+   "?": 123,
    "AT": 29,
    "BE": 25,
    "CA": 5,
-   "CH": 31,
+   "CH": 30,
    "CN": 1,
-   "DE": 133,
+   "DE": 134,
    "DK": 1,
    "ES": 42,
    "EU": 9,
    "FI": 1,
-   "FR": 65,
+   "FR": 64,
    "GR": 2,
    "HR": 2,
    "HU": 1,
    "IE": 2,
-   "IT": 54,
-   "JP": 4,
+   "IT": 57,
+   "JP": 5,
    "MX": 1,
-   "NL": 53,
+   "NL": 55,
    "NO": 1,
    "PL": 43,
    "PT": 1,
@@ -45275,10 +45652,10 @@
    "UK": 12,
    "US": 18
   },
-  "mit_entdeckungsweg": 344,
-  "naruto_erwaehnt": 200,
+  "mit_entdeckungsweg": 346,
+  "naruto_erwaehnt": 201,
   "plattform": {
-   "?": 98,
+   "?": 99,
    "ecwid": 3,
    "gambio": 1,
    "jtl": 6,
@@ -45288,27 +45665,27 @@
    "oxid": 2,
    "plentymarkets": 2,
    "prestashop": 4,
-   "shopify": 229,
+   "shopify": 231,
    "shopware": 13,
-   "unbekannt": 220,
+   "unbekannt": 223,
    "wix": 10,
    "woocommerce": 75
   },
   "status": {
-   "blockiert": 93,
-   "geeignet": 344,
+   "blockiert": 94,
+   "geeignet": 346,
    "nicht_erreichbar": 5,
-   "ungeeignet": 240
+   "ungeeignet": 243
   },
   "versand_de": {
-   "?": 98,
-   "ja": 234,
+   "?": 99,
+   "ja": 236,
    "nein": 48,
-   "unbekannt": 252,
+   "unbekannt": 255,
    "vermutlich": 50
   },
   "vertrauen": {
-   "ungeprueft": 552,
+   "ungeprueft": 558,
    "vorgeprueft": 130
   }
  }
