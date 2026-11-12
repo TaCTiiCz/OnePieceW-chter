@@ -1,10 +1,10 @@
 {
- "updated": "2026-11-11T23:39:50+00:00",
+ "updated": "2026-11-12T23:49:02+00:00",
  "quelle": "github",
- "state": "checking",
+ "state": "alert",
  "current": null,
- "last_run": "2026-11-11T23:39:39+00:00",
- "run_seconds": 10.3,
+ "last_run": "2026-11-12T23:48:27+00:00",
+ "run_seconds": 34.3,
  "sites": [
   {
    "id": "produkt",
@@ -12,7 +12,7 @@
    "agent": "naruto",
    "status": "ok",
    "im_lauf": true,
-   "last_checked": "2026-11-11T23:39:45+00:00",
+   "last_checked": "2026-11-12T23:48:45+00:00",
    "detail": "32 Aufgaben"
   },
   {
@@ -21,101 +21,101 @@
    "agent": "naruto",
    "status": "ok",
    "im_lauf": true,
-   "last_checked": "2026-11-11T23:39:44+00:00",
-   "detail": "2079 Aufgaben, 113 mit Fehlern"
+   "last_checked": "2026-11-12T23:48:59+00:00",
+   "detail": "2089 Aufgaben, 127 mit Fehlern"
   },
   {
    "id": "op_restock",
    "name": "Restock",
    "agent": "onepiece",
    "status": "ok",
-   "im_lauf": false,
-   "last_checked": "2026-11-11T23:37:35+00:00",
+   "im_lauf": true,
+   "last_checked": "2026-11-12T23:49:01+00:00",
    "detail": "1 Aufgaben"
   },
   {
    "id": "op_vorbestellung",
    "name": "Vorbestellung",
    "agent": "onepiece",
-   "status": "ok",
-   "im_lauf": false,
-   "last_checked": "2026-11-11T23:37:35+00:00",
-   "detail": "1 Aufgaben"
+   "status": "restock",
+   "im_lauf": true,
+   "last_checked": "2026-11-12T23:49:01+00:00",
+   "detail": "Neue Vorbestellung: OP18 Booster Display (EN, 24 Packs) bei GeeksHeaven Marktvergleich: M…"
   }
  ],
  "events": [
   {
-   "time": "2026-11-11T23:39:12+00:00",
+   "time": "2026-11-12T23:48:36+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-11-11T23:38:12+00:00",
+   "time": "2026-11-12T23:46:24+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-11-11T23:37:06+00:00",
+   "time": "2026-11-12T23:45:24+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-11-11T23:35:31+00:00",
+   "time": "2026-11-12T23:45:20+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Ultra Premium Coll…"
+  },
+  {
+   "time": "2026-11-12T23:45:20+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Ultra Premium Coll…"
+  },
+  {
+   "time": "2026-11-12T23:45:20+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Sylveon Tin"
+  },
+  {
+   "time": "2026-11-12T23:45:20+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Sylveon ex Box"
+  },
+  {
+   "time": "2026-11-12T23:44:12+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-11-11T23:34:26+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokemon 30th Celebration - Elite Tr…"
-  },
-  {
-   "time": "2026-11-11T23:34:26+00:00",
+   "time": "2026-11-12T23:42:58+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-11-11T23:33:19+00:00",
+   "time": "2026-11-12T23:42:21+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokemon 30th Celebration - Bundle k…"
+  },
+  {
+   "time": "2026-11-12T23:41:46+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-11-11T23:30:12+00:00",
-   "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
-  },
-  {
-   "time": "2026-11-11T23:21:16+00:00",
-   "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
-  },
-  {
-   "time": "2026-11-11T23:19:22+00:00",
-   "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
-  },
-  {
-   "time": "2026-11-11T23:17:00+00:00",
-   "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
-  },
-  {
-   "time": "2026-11-11T23:15:06+00:00",
+   "time": "2026-11-12T23:40:29+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   }
  ],
  "naruto": {
   "bestellbar": 4,
   "guenstigste": {
-   "titel": "Naruto Card Game - Display 01 [ENG] PreOrder - Release: 2027",
-   "shop": "Brickznmore",
-   "preis_cent": 30000,
+   "titel": "Bandai Naruto TCG Display Set 1 (Englisch) - Spielwarenpara…",
+   "shop": "spielwarenparadies24.de",
+   "preis_cent": 29999,
    "status": "PREORDER",
-   "url": "https://brickznmore.myshopify.com/products/naruto-card-game-display-01-eng-preorder-release-2027"
+   "url": "https://spielwarenparadies24.de/shop/bandai-naruto-tcg-display-set-1-englisch/"
   }
  },
  "pokemon": {
-  "status": "fishing",
-  "detail": "angelt nach Normalpreisen · 3823 Aufgaben, 83 zum Normalpreis bestellbar",
-  "last_checked": "2026-11-11T23:39:35+00:00",
-  "aufgaben": 3823,
+  "status": "catch",
+  "detail": "Neue passende Produktseite: 30th Celebration: Mew Figure Collection - Deutsch bei 2Sleeve…",
+  "last_checked": "2026-11-12T23:48:23+00:00",
+  "aufgaben": 3847,
   "bestellbar": 83,
-  "fang": null,
+  "fang": "Neue passende Produktseite: 30th Celebration: Mew Figure Collection - Deutsch bei 2Sleeve – noch NICHT bestellbar (SOLD…",
   "test": false
  },
  "stats": {
-  "haendler": 341,
-  "aufgaben": 2112,
-  "aufgaben_mit_fehlern": 113,
+  "haendler": 342,
+  "aufgaben": 2122,
+  "aufgaben_mit_fehlern": 127,
   "push_problem": false
  }
 }
