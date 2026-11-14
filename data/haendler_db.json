@@ -1,5 +1,5 @@
 {
- "aktualisiert": "2026-11-13T11:04:05+00:00",
+ "aktualisiert": "2026-11-14T10:30:44+00:00",
  "haendler": {
   "1001hobbies": {
    "basis_url": "https://www.1001hobbies.es",
@@ -2791,6 +2791,103 @@
    "versand_url": "https://www.bazaarofmagic.eu/en-WW/helpdesk/customer-service/shipment-and-shipment-costs/232",
    "vertrauen": "ungeprueft"
   },
+  "bazaverse": {
+   "basis_url": "https://bazaverse.com",
+   "domain": "bazaverse.com",
+   "entdeckung": [
+    {
+     "art": "woo_api",
+     "url": "https://bazaverse.com/wp-json/wc/store/v1/products?search=naruto&per_page=50"
+    },
+    {
+     "art": "woo_neueste",
+     "url": "https://bazaverse.com/wp-json/wc/store/v1/products?orderby=date&order=desc&per_page=50"
+    },
+    {
+     "art": "shopsuche",
+     "url": "https://bazaverse.com/wp-json/shopengine/v1/advanced-search/?nonce=96454ea332&_wp_http_referer=%2F&post_type=product&s=naruto"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://bazaverse.com/categoria-prodotto/japan-tcg-booster-box/naruto-card-game-bandai/"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://bazaverse.com/categoria-prodotto/japan-tcg-booster-box/naruto-tcg/"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://bazaverse.com/prodotto/magic-the-gathering-the-hobbit-collectors-booster-display-12-buste-eng-inglese/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://bazaverse.com/categoria-prodotto/japan-tcg-booster-box/one-piece/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://bazaverse.com/categoria-prodotto/japan-tcg-booster-box/one-piece/one-piece-graded-cards/"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://bazaverse.com/wp-sitemap.xml"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://bazaverse.com/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-14T10:30:24+00:00",
+   "fake_check": {
+    "domain_alter_tage": 1505,
+    "punkte": 3,
+    "signale": [
+     "Rechtstexte fehlen: agb, widerruf",
+     "keine Kontaktdaten auf Startseite/Impressum"
+    ],
+    "stufe": "mittel"
+   },
+   "geprueft_am": "2026-11-14T10:30:24+00:00",
+   "gruende": [
+    "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)"
+   ],
+   "id": "bazaverse",
+   "impressum_url": null,
+   "land": "?",
+   "land_quelle": "Domain-Endung",
+   "name": "bazaverse.com",
+   "naruto_erwaehnt": true,
+   "plattform": "woocommerce",
+   "quelle": "Brave-Suche 2026-11-14: \"Naruto Card Game\" preordine Bandai",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://bazaverse.com/wp-sitemap.xml",
+    "https://bazaverse.com/sitemap.xml",
+    "https://bazaverse.com/sitemap.html"
+   ],
+   "status": "ungeeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "display",
+    "dragon ball",
+    "magic: the gathering",
+    "naruto",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "tcg"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "vermutlich",
+   "versand_de_quelle": "https://bazaverse.com/categoria-prodotto/nerd-poster-game-shipping/ nennt EU/international",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": false,
+    "nennt_eu": true
+   },
+   "versand_url": "https://bazaverse.com/categoria-prodotto/nerd-poster-game-shipping/",
+   "vertrauen": "ungeprueft"
+  },
   "bbspiele": {
    "basis_url": "https://www.bb-spiele.de",
    "domain": "bb-spiele.de",
@@ -5568,50 +5665,50 @@
    "waehrung": "EUR"
   },
   "cardcosmos2": {
-   "basis_url": "https://cardcosmos.ch",
-   "domain": "cardcosmos.ch",
+   "basis_url": "https://cardcosmos.de",
+   "domain": "cardcosmos.de",
    "entdeckung": [
     {
      "art": "shopify_neueste",
-     "url": "https://cardcosmos.ch/products.json?limit=100"
+     "url": "https://cardcosmos.de/products.json?limit=100"
     },
     {
      "art": "shopify_katalog",
-     "url": "https://cardcosmos.ch/products.json?limit=250"
+     "url": "https://cardcosmos.de/products.json?limit=250"
     },
     {
      "art": "kategorie_naruto",
-     "url": "https://cardcosmos.ch/collections/naruto-tcg"
+     "url": "https://cardcosmos.de/collections/naruto-tcg"
     },
     {
      "art": "kategorie_vorbestellung",
-     "url": "https://cardcosmos.ch/collections/pokemon-release-kalender-2026"
+     "url": "https://cardcosmos.de/collections/pokemon-release-kalender-2026"
     },
     {
      "art": "kategorie_vorbestellung",
-     "url": "https://cardcosmos.ch/collections/magic-the-gathering-release"
+     "url": "https://cardcosmos.de/collections/magic-the-gathering-release"
     },
     {
      "art": "kategorie_bandai",
-     "url": "https://cardcosmos.ch/collections/one-piece-karten-kaufen"
+     "url": "https://cardcosmos.de/collections/one-piece-karten-kaufen"
     },
     {
      "art": "kategorie_bandai",
-     "url": "https://cardcosmos.ch/collections/one-piece-booster-displays"
+     "url": "https://cardcosmos.de/collections/one-piece-booster-displays"
     },
     {
      "art": "sitemap",
-     "url": "https://cardcosmos.ch/sitemap.xml"
+     "url": "https://cardcosmos.de/sitemap.xml"
     }
    ],
-   "erstmals_geprueft": "2026-11-13T11:03:50+00:00",
+   "erstmals_geprueft": "2026-11-14T10:30:24+00:00",
    "fake_check": {
     "domain_alter_tage": null,
     "punkte": 0,
     "signale": [],
     "stufe": "gering"
    },
-   "geprueft_am": "2026-11-13T11:03:50+00:00",
+   "geprueft_am": "2026-11-14T10:30:24+00:00",
    "gruende": [],
    "id": "cardcosmos2",
    "impressum": {
@@ -5620,17 +5717,17 @@
     "register": true,
     "ust_id": "DE366668128"
    },
-   "impressum_url": "https://cardcosmos.ch/policies/legal-notice",
-   "land": "CH",
+   "impressum_url": "https://cardcosmos.de/policies/legal-notice",
+   "land": "DE",
    "land_quelle": "Kandidatenliste",
-   "name": "cardcosmos.ch",
+   "name": "cardcosmos",
    "naruto_erwaehnt": true,
    "plattform": "shopify",
-   "quelle": "Brave-Suche 2026-11-09: One Piece Card Game Display Shop",
+   "quelle": "Prüfung 2026-10-06 (dokumentiert)",
    "shop_land_meta": "DE",
    "shop_merkmale": true,
    "sitemaps": [
-    "https://cardcosmos.ch/sitemap.xml"
+    "https://cardcosmos.de/sitemap.xml"
    ],
    "status": "geeignet",
    "tcg_bezug": true,
@@ -5653,16 +5750,15 @@
    ],
    "tdm_vorbehalt": false,
    "versand_de": "ja",
-   "versand_de_quelle": "https://cardcosmos.ch/meta.json (ships_to_countries)",
+   "versand_de_quelle": "https://cardcosmos.de/meta.json (ships_to_countries)",
    "versand_hinweise": {
     "betrag_hinweis": "4,99 € (automatisch gelesen, unbestätigt)",
     "nennt_deutschland": true,
     "nennt_eu": true
    },
-   "versand_url": "https://cardcosmos.ch/policies/shipping-policy",
+   "versand_url": "https://cardcosmos.de/policies/shipping-policy",
    "vertrauen": "vorgeprueft",
-   "waehrung": "EUR",
-   "zoll_hinweis": "Versand aus Nicht-EU-Land: Zoll/Einfuhrumsatzsteuer möglich"
+   "waehrung": "EUR"
   },
   "cardcosmos3": {
    "basis_url": "https://cardcosmos.es",
@@ -6458,6 +6554,22 @@
    "name": "Cardgameshop",
    "quelle": "Suche Europa 2026-10-07",
    "status": "nicht_erreichbar",
+   "vertrauen": "ungeprueft"
+  },
+  "cardheaven": {
+   "domain": "cardheaven.de",
+   "entdeckung": [],
+   "erstmals_geprueft": "2026-11-14T10:30:24+00:00",
+   "geprueft_am": "2026-11-14T10:30:24+00:00",
+   "gruende": [
+    "robots.txt nicht abrufbar (HTTP Netzwerkfehler)"
+   ],
+   "http_status": null,
+   "id": "cardheaven",
+   "land": "DE",
+   "name": "cardheaven.de",
+   "quelle": "Brave-Suche 2026-11-14: One Piece Booster Box Vorbestellung",
+   "status": "blockiert",
    "vertrauen": "ungeprueft"
   },
   "cardhome": {
@@ -25281,6 +25393,22 @@
    "versand_url": null,
    "vertrauen": "ungeprueft"
   },
+  "morningstar": {
+   "domain": "morningstar.com",
+   "entdeckung": [],
+   "erstmals_geprueft": "2026-11-14T10:30:24+00:00",
+   "geprueft_am": "2026-11-14T10:30:24+00:00",
+   "gruende": [
+    "Zugriff verweigert (HTTP 403)"
+   ],
+   "http_status": 403,
+   "id": "morningstar",
+   "land": "?",
+   "name": "morningstar.com",
+   "quelle": "Brave-Suche 2026-11-14: \"Naruto Card Game\" Bandai pre-order booster box",
+   "status": "blockiert",
+   "vertrauen": "ungeprueft"
+  },
   "mrpackhouse": {
    "basis_url": "https://www.mrpackhouse.ch",
    "domain": "mrpackhouse.ch",
@@ -29443,51 +29571,52 @@
    "vertrauen": "ungeprueft"
   },
   "picclick2": {
-   "basis_url": "https://picclick.it",
-   "domain": "picclick.it",
+   "basis_url": "https://picclick.de",
+   "domain": "picclick.de",
    "entdeckung": [
     {
      "art": "shopsuche",
-     "url": "https://picclick.it/?q=naruto"
+     "url": "https://picclick.de/?q=naruto"
     },
     {
      "art": "sitemap",
-     "url": "https://picclick.it/sitemapindex.xml"
+     "url": "https://picclick.de/sitemapindex.xml"
     }
    ],
-   "erstmals_geprueft": "2026-11-12T11:19:10+00:00",
+   "erstmals_geprueft": "2026-11-14T10:30:24+00:00",
    "fake_check": {
     "domain_alter_tage": null,
-    "punkte": 1,
+    "punkte": 4,
     "signale": [
+     "kein Impressum auffindbar",
      "Rechtstexte fehlen: widerruf"
     ],
-    "stufe": "gering"
+    "stufe": "mittel"
    },
-   "geprueft_am": "2026-11-12T11:19:10+00:00",
+   "geprueft_am": "2026-11-14T10:30:24+00:00",
    "gruende": [
     "kein erkennbares TCG-Sortiment auf der Startseite",
     "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin"
    ],
    "id": "picclick2",
    "impressum_url": null,
-   "land": "IT",
+   "land": "DE",
    "land_quelle": "Kandidatenliste",
-   "name": "picclick.it",
+   "name": "picclick.de",
    "naruto_erwaehnt": false,
    "plattform": "unbekannt",
-   "quelle": "Brave-Suche 2026-11-05: Naruto Card Game Bandai acquista",
+   "quelle": "Brave-Suche 2026-10-31: \"Naruto Card Game\" Bandai vorbestellen",
    "shop_merkmale": false,
    "sitemaps": [
-    "https://picclick.it/sitemapindex.xml"
+    "https://picclick.de/sitemapindex.xml"
    ],
    "status": "ungeeignet",
    "tcg_bezug": false,
    "tcg_hinweise": [],
    "tdm_vorbehalt": false,
-   "versand_de": "unbekannt",
-   "versand_de_quelle": "",
-   "versand_url": "https://picclick.it?sort=PricePlusShippingLowest",
+   "versand_de": "ja",
+   "versand_de_quelle": "Inlandshändler (Land DE)",
+   "versand_url": "https://picclick.de?sort=PricePlusShippingLowest",
    "vertrauen": "ungeprueft"
   },
   "picclick3": {
@@ -46070,15 +46199,15 @@
  "version": 1,
  "zusammenfassung": {
   "geeignet": 347,
-  "kandidaten": 695,
+  "kandidaten": 698,
   "land": {
-   "?": 125,
+   "?": 127,
    "AT": 29,
    "BE": 25,
    "CA": 5,
-   "CH": 31,
+   "CH": 30,
    "CN": 1,
-   "DE": 132,
+   "DE": 135,
    "DK": 1,
    "ES": 42,
    "EU": 9,
@@ -46088,7 +46217,7 @@
    "HR": 2,
    "HU": 1,
    "IE": 2,
-   "IT": 57,
+   "IT": 56,
    "JP": 5,
    "MX": 1,
    "NL": 55,
@@ -46102,9 +46231,9 @@
    "US": 20
   },
   "mit_entdeckungsweg": 347,
-  "naruto_erwaehnt": 203,
+  "naruto_erwaehnt": 204,
   "plattform": {
-   "?": 99,
+   "?": 101,
    "ecwid": 3,
    "gambio": 1,
    "jtl": 6,
@@ -46118,23 +46247,23 @@
    "shopware": 13,
    "unbekannt": 227,
    "wix": 10,
-   "woocommerce": 75
+   "woocommerce": 76
   },
   "status": {
-   "blockiert": 94,
+   "blockiert": 96,
    "geeignet": 347,
    "nicht_erreichbar": 5,
-   "ungeeignet": 249
+   "ungeeignet": 250
   },
   "versand_de": {
-   "?": 99,
-   "ja": 236,
+   "?": 101,
+   "ja": 237,
    "nein": 50,
-   "unbekannt": 260,
-   "vermutlich": 50
+   "unbekannt": 259,
+   "vermutlich": 51
   },
   "vertrauen": {
-   "ungeprueft": 565,
+   "ungeprueft": 568,
    "vorgeprueft": 130
   }
  }
