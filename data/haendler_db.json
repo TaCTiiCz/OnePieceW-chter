@@ -1,5 +1,5 @@
 {
- "aktualisiert": "2026-11-16T10:23:27+00:00",
+ "aktualisiert": "2026-11-16T11:27:12+00:00",
  "haendler": {
   "1001hobbies": {
    "basis_url": "https://www.1001hobbies.es",
@@ -31838,6 +31838,22 @@
    "vertrauen": "ungeprueft",
    "waehrung": "EUR"
   },
+  "pokemontcgsupplier": {
+   "domain": "pokemontcgsupplier.com",
+   "entdeckung": [],
+   "erstmals_geprueft": "2026-11-16T11:26:59+00:00",
+   "geprueft_am": "2026-11-16T11:26:59+00:00",
+   "gruende": [
+    "unerwarteter HTTP-Status 202"
+   ],
+   "http_status": 202,
+   "id": "pokemontcgsupplier",
+   "land": "?",
+   "name": "pokemontcgsupplier.com",
+   "quelle": "Brave-Suche 2026-11-16: \"Naruto Card Game\" Bandai pre-order booster box",
+   "status": "nicht_erreichbar",
+   "vertrauen": "ungeprueft"
+  },
   "pokepower": {
    "basis_url": "https://poke-power.eu",
    "domain": "poke-power.eu",
@@ -41338,6 +41354,91 @@
    "vertrauen": "vorgeprueft",
    "waehrung": "EUR"
   },
+  "tenkaichi": {
+   "basis_url": "https://tenkaichi.de",
+   "domain": "tenkaichi.de",
+   "entdeckung": [
+    {
+     "art": "shopify_neueste",
+     "url": "https://tenkaichi.de/products.json?limit=100"
+    },
+    {
+     "art": "shopify_katalog",
+     "url": "https://tenkaichi.de/products.json?limit=250"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://tenkaichi.de/collections/preorders"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://tenkaichi.de/collections/one-piece-card-game"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://tenkaichi.de/collections/dragon-ball-super-card-game"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://tenkaichi.de/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-16T11:26:59+00:00",
+   "fake_check": {
+    "domain_alter_tage": null,
+    "punkte": 0,
+    "signale": [],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-11-16T11:26:59+00:00",
+   "gruende": [],
+   "id": "tenkaichi",
+   "impressum": {
+    "beleg": "\\u003cbr\\u003eUmsatzsteuer-Identifikationsnummer gemäß §27a Umsatzsteuergesetz: DE346891005\\u003c\\/p\\u003e\",\"created_at\":\"2023-05-2",
+    "rechtsform": null,
+    "register": true,
+    "ust_id": "DE346891005"
+   },
+   "impressum_url": "https://tenkaichi.de/policies/legal-notice",
+   "land": "DE",
+   "land_quelle": "Kandidatenliste",
+   "name": "tenkaichi.de",
+   "naruto_erwaehnt": false,
+   "plattform": "shopify",
+   "quelle": "Brave-Suche 2026-11-16: One Piece Card Game Display Restock",
+   "shop_land_meta": "DE",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://tenkaichi.de/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "digimon",
+    "display",
+    "dragon ball",
+    "gundam",
+    "magic: the gathering",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "tcg",
+    "trading card",
+    "yu-gi-oh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "https://tenkaichi.de/meta.json (ships_to_countries)",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": false,
+    "nennt_eu": false
+   },
+   "versand_url": "https://tenkaichi.de/policies/shipping-policy",
+   "vertrauen": "vorgeprueft",
+   "waehrung": "EUR"
+  },
   "ternavo": {
    "basis_url": "https://ternavo.fr",
    "domain": "ternavo.fr",
@@ -43075,6 +43176,82 @@
    "versand_de": "unbekannt",
    "versand_de_quelle": "",
    "versand_url": "https://www.triplacegames.com/customer/login",
+   "vertrauen": "ungeprueft"
+  },
+  "turnzerohq": {
+   "basis_url": "https://turnzerohq.com",
+   "domain": "turnzerohq.com",
+   "entdeckung": [
+    {
+     "art": "shopsuche",
+     "url": "https://turnzerohq.com/?q=naruto"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://turnzerohq.com/one-piece"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://turnzerohq.com/one-piece/card-scanner"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://turnzerohq.com/sitemap.xml"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://turnzerohq.com/sitemap-decks.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-16T11:26:59+00:00",
+   "fake_check": {
+    "domain_alter_tage": 140,
+    "punkte": 3,
+    "signale": [
+     "Domain jünger als 1 Jahr (140 Tage)",
+     "Rechtstexte fehlen: widerruf",
+     "keine Kontaktdaten auf Startseite/Impressum"
+    ],
+    "stufe": "mittel"
+   },
+   "geprueft_am": "2026-11-16T11:26:59+00:00",
+   "gruende": [
+    "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)",
+    "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin"
+   ],
+   "id": "turnzerohq",
+   "impressum_url": null,
+   "land": "?",
+   "land_quelle": "Domain-Endung",
+   "name": "turnzerohq.com",
+   "naruto_erwaehnt": false,
+   "plattform": "unbekannt",
+   "quelle": "Brave-Suche 2026-11-16: One Piece Booster Box Restock",
+   "shop_merkmale": false,
+   "sitemaps": [
+    "https://turnzerohq.com/sitemap.xml",
+    "https://turnzerohq.com/sitemap-decks.xml",
+    "https://turnzerohq.com/sitemap-game-decks.xml"
+   ],
+   "status": "ungeeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "display",
+    "lorcana",
+    "magic: the gathering",
+    "mtg",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "tcg",
+    "trading card",
+    "yu-gi-oh",
+    "yugioh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "unbekannt",
+   "versand_de_quelle": "",
+   "versand_url": null,
    "vertrauen": "ungeprueft"
   },
   "turolgames": {
@@ -46775,16 +46952,16 @@
  },
  "version": 1,
  "zusammenfassung": {
-  "geeignet": 354,
-  "kandidaten": 701,
+  "geeignet": 355,
+  "kandidaten": 704,
   "land": {
-   "?": 127,
+   "?": 129,
    "AT": 29,
    "BE": 25,
    "CA": 5,
    "CH": 31,
    "CN": 1,
-   "DE": 135,
+   "DE": 136,
    "DK": 1,
    "ES": 42,
    "EU": 10,
@@ -46807,10 +46984,10 @@
    "UK": 12,
    "US": 20
   },
-  "mit_entdeckungsweg": 354,
+  "mit_entdeckungsweg": 355,
   "naruto_erwaehnt": 220,
   "plattform": {
-   "?": 95,
+   "?": 96,
    "ecwid": 3,
    "gambio": 1,
    "jtl": 6,
@@ -46820,28 +46997,28 @@
    "oxid": 3,
    "plentymarkets": 1,
    "prestashop": 4,
-   "shopify": 234,
+   "shopify": 235,
    "shopware": 13,
-   "unbekannt": 233,
+   "unbekannt": 234,
    "wix": 9,
    "woocommerce": 77
   },
   "status": {
    "blockiert": 90,
-   "geeignet": 354,
-   "nicht_erreichbar": 5,
-   "ungeeignet": 252
+   "geeignet": 355,
+   "nicht_erreichbar": 6,
+   "ungeeignet": 253
   },
   "versand_de": {
-   "?": 95,
-   "ja": 236,
+   "?": 96,
+   "ja": 237,
    "nein": 50,
-   "unbekannt": 266,
+   "unbekannt": 267,
    "vermutlich": 54
   },
   "vertrauen": {
-   "ungeprueft": 571,
-   "vorgeprueft": 130
+   "ungeprueft": 573,
+   "vorgeprueft": 131
   }
  }
 }
