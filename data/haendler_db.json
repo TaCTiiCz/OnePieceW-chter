@@ -1,5 +1,5 @@
 {
- "aktualisiert": "2026-11-18T11:48:15+00:00",
+ "aktualisiert": "2026-11-19T11:44:39+00:00",
  "haendler": {
   "1001hobbies": {
    "basis_url": "https://www.1001hobbies.es",
@@ -4114,6 +4114,166 @@
    },
    "versand_url": "https://brickznmore.myshopify.com/pages/versandinformationen",
    "vertrauen": "vorgeprueft",
+   "waehrung": "EUR"
+  },
+  "bro2store": {
+   "basis_url": "https://bro2store.it",
+   "domain": "bro2store.it",
+   "entdeckung": [
+    {
+     "art": "woo_api",
+     "url": "https://bro2store.it/wp-json/wc/store/v1/products?search=naruto&per_page=50"
+    },
+    {
+     "art": "woo_neueste",
+     "url": "https://bro2store.it/wp-json/wc/store/v1/products?orderby=date&order=desc&per_page=50"
+    },
+    {
+     "art": "shopsuche",
+     "url": "https://bro2store.it/?post_type=product&s=naruto"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://bro2store.it/product-category/altri-tcg/naruto/"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://bro2store.it/product-category/novita/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://bro2store.it/product-category/one-piece/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://bro2store.it/product-category/altri-tcg/dragon-ball/"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://bro2store.it/sitemap_index.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-19T11:44:23+00:00",
+   "fake_check": {
+    "domain_alter_tage": null,
+    "punkte": 2,
+    "signale": [
+     "Rechtstexte fehlen: agb, datenschutz"
+    ],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-11-19T11:44:23+00:00",
+   "gruende": [],
+   "id": "bro2store",
+   "impressum_url": null,
+   "land": "IT",
+   "land_quelle": "Kandidatenliste",
+   "name": "bro2store.it",
+   "naruto_erwaehnt": true,
+   "plattform": "woocommerce",
+   "quelle": "Brave-Suche 2026-11-19: One Piece Card Game display acquista",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://bro2store.it/sitemap_index.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "display",
+    "dragon ball",
+    "naruto",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "tcg"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "vermutlich",
+   "versand_de_quelle": "https://bro2store.it/spedizioni-per-prodotti-off-site/ nennt EU/international",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": false,
+    "nennt_eu": true
+   },
+   "versand_url": "https://bro2store.it/spedizioni-per-prodotti-off-site/",
+   "vertrauen": "ungeprueft"
+  },
+  "brosbrielle": {
+   "basis_url": "https://brosbrielle.nl",
+   "domain": "brosbrielle.nl",
+   "entdeckung": [
+    {
+     "art": "shopify_neueste",
+     "url": "https://brosbrielle.nl/products.json?limit=100"
+    },
+    {
+     "art": "shopify_katalog",
+     "url": "https://brosbrielle.nl/products.json?limit=250"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://brosbrielle.nl/collections/pre-order-1"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://brosbrielle.nl/collections/one-piece"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://brosbrielle.nl/collections/dragon-ball-z"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://brosbrielle.nl/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-19T11:44:23+00:00",
+   "fake_check": {
+    "domain_alter_tage": 723,
+    "punkte": 0,
+    "signale": [],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-11-19T11:44:23+00:00",
+   "gruende": [],
+   "id": "brosbrielle",
+   "impressum": {
+    "fehler": "Seite nicht gefunden (404)"
+   },
+   "impressum_url": "https://brosbrielle.nl/policies/legal-notice",
+   "land": "NL",
+   "land_quelle": "Kandidatenliste",
+   "name": "brosbrielle.nl",
+   "naruto_erwaehnt": false,
+   "plattform": "shopify",
+   "quelle": "Brave-Suche 2026-11-19: One Piece Card Game display kopen",
+   "shop_land_meta": "NL",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://brosbrielle.nl/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "display",
+    "dragon ball",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "tcg",
+    "yu-gi-oh"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "https://brosbrielle.nl/meta.json (ships_to_countries)",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": false,
+    "nennt_eu": true
+   },
+   "versand_url": "https://brosbrielle.nl/policies/shipping-policy",
+   "vertrauen": "ungeprueft",
    "waehrung": "EUR"
   },
   "bruxelles": {
@@ -21045,6 +21205,68 @@
    "status": "blockiert",
    "vertrauen": "ungeprueft"
   },
+  "knotadonuttcg": {
+   "basis_url": "https://knotadonuttcg.store",
+   "domain": "knotadonuttcg.store",
+   "entdeckung": [
+    {
+     "art": "shopify_neueste",
+     "url": "https://knotadonuttcg.store/products.json?limit=100"
+    },
+    {
+     "art": "shopify_katalog",
+     "url": "https://knotadonuttcg.store/products.json?limit=250"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://knotadonuttcg.store/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-19T11:44:23+00:00",
+   "fake_check": {
+    "domain_alter_tage": 27,
+    "punkte": 5,
+    "signale": [
+     "Domain erst 27 Tage alt",
+     "Rechtstexte fehlen: agb",
+     "keine Kontaktdaten auf Startseite/Impressum"
+    ],
+    "stufe": "hoch"
+   },
+   "geprueft_am": "2026-11-19T11:44:23+00:00",
+   "gruende": [
+    "Fake-Shop-Verdacht (hoch, 5 Punkte): Domain erst 27 Tage alt; Rechtstexte fehlen: agb; keine Kontaktdaten auf Startseite/Impressum"
+   ],
+   "id": "knotadonuttcg",
+   "impressum": {
+    "fehler": "Seite nicht gefunden (404)"
+   },
+   "impressum_url": "https://knotadonuttcg.store/policies/legal-notice",
+   "land": "IT",
+   "land_quelle": "Shopify-Shopdaten (meta.json)",
+   "name": "knotadonuttcg.store",
+   "naruto_erwaehnt": false,
+   "plattform": "shopify",
+   "quelle": "Brave-Suche 2026-11-19: One Piece Card Game display negozio",
+   "shop_land_meta": "IT",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://knotadonuttcg.store/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "display",
+    "one piece",
+    "tcg"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "https://knotadonuttcg.store/meta.json (ships_to_countries)",
+   "versand_url": "https://knotadonuttcg.store/policies/shipping-policy",
+   "vertrauen": "ungeprueft",
+   "waehrung": "EUR"
+  },
   "kofuku": {
    "basis_url": "https://kofuku.de",
    "domain": "kofuku.de",
@@ -35956,66 +36178,72 @@
    "vertrauen": "ungeprueft"
   },
   "shop2": {
-   "basis_url": "https://shop.bandainamco-am.com",
-   "domain": "shop.bandainamco-am.com",
+   "basis_url": "https://shop.shopofmagic.com",
+   "domain": "shop.shopofmagic.com",
    "entdeckung": [
     {
-     "art": "kategorie_bandai",
-     "url": "https://shop.bandainamco-am.com/bandainamcocrossstoreus/"
+     "art": "shopify_neueste",
+     "url": "https://shop.shopofmagic.com/products.json?limit=100"
     },
     {
-     "art": "kategorie_bandai",
-     "url": "https://shop.bandainamco-am.com/gashapon-bandai-officialshop/"
+     "art": "shopify_katalog",
+     "url": "https://shop.shopofmagic.com/products.json?limit=250"
+    },
+    {
+     "art": "kategorie_vorbestellung",
+     "url": "https://shop.shopofmagic.com/pages/kickstarter-and-pre-order-policy"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://shop.shopofmagic.com/collections/games-workshop-new-releases"
     },
     {
      "art": "sitemap",
-     "url": "https://shop.bandainamco-am.com/sitemap.xml"
-    },
-    {
-     "art": "sitemap",
-     "url": "https://shop.bandainamco-am.com/sitemap.rss"
+     "url": "https://shop.shopofmagic.com/sitemap.xml"
     }
    ],
-   "erstmals_geprueft": "2026-11-18T11:47:58+00:00",
+   "erstmals_geprueft": "2026-11-19T11:44:23+00:00",
    "fake_check": {
     "domain_alter_tage": null,
-    "punkte": 3,
-    "signale": [
-     "Rechtstexte fehlen: agb, widerruf, datenschutz",
-     "keine Kontaktdaten auf Startseite/Impressum"
-    ],
-    "stufe": "mittel"
+    "punkte": 0,
+    "signale": [],
+    "stufe": "gering"
    },
-   "geprueft_am": "2026-11-18T11:47:58+00:00",
+   "geprueft_am": "2026-11-19T11:44:23+00:00",
    "gruende": [
-    "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)",
-    "kein erkennbares TCG-Sortiment auf der Startseite",
-    "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin"
+    "Land US nicht in Europa",
+    "kein erkennbares TCG-Sortiment auf der Startseite"
    ],
    "id": "shop2",
-   "impressum_url": null,
-   "land": "?",
-   "land_quelle": "Domain-Endung",
-   "name": "shop.bandainamco-am.com",
+   "impressum": {
+    "fehler": "Seite nicht gefunden (404)"
+   },
+   "impressum_url": "https://shop.shopofmagic.com/policies/legal-notice",
+   "land": "US",
+   "land_quelle": "Shopify-Shopdaten (meta.json)",
+   "name": "shop.shopofmagic.com",
    "naruto_erwaehnt": false,
-   "plattform": "unbekannt",
-   "quelle": "Brave-Suche 2026-10-21: One Piece Card Game Display Shop",
-   "shop_merkmale": false,
+   "plattform": "shopify",
+   "quelle": "Brave-Suche 2026-11-17: Gundam Card Game Display Restock",
+   "shop_land_meta": "US",
+   "shop_merkmale": true,
    "sitemaps": [
-    "https://shop.bandainamco-am.com/sitemap.xml",
-    "https://shop.bandainamco-am.com/sitemap.rss"
+    "https://shop.shopofmagic.com/sitemap.xml"
    ],
    "status": "ungeeignet",
    "tcg_bezug": false,
-   "tcg_hinweise": [
-    "gundam",
-    "one piece"
-   ],
+   "tcg_hinweise": [],
    "tdm_vorbehalt": false,
-   "versand_de": "unbekannt",
-   "versand_de_quelle": "",
-   "versand_url": null,
-   "vertrauen": "ungeprueft"
+   "versand_de": "ja",
+   "versand_de_quelle": "https://shop.shopofmagic.com/meta.json (ships_to_countries)",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": true,
+    "nennt_eu": true
+   },
+   "versand_url": "https://shop.shopofmagic.com/policies/shipping-policy",
+   "vertrauen": "ungeprueft",
+   "waehrung": "USD"
   },
   "shop3": {
    "domain": "shop.cafemeisia.com",
@@ -38870,6 +39098,50 @@
    "shop_merkmale": false,
    "sitemaps": [
     "http://localhost/aktualizacje/strefamtg/1_index_sitemap.xml"
+   ],
+   "status": "ungeeignet",
+   "tcg_bezug": false,
+   "tcg_hinweise": [],
+   "tdm_vorbehalt": false,
+   "versand_de": "unbekannt",
+   "versand_de_quelle": "",
+   "versand_url": null,
+   "vertrauen": "ungeprueft"
+  },
+  "subito": {
+   "basis_url": "https://www.subito.it",
+   "domain": "subito.it",
+   "entdeckung": [
+    {
+     "art": "sitemap",
+     "url": "https://www.subito.it/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-19T11:44:23+00:00",
+   "fake_check": {
+    "domain_alter_tage": null,
+    "punkte": 2,
+    "signale": [
+     "Rechtstexte fehlen: agb, widerruf, datenschutz"
+    ],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-11-19T11:44:23+00:00",
+   "gruende": [
+    "kein erkennbares TCG-Sortiment auf der Startseite",
+    "keine Shop-Merkmale (Warenkorb/Kasse) – vermutlich News-Seite, Blog oder Magazin"
+   ],
+   "id": "subito",
+   "impressum_url": null,
+   "land": "IT",
+   "land_quelle": "Kandidatenliste",
+   "name": "subito.it",
+   "naruto_erwaehnt": false,
+   "plattform": "unbekannt",
+   "quelle": "Brave-Suche 2026-11-19: Naruto Card Game Bandai acquista",
+   "shop_merkmale": false,
+   "sitemaps": [
+    "https://www.subito.it/sitemap.xml"
    ],
    "status": "ungeeignet",
    "tcg_bezug": false,
@@ -47455,10 +47727,10 @@
  },
  "version": 1,
  "zusammenfassung": {
-  "geeignet": 359,
-  "kandidaten": 711,
+  "geeignet": 362,
+  "kandidaten": 715,
   "land": {
-   "?": 130,
+   "?": 129,
    "AT": 29,
    "BE": 25,
    "CA": 5,
@@ -47474,10 +47746,10 @@
    "HR": 2,
    "HU": 1,
    "IE": 2,
-   "IT": 57,
+   "IT": 60,
    "JP": 5,
    "MX": 1,
-   "NL": 55,
+   "NL": 56,
    "NO": 1,
    "PL": 44,
    "PT": 1,
@@ -47485,10 +47757,10 @@
    "SI": 1,
    "TW": 1,
    "UK": 12,
-   "US": 20
+   "US": 21
   },
-  "mit_entdeckungsweg": 359,
-  "naruto_erwaehnt": 223,
+  "mit_entdeckungsweg": 362,
+  "naruto_erwaehnt": 224,
   "plattform": {
    "?": 96,
    "ecwid": 3,
@@ -47500,27 +47772,27 @@
    "oxid": 3,
    "plentymarkets": 1,
    "prestashop": 4,
-   "shopify": 237,
+   "shopify": 240,
    "shopware": 13,
    "unbekannt": 237,
    "wix": 9,
-   "woocommerce": 79
+   "woocommerce": 80
   },
   "status": {
    "blockiert": 90,
-   "geeignet": 359,
+   "geeignet": 362,
    "nicht_erreichbar": 6,
-   "ungeeignet": 256
+   "ungeeignet": 257
   },
   "versand_de": {
    "?": 96,
-   "ja": 238,
+   "ja": 241,
    "nein": 51,
    "unbekannt": 272,
-   "vermutlich": 54
+   "vermutlich": 55
   },
   "vertrauen": {
-   "ungeprueft": 580,
+   "ungeprueft": 584,
    "vorgeprueft": 131
   }
  }
