@@ -1,10 +1,10 @@
 {
- "updated": "2026-11-20T23:44:06+00:00",
+ "updated": "2026-11-21T17:40:59+00:00",
  "quelle": "github",
  "state": "alert",
  "current": null,
- "last_run": "2026-11-20T23:43:56+00:00",
- "run_seconds": 9.4,
+ "last_run": "2026-11-21T17:40:43+00:00",
+ "run_seconds": 15.3,
  "sites": [
   {
    "id": "produkt",
@@ -12,7 +12,7 @@
    "agent": "naruto",
    "status": "ok",
    "im_lauf": true,
-   "last_checked": "2026-11-20T23:43:56+00:00",
+   "last_checked": "2026-11-21T17:40:56+00:00",
    "detail": "33 Aufgaben"
   },
   {
@@ -21,76 +21,76 @@
    "agent": "naruto",
    "status": "ok",
    "im_lauf": false,
-   "last_checked": "2026-11-20T23:42:03+00:00",
-   "detail": "2194 Aufgaben, 142 mit Fehlern"
+   "last_checked": "2026-11-21T17:38:20+00:00",
+   "detail": "2219 Aufgaben, 156 mit Fehlern"
   },
   {
    "id": "op_restock",
    "name": "Restock",
    "agent": "onepiece",
-   "status": "ok",
+   "status": "restock",
    "im_lauf": false,
-   "last_checked": "2026-11-20T23:41:42+00:00",
-   "detail": "1 Aufgaben"
+   "last_checked": "2026-11-21T17:39:13+00:00",
+   "detail": "Restock: OP17 Booster Display (EN, 24 Packs) bei play-maniac.de (vorher SOLD OUT) Marktve…"
   },
   {
    "id": "op_vorbestellung",
    "name": "Vorbestellung",
    "agent": "onepiece",
-   "status": "restock",
+   "status": "ok",
    "im_lauf": false,
-   "last_checked": "2026-11-20T23:41:42+00:00",
-   "detail": "Vorbestellung (wieder) möglich: OP18 Booster Display (EN, 24 Packs) bei BreakTheCase Im L…"
+   "last_checked": "2026-11-21T17:39:13+00:00",
+   "detail": "1 Aufgaben"
   }
  ],
  "events": [
   {
-   "time": "2026-11-20T23:44:05+00:00",
+   "time": "2026-11-21T17:40:33+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-11-20T23:43:22+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Ultra Premium Coll…"
-  },
-  {
-   "time": "2026-11-20T23:43:22+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Mewtwo Figure Coll…"
-  },
-  {
-   "time": "2026-11-20T23:43:22+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Mew Figure Collect…"
-  },
-  {
-   "time": "2026-11-20T23:43:22+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Greninja Tin"
-  },
-  {
-   "time": "2026-11-20T23:43:22+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Binder Collection"
-  },
-  {
-   "time": "2026-11-20T23:43:05+00:00",
+   "time": "2026-11-21T17:39:34+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-11-20T23:42:02+00:00",
+   "time": "2026-11-21T17:37:41+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-11-20T23:40:44+00:00",
+   "time": "2026-11-21T17:35:52+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-11-20T23:39:44+00:00",
+   "time": "2026-11-21T17:34:52+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-11-20T23:38:43+00:00",
+   "time": "2026-11-21T17:33:21+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-11-20T23:37:47+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon - Pokémon 30th Celebration …"
+   "time": "2026-11-21T17:31:25+00:00",
+   "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
+  },
+  {
+   "time": "2026-11-21T17:26:58+00:00",
+   "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
+  },
+  {
+   "time": "2026-11-21T17:25:58+00:00",
+   "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
+  },
+  {
+   "time": "2026-11-21T17:24:42+00:00",
+   "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
+  },
+  {
+   "time": "2026-11-21T17:24:08+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon - 30th Celebration Sylveon …"
+  },
+  {
+   "time": "2026-11-21T17:24:08+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon - 30th Celebration Greninja…"
   }
  ],
  "naruto": {
@@ -98,24 +98,24 @@
   "guenstigste": {
    "titel": "Bandai Naruto TCG Display Set 1 (Englisch) - Spielwarenpara…",
    "shop": "spielwarenparadies24.de",
-   "preis_cent": 29999,
+   "preis_cent": 27999,
    "status": "PREORDER",
    "url": "https://spielwarenparadies24.de/shop/bandai-naruto-tcg-display-set-1-englisch/"
   }
  },
  "pokemon": {
   "status": "catch",
-  "detail": "Jetzt lieferbar zum Normalpreis (DE): [DE] Pokémon Kampfdecks – 30 Jahre Psiana-ex & Nach…",
-  "last_checked": "2026-11-20T23:43:41+00:00",
-  "aufgaben": 4278,
-  "bestellbar": 92,
-  "fang": "Jetzt lieferbar zum Normalpreis (DE): [DE] Pokémon Kampfdecks – 30 Jahre Psiana-ex & Nachtara-ex Nachtara bei Yonko TCG",
+  "detail": "Neue passende Produktseite: UPC POKEMON ULTRA PREMIUM COLLECTION 30TH CELEBRATIONS (INGLÉ…",
+  "last_checked": "2026-11-21T17:37:33+00:00",
+  "aufgaben": 4318,
+  "bestellbar": 85,
+  "fang": "Neue passende Produktseite: UPC POKEMON ULTRA PREMIUM COLLECTION 30TH CELEBRATIONS (INGLÉS) UPC ESPEON DAY bei sunnysto…",
   "test": false
  },
  "stats": {
-  "haendler": 358,
-  "aufgaben": 2228,
-  "aufgaben_mit_fehlern": 142,
+  "haendler": 363,
+  "aufgaben": 2253,
+  "aufgaben_mit_fehlern": 156,
   "push_problem": false
  }
 }
