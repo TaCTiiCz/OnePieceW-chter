@@ -1,5 +1,5 @@
 {
- "aktualisiert": "2026-11-23T11:31:22+00:00",
+ "aktualisiert": "2026-11-23T12:52:33+00:00",
  "haendler": {
   "1001hobbies": {
    "basis_url": "https://www.1001hobbies.es",
@@ -13277,6 +13277,74 @@
    "status": "blockiert",
    "vertrauen": "ungeprueft"
   },
+  "fandomwire": {
+   "basis_url": "https://fandomwire.com",
+   "domain": "fandomwire.com",
+   "entdeckung": [
+    {
+     "art": "kategorie_naruto",
+     "url": "https://fandomwire.com/best-naruto-ovas-ranked/"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://fandomwire.com/naruto-returns-june-2027-card-game-shadow-rising/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://fandomwire.com/frieren-beats-one-piece-crunchyroll-popular-anime/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://fandomwire.com/dragon-ball-super-beerus-episode-8-release-date/"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://fandomwire.com/sitemap.xml"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://fandomwire.com/google-news.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-23T12:52:17+00:00",
+   "fake_check": {
+    "domain_alter_tage": 3329,
+    "punkte": 1,
+    "signale": [
+     "keine Kontaktdaten auf Startseite/Impressum"
+    ],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-11-23T12:52:17+00:00",
+   "gruende": [
+    "Land unbekannt (keine Länder-Domain, keine Shopdaten, keine USt-ID)"
+   ],
+   "id": "fandomwire",
+   "impressum_url": null,
+   "land": "?",
+   "land_quelle": "Domain-Endung",
+   "name": "fandomwire.com",
+   "naruto_erwaehnt": true,
+   "plattform": "unbekannt",
+   "quelle": "Brave-Suche 2026-11-23: \"Naruto Card Game\" preordine Bandai",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://fandomwire.com/sitemap.xml",
+    "https://fandomwire.com/google-news.xml"
+   ],
+   "status": "ungeeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "dragon ball",
+    "naruto",
+    "one piece"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "unbekannt",
+   "versand_de_quelle": "",
+   "versand_url": null,
+   "vertrauen": "ungeprueft"
+  },
   "fantasiacards": {
    "basis_url": "https://fantasiacards.de",
    "domain": "fantasiacards.de",
@@ -16927,6 +16995,72 @@
    "versand_de_quelle": "",
    "versand_url": null,
    "vertrauen": "ungeprueft"
+  },
+  "ggcardsshop": {
+   "basis_url": "https://ggcards-shop.at",
+   "domain": "ggcards-shop.at",
+   "entdeckung": [
+    {
+     "art": "shopify_neueste",
+     "url": "https://ggcards-shop.at/products.json?limit=100"
+    },
+    {
+     "art": "shopify_katalog",
+     "url": "https://ggcards-shop.at/products.json?limit=250"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://www.ggcards-shop.at/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-23T12:52:17+00:00",
+   "fake_check": {
+    "domain_alter_tage": null,
+    "punkte": 1,
+    "signale": [
+     "keine Kontaktdaten auf Startseite/Impressum"
+    ],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-11-23T12:52:17+00:00",
+   "gruende": [],
+   "id": "ggcardsshop",
+   "impressum": {
+    "beleg": "F-8\\\"\\u003e\\u003cspan\\u003eUmsatzsteuer-Identifikationsnummer gemäß § 27a UStG: ATU82681607\\u003c\\/span\\u003e\\u003c\\/p\\u003e\\n\\u003",
+    "rechtsform": null,
+    "register": true,
+    "ust_id": "ATU82681607"
+   },
+   "impressum_url": "https://ggcards-shop.at/policies/legal-notice",
+   "land": "AT",
+   "land_quelle": "Kandidatenliste",
+   "name": "ggcards-shop.at",
+   "naruto_erwaehnt": false,
+   "plattform": "shopify",
+   "quelle": "Brave-Suche 2026-11-23: TCG Shop Österreich Booster Display",
+   "shop_land_meta": "AT",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://www.ggcards-shop.at/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "display",
+    "tcg"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "https://ggcards-shop.at/meta.json (ships_to_countries)",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": true,
+    "nennt_eu": false
+   },
+   "versand_url": "https://ggcards-shop.at/policies/shipping-policy",
+   "vertrauen": "vorgeprueft",
+   "waehrung": "EUR"
   },
   "giaxstore": {
    "basis_url": "https://www.giaxstore.it",
@@ -23447,6 +23581,22 @@
    "vertrauen": "ungeprueft",
    "waehrung": "EUR"
   },
+  "lumatcg": {
+   "domain": "lumatcg.com",
+   "entdeckung": [],
+   "erstmals_geprueft": "2026-11-23T12:52:17+00:00",
+   "geprueft_am": "2026-11-23T12:52:17+00:00",
+   "gruende": [
+    "Zugriff verweigert (HTTP 403)"
+   ],
+   "http_status": 403,
+   "id": "lumatcg",
+   "land": "?",
+   "name": "lumatcg.com",
+   "quelle": "Brave-Suche 2026-11-23: \"Naruto Card Game\" Bandai vorbestellen",
+   "status": "blockiert",
+   "vertrauen": "ungeprueft"
+  },
   "madatsutcg": {
    "basis_url": "https://madatsutcg.com",
    "domain": "madatsutcg.com",
@@ -28443,6 +28593,22 @@
    "versand_url": null,
    "vertrauen": "ungeprueft"
   },
+  "nettoonline": {
+   "domain": "netto-online.de",
+   "entdeckung": [],
+   "erstmals_geprueft": "2026-11-23T12:52:17+00:00",
+   "geprueft_am": "2026-11-23T12:52:17+00:00",
+   "gruende": [
+    "robots.txt mit HTTP 403 verweigert"
+   ],
+   "http_status": null,
+   "id": "nettoonline",
+   "land": "DE",
+   "name": "netto-online.de",
+   "quelle": "Brave-Suche 2026-11-23: One Piece Booster Box kaufen",
+   "status": "blockiert",
+   "vertrauen": "ungeprueft"
+  },
   "nimasvault": {
    "basis_url": "https://www.nimasvault.com",
    "domain": "nimasvault.com",
@@ -32896,6 +33062,101 @@
    },
    "versand_url": "https://pokemontcgsupplier.com/shipping-policy/",
    "vertrauen": "ungeprueft"
+  },
+  "pokeplugtcg": {
+   "basis_url": "https://pokeplugtcg.nl",
+   "domain": "pokeplugtcg.nl",
+   "entdeckung": [
+    {
+     "art": "shopify_neueste",
+     "url": "https://pokeplugtcg.nl/products.json?limit=100"
+    },
+    {
+     "art": "shopify_katalog",
+     "url": "https://pokeplugtcg.nl/products.json?limit=250"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://pokeplugtcg.nl/collections/naruto-tcg"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://pokeplugtcg.nl/blogs/nieuws/naruto-card-game-juni-2027-release-starter-decks"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://pokeplugtcg.nl/blogs/nieuws/one-piece-banlist-dracule-mihawk-op14-020-verboden"
+    },
+    {
+     "art": "kategorie_neuheiten",
+     "url": "https://pokeplugtcg.nl/blogs/nieuws/pokemon-30th-celebration-ultra-premium-collection-day-night"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://pokeplugtcg.nl/collections/one-piece-card-game"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://pokeplugtcg.nl/collections/dragon-ball-super-tcg"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://pokeplugtcg.nl/sitemap.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-23T12:52:17+00:00",
+   "fake_check": {
+    "domain_alter_tage": 294,
+    "punkte": 1,
+    "signale": [
+     "Domain jünger als 1 Jahr (294 Tage)"
+    ],
+    "stufe": "gering"
+   },
+   "geprueft_am": "2026-11-23T12:52:17+00:00",
+   "gruende": [],
+   "id": "pokeplugtcg",
+   "impressum": {
+    "beleg": "mmer: -\\u003c\\/span\\u003e\\u003cbr\\u003e\\u003cspan\\u003eBtw-identificatienummer: NL005456509B70\\u003c\\/span\\u003e\\u003c\\/p\\u003e\\n\\u003",
+    "rechtsform": null,
+    "register": true,
+    "ust_id": "NL005456509B70"
+   },
+   "impressum_url": "https://pokeplugtcg.nl/policies/legal-notice",
+   "land": "NL",
+   "land_quelle": "Kandidatenliste",
+   "name": "pokeplugtcg.nl",
+   "naruto_erwaehnt": true,
+   "plattform": "shopify",
+   "quelle": "Brave-Suche 2026-11-23: \"Naruto Card Game\" Bandai vorbestellen",
+   "shop_land_meta": "NL",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://pokeplugtcg.nl/sitemap.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "display",
+    "dragon ball",
+    "naruto",
+    "one piece",
+    "pokemon",
+    "pokémon",
+    "tcg"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "ja",
+   "versand_de_quelle": "https://pokeplugtcg.nl/meta.json (ships_to_countries)",
+   "versand_hinweise": {
+    "betrag_hinweis": null,
+    "nennt_deutschland": false,
+    "nennt_eu": false
+   },
+   "versand_url": "https://pokeplugtcg.nl/pages/live-openen-verzending",
+   "vertrauen": "vorgeprueft",
+   "waehrung": "EUR"
   },
   "pokepower": {
    "basis_url": "https://poke-power.eu",
@@ -43353,6 +43614,73 @@
    "versand_url": null,
    "vertrauen": "ungeprueft"
   },
+  "tobira": {
+   "basis_url": "https://tobira.fr",
+   "domain": "tobira.fr",
+   "entdeckung": [
+    {
+     "art": "kategorie_naruto",
+     "url": "https://tobira.fr/category/actu-sorties/actu-naruto-card-game/"
+    },
+    {
+     "art": "kategorie_naruto",
+     "url": "https://tobira.fr/naruto-card-game-mecaniques-comment-jouer/"
+    },
+    {
+     "art": "kategorie_bandai",
+     "url": "https://tobira.fr/category/actu-sorties/actu-one-piece-card-game/"
+    },
+    {
+     "art": "sitemap",
+     "url": "https://tobira.fr/sitemap_index.xml"
+    }
+   ],
+   "erstmals_geprueft": "2026-11-23T12:52:17+00:00",
+   "fake_check": {
+    "domain_alter_tage": 220,
+    "punkte": 4,
+    "signale": [
+     "Domain jünger als 1 Jahr (220 Tage)",
+     "Rechtstexte fehlen: agb, widerruf",
+     "keine Kontaktdaten auf Startseite/Impressum"
+    ],
+    "stufe": "mittel"
+   },
+   "geprueft_am": "2026-11-23T12:52:17+00:00",
+   "gruende": [],
+   "id": "tobira",
+   "impressum": {
+    "beleg": "r ? Lexique TCG manga Deck-building Tier List & Méta Achat & Collection Expand Guides d’achat accessoires Cote des cartes O",
+    "rechtsform": null,
+    "register": true,
+    "ust_id": null
+   },
+   "impressum_url": "https://tobira.fr/mentions-legales/",
+   "land": "FR",
+   "land_quelle": "Kandidatenliste",
+   "name": "tobira.fr",
+   "naruto_erwaehnt": true,
+   "plattform": "unbekannt",
+   "quelle": "Brave-Suche 2026-11-23: \"Naruto Card Game\" précommande Bandai",
+   "shop_merkmale": true,
+   "sitemaps": [
+    "https://tobira.fr/sitemap_index.xml"
+   ],
+   "status": "geeignet",
+   "tcg_bezug": true,
+   "tcg_hinweise": [
+    "booster",
+    "display",
+    "naruto",
+    "one piece",
+    "tcg"
+   ],
+   "tdm_vorbehalt": false,
+   "versand_de": "unbekannt",
+   "versand_de_quelle": "",
+   "versand_url": null,
+   "vertrauen": "ungeprueft"
+  },
   "todocoleccion": {
    "basis_url": "https://www.todocoleccion.net",
    "domain": "todocoleccion.net",
@@ -47995,21 +48323,21 @@
  },
  "version": 1,
  "zusammenfassung": {
-  "geeignet": 361,
-  "kandidaten": 732,
+  "geeignet": 364,
+  "kandidaten": 738,
   "land": {
-   "?": 135,
-   "AT": 29,
+   "?": 137,
+   "AT": 30,
    "BE": 27,
    "CA": 6,
    "CH": 34,
    "CN": 1,
-   "DE": 136,
+   "DE": 137,
    "DK": 1,
    "ES": 45,
    "EU": 11,
    "FI": 1,
-   "FR": 68,
+   "FR": 69,
    "GR": 2,
    "HR": 2,
    "HU": 1,
@@ -48017,7 +48345,7 @@
    "IT": 61,
    "JP": 5,
    "MX": 1,
-   "NL": 56,
+   "NL": 57,
    "NO": 1,
    "PL": 46,
    "PT": 1,
@@ -48027,10 +48355,10 @@
    "UK": 12,
    "US": 21
   },
-  "mit_entdeckungsweg": 361,
-  "naruto_erwaehnt": 218,
+  "mit_entdeckungsweg": 364,
+  "naruto_erwaehnt": 221,
   "plattform": {
-   "?": 110,
+   "?": 112,
    "ecwid": 3,
    "gambio": 1,
    "jtl": 6,
@@ -48040,28 +48368,28 @@
    "oxid": 4,
    "plentymarkets": 1,
    "prestashop": 5,
-   "shopify": 244,
+   "shopify": 246,
    "shopware": 13,
-   "unbekannt": 238,
+   "unbekannt": 240,
    "wix": 9,
    "woocommerce": 77
   },
   "status": {
-   "blockiert": 99,
-   "geeignet": 361,
+   "blockiert": 101,
+   "geeignet": 364,
    "nicht_erreichbar": 11,
-   "ungeeignet": 261
+   "ungeeignet": 262
   },
   "versand_de": {
-   "?": 110,
-   "ja": 243,
+   "?": 112,
+   "ja": 245,
    "nein": 52,
-   "unbekannt": 282,
+   "unbekannt": 284,
    "vermutlich": 45
   },
   "vertrauen": {
-   "ungeprueft": 598,
-   "vorgeprueft": 134
+   "ungeprueft": 602,
+   "vorgeprueft": 136
   }
  }
 }
