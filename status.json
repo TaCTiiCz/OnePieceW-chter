@@ -1,10 +1,10 @@
 {
- "updated": "2026-11-23T23:55:38+00:00",
+ "updated": "2026-11-24T23:45:47+00:00",
  "quelle": "github",
- "state": "alert",
+ "state": "checking",
  "current": null,
- "last_run": "2026-11-23T23:55:28+00:00",
- "run_seconds": 9.4,
+ "last_run": "2026-11-24T23:43:34+00:00",
+ "run_seconds": 131.8,
  "sites": [
   {
    "id": "produkt",
@@ -12,7 +12,7 @@
    "agent": "naruto",
    "status": "ok",
    "im_lauf": true,
-   "last_checked": "2026-11-23T23:55:29+00:00",
+   "last_checked": "2026-11-24T23:43:53+00:00",
    "detail": "35 Aufgaben"
   },
   {
@@ -21,76 +21,76 @@
    "agent": "naruto",
    "status": "ok",
    "im_lauf": false,
-   "last_checked": "2026-11-23T23:54:30+00:00",
-   "detail": "2190 Aufgaben, 114 mit Fehlern"
+   "last_checked": "2026-11-24T23:42:35+00:00",
+   "detail": "2190 Aufgaben, 126 mit Fehlern"
   },
   {
    "id": "op_restock",
    "name": "Restock",
    "agent": "onepiece",
-   "status": "restock",
-   "im_lauf": false,
-   "last_checked": "2026-11-23T23:54:15+00:00",
-   "detail": "Restock: OP17 Booster Display (EN, 24 Packs) bei spielewelt.de (vorher SOLD OUT) Marktver…"
+   "status": "ok",
+   "im_lauf": true,
+   "last_checked": "2026-11-24T23:45:46+00:00",
+   "detail": "1 Aufgaben"
   },
   {
    "id": "op_vorbestellung",
    "name": "Vorbestellung",
    "agent": "onepiece",
    "status": "ok",
-   "im_lauf": false,
-   "last_checked": "2026-11-23T23:54:15+00:00",
+   "im_lauf": true,
+   "last_checked": "2026-11-24T23:45:46+00:00",
    "detail": "1 Aufgaben"
   }
  ],
  "events": [
   {
-   "time": "2026-11-23T23:55:37+00:00",
+   "time": "2026-11-24T23:44:51+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon 30th Celebration – Greninja…"
+  },
+  {
+   "time": "2026-11-24T23:44:51+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon 30th Celebration – Elite Tr…"
+  },
+  {
+   "time": "2026-11-24T23:44:51+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon 30th Celebration – Booster …"
+  },
+  {
+   "time": "2026-11-24T23:44:51+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokemon 30th Celebration – Battle D…"
+  },
+  {
+   "time": "2026-11-24T23:44:51+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokemon 30th Celebration – Battle D…"
+  },
+  {
+   "time": "2026-11-24T23:44:51+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon 30th Celebration – 2-Pack B…"
+  },
+  {
+   "time": "2026-11-24T23:44:51+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon 30 Jahre – Tin-Box #1 Tag: …"
+  },
+  {
+   "time": "2026-11-24T23:44:51+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon 30 Jahre – Tech-Sticker-Kol…"
+  },
+  {
+   "time": "2026-11-24T23:43:44+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-11-23T23:54:35+00:00",
+   "time": "2026-11-24T23:41:36+00:00",
    "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-11-23T23:51:19+00:00",
-   "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
+   "time": "2026-11-24T23:39:14+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon TCG: Ultra Premium Collecti…"
   },
   {
-   "time": "2026-11-23T23:51:03+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Elite Trainer Box"
-  },
-  {
-   "time": "2026-11-23T23:51:03+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Classic Collection…"
-  },
-  {
-   "time": "2026-11-23T23:51:03+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Booster Bundle"
-  },
-  {
-   "time": "2026-11-23T23:51:03+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Binder Collection"
-  },
-  {
-   "time": "2026-11-23T23:51:03+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration 2-Pack Blister Eev…"
-  },
-  {
-   "time": "2026-11-23T23:51:03+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Umbreon ex Battle …"
-  },
-  {
-   "time": "2026-11-23T23:51:03+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Ultra Premium Coll…"
-  },
-  {
-   "time": "2026-11-23T23:51:03+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Ultra Premium Coll…"
-  },
-  {
-   "time": "2026-11-23T23:51:03+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Sylveon Tin"
+   "time": "2026-11-24T23:39:14+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon TCG: Ultra Premium Collecti…"
   }
  ],
  "naruto": {
@@ -104,18 +104,18 @@
   }
  },
  "pokemon": {
-  "status": "catch",
-  "detail": "Jetzt lieferbar zum Normalpreis (DE): [DE] Pokémon Kampfdecks – 30 Jahre Psiana-ex & Nach…",
-  "last_checked": "2026-11-23T23:53:43+00:00",
-  "aufgaben": 4289,
-  "bestellbar": 81,
-  "fang": "Jetzt lieferbar zum Normalpreis (DE): [DE] Pokémon Kampfdecks – 30 Jahre Psiana-ex & Nachtara-ex Nachtara bei yonko-tcg…",
+  "status": "fishing",
+  "detail": "angelt nach Normalpreisen · 4307 Aufgaben, 74 zum Normalpreis bestellbar",
+  "last_checked": "2026-11-24T23:45:23+00:00",
+  "aufgaben": 4307,
+  "bestellbar": 74,
+  "fang": null,
   "test": false
  },
  "stats": {
   "haendler": 358,
   "aufgaben": 2226,
-  "aufgaben_mit_fehlern": 114,
+  "aufgaben_mit_fehlern": 126,
   "push_problem": false
  }
 }
