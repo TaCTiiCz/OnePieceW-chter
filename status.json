@@ -1,10 +1,10 @@
 {
- "updated": "2026-11-25T23:38:28+00:00",
+ "updated": "2026-11-26T23:39:33+00:00",
  "quelle": "github",
- "state": "alert",
+ "state": "checking",
  "current": null,
- "last_run": "2026-11-25T23:37:04+00:00",
- "run_seconds": 82.9,
+ "last_run": "2026-11-26T23:34:24+00:00",
+ "run_seconds": 307.8,
  "sites": [
   {
    "id": "produkt",
@@ -12,8 +12,8 @@
    "agent": "naruto",
    "status": "ok",
    "im_lauf": true,
-   "last_checked": "2026-11-25T23:37:22+00:00",
-   "detail": "36 Aufgaben"
+   "last_checked": "2026-11-26T23:34:44+00:00",
+   "detail": "37 Aufgaben, 1 mit Fehlern"
   },
   {
    "id": "entdeckung",
@@ -21,8 +21,8 @@
    "agent": "naruto",
    "status": "ok",
    "im_lauf": true,
-   "last_checked": "2026-11-25T23:37:26+00:00",
-   "detail": "2192 Aufgaben, 134 mit Fehlern"
+   "last_checked": "2026-11-26T23:35:14+00:00",
+   "detail": "2190 Aufgaben, 176 mit Fehlern"
   },
   {
    "id": "op_restock",
@@ -30,7 +30,7 @@
    "agent": "onepiece",
    "status": "ok",
    "im_lauf": false,
-   "last_checked": "2026-11-25T23:36:53+00:00",
+   "last_checked": "2026-11-26T23:22:39+00:00",
    "detail": "1 Aufgaben"
   },
   {
@@ -39,58 +39,58 @@
    "agent": "onepiece",
    "status": "ok",
    "im_lauf": false,
-   "last_checked": "2026-11-25T23:36:53+00:00",
+   "last_checked": "2026-11-26T23:22:39+00:00",
    "detail": "1 Aufgaben"
   }
  ],
  "events": [
   {
-   "time": "2026-11-25T23:37:13+00:00",
-   "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache UNBEKANNT; Produktart unklar (UNBEKANNT)): Official Sac Cabas - …"
+   "time": "2026-11-26T23:35:41+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon - Mega Evolution - 30th Cel…"
   },
   {
-   "time": "2026-11-25T23:37:13+00:00",
-   "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
+   "time": "2026-11-26T23:35:41+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon - Mega Evolution - 30th Cel…"
   },
   {
-   "time": "2026-11-25T23:35:49+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon 30th Celebration Elite Trai…"
+   "time": "2026-11-26T23:35:41+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon - Mega Evolution - 30th Cel…"
   },
   {
-   "time": "2026-11-25T23:35:49+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon 30th Celebration Sylveon EX…"
+   "time": "2026-11-26T23:35:41+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon - Mega Evolution - 30th Cel…"
   },
   {
-   "time": "2026-11-25T23:35:49+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon 30th Celebration Greninja E…"
+   "time": "2026-11-26T23:35:40+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Greninja ex Box [L…"
   },
   {
-   "time": "2026-11-25T23:35:49+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon 30 Jahre Alola-Kokowei Tech…"
+   "time": "2026-11-26T23:35:40+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Elite Trainer Box …"
   },
   {
-   "time": "2026-11-25T23:35:49+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon 30 Jahre 2er-Pack-Blister E…"
+   "time": "2026-11-26T23:35:40+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Classic Collection…"
   },
   {
-   "time": "2026-11-25T23:35:49+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon 30 Jahre Ultra-Premium-Koll…"
+   "time": "2026-11-26T23:35:40+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Mini Tin Display"
   },
   {
-   "time": "2026-11-25T23:35:49+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon 30 Jahre Top-Trainer-Box De…"
+   "time": "2026-11-26T23:35:40+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Mewtwo Figure Coll…"
   },
   {
-   "time": "2026-11-25T23:35:49+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon 30 Jahre Kampfdeck Psiana e…"
+   "time": "2026-11-26T23:35:40+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Mew Figure Collect…"
   },
   {
-   "time": "2026-11-25T23:35:49+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon 30 Jahre Kampfdeck Nachtara…"
+   "time": "2026-11-26T23:35:40+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Greninja Collection"
   },
   {
-   "time": "2026-11-25T23:35:49+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon 30 Jahre Figuren-Kollektion…"
+   "time": "2026-11-26T23:35:40+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Espeon ex Battle D…"
   }
  ],
  "naruto": {
@@ -104,18 +104,18 @@
   }
  },
  "pokemon": {
-  "status": "catch",
-  "detail": "Jetzt lieferbar zum Normalpreis (DE): Pokémon 30 Jahre Mini-Tin - DE Quajutsu bei Nerdbank",
-  "last_checked": "2026-11-25T23:36:22+00:00",
-  "aufgaben": 4378,
+  "status": "error",
+  "detail": "1101 von 4391 Aufgaben mit Fehlern",
+  "last_checked": "2026-11-26T23:36:13+00:00",
+  "aufgaben": 4391,
   "bestellbar": 92,
-  "fang": "Jetzt lieferbar zum Normalpreis (DE): Pokémon 30 Jahre Mini-Tin - DE Quajutsu bei Nerdbank",
+  "fang": null,
   "test": false
  },
  "stats": {
-  "haendler": 359,
-  "aufgaben": 2229,
-  "aufgaben_mit_fehlern": 134,
+  "haendler": 358,
+  "aufgaben": 2228,
+  "aufgaben_mit_fehlern": 177,
   "push_problem": false
  }
 }
