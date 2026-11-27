@@ -1,10 +1,10 @@
 {
- "updated": "2026-11-26T23:39:33+00:00",
+ "updated": "2026-11-27T23:48:22+00:00",
  "quelle": "github",
- "state": "checking",
+ "state": "alert",
  "current": null,
- "last_run": "2026-11-26T23:34:24+00:00",
- "run_seconds": 307.8,
+ "last_run": "2026-11-27T23:48:13+00:00",
+ "run_seconds": 9.3,
  "sites": [
   {
    "id": "produkt",
@@ -12,26 +12,26 @@
    "agent": "naruto",
    "status": "ok",
    "im_lauf": true,
-   "last_checked": "2026-11-26T23:34:44+00:00",
-   "detail": "37 Aufgaben, 1 mit Fehlern"
+   "last_checked": "2026-11-27T23:48:13+00:00",
+   "detail": "38 Aufgaben, 1 mit Fehlern"
   },
   {
    "id": "entdeckung",
    "name": "Entdeckung",
    "agent": "naruto",
    "status": "ok",
-   "im_lauf": true,
-   "last_checked": "2026-11-26T23:35:14+00:00",
-   "detail": "2190 Aufgaben, 176 mit Fehlern"
+   "im_lauf": false,
+   "last_checked": "2026-11-27T23:46:34+00:00",
+   "detail": "2196 Aufgaben, 185 mit Fehlern"
   },
   {
    "id": "op_restock",
    "name": "Restock",
    "agent": "onepiece",
-   "status": "ok",
+   "status": "restock",
    "im_lauf": false,
-   "last_checked": "2026-11-26T23:22:39+00:00",
-   "detail": "1 Aufgaben"
+   "last_checked": "2026-11-27T23:46:23+00:00",
+   "detail": "Neu gelistet und lieferbar: OP17 Booster Display (EN, 24 Packs) bei FantasiaCards 💸 Über …"
   },
   {
    "id": "op_vorbestellung",
@@ -39,58 +39,58 @@
    "agent": "onepiece",
    "status": "ok",
    "im_lauf": false,
-   "last_checked": "2026-11-26T23:22:39+00:00",
+   "last_checked": "2026-11-27T23:46:23+00:00",
    "detail": "1 Aufgaben"
   }
  ],
  "events": [
   {
-   "time": "2026-11-26T23:35:41+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon - Mega Evolution - 30th Cel…"
+   "time": "2026-11-27T23:48:22+00:00",
+   "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache UNBEKANNT; Produktart unklar (UNBEKANNT)): Official Sac Cabas - …"
   },
   {
-   "time": "2026-11-26T23:35:41+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon - Mega Evolution - 30th Cel…"
+   "time": "2026-11-27T23:48:02+00:00",
+   "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache UNBEKANNT; Produktart unklar (UNBEKANNT)): Official Sac Cabas - …"
   },
   {
-   "time": "2026-11-26T23:35:41+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon - Mega Evolution - 30th Cel…"
+   "time": "2026-11-27T23:48:02+00:00",
+   "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache EN; Produktart unklar (UNBEKANNT)): Naruto Card Game Ninjas Figh…"
   },
   {
-   "time": "2026-11-26T23:35:41+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon - Mega Evolution - 30th Cel…"
+   "time": "2026-11-27T23:47:22+00:00",
+   "text": "FRUEHHINWEIS: Bestellbar, aber Zuordnung unsicher (Sprache UNBEKANNT; Produktart unklar (UNBEKANNT)): Official Sac Cabas - …"
   },
   {
-   "time": "2026-11-26T23:35:40+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Greninja ex Box [L…"
+   "time": "2026-11-27T23:47:10+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon TCG - Pokemon 30th Celebrat…"
   },
   {
-   "time": "2026-11-26T23:35:40+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Elite Trainer Box …"
+   "time": "2026-11-27T23:47:10+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon TCG: 30th Celebration Ultra…"
   },
   {
-   "time": "2026-11-26T23:35:40+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Classic Collection…"
+   "time": "2026-11-27T23:47:10+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon TCG: 30th Celebration Ultra…"
   },
   {
-   "time": "2026-11-26T23:35:40+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Mini Tin Display"
+   "time": "2026-11-27T23:47:10+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon TCG: 30th Celebration Ultra…"
   },
   {
-   "time": "2026-11-26T23:35:40+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Mewtwo Figure Coll…"
+   "time": "2026-11-27T23:47:10+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon TCG: 30th Celebration Ultra…"
   },
   {
-   "time": "2026-11-26T23:35:40+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Mew Figure Collect…"
+   "time": "2026-11-27T23:47:10+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon TCG: 30th Celebration Tin S…"
   },
   {
-   "time": "2026-11-26T23:35:40+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Greninja Collection"
+   "time": "2026-11-27T23:47:10+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon TCG: 30th Celebration Tin G…"
   },
   {
-   "time": "2026-11-26T23:35:40+00:00",
-   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: 30th Celebration Espeon ex Battle D…"
+   "time": "2026-11-27T23:47:10+00:00",
+   "text": "🎴 FEHLER: Abruf fehlgeschlagen (3x in Folge) – Status UNBEKANNT, NICHT ausverkauft: Pokémon TCG: 30th Celebration Tech …"
   }
  ],
  "naruto": {
@@ -98,24 +98,24 @@
   "guenstigste": {
    "titel": "Bandai Naruto TCG Display Set 1 (Englisch) - Spielwarenpara…",
    "shop": "spielwarenparadies24.de",
-   "preis_cent": 27999,
+   "preis_cent": 24999,
    "status": "PREORDER",
    "url": "https://spielwarenparadies24.de/shop/bandai-naruto-tcg-display-set-1-englisch/"
   }
  },
  "pokemon": {
-  "status": "error",
-  "detail": "1101 von 4391 Aufgaben mit Fehlern",
-  "last_checked": "2026-11-26T23:36:13+00:00",
-  "aufgaben": 4391,
-  "bestellbar": 92,
+  "status": "fishing",
+  "detail": "angelt nach Normalpreisen · 4445 Aufgaben, 75 zum Normalpreis bestellbar",
+  "last_checked": "2026-11-27T23:47:42+00:00",
+  "aufgaben": 4445,
+  "bestellbar": 75,
   "fang": null,
   "test": false
  },
  "stats": {
-  "haendler": 358,
-  "aufgaben": 2228,
-  "aufgaben_mit_fehlern": 177,
+  "haendler": 360,
+  "aufgaben": 2235,
+  "aufgaben_mit_fehlern": 186,
   "push_problem": false
  }
 }
